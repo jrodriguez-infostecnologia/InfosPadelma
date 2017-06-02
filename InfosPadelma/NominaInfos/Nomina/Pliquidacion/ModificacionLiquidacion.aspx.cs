@@ -225,7 +225,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         {
             try
             {
-            
+
             }
             catch (Exception ex)
             {
@@ -249,7 +249,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
     protected void niimbBuscar_Click(object sender, ImageClickEventArgs e)
     {
         CcontrolesUsuario.InhabilitarControles(this.Page.Controls);
-      
+
         this.gvDetalleLiquidacion.DataSource = null;
         this.gvDetalleLiquidacion.DataBind();
         gvDetalleLiquidacion.Visible = false;

@@ -56,6 +56,7 @@
             width: 20px;
             height: 150px;
         }
+
         .auto-style3 {
             height: 150px;
         }
@@ -187,8 +188,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right; width: 400px;">
-                                    &nbsp;</td>
+                                <td style="text-align: right; width: 400px;">&nbsp;</td>
                                 <td style="width: 20px"></td>
                                 <td style="text-align: left; width: 400px;">
                                     <asp:ImageButton ID="btnLiquidar" runat="server" ImageUrl="~/Imagen/Bonotes/btnLiquidar.png" OnClick="btnLiquidar_Click" OnClientClick="if(!confirm('Desea liquidar el documento ?')){return false;};" onmouseout="this.src='../../Imagen/Bonotes/btnLiquidar.png'" onmouseover="this.src='../../Imagen/Bonotes/btnLiquidarN.png'" ToolTip="Preliquidar documento" Visible="False" />
