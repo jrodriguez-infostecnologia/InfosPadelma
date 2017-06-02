@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetpTransaccionDetalle AS select * from pTransaccionDetalle GO

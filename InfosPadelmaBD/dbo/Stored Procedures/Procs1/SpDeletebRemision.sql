@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletebRemision @empresa int,@codigo varchar(50),@Retorno int output  AS begin tran bRemision delete bRemision where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran bRemision end else begin set @Retorno = 1 rollback tran bRemision end

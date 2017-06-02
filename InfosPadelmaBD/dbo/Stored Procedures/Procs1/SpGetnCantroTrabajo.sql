@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnCantroTrabajo] AS select * from nCantroTrabajo GO

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetcConceptoIR AS select * from cConceptoIR GO

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiBodega AS select * from iBodega GO

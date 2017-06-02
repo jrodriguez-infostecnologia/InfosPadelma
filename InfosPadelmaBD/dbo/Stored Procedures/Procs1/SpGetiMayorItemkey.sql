@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiMayorItemkey @empresa int,@codigo varchar(50) AS  select * from iMayorItem where codigo = @codigo and empresa = @empresa

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeleteiPlanItem @empresa int,@codigo varchar(5),@Retorno int output  AS begin tran iPlanItem delete iPlanItem where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran iPlanItem end else begin set @Retorno = 1 rollback tran iPlanItem end

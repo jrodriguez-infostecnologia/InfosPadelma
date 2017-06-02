@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetnPagosNomina] AS select * from nPagosNomina GO

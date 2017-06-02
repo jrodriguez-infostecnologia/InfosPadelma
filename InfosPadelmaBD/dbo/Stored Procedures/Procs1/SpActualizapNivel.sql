@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpActualizapNivel] @codigo int,@descripcion varchar(250),@activo bit , @empresa int,@Retorno int output  AS begin tran pNivel update pNivel set descripcion = @descripcion, activo=@activo where codigo = @codigo and empresa=@empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran pNivel end else begin set @Retorno = 1 rollback tran pNivel end

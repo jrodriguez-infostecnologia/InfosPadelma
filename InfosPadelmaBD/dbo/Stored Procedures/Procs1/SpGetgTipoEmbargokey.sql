@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetgTipoEmbargokey] @empresa int,@codigo varchar(50) AS  select * from gTipoEmbargo where codigo = @codigo and empresa = @empresa

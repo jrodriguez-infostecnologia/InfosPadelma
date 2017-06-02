@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetaCaracteristica] AS select * from aCaracteristica GO

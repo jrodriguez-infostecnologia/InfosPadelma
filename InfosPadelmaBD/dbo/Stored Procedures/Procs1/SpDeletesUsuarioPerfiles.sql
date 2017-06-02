@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpDeletesUsuarioPerfiles] @empresa int,@usuario varchar(50),@Retorno int output  AS begin tran sUsuarioPerfiles delete sUsuarioPerfiles where empresa = @empresa and usuario = @usuario if (@@error = 0 ) begin set @Retorno = 0 commit tran sUsuarioPerfiles end else begin set @Retorno = 1 rollback tran sUsuarioPerfiles end

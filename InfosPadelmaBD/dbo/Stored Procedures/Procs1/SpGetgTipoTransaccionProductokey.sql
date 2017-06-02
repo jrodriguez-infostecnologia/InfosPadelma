@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgTipoTransaccionProductokey @empresa int,@tipo varchar(50),@producto varchar(50) AS  select * from gTipoTransaccionProducto where empresa = @empresa and producto = @producto and tipo = @tipo

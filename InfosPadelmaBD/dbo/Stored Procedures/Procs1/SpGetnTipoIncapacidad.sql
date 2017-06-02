@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetnTipoIncapacidad] AS select * from nTipoIncapacidad GO

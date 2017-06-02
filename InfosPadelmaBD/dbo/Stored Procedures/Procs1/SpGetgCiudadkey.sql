@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgCiudadkey @empresa int,@codigo varchar(50) AS  select * from gCiudad where codigo = @codigo and empresa = @empresa

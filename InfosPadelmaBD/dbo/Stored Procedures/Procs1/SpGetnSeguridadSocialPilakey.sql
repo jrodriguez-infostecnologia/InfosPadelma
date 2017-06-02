@@ -1,0 +1,1 @@
+﻿ create PROCEDURE [dbo].[SpGetnSeguridadSocialPilakey] @empresa int,@año int,@mes int,@registro int AS  select * from nSeguridadSocialPila where año = @año and empresa = @empresa and mes = @mes and registro = @registro

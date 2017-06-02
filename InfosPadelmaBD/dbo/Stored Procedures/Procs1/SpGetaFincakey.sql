@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaFincakey @empresa int,@codigo varchar(50) AS  select * from aFinca where codigo = @codigo and empresa = @empresa

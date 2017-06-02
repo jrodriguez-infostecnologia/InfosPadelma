@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiPlanItem AS select * from iPlanItem GO

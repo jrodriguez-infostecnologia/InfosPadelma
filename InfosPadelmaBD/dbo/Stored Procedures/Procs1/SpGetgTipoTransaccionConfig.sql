@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgTipoTransaccionConfig AS select * from gTipoTransaccionConfig GO

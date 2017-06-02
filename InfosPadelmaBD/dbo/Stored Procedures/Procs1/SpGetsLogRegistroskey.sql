@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsLogRegistroskey @fecha datetime,@usuario varchar(50),@operacion varchar(50) AS  select * from sLogRegistros where fecha = @fecha and operacion = @operacion and usuario = @usuario

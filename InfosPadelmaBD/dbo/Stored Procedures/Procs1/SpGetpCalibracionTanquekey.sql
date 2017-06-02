@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetpCalibracionTanquekey @empresa int,@altura int,@movimiento varchar(50),@tipo varchar(2) AS  select * from pCalibracionTanque where altura = @altura and empresa = @empresa and movimiento = @movimiento and tipo = @tipo

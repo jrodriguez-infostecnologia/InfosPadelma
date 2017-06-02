@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletegEmpresa @id int,@Retorno int output  AS begin tran gEmpresa delete gEmpresa where id = @id if (@@error = 0 ) begin set @Retorno = 0 commit tran gEmpresa end else begin set @Retorno = 1 rollback tran gEmpresa end

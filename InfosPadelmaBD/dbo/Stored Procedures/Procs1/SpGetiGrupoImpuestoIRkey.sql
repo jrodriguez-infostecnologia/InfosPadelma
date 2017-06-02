@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiGrupoImpuestoIRkey @empresa int,@grupo char(5) AS  select * from iGrupoImpuestoIR where empresa = @empresa and grupo = @grupo

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsUsuarioPerfiles AS select * from sUsuarioPerfiles GO

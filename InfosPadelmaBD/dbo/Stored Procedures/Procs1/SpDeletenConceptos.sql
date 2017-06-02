@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpDeletenConceptos] @empresa int,@Retorno int output  AS begin tran nConceptos delete nConceptos where empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran nConceptos end else begin set @Retorno = 1 rollback tran nConceptos end

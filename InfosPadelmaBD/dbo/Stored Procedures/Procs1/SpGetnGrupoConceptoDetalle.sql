@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetnGrupoConceptoDetalle] AS select * from nGrupoConceptoDetalle GO

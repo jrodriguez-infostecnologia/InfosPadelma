@@ -8,20 +8,41 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "http://dev.padelma.infos.co
 		UseIISExpress = "false"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/dev.padelma.infos.com"
-		Debug.AspNetCompiler.PhysicalPath = "..\InfosPadelma\"
+		Debug.AspNetCompiler.PhysicalPath = "InfosPadelma\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\dev.padelma.infos.com\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/dev.padelma.infos.com"
-		Release.AspNetCompiler.PhysicalPath = "..\InfosPadelma\"
+		Release.AspNetCompiler.PhysicalPath = "InfosPadelma\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\dev.padelma.infos.com\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\InfosPadelma\"
+		SlnRelativePath = "InfosPadelma\"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "NominaInfos", "http://dev.padelma.infos.com/NominaInfos", "{C6DFDEAF-A302-4A5C-B5ED-5D8CB9CDA1D7}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "false"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/NominaInfos"
+		Debug.AspNetCompiler.PhysicalPath = "InfosPadelma\NominaInfos\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\NominaInfos\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/NominaInfos"
+		Release.AspNetCompiler.PhysicalPath = "InfosPadelma\NominaInfos\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\NominaInfos\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "InfosPadelma\NominaInfos\"
 	EndProjectSection
 EndProject
 Global
@@ -31,6 +52,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D5C72178-067E-4E81-893A-0E13442FC42B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D5C72178-067E-4E81-893A-0E13442FC42B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DFDEAF-A302-4A5C-B5ED-5D8CB9CDA1D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DFDEAF-A302-4A5C-B5ED-5D8CB9CDA1D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

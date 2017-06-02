@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpInsertasOperaciones @activo bit,@codigo varchar(50),@descripcion varchar(150),@Retorno int output  AS begin tran sOperaciones insert sOperaciones( activo,codigo,descripcion ) select @activo,@codigo,@descripcion if (@@error = 0 ) begin set @Retorno = 0 commit tran sOperaciones end else begin set @Retorno = 1 rollback tran sOperaciones end

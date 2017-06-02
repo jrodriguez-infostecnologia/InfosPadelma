@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaNovedad AS select * from aNovedad GO

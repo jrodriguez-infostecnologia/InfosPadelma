@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletefMercado @empresa int,@codigo varchar(50),@Retorno int output  AS begin tran fMercado delete fMercado where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran fMercado end else begin set @Retorno = 1 rollback tran fMercado end

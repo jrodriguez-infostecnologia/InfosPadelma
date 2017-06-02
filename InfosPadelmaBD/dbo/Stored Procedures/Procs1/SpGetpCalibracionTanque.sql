@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetpCalibracionTanque AS select * from pCalibracionTanque GO

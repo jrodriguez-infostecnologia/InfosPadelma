@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpInsertagNivelEducativo @empresa int,@codigo varchar(50),@descripcion varchar(550),@Retorno int output  AS begin tran gNivelEducativo insert gNivelEducativo( empresa,codigo,descripcion ) select @empresa,@codigo,@descripcion if (@@error = 0 ) begin set @Retorno = 0 commit tran gNivelEducativo end else begin set @Retorno = 1 rollback tran gNivelEducativo end

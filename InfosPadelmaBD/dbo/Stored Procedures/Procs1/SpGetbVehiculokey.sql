@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetbVehiculokey @empresa int,@codigo varchar(50),@tipo nchar AS  select * from bVehiculo where codigo = @codigo and empresa = @empresa and tipo = @tipo
