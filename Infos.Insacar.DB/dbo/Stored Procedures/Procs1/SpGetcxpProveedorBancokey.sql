@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetcxpProveedorBancokey @empresa int,@proveedor int,@banco varchar(10) AS  select * from cxpProveedorBanco where banco = @banco and empresa = @empresa and proveedor = @proveedor

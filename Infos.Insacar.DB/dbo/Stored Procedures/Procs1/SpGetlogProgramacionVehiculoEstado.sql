@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetlogProgramacionVehiculoEstado AS select * from logProgramacionVehiculoEstado GO

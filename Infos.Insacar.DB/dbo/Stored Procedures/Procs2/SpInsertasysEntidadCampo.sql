@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpInsertasysEntidadCampo @entidad varchar(250),@campo varchar(250),@Retorno int output  AS begin tran sysEntidadCampo insert sysEntidadCampo( entidad,campo ) select @entidad,@campo if (@@error = 0 ) begin set @Retorno = 0 commit tran sysEntidadCampo end else begin set @Retorno = 1 rollback tran sysEntidadCampo end

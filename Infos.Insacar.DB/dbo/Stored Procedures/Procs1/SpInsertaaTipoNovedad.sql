@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpInsertaaTipoNovedad @empresa int,@novedad int,@tipo varchar(50),@Retorno int output  AS begin tran aTipoNovedad insert aTipoNovedad( empresa,novedad,tipo ) select @empresa,@novedad,@tipo if (@@error = 0 ) begin set @Retorno = 0 commit tran aTipoNovedad end else begin set @Retorno = 1 rollback tran aTipoNovedad end

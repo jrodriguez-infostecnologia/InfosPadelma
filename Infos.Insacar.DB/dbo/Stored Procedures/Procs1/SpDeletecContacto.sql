@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletecContacto @empresa int,@idtercero int,@codigo char(4),@Retorno int output  AS begin tran cContacto delete cContacto where empresa = @empresa and idtercero = @idtercero and codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran cContacto end else begin set @Retorno = 1 rollback tran cContacto end

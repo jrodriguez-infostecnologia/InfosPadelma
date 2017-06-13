@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnPrestamokey] @empresa int,@codigo varchar(50) AS  select * from nPrestamo where empresa = @empresa and codigo = @codigo

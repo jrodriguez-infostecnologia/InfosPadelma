@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsOperaciones AS select * from sOperaciones GO

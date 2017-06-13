@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetcConceptoIRkey @empresa int,@codigo varchar(50) AS  select * from cConceptoIR where codigo = @codigo and empresa = @empresa

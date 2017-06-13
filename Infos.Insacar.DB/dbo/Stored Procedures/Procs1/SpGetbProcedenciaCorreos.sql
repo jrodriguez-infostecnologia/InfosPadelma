@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetbProcedenciaCorreos AS select * from bProcedenciaCorreos GO

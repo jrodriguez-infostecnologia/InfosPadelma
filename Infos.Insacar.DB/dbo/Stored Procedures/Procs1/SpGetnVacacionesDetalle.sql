@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetnVacacionesDetalle] AS select * from nVacacionesDetalle GO

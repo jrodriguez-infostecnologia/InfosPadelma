@@ -1,0 +1,1 @@
+﻿create proc [dbo].[SpGetnGrupoConcepto] AS select * from nGrupoConcepto GO

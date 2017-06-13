@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiNivelDestinokey @empresa int,@codigo varchar(2) AS  select * from iNivelDestino where codigo = @codigo and empresa = @empresa

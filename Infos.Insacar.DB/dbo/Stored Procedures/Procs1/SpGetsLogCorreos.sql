@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsLogCorreos AS select * from sLogCorreos GO

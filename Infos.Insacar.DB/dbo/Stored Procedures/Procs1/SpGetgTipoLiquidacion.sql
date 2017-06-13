@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetgTipoLiquidacion] AS select * from gTipoLiquidacion GO

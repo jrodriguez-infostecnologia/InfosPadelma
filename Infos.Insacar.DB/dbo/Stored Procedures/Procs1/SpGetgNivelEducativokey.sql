@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgNivelEducativokey @empresa int,@codigo varchar(50) AS  select * from gNivelEducativo where codigo = @codigo and empresa = @empresa

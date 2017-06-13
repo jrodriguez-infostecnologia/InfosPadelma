@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[aMovimientoLotes] (
+    [tipo]             VARCHAR (50)    NOT NULL,
+    [numero]           VARCHAR (50)    NOT NULL,
+    [registroT]        INT             NOT NULL,
+    [empresa]          INT             NOT NULL,
+    [codigo]           VARCHAR (50)    NOT NULL,
+    [registro]         INT             NOT NULL,
+    [seccion]          VARCHAR (50)    NULL,
+    [finca]            VARCHAR (50)    NULL,
+    [añoSiembra]       INT             NULL,
+    [mesSiembra]       INT             NULL,
+    [palmasBrutas]     INT             NULL,
+    [palmasProduccion] INT             NULL,
+    [hBrutas]          DECIMAL (18, 2) NULL,
+    [hNetas]           DECIMAL (18, 2) NULL,
+    [dSiembra]         DECIMAL (18, 2) NULL,
+    [variedad]         CHAR (5)        NULL,
+    [densidad]         DECIMAL (18, 2) NULL,
+    [NoLineas]         INT             NULL,
+    [fechaRegistro]    DATETIME        NULL,
+    [usuario]          VARCHAR (50)    NULL,
+    [desarrollo]       BIT             NULL,
+    CONSTRAINT [PK_aMovimientoLotes] PRIMARY KEY CLUSTERED ([tipo] ASC, [numero] ASC, [registroT] ASC, [empresa] ASC, [codigo] ASC, [registro] ASC)
+);
+

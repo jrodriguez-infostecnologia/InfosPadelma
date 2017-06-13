@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaLotePesosPeriodo AS select * from aLotePesosPeriodo GO

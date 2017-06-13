@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpDeletepNivel] @codigo int,@empresa int,@Retorno int output  AS begin tran pNivel delete pNivel where codigo = @codigo and empresa=@empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran pNivel end else begin set @Retorno = 1 rollback tran pNivel end

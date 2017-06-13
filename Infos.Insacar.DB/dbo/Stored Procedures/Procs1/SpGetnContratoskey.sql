@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnContratoskey] @empresa int,@id int,@tercero int,@codigoTercero varchar(50) AS  select * from nContratos where empresa = @empresa and id = @id and codigoTercero = @codigoTercero and tercero = @tercero

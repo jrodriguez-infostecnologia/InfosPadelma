@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetpFrutaEstimadaTmpkey @fecha date,@empresa int AS  select * from pFrutaEstimadaTmp where empresa = @empresa and fecha = @fecha

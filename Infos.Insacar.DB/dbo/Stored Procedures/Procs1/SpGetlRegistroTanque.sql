@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetlRegistroTanque AS select * from lRegistroTanque GO

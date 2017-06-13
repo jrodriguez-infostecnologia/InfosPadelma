@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgTipoDocumentokey @empresa int,@codigo char(2) AS  select * from gTipoDocumento where codigo = @codigo and empresa = @empresa

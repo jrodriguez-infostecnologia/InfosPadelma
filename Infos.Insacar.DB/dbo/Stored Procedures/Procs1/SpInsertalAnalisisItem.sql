@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpInsertalAnalisisItem @empresa int,@item int,@analisis varchar(10),@Retorno int output  AS begin tran lAnalisisItem insert lAnalisisItem( empresa,item,analisis ) select @empresa,@item,@analisis if (@@error = 0 ) begin set @Retorno = 0 commit tran lAnalisisItem end else begin set @Retorno = 1 rollback tran lAnalisisItem end
