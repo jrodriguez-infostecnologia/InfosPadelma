@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgEntidadNacional AS select * from gEntidadNacional GO

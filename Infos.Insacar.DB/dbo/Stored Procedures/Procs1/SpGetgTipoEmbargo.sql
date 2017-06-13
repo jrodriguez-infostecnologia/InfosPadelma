@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetgTipoEmbargo] AS select * from gTipoEmbargo GO

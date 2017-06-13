@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcPuckey @empresa int,@codigo varchar(16) AS  select * from cPuc where codigo = @codigo and empresa = @empresa

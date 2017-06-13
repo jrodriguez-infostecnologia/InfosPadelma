@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnConceptoskey] @empresa int AS  select * from nConceptos where empresa = @empresa

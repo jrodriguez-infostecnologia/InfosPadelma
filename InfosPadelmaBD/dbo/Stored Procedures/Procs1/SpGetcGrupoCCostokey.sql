@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcGrupoCCostokey @empresa int,@codigo varchar(5) AS  select * from cGrupoCCosto where codigo = @codigo and empresa = @empresa

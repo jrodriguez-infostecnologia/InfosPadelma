@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetaSanidadDetalle] AS select * from aSanidadDetalle GO

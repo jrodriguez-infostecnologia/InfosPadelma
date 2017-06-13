@@ -1,2 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnSubTipoCotizante] AS 
-select empresa, codigo, tipoCotizante, codigo + ' - ' +  descripcion descripcion, observacion, activo, fechaRegistro, usuario from nSubTipoCotizante GO

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcxpProveedorkey @empresa int,@idTercero int,@codigo varchar(10) AS  select * from cxpProveedor where codigo = @codigo and empresa = @empresa and idTercero = @idTercero

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpDeletenPeriodo] @empresa int,@año int,@Retorno int output  AS begin tran nPeriodo delete nPeriodo where empresa = @empresa and año = @año if (@@error = 0 ) begin set @Retorno = 0 commit tran nPeriodo end else begin set @Retorno = 1 rollback tran nPeriodo end

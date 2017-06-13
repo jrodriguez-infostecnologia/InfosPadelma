@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlRegistroBodega AS select * from lRegistroBodega GO

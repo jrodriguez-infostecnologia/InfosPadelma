@@ -1,2 +1,0 @@
-﻿
-CREATE PROCEDURE [dbo].[SpActualizasUsuarioPerfiles] @empresa int,@activo bit,@usuario varchar(50),@perfil varchar(50),@Retorno int output  AS begin tran sUsuarioPerfiles update sUsuarioPerfiles set activo = @activo,perfil = @perfil where empresa = @empresa and usuario = @usuario if (@@error = 0 ) begin set @Retorno = 0 commit tran sUsuarioPerfiles end else begin set @Retorno = 1 rollback tran sUsuarioPerfiles end

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcxpProveedorCalseIRkey @empresa int,@tercero int,@clase int,@proveedor varchar(10) AS  select * from cxpProveedorCalseIR where clase = @clase and empresa = @empresa and proveedor = @proveedor and tercero = @tercero

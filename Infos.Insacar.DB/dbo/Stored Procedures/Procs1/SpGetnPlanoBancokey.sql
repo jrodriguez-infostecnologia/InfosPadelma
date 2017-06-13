@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetnPlanoBancokey] @empresa int,@banco varchar(50) AS  select * from nPlanoBanco where banco = @banco and empresa = @empresa

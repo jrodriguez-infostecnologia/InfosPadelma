@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcxpProveedor AS select * from cxpProveedor GO

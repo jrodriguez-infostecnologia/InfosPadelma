@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetbRegistroPorteria AS select * from bRegistroPorteria GO

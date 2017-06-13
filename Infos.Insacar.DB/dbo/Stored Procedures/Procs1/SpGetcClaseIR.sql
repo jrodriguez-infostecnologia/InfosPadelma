@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcClaseIR AS select * from cClaseIR GO

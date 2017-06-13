@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpInsertasUsuarioEmpresa @empresa int,@usuario varchar(50),@Retorno int output  AS begin tran sUsuarioEmpresa insert sUsuarioEmpresa( empresa,usuario ) select @empresa,@usuario if (@@error = 0 ) begin set @Retorno = 0 commit tran sUsuarioEmpresa end else begin set @Retorno = 1 rollback tran sUsuarioEmpresa end

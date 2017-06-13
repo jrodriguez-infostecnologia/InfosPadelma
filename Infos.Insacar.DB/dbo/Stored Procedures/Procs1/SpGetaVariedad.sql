@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaVariedad AS select * from aVariedad GO

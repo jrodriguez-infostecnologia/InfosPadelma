@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaLaborkey @empresa int,@codigo varchar(50) AS  select * from aLabor where empresa = @empresa and codigo = @codigo

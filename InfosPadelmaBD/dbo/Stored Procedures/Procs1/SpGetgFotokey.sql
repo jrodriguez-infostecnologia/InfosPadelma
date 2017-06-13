@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgFotokey @id int AS  select * from gFoto where id = @id

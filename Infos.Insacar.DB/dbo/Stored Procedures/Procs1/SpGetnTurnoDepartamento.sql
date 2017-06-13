@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetnTurnoDepartamento] AS select * from nTurnoDepartamento GO

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlogCarnetDespacho AS select * from logCarnetDespacho GO

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnPeriodo] AS select * from nPeriodo GO

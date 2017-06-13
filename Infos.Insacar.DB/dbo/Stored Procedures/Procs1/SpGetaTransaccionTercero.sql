@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaTransaccionTercero AS select * from aTransaccionTercero GO

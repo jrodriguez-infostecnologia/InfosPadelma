@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnDepartamentokey] @empresa int,@codigo varchar(50) AS  select * from nDepartamento where empresa = @empresa and codigo = @codigo

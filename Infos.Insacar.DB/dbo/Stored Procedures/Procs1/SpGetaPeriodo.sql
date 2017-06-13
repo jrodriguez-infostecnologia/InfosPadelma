@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaPeriodo AS select * from aPeriodo GO

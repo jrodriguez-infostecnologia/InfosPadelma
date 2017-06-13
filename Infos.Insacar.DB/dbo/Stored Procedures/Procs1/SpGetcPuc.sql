@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcPuc AS select * from cPuc GO

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlRegistroBodegakey @empresa int,@tipo varchar(50),@numero varchar(50),@bodega varchar(5) AS  select * from lRegistroBodega where bodega = @bodega and empresa = @empresa and numero = @numero and tipo = @tipo

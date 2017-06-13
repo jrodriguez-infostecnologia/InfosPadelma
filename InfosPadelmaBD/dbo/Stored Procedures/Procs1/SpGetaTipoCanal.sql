@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaTipoCanal AS select * from aTipoCanal GO

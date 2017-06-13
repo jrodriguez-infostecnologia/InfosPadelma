@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcTercero AS select * from cTercero GO

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaLotesCanal AS select * from aLotesCanal GO

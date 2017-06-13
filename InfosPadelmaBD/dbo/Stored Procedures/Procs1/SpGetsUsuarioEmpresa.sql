@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsUsuarioEmpresa AS select * from sUsuarioEmpresa GO

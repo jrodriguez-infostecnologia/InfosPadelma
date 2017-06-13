@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetgDiagnostico] AS select * from gDiagnostico GO

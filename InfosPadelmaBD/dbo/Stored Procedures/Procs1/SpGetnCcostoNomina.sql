@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnCcostoNomina] AS select * from nCcostoNomina GO

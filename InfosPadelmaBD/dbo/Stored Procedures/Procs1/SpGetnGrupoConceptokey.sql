@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetnGrupoConceptokey] @empresa int,@codigo char(5) AS  select * from nGrupoConcepto where codigo = @codigo and empresa = @empresa

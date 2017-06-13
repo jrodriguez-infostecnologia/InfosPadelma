@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcCentrosCosto AS select * from cCentrosCosto GO

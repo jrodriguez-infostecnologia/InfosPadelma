@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpInsertacGrupoConcepto @empresa int,@grupo char(5),@cocepto char(5),@Retorno int output  AS begin tran cGrupoConcepto insert cGrupoConcepto( empresa,grupo,cocepto ) select @empresa,@grupo,@cocepto if (@@error = 0 ) begin set @Retorno = 0 commit tran cGrupoConcepto end else begin set @Retorno = 1 rollback tran cGrupoConcepto end

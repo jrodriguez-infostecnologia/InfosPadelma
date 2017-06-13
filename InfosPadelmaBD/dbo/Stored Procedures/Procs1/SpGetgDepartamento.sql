@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetgDepartamento] AS select * from gDepartamento

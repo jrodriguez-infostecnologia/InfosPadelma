@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletesLogCorreos @id int,@Retorno int output  AS begin tran sLogCorreos delete sLogCorreos where id = @id if (@@error = 0 ) begin set @Retorno = 0 commit tran sLogCorreos end else begin set @Retorno = 1 rollback tran sLogCorreos end

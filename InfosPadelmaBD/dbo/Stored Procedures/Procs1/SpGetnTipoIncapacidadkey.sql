@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetnTipoIncapacidadkey] @empresa int,@codigo varchar(50) AS  select * from nTipoIncapacidad where empresa = @empresa and codigo = @codigo

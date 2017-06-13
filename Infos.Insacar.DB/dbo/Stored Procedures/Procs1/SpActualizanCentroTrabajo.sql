@@ -1,2 +1,0 @@
-﻿
-CREATE PROCEDURE [dbo].[SpActualizanCentroTrabajo] @empresa int,@activo bit,@porcentaje decimal(18,3),@codigo varchar(50),@descripcion varchar(550),@Retorno int output  AS begin tran nCentroTrabajo update nCentroTrabajo set activo = @activo,porcentaje = @porcentaje,descripcion = @descripcion where empresa = @empresa and codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran nCentroTrabajo end else begin set @Retorno = 1 rollback tran nCentroTrabajo end

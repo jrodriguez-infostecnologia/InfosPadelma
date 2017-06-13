@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetpJerarquiaAnalisis] AS select * from pJerarquiaAnalisis GO

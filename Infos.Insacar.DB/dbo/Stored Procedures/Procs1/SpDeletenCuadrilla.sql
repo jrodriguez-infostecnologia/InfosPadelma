@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpDeletenCuadrilla] @empresa int,@codigo varchar(50),@Retorno int output  AS begin tran nCuadrilla delete nCuadrilla where empresa = @empresa and codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran nCuadrilla end else begin set @Retorno = 1 rollback tran nCuadrilla end

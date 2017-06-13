@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlRegistroAnalisisTanque AS select * from lRegistroAnalisisTanque GO

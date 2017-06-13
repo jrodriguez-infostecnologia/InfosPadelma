@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcxcCliente AS select * from cxcCliente GO

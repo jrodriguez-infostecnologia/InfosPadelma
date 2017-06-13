@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpInsertagPais @empresa int,@codigo varchar(50),@descripcion varchar(150),@Retorno int output  AS begin tran gPais insert gPais( empresa,codigo,descripcion ) select @empresa,@codigo,@descripcion if (@@error = 0 ) begin set @Retorno = 0 commit tran gPais end else begin set @Retorno = 1 rollback tran gPais end

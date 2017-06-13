@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgTipoTransaccionDias AS select * from gTipoTransaccionDias GO

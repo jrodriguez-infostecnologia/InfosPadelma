@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletegTipoTransaccionDias @empresa int,@tipo varchar(50),@Retorno int output  AS begin tran gTipoTransaccionDias delete gTipoTransaccionDias where empresa = @empresa and tipo = @tipo if (@@error = 0 ) begin set @Retorno = 0 commit tran gTipoTransaccionDias end else begin set @Retorno = 1 rollback tran gTipoTransaccionDias end

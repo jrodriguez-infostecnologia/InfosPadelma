@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetiNivelDestino AS select * from iNivelDestino GO

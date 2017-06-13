@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnParametrosGeneralkey] @empresa int AS  select * from nParametrosGeneral where empresa = @empresa

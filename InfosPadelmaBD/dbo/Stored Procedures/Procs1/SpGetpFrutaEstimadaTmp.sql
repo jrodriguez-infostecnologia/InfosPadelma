@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetpFrutaEstimadaTmp AS select * from pFrutaEstimadaTmp GO

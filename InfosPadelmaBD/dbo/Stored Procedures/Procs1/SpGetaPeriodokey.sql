@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaPeriodokey @empresa int,@año int,@mes int AS  select * from aPeriodo where año = @año and empresa = @empresa and mes = @mes

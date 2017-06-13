@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeleteaVariedad @empresa int,@codigo char(5),@Retorno int output  AS begin tran aVariedad delete aVariedad where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran aVariedad end else begin set @Retorno = 1 rollback tran aVariedad end

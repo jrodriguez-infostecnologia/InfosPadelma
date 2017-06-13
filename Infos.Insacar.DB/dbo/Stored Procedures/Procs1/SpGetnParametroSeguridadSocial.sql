@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnParametroSeguridadSocial] AS select * from nParametroSeguridadSocial

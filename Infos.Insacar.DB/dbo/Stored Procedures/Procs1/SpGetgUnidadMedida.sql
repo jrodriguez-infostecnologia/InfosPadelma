@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgUnidadMedida AS select * from gUnidadMedida GO

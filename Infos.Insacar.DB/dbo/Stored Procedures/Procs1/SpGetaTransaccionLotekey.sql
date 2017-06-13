@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaTransaccionLotekey @empresa int,@tipo varchar(50),@numero varchar(50),@lote char(10) AS  select * from aTransaccionLote where empresa = @empresa and tipo = @tipo and numero = @numero and lote = @lote

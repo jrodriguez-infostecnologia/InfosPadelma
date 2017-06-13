@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaLaborLotePrecio AS select * from aLaborLotePrecio GO

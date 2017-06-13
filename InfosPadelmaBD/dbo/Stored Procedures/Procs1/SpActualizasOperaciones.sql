@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpActualizasOperaciones @activo bit,@codigo varchar(50),@descripcion varchar(150),@Retorno int output  AS begin tran sOperaciones update sOperaciones set activo = @activo,descripcion = @descripcion where codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran sOperaciones end else begin set @Retorno = 1 rollback tran sOperaciones end

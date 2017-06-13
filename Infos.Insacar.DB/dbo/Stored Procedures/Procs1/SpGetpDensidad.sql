@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetpDensidad AS select * from pDensidad GO

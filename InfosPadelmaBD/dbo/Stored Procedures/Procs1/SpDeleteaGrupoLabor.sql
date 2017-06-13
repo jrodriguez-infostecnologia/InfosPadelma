@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeleteaGrupoLabor @empresa int,@codigo varchar(50),@Retorno int output  AS begin tran aGrupoLabor delete aGrupoLabor where empresa = @empresa and codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran aGrupoLabor end else begin set @Retorno = 1 rollback tran aGrupoLabor end

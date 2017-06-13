@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletegCiudad @empresa int,@codigo varchar(50),@Retorno int output  AS begin tran gCiudad delete gCiudad where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran gCiudad end else begin set @Retorno = 1 rollback tran gCiudad end

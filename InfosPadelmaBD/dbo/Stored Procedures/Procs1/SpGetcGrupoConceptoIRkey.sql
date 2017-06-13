@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcGrupoConceptoIRkey @empresa int,@grupo char(5),@cocepto char(5) AS  select * from cGrupoConceptoIR where cocepto = @cocepto and empresa = @empresa and grupo = @grupo

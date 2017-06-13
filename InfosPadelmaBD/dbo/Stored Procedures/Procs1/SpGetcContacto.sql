@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcContacto AS select * from cContacto GO

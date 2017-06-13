@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetcPlanCuenta] AS select * from cPlanCuenta GO

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlAnalisiskey @empresa int,@codigo varchar(10) AS  select * from lAnalisis where codigo = @codigo and empresa = @empresa

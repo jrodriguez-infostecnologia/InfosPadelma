@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetpTransaccionDetallekey @empresa int,@registro int,@tipo varchar(50),@numero varchar(50) AS  select * from pTransaccionDetalle where empresa = @empresa and numero = @numero and registro = @registro and tipo = @tipo

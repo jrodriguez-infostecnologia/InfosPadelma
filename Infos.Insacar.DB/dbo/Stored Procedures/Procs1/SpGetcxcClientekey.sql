@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcxcClientekey @empresa int,@idTercero int,@codigo varchar(10) AS  select * from cxcCliente where codigo = @codigo and empresa = @empresa and idTercero = @idTercero

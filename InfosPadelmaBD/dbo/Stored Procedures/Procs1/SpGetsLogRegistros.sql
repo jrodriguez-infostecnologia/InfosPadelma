@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsLogRegistros AS select * from sLogRegistros GO

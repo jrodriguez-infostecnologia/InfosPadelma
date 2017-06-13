@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnCuadrilla] AS select * from nCuadrilla GO

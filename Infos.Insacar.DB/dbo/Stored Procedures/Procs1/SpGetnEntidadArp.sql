@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnEntidadArp] AS select * from nEntidadArp GO

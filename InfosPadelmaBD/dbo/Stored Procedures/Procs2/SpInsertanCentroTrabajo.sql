@@ -1,2 +1,0 @@
-﻿
-CREATE PROCEDURE [dbo].[SpInsertanCentroTrabajo] @empresa int,@activo bit,@porcentaje decimal(18,3),@codigo varchar(50),@descripcion varchar(550),@Retorno int output  AS begin tran nCentroTrabajo insert nCentroTrabajo( empresa,activo,porcentaje,codigo,descripcion ) select @empresa,@activo,@porcentaje,@codigo,@descripcion if (@@error = 0 ) begin set @Retorno = 0 commit tran nCentroTrabajo end else begin set @Retorno = 1 rollback tran nCentroTrabajo end

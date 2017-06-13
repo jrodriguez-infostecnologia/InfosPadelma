@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaTransaccionNovedad AS select * from aTransaccionNovedad GO

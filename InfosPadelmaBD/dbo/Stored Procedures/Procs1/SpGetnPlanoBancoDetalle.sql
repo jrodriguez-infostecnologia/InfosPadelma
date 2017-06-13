@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetnPlanoBancoDetalle] AS select * from nPlanoBancoDetalle GO

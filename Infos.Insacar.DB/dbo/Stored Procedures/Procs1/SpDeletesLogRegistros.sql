@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletesLogRegistros @fecha datetime,@usuario varchar(50),@operacion varchar(50),@Retorno int output  AS begin tran sLogRegistros delete sLogRegistros where fecha = @fecha and operacion = @operacion and usuario = @usuario if (@@error = 0 ) begin set @Retorno = 0 commit tran sLogRegistros end else begin set @Retorno = 1 rollback tran sLogRegistros end

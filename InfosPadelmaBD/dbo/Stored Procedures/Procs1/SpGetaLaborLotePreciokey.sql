@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaLaborLotePreciokey @empresa int,@labor varchar(50),@finca varchar(50),@lote varchar(50) AS  select * from aLaborLotePrecio where empresa = @empresa and labor = @labor and finca = @finca and lote = @lote

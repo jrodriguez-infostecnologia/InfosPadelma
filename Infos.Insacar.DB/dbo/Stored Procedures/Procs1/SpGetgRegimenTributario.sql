@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgRegimenTributario AS select * from gRegimenTributario GO

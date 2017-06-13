@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetpDensidadkey @empresa int,@temperatura int,@item varchar(50) AS  select * from pDensidad where empresa = @empresa and item = @item and temperatura = @temperatura

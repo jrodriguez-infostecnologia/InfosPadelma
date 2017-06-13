@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlAnalisis AS select * from lAnalisis GO

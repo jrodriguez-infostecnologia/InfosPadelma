@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnClaseContratokey] @empresa int,@codigo varchar(50) AS  select * from nClaseContrato where empresa = @empresa and codigo = @codigo

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlogProgramacionGeneral AS select * from logProgramacionGeneral GO

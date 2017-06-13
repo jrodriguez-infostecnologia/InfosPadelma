@@ -1,8 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpInsertacParametroContaNomi] @empresa int,@id int,@tipoDato int,@manejaEntidad bit,@valorTipoDato decimal(18,2),@tipo varchar(50),@clase varchar(50),@tipoTransaccion varchar(50),@cCostoMayor varchar(50),@cCosto varchar(50),@departamento varchar(50),@concepto varchar(50),@cuentaActivo varchar(50),@cuentaGasto varchar(50),@cuentaContratista varchar(50),@cCostoMayorSigo varchar(50),@cCostoSigo varchar(50),@cuentaCredito varchar(50),@cCostoMayorCredito varchar(50),@cCostoCredito varchar(50),
-@tercero varchar(50), @terceroCredito varchar(50),
-@entidad varchar(50),@Retorno int output  AS begin tran cParametroContaNomi 
-declare @manejaLabores bit=0
-select @manejaLabores=isnull(manejaLC,0)  from cCentrosCosto
-where codigo=@cCosto and empresa=@empresa 
-
-insert cParametroContaNomi( empresa,id,tipoDato,manejaEntidad,valorTipoDato,tipo,clase,tipoTransaccion,cCostoMayor,cCosto,departamento,concepto,cuentaActivo,cuentaGasto,cuentaContratista,cCostoMayorSigo,cCostoSigo,cuentaCredito,cCostoMayorCredito,cCostoCredito,entidad,labor, tercero, tercerocredito ) select @empresa,@id,@tipoDato,@manejaEntidad,@valorTipoDato,@tipo,@clase,@tipoTransaccion,@cCostoMayor,@cCosto,@departamento,@concepto,@cuentaActivo,@cuentaGasto,@cuentaContratista,@cCostoMayorSigo,@cCostoSigo,@cuentaCredito,@cCostoMayorCredito,@cCostoCredito,@entidad, @manejaLabores,@tercero, @terceroCredito if (@@error = 0 ) begin set @Retorno = 0 commit tran cParametroContaNomi end else begin set @Retorno = 1 rollback tran cParametroContaNomi end

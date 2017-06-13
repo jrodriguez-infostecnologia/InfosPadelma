@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletecEstructuraCCosto @empresa int,@nivel int,@Retorno int output  AS begin tran cEstructuraCCosto delete cEstructuraCCosto where empresa = @empresa and nivel = @nivel if (@@error = 0 ) begin set @Retorno = 0 commit tran cEstructuraCCosto end else begin set @Retorno = 1 rollback tran cEstructuraCCosto end

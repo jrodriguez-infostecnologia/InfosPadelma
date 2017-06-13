@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgTipoCuentakey @empresa int,@codigo char(1) AS  select * from gTipoCuenta where codigo = @codigo and empresa = @empresa

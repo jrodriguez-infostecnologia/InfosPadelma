@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnNovedadesDetallekey] @empresa int,@registro int,@tipo varchar(50),@numero varchar(50) AS  select * from nNovedadesDetalle where empresa = @empresa and tipo = @tipo and numero = @numero and registro = @registro

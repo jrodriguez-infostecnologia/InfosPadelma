@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaNovedadkey @empresa int,@codigo varchar(50) AS  select * from aNovedad where codigo = @codigo and empresa = @empresa

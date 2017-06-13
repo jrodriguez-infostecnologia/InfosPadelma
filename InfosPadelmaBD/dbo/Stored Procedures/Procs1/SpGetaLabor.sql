@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaLabor AS select * from aLabor GO

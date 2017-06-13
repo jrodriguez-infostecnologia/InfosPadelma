@@ -1,2 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnEmbargos] AS 
-select a.codigo codEmbargo, b.codigo codEmpleado,b.descripcion desEmpleado,a.*  from nEmbargos a join nFuncionario b on a.empleado=b.tercero and a.empresa=b.empresa

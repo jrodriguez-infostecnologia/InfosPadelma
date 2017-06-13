@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsysdiagrams AS select * from sysdiagrams GO

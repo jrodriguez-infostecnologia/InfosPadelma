@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeleteaPeriodo @empresa int,@año int,@mes int,@Retorno int output  AS begin tran aPeriodo delete aPeriodo where año = @año and empresa = @empresa and mes = @mes if (@@error = 0 ) begin set @Retorno = 0 commit tran aPeriodo end else begin set @Retorno = 1 rollback tran aPeriodo end

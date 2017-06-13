@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnParametroSeguridadSocialDetallekey] @empresa int,@codigo varchar(50),@concepto varchar(50) AS  select * from nParametroSeguridadSocialDetalle where concepto = @concepto and empresa = @empresa and codigo = @codigo

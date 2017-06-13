@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgTipoDocumento AS select * from gTipoDocumento GO

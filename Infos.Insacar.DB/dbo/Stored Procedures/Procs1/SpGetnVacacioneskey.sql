@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetnVacacioneskey] @periodoInicial date,@periodoFinal date,@empresa int,@empleado int,@registro int AS  select * from nVacaciones where empleado = @empleado and empresa = @empresa and periodoFinal = @periodoFinal and periodoInicial = @periodoInicial and registro = @registro

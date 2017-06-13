@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaLoteCanalkey @empresa int,@registro int,@lote nchar AS  select * from aLoteCanal where empresa = @empresa and lote = @lote and registro = @registro

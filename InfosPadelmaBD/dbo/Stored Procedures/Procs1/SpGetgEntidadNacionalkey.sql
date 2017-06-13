@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgEntidadNacionalkey @empresa int,@codigo varchar(50) AS  select * from gEntidadNacional where codigo = @codigo and empresa = @empresa

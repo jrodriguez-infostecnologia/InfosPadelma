@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgRegimenTributariokey @empresa int,@codigo char(1) AS  select * from gRegimenTributario where codigo = @codigo and empresa = @empresa

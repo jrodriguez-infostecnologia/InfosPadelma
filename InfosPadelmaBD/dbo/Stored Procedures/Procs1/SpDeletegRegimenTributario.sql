@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletegRegimenTributario @empresa int,@codigo char(1),@Retorno int output  AS begin tran gRegimenTributario delete gRegimenTributario where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran gRegimenTributario end else begin set @Retorno = 1 rollback tran gRegimenTributario end

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgTipoCuenta AS select * from gTipoCuenta GO

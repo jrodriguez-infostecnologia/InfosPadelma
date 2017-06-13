@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetiItemsCriterioskey @empresa int,@item int,@idPlan varchar(5),@idMayor varchar(50) AS  select * from iItemsCriterios where empresa = @empresa and idMayor = @idMayor and idPlan = @idPlan and item = @item

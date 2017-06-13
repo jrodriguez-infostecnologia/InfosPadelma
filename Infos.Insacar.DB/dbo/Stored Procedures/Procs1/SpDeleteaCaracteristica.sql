@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpDeleteaCaracteristica] @empresa int,@codigo int,@Retorno int output  AS begin tran aCaracteristica delete aCaracteristica where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran aCaracteristica end else begin set @Retorno = 1 rollback tran aCaracteristica end

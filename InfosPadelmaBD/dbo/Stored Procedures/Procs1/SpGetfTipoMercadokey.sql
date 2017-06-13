@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetfTipoMercadokey @empresa int,@codigo varchar(50) AS  select * from fTipoMercado where codigo = @codigo and empresa = @empresa

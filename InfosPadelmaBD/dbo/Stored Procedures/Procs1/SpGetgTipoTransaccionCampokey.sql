@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgTipoTransaccionCampokey @empresa int,@tipoTransaccion varchar(50),@entidad varchar(250),@campo varchar(250) AS  select * from gTipoTransaccionCampo where campo = @campo and empresa = @empresa and entidad = @entidad and tipoTransaccion = @tipoTransaccion

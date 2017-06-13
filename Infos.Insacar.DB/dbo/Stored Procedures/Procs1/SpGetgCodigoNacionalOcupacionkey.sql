@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgCodigoNacionalOcupacionkey @empresa int,@codigo varchar(50) AS  select * from gCodigoNacionalOcupacion where codigo = @codigo and empresa = @empresa

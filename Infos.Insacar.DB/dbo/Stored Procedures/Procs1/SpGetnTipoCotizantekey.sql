@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnTipoCotizantekey] @empresa int,@codigo varchar(50) AS  select * from nTipoCotizante where empresa = @empresa and codigo = @codigo

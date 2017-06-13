@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnConcepto] AS select * from nConcepto GO

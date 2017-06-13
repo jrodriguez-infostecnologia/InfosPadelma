@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsLogCorreoskey @id int AS  select * from sLogCorreos where id = @id

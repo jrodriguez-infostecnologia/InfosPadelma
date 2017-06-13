@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnCargo] AS select * from nCargo GO

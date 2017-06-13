@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgBancokey @empresa int,@codigo varchar(10) AS  select * from gBanco where codigo = @codigo and empresa = @empresa

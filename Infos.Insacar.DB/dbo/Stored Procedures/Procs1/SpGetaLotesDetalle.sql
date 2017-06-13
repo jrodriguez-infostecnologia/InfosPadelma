@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaLotesDetalle AS select * from aLotesDetalle GO
