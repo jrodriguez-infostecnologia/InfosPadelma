@@ -70,4 +70,35 @@ public class CModificacionNomina
             objValores,
             "ppa");
     }
+
+    public void ElimnarDetalleLiquidación(int año, int periodo, string tipo, int empresa, string numero, int codigoTercero, int codContrato)
+    {
+        string[] iParametros = new string[] { "@año", "@CodContrato", "@CodTercero", "@empresa", "@numero", "@periodo", "@tipo" };
+        string[] oParametros = new string[] { "@retorno" };
+        object[] objValores = new object[] { año, codContrato, codigoTercero, empresa, numero, periodo, tipo };
+
+        Cacceso.ExecProc(
+            "spEliminaNominaDetalle",
+            iParametros,
+            oParametros,
+            objValores,
+            "ppa");
+    }
+
+    public void GuardarDetalleLiqidación(int año, int periodo, string tipo, int empresa, string numero, int codigoTercero, int codContrato, List<LiquidacionDetalle> listadoDetalleLiquidacion)
+    {
+        foreach (var detalle in listadoDetalleLiquidacion)
+        {
+            string[] iParametros = new string[] { "@año", "@CodConcepto", "@Cantidad", "@CodContrato", "@CodTercero", "@empresa", "@numero", "@periodo", "@tipo", "@registro", "@valorTotal", "@valorUnitario" };
+            string[] oParametros = new string[] { "@retorno" };
+            object[] objValores = new object[] { año, codContrato, codigoTercero, empresa, numero, periodo, tipo, detalle.RegistroDetalleNomina, detalle.CodConcepto, detalle.Cantidad, detalle.ValorUnitario, detalle.ValorTotal };
+
+            Cacceso.ExecProc(
+                "spInsertarNominaDetalle",
+                iParametros,
+                oParametros,
+                objValores,
+                "ppa");
+        }
+    }
 }

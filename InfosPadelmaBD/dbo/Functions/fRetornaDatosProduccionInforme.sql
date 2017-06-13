@@ -31,20 +31,20 @@ BEGIN
 	begin
 		 set @PP= (select  SUM( valor )
 		from vTransaccionesProduccion 
-		where refProducto='FRU' AND refMovimiento='FP' and
+		where refProducto='FRU' AND refmovimiento='FP' and
 		fecha=@fecha and empresa=@empresa)
 	end
 	else
 	begin
 		select  @PP= SUM( valor )
 		from vTransaccionesProduccion 
-		where refMovimiento='AP' and refProducto='ADPA' AND
+		where refmovimiento='AP' and refProducto='ADPA' AND
 		fecha=@fecha and empresa=@empresa
 	end
 
 		select  @PTP= SUM( valor )
 		from vTransaccionesProduccion 
-		where refProducto=@producto and refMovimiento='PRO' and
+		where refProducto=@producto and refmovimiento='PRO' and
 		fecha=@fecha and empresa=@empresa
 		
 	
@@ -57,7 +57,7 @@ BEGIN
 		from vTransaccionesProduccion	
 		where
 		refProducto = @producto and
-		refMovimiento = @movimiento and
+		refmovimiento = @movimiento and
 		CONVERT( date,fecha ) = @fecha and empresa=@empresa)
 	END
 	end	
@@ -72,7 +72,7 @@ BEGIN
 		from vTransaccionesProduccion	
 		where
 		refproducto = @producto and
-		refMovimiento = @movimiento and empresa=@empresa and
+		refmovimiento = @movimiento and empresa=@empresa and
 		fecha=(select min( b.fecha )
 				  from vTransaccionesProduccion b
 				  where
@@ -127,7 +127,7 @@ BEGIN
 	begin
 		select  @PP= SUM( valor )
 		from vTransaccionesProduccion a
-		where refproducto='FRU' AND refMovimiento='FP' and
+		where refproducto='FRU' AND refmovimiento='FP' and
 			DATEPART(week,convert(date,fecha))= DATEPART(week,convert(date,@fecha)) and 
 		DATEPART(MONTH,convert(date,fecha))= DATEPART(MONTH,convert(date,@fecha)) and empresa=@empresa
 	end
@@ -156,7 +156,7 @@ BEGIN
 		from vTransaccionesProduccion	
 		where
 		refproducto = @producto and
-		refMovimiento = @movimiento and
+		refmovimiento = @movimiento and
 		DATEPART(week,convert(date,fecha))= DATEPART(week,convert(date,@fecha)) and 
 		DATEPART(MONTH,convert(date,fecha))= DATEPART(MONTH,convert(date,@fecha))   and empresa=@empresa
 		END
@@ -168,7 +168,7 @@ BEGIN
 		from vTransaccionesProduccion	
 		where
 		refProducto = @producto and
-		refMovimiento = @movimiento and empresa=@empresa and
+		refmovimiento = @movimiento and empresa=@empresa and
 		fecha=(select max( b.fecha )
 				  from vTransaccionesProduccion b
 				  where
@@ -186,7 +186,7 @@ BEGIN
 		from vTransaccionesProduccion	
 		where
 		refproducto = @producto and
-		refMovimiento = @movimiento and empresa=@empresa and
+		refmovimiento = @movimiento and empresa=@empresa and
 		fecha=(select max( b.fecha )
 				  from vTransaccionesProduccion b
 				  where

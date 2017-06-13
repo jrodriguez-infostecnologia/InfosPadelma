@@ -1,0 +1,9 @@
+C:\projects\InfosPadelma\InfosPadelmaBD\bin\Debug\InfosPadelmaDB.dacpac
+C:\projects\InfosPadelma\InfosPadelmaBD\obj\Debug\Model.xml
+C:\projects\InfosPadelma\InfosPadelmaBD\obj\Debug\refactor.xml
+C:\projects\InfosPadelma\InfosPadelmaBD\obj\Debug\postdeploy.sql
+C:\projects\InfosPadelma\InfosPadelmaBD\obj\Debug\predeploy.sql
+C:\projects\InfosPadelma\InfosPadelmaBD\obj\Debug\InfosPadelmaDB.dll
+C:\projects\InfosPadelma\InfosPadelmaBD\obj\Debug\InfosPadelmaDB.pdb
+C:\projects\InfosPadelma\InfosPadelmaBD\bin\Debug\InfosPadelmaDB.dll
+C:\projects\InfosPadelma\InfosPadelmaBD\bin\Debug\InfosPadelmaDB.pdb

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Net;
 using System.Transactions;
 using System.Web;
 using System.Web.UI;
@@ -10,23 +11,39 @@ using System.Web.UI.WebControls;
 public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 {
 
-    #region Instancias
+    public List<LiquidacionDetalle> ListadoDetalleLiquidacion
+    {
+        get
+        {
+            object o = ViewState["ListadoDetalleLiquidacion"];
+            return (o == null) ? null : (List<LiquidacionDetalle>)o;
+        }
+        set
+        {
+            ViewState["ListadoDetalleLiquidacion"] = value;
+        }
+    }
 
+    public List<LiquidacionDetalle> ListadoDetalleLiquidacionEliminados
+    {
+        get
+        {
+            object o = ViewState["ListadoDetalleLiquidacionEliminados"];
+            return (o == null) ? null : (List<LiquidacionDetalle>)o;
+        }
+        set
+        {
+            ViewState["ListadoDetalleLiquidacionEliminados"] = value;
+        }
+    }
+
+
+    #region Instancias
 
     SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
     CIP ip = new CIP();
-    Cfuncionarios funcionarios = new Cfuncionarios();
-    Coperadores operadores = new Coperadores();
-    CtransaccionNovedad transaccionNovedad = new CtransaccionNovedad();
-    CtipoTransaccion tipoTransaccion = new CtipoTransaccion();
     Cperiodos periodo = new Cperiodos();
-    string numerotransaccion = "";
-    Ctransacciones transacciones = new Ctransacciones();
-    CliquidacionNomina liquidacion = new CliquidacionNomina();
-    Cgeneral general = new Cgeneral();
-    Cfuncionarios funcionario = new Cfuncionarios();
     CModificacionNomina modificacionNomina = new CModificacionNomina();
-
     #endregion Instancias
 
     #region Metodos
@@ -35,73 +52,20 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
     {
         try
         {
-            DataView dvConceptosNoFijos = CcontrolesUsuario.OrdenarEntidadyActivos(CentidadMetodos.EntidadGet("nConcepto", "ppa"), "descripcion", Convert.ToInt16(Session["empresa"]));
-            dvConceptosNoFijos.RowFilter = "empresa = " + Convert.ToInt16(Session["empresa"]).ToString() + " and fijo = 0 and ausentismo=0";
-            this.ddlConcepto.DataSource = dvConceptosNoFijos;
+            DataView dvConceptos = CcontrolesUsuario.OrdenarEntidadyActivos(CentidadMetodos.EntidadGet("nConcepto", "ppa"), "descripcion", Convert.ToInt16(Session["empresa"]));
+            dvConceptos.RowFilter = "empresa = " + Convert.ToInt16(Session["empresa"]).ToString();
+            this.ddlConcepto.DataSource = dvConceptos;
             this.ddlConcepto.DataValueField = "codigo";
             this.ddlConcepto.DataTextField = "descripcion";
+
             this.ddlConcepto.DataBind();
             this.ddlConcepto.Items.Insert(0, new ListItem("", ""));
+
         }
         catch (Exception ex)
         {
             ManejoError("Error al cargar conceptos. Correspondiente a: " + ex.Message, "C");
         }
-    }
-    private void manejaConceptos()
-    {
-        if (gvDetalleLiquidacion.Rows.Count > 0)
-        {
-            lblConcepto.Visible = true;
-            ddlConcepto.Visible = true;
-            txvValorTotal.Visible = true;
-            btnCargar.Visible = true;
-            btnLiquidar.Visible = true;
-            txvValorTotal.Text = "0";
-            lblCantidad.Visible = true;
-            lblValorUnitario.Visible = true;
-            lblValorTotal.Visible = true;
-            txvValorUnitario.Visible = true;
-
-            cargarConcepto();
-        }
-        else
-        {
-            lblConcepto.Visible = false;
-            ddlConcepto.Visible = false;
-            txvValorTotal.Visible = false;
-            btnCargar.Visible = false;
-            btnLiquidar.Visible = false;
-            lblCantidad.Visible = false;
-            lblValorUnitario.Visible = false;
-            txvValorUnitario.Visible = false;
-            lblValorTotal.Visible = false;
-        }
-    }
-
-    private void cargarLiquidacion()
-    {
-        gvDetalleLiquidacion.Visible = true;
-        int año, perido;
-        DateTime fechaCorte;
-        if (ddlAño.Visible == true)
-        {
-            año = Convert.ToInt16(ddlAño.SelectedValue);
-            perido = Convert.ToInt16(ddlPeriodo.SelectedValue);
-        }
-        else
-        {
-            año = DateTime.Now.Year;
-            perido = 0;
-        }
-
-
-        DataView dvLiquidacion = liquidacion.PreliquidarContrato(perido, Convert.ToInt16(Session["empresa"]), año, Convert.ToInt16(ddlEmpleado.SelectedValue), false, DateTime.Now);
-        gvDetalleLiquidacion.DataSource = dvLiquidacion;
-        gvDetalleLiquidacion.DataBind();
-
-        if (gvDetalleLiquidacion.Rows.Count > 0)
-            this.Session["liquidacionContrato"] = dvLiquidacion;
     }
 
     private void cargarPeriodos()
@@ -111,21 +75,21 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlPeriodo.DataSource = periodo.PeriodosAbiertoNominaAño(Convert.ToInt32(ddlAño.SelectedValue.Trim()), Convert.ToInt16(Session["empresa"])).Tables[0].DefaultView;
             this.ddlPeriodo.DataValueField = "noPeriodo";
             this.ddlPeriodo.DataTextField = "descripcion";
+
             this.ddlPeriodo.DataBind();
+            if (this.ddlPeriodo.Items.Count == 0)
+            {
+                limpiarPeriodos();
+                return;
+            }
             this.ddlPeriodo.Items.Insert(0, new ListItem("", ""));
+            this.ddlPeriodo.Enabled = true;
+            limpiarTipoDeDocumento();
         }
         catch (Exception ex)
         {
             ManejoError("Error al cargar periodo inicial. Correspondiente a: " + ex.Message, "C");
         }
-    }
-
-    private string nombrePaginaActual()
-    {
-        string[] arrResult = HttpContext.Current.Request.RawUrl.Split('/');
-        string result = arrResult[arrResult.GetUpperBound(0)];
-        arrResult = result.Split('?');
-        return arrResult[arrResult.GetLowerBound(0)];
     }
 
     private void ManejoError(string error, string operacion)
@@ -144,6 +108,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlAño.DataSource = periodo.PeriodoAñoAbiertoNomina(Convert.ToInt16(Session["empresa"]));
             this.ddlAño.DataValueField = "año";
             this.ddlAño.DataTextField = "año";
+
             this.ddlAño.DataBind();
             this.ddlAño.Items.Insert(0, new ListItem("", ""));
         }
@@ -153,28 +118,13 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         }
     }
 
-    private string ConsecutivoTransaccion(string tipoTransaccion)
-    {
-        string numero = "";
-
-        try
-        {
-            numero = transacciones.RetornaNumeroTransaccion(tipoTransaccion, Convert.ToInt16(Session["empresa"]));
-        }
-        catch (Exception ex)
-        {
-            ManejoError("Error al obtener el número de transacción. Correspondiente a: " + ex.Message, "C");
-        }
-
-        return numero;
-    }
-
     #endregion Metodos
 
     #region Eventos
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (this.Session["usuario"] == null)
             this.Response.Redirect("~/Inicio.aspx");
         else
@@ -184,84 +134,71 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 ManejoError("Usuario no autorizado para ingresar a esta página", "IN");
                 return;
             }
-            CargarCombos();
-        }
-    }
-
-    protected void lbNuevo_Click(object sender, ImageClickEventArgs e)
-    {
-        if (seguridad.VerificaAccesoOperacion(this.Session["usuario"].ToString(), ConfigurationManager.AppSettings["Modulo"].ToString(), nombrePaginaActual(), "I", Convert.ToInt16(Session["empresa"])) == 0)
-        {
-            ManejoError("Usuario no autorizado para ejecutar esta operación", "C");
-            return;
-        }
-
-        CcontrolesUsuario.HabilitarControles(this.Page.Controls);
-        CcontrolesUsuario.LimpiarControles(Page.Controls);
-
-        CargarCombos();
-        manejaConceptos();
-        this.Session["editar"] = null;
-        this.Session["liquidacionContrato"] = null;
-        this.nilblInformacion.Text = "";
-    }
-
-    protected void lbCancelar_Click(object sender, ImageClickEventArgs e)
-    {
-        CcontrolesUsuario.InhabilitarControles(this.Page.Controls);
-        this.gvDetalleLiquidacion.DataSource = null;
-        this.gvDetalleLiquidacion.DataBind();
-        gvDetalleLiquidacion.Visible = false;
-        this.nilblInformacion.Text = "";
-        this.Session["editar"] = null;
-    }
-
-
-    protected void gvLista_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    {
-        this.nilblMensaje.Text = "";
-
-        using (TransactionScope ts = new TransactionScope())
-        {
-            try
+            if (!IsPostBack)
             {
-
+                CargarCombos();
+                cargarConcepto();
+                InitView();
             }
-            catch (Exception ex)
+            else
             {
-                ManejoError("Error al eliminar el registro. Correspondiente a: " + ex.Message, "E");
+                ListadoDetalleLiquidacion = new List<LiquidacionDetalle>();
+                var i = 1;
+                foreach (GridViewRow dr in gvDetalleLiquidacion.Rows)
+                {
+                    var item = new LiquidacionDetalle();
+                    item.RegistroDetalleNomina = (i++).ToString();
+                    item.CodConcepto = Server.HtmlDecode(dr.Cells[2].Text.ToString());
+                    item.DescripcionConcepto = Server.HtmlDecode(dr.Cells[3].Text.ToString());
+                    item.Cantidad = ((TextBox)dr.FindControl("txvCantidad")).Text.ToString();
+                    item.ValorUnitario = ((TextBox)dr.FindControl("txvValorUnitario")).Text.ToString();
+                    item.ValorTotal = ((TextBox)dr.FindControl("txvValorTotal")).Text.ToString();
+                    ListadoDetalleLiquidacion.Add(item);
+                }
             }
         }
+    }
+
+    private string nombrePaginaActual()
+    {
+        string[] arrResult = HttpContext.Current.Request.RawUrl.Split('/');
+        string result = arrResult[arrResult.GetUpperBound(0)];
+        arrResult = result.Split('?');
+        return arrResult[arrResult.GetLowerBound(0)];
+    }
+
+    private void InitView()
+    {
+        detailLoadedPanel.Visible = false;
+        hasMadeChangesPanel.Visible = false;
+        limpiarContrato();
+        limpiarDetalle();
+        limpiarDocumentos();
+        limpiarEmpleados();
+        limpiarPeriodos();
+        limpiarTipoDeDocumento();
     }
 
     #endregion Eventos
 
-    #region MetodosFuncionario
-
-
-
-
-    #endregion MetodosFuncionario
-
     #region EventosFuncionario
-
-
-    protected void niimbBuscar_Click(object sender, ImageClickEventArgs e)
-    {
-        CcontrolesUsuario.InhabilitarControles(this.Page.Controls);
-
-        this.gvDetalleLiquidacion.DataSource = null;
-        this.gvDetalleLiquidacion.DataBind();
-        gvDetalleLiquidacion.Visible = false;
-    }
-
-
-
 
     protected void ddlPeriodo_SelectedIndexChanged(object sender, EventArgs e)
     {
-        cargarTipoDeDocumento();
-        //manejoLiquidacion();
+        if (ddlPeriodo.SelectedValue.Trim().Length > 0)
+            cargarTipoDeDocumento();
+        else
+            limpiarTipoDeDocumento();
+    }
+
+    private void limpiarTipoDeDocumento()
+    {
+        ddlTipoDocumento.DataSource = null;
+
+        ddlTipoDocumento.SelectedValue = null;
+        ddlTipoDocumento.DataBind();
+        ddlTipoDocumento.Enabled = false;
+        limpiarDocumentos();
     }
 
     private void cargarTipoDeDocumento()
@@ -272,7 +209,14 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlTipoDocumento.DataValueField = "codigo";
             this.ddlTipoDocumento.DataTextField = "tipo";
             this.ddlTipoDocumento.DataBind();
+            if (this.ddlTipoDocumento.Items.Count == 0)
+            {
+                limpiarTipoDeDocumento();
+                return;
+            }
             this.ddlTipoDocumento.Items.Insert(0, new ListItem("", ""));
+            this.ddlTipoDocumento.Enabled = true;
+            limpiarDocumentos();
         }
         catch (Exception ex)
         {
@@ -280,156 +224,41 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         }
     }
 
-    protected void lbPreLiquidar_Click(object sender, ImageClickEventArgs e)
-    {
-        try
-        {
-            if (ddlEmpleado.SelectedValue.Trim().Length == 0 & ddlEmpleado.Visible == true)
-            {
-                nilblInformacion.Text = "Debe seleccionar un de centro de costp para seguir";
-                ddlEmpleado.Focus();
-                return;
-            }
-            cargarLiquidacion();
-            manejaConceptos();
-            ddlEmpleado.Enabled = false;
-
-
-        }
-        catch (Exception ex)
-        {
-            ManejoError("Error al liquidar el documento debido a :" + ex.Message, "I");
-        }
-    }
-
-
-
-    protected void btnLiquidar_Click(object sender, ImageClickEventArgs e)
-    {
-        try
-        {
-
-            if (ddlAño.SelectedValue.Trim().Length == 0)
-            {
-                nilblInformacion.Text = "Debe seleccionar un año para guardar liquidación";
-                ddlAño.Focus();
-                return;
-            }
-
-
-            if (ddlEmpleado.SelectedValue.Trim().Length == 0 & ddlEmpleado.Visible == true)
-            {
-                nilblInformacion.Text = "Debe seleccionar un empleado para seguir";
-                ddlEmpleado.Focus();
-                return;
-            }
-
-            if (ddlContratos.SelectedValue.ToString().Trim().Length == 0)
-            {
-                nilblInformacion.Text = "Debe seleccionar contrato";
-                return;
-            }
-
-            this.gvDetalleLiquidacion.DataSource = null;
-            this.gvDetalleLiquidacion.DataBind();
-            gvDetalleLiquidacion.Visible = false;
-
-
-        }
-        catch (Exception ex)
-        {
-            ManejoError("Error al liquidar el documento debido a :" + ex.Message, "I");
-        }
-    }
     #endregion EventosFuncionario
 
     protected void ddlAño_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (ddlAño.SelectedValue.Trim().Length > 0)
-        {
             cargarPeriodos();
-            //manejoLiquidacion();
-        }
-    }
-    protected void gvSaludPension_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    {
-        try
-        {
-            switch (liquidacion.EliminaConceptoLiquidacionContrato(Convert.ToInt16(ddlEmpleado.SelectedValue.Trim()),
-                Convert.ToString((this.gvDetalleLiquidacion.Rows[e.RowIndex].Cells[1].Text)), Convert.ToInt16(Session["empresa"])))
-            {
-                case 0:
-                    cargarGrillaConceptos();
-                    break;
-                case 1:
-                    ManejoError("Error al eliminar el registro. Operación no realizada", "E");
-                    break;
-            }
-        }
-        catch (Exception ex)
-        {
-            ManejoError("Error al eliminar el registro. Correspondiente a: " + ex.Message, "E");
-        }
+        else
+            limpiarPeriodos();
     }
 
-    protected void btnCargar_Click(object sender, ImageClickEventArgs e)
-    {
-        if (ddlConcepto.SelectedValue.Length == 0 || txvValorTotal.Text.Length == 0 || txvValorUnitario.Text.Length == 0 || txvValorUnitario.Text.Length == 0)
-        {
-            nilblMensaje.Text = "Campos vacios por favor corrija";
-            return;
-        }
-
-        if (Convert.ToDecimal(txvValorTotal.Text) == 0 || Convert.ToDecimal(txvValorUnitario.Text) == 0 || Convert.ToDecimal(txvValorUnitario.Text) == 0)
-        {
-            nilblMensaje.Text = "Campos cero (0), por favor corrija";
-            return;
-        }
-
-        foreach (GridViewRow r in gvDetalleLiquidacion.Rows)
-        {
-            if (r.Cells[3].Text == ddlConcepto.SelectedValue)
-            {
-                CcontrolesUsuario.MensajeError("El concepto seleccionado ya se encuentra registrado. Por favor corrija", nilblMensaje);
-                return;
-            }
-        }
-        guardarCocepto();
-    }
-
-    private void guardarCocepto()
+    private void limpiarPeriodos()
     {
 
-        try
-        {
-            switch (liquidacion.InsertaConceptoLiquidacionContrato(ddlEmpleado.SelectedValue.Trim(), ddlConcepto.SelectedValue, Convert.ToDecimal(txvValorTotal.Text), Convert.ToInt16(Session["empresa"]), Convert.ToDecimal(txvValorUnitario.Text), Convert.ToDecimal(txvValorUnitario.Text)))
-            {
-                case 0:
-                    cargarGrillaConceptos();
-                    break;
-                case 1:
-                    nilblMensaje.Text = "Error al cargar concepto.";
-                    break;
-            }
-        }
-
-        catch (Exception ex)
-        {
-            ManejoError("Error al eliminar borrar la fila debido a : " + ex.Message, "E");
-        }
+        ddlPeriodo.DataSource = null;
+        ddlPeriodo.SelectedValue = null;
+        ddlPeriodo.DataBind();
+        ddlPeriodo.Enabled = false;
+        limpiarTipoDeDocumento();
     }
 
-    private void cargarGrillaConceptos()
-    {
-        gvDetalleLiquidacion.Visible = true;
-        DataView dvLiquidacion = liquidacion.cargarConceptosLiquidacionContrato(Convert.ToInt16(Session["empresa"]));
-        gvDetalleLiquidacion.DataSource = dvLiquidacion;
-        gvDetalleLiquidacion.DataBind();
-
-    }
     protected void ddlEmpleado_SelectedIndexChanged(object sender, EventArgs e)
     {
-        cargarContrato();
+        if (ddlEmpleado.SelectedValue.Trim().Length > 0)
+            cargarContrato();
+        else
+            limpiarContrato();
+    }
+
+    private void limpiarContrato()
+    {
+        ddlContratos.DataSource = null;
+        ddlContratos.SelectedValue = null;
+        ddlContratos.DataBind();
+        ddlContratos.Enabled = false;
+        limpiarDetalle();
     }
 
     private void cargarContrato()
@@ -446,7 +275,16 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlContratos.DataValueField = "codContrato";
             this.ddlContratos.DataTextField = "descContrato";
             this.ddlContratos.DataBind();
+
+            if (ddlContratos.Items.Count == 0)
+            {
+                limpiarContrato();
+                return;
+            }
+
             this.ddlContratos.Items.Insert(0, new ListItem("", ""));
+            ddlContratos.Enabled = true;
+            limpiarDetalle();
         }
         catch (Exception ex)
         {
@@ -457,7 +295,19 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 
     protected void ddlTipoDocumento_SelectedIndexChanged(object sender, EventArgs e)
     {
-        cargarDocumentos();
+        if (ddlTipoDocumento.SelectedValue.Trim().Length > 0)
+            cargarDocumentos();
+        else
+            limpiarDocumentos();
+    }
+
+    private void limpiarDocumentos()
+    {
+        ddlNumeroDocumento.DataSource = null;
+        ddlNumeroDocumento.SelectedValue = null;
+        ddlNumeroDocumento.DataBind();
+        ddlNumeroDocumento.Enabled = false;
+        limpiarEmpleados();
     }
 
     private void cargarDocumentos()
@@ -468,7 +318,14 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlNumeroDocumento.DataValueField = "numero";
             this.ddlNumeroDocumento.DataTextField = "numero";
             this.ddlNumeroDocumento.DataBind();
+            if (this.ddlNumeroDocumento.Items.Count == 0)
+            {
+                limpiarDocumentos();
+                return;
+            }
             this.ddlNumeroDocumento.Items.Insert(0, new ListItem("", ""));
+            this.ddlNumeroDocumento.Enabled = true;
+            limpiarEmpleados();
         }
         catch (Exception ex)
         {
@@ -478,7 +335,19 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 
     protected void ddlNumeroDocumento_SelectedIndexChanged(object sender, EventArgs e)
     {
-        cargarEmpleados();
+        if (ddlNumeroDocumento.SelectedValue.Trim().Length > 0)
+            cargarEmpleados();
+        else
+            limpiarEmpleados();
+    }
+
+    private void limpiarEmpleados()
+    {
+        ddlEmpleado.DataSource = null;
+        ddlEmpleado.SelectedValue = null;
+        ddlEmpleado.DataBind();
+        ddlEmpleado.Enabled = false;
+        limpiarContrato();
     }
 
     private void cargarEmpleados()
@@ -494,7 +363,14 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlEmpleado.DataValueField = "codTercero";
             this.ddlEmpleado.DataTextField = "descripcion";
             this.ddlEmpleado.DataBind();
+            if (ddlEmpleado.Items.Count == 0)
+            {
+                limpiarEmpleados();
+                return;
+            }
             this.ddlEmpleado.Items.Insert(0, new ListItem("", ""));
+            this.ddlEmpleado.Enabled = true;
+            limpiarContrato();
         }
         catch (Exception ex)
         {
@@ -504,14 +380,27 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 
     protected void ddlContratos_SelectedIndexChanged(object sender, EventArgs e)
     {
-        CargarDetalle();
+        if (ddlContratos.SelectedValue.Trim().Length > 0)
+            CargarDetalle();
+        else
+            limpiarDetalle();
+    }
+
+    private void limpiarDetalle()
+    {
+        gvDetalleLiquidacion.DataSource = null;
+        gvDetalleLiquidacion.DataBind();
+        gvDetalleLiquidacion.Visible = false;
+        detailLoadedPanel.Visible = false;
+        ddlConceptoVal.Text = "";
     }
 
     private void CargarDetalle()
     {
         try
         {
-            this.gvDetalleLiquidacion.DataSource = modificacionNomina.CargarDetalleLiquidación(
+            ListadoDetalleLiquidacion = new List<LiquidacionDetalle>();
+            var result = modificacionNomina.CargarDetalleLiquidación(
                 Convert.ToInt32(ddlAño.SelectedValue),
                 Convert.ToInt32(ddlPeriodo.SelectedValue),
                 ddlTipoDocumento.SelectedValue,
@@ -519,11 +408,107 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 ddlNumeroDocumento.SelectedValue,
                 Convert.ToInt32(ddlEmpleado.SelectedValue),
                 Convert.ToInt32(ddlContratos.SelectedValue));
+            foreach (DataRow dr in result.Tables[0].AsEnumerable())
+            {
+                var item = new LiquidacionDetalle();
+                item.CodConcepto = dr["codConcepto"].ToString();
+                item.DescripcionConcepto = dr["descripcionConcepto"].ToString();
+                item.Cantidad = dr["cantidad"].ToString();
+                item.ValorUnitario = dr["valorUnitario"].ToString();
+                item.ValorTotal = dr["valorTotal"].ToString();
+                item.RegistroDetalleNomina = dr["registroDetalleNomina"].ToString();
+                ListadoDetalleLiquidacion.Add(item);
+            }
+            this.gvDetalleLiquidacion.DataSource = ListadoDetalleLiquidacion;
             this.gvDetalleLiquidacion.DataBind();
+            gvDetalleLiquidacion.Visible = true;
+            detailLoadedPanel.Visible = true;
         }
         catch (Exception ex)
         {
             ManejoError("Error al cargar año. Correspondiente a: " + ex.Message, "C");
+        }
+    }
+
+    protected void gvDetalleLiquidacion_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        if (ListadoDetalleLiquidacionEliminados == null)
+            ListadoDetalleLiquidacionEliminados = new List<LiquidacionDetalle>();
+
+        var dr = ListadoDetalleLiquidacion[e.RowIndex];
+        if (!dr.RegistroDetalleNomina.ToString().Equals("0"))
+            ListadoDetalleLiquidacionEliminados.Add(dr);
+
+        ListadoDetalleLiquidacion.Remove(dr);
+        var i = 1;
+        foreach(var rd in ListadoDetalleLiquidacion) {
+            rd.RegistroDetalleNomina = (i++).ToString();
+        }
+        
+        gvDetalleLiquidacion.DataSource = ListadoDetalleLiquidacion;
+        gvDetalleLiquidacion.DataBind();
+        hasMadeChangesPanel.Visible = true;
+    }
+
+    protected void btnCargar_Click(object sender, ImageClickEventArgs e)
+    {
+        ddlConceptoVal.Text = "";
+        if (string.IsNullOrEmpty(ddlConcepto.SelectedValue.Trim()))
+        {
+            ddlConceptoVal.Text = "Debe seleccionar un concepto";
+            return;
+        }
+
+        var dt = ListadoDetalleLiquidacion;
+        var dataRow = new LiquidacionDetalle();
+        dataRow.RegistroDetalleNomina = ListadoDetalleLiquidacion.Count.ToString();
+        dataRow.CodConcepto = ddlConcepto.SelectedValue;
+        dataRow.DescripcionConcepto = ddlConcepto.SelectedItem.Text;
+        dataRow.Cantidad = "0";
+        dataRow.ValorUnitario = "0";
+        dataRow.ValorTotal = "0";
+        dt.Add(dataRow);
+
+        gvDetalleLiquidacion.DataSource = ListadoDetalleLiquidacion;
+        gvDetalleLiquidacion.DataBind();
+
+        ddlConcepto.SelectedValue = "";
+        hasMadeChangesPanel.Visible = true;
+    }
+
+    protected void lbCancelar_Click(object sender, ImageClickEventArgs e)
+    {
+        ddlConceptoVal.Text = "";
+        CargarDetalle();
+        ddlConcepto.SelectedValue = "";
+        hasMadeChangesPanel.Visible = false;
+    }
+
+    protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
+    {
+        try
+        {
+            modificacionNomina.ElimnarDetalleLiquidación(
+                Convert.ToInt32(ddlAño.SelectedValue),
+                Convert.ToInt32(ddlPeriodo.SelectedValue),
+                ddlTipoDocumento.SelectedValue,
+                Convert.ToInt32(Session["empresa"]),
+                ddlNumeroDocumento.SelectedValue,
+                Convert.ToInt32(ddlEmpleado.SelectedValue),
+                Convert.ToInt32(ddlContratos.SelectedValue));
+            modificacionNomina.GuardarDetalleLiqidación(
+                Convert.ToInt32(ddlAño.SelectedValue),
+                Convert.ToInt32(ddlPeriodo.SelectedValue),
+                ddlTipoDocumento.SelectedValue,
+                Convert.ToInt32(Session["empresa"]),
+                ddlNumeroDocumento.SelectedValue,
+                Convert.ToInt32(ddlEmpleado.SelectedValue),
+                Convert.ToInt32(ddlContratos.SelectedValue),
+                ListadoDetalleLiquidacion)                                                           ;
+        }
+        catch (Exception ex)
+        {
+            ManejoError("Error al guardar los datos. Correspondiente a: " + ex.Message, "C");
         }
     }
 }

@@ -9,7 +9,8 @@ SELECT        a.empresa, SUBSTRING(CONVERT(varchar, CONVERT(money, RTRIM(tt.codi
                          cc.entidadSena, cc.entidadIcbf, cc.fechaIngreso, cc.fechaRetiro, dbo.nCargo.codigo AS codigoCago, dbo.nCargo.descripcion AS Expr3, tt.codigo, cc.salario, cc.departamento, b.fecha AS Expr4, tt.codigo AS Expr5, 
                          s.noMostrar, s.prioridad, s.mostrarFecha, s.mostrarDetalle, b.tipoConcepto, b.desTipoConcepto, cc.fechaContratoHasta, cc.terminoContrato, cc.motivoRetiro, cc.tipoContizante, cc.tipoNomina, cc.salarioAnterior, 
                          cc.auxilioTransporte, cc.id, s.prestacionSocial, s.mostrarCantidad, d.codigo AS codCCosto, d.descripcion AS nombreCcosto, g.descripcion AS nombreDepartamento, g.codigo AS codDepto, ISNULL(c.entidadEps, 
-                         cc.entidadEps) AS Expr6, ISNULL(c.entidadPension, cc.entidadPension) AS Expr7, ISNULL(h.razonSocial, '') AS nombreEPS, ISNULL(i.razonSocial, '') AS nombrePension, b.valorTotal AS vTotalNR
+                         cc.entidadEps) AS Expr6, ISNULL(c.entidadPension, cc.entidadPension) AS Expr7, ISNULL(h.razonSocial, '') AS nombreEPS, ISNULL(i.razonSocial, '') AS nombrePension, b.valorTotal AS vTotalNR,
+						 b.registro registroDetalleNomina
 FROM            dbo.nLiquidacionNomina AS a INNER JOIN
                          dbo.nLiquidacionNominaDetalle AS b ON b.numero = a.numero AND b.tipo = a.tipo AND b.empresa = a.empresa INNER JOIN
                          dbo.cTercero AS tt ON a.empresa = tt.empresa AND tt.id = b.tercero INNER JOIN
@@ -292,5 +293,6 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 0
-         End', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vLiquidacionDefinitivaReal';
+         End
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vLiquidacionDefinitivaReal';
 

@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE  spSeleccionaTipoDocumentoExistenteNominaDetalle
+﻿
+CREATE PROCEDURE  spSeleccionaTipoDocumentoExistenteNominaDetalle
 	@Año int = 2016, 
 	@Periodo int = 13, 
 	@Empresa int = 1
