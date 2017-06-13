@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetpProductoMovimientokey @empresa int,@producto varchar(50),@movimiento varchar(50) AS  select * from pProductoMovimiento where empresa = @empresa and movimiento = @movimiento and producto = @producto

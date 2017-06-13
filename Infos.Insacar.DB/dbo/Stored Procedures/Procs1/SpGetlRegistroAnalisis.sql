@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetlRegistroAnalisis AS select * from lRegistroAnalisis GO

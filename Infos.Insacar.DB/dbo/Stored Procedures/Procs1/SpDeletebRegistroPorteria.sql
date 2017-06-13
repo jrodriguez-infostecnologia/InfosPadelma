@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletebRegistroPorteria @empresa int,@numero varchar(50),@tipo varchar(50),@Retorno int output  AS begin tran bRegistroPorteria delete bRegistroPorteria where empresa = @empresa and numero = @numero and tipo = @tipo if (@@error = 0 ) begin set @Retorno = 0 commit tran bRegistroPorteria end else begin set @Retorno = 1 rollback tran bRegistroPorteria end

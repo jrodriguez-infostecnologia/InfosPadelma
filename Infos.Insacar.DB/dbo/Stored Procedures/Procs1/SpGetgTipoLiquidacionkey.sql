@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetgTipoLiquidacionkey] @codigo int,@empresa int AS  select * from gTipoLiquidacion where codigo = @codigo and empresa = @empresa

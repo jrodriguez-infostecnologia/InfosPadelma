@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpActualizasPerfiles @activo bit,@codigo varchar(50),@descripcion varchar(550),@Retorno int output  AS begin tran sPerfiles update sPerfiles set activo = @activo,descripcion = @descripcion where codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran sPerfiles end else begin set @Retorno = 1 rollback tran sPerfiles end

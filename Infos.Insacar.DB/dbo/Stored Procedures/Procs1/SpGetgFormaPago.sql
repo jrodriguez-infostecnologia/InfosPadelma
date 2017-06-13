@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgFormaPago AS select * from gFormaPago GO

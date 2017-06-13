@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetcGrupoConceptoIR AS select * from cGrupoConceptoIR GO

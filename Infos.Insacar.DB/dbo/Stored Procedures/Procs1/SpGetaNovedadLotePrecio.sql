@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaNovedadLotePrecio AS select * from aNovedadLotePrecio GO

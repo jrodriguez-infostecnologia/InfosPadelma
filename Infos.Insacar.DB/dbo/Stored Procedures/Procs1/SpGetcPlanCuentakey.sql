@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetcPlanCuentakey] @empresa int,@codigo varchar(50) AS  select * from cPlanCuenta where codigo = @codigo and empresa = @empresa

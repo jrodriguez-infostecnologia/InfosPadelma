@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletesOperaciones @codigo varchar(50),@Retorno int output  AS begin tran sOperaciones delete sOperaciones where codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran sOperaciones end else begin set @Retorno = 1 rollback tran sOperaciones end

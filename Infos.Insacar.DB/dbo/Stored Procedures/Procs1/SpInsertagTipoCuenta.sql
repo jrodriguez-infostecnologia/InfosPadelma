@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpInsertagTipoCuenta @empresa int,@descripcion varchar(250),@codigo char(1),@Retorno int output  AS begin tran gTipoCuenta insert gTipoCuenta( empresa,descripcion,codigo ) select @empresa,@descripcion,@codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran gTipoCuenta end else begin set @Retorno = 1 rollback tran gTipoCuenta end

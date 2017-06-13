@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx">
+      <s:element name="EntidadGet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="entidad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dBase" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EntidadGetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EntidadGetResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SpNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IParametros" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="OParametros" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ObjValores" type="tns:ArrayOfAnyType" />
+            <s:element minOccurs="0" maxOccurs="1" name="Conexion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ExecProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecProcResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SpNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Conexion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSeteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataSeteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSetParametros">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SpNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IParametros" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ObjValores" type="tns:ArrayOfAnyType" />
+            <s:element minOccurs="0" maxOccurs="1" name="Conexion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSetParametrosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataSetParametrosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EntidadInsertUpdateDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="entidad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operacion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dBase" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="valores" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EntidadInsertUpdateDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EntidadInsertUpdateDeleteResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EntidadGetKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="entidad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dBase" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="valores" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EntidadGetKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EntidadGetKeyResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EntidadGetSoapIn">
+    <wsdl:part name="parameters" element="tns:EntidadGet" />
+  </wsdl:message>
+  <wsdl:message name="EntidadGetSoapOut">
+    <wsdl:part name="parameters" element="tns:EntidadGetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecProcSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecProc" />
+  </wsdl:message>
+  <wsdl:message name="ExecProcSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataSeteSoapIn">
+    <wsdl:part name="parameters" element="tns:DataSete" />
+  </wsdl:message>
+  <wsdl:message name="DataSeteSoapOut">
+    <wsdl:part name="parameters" element="tns:DataSeteResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataSetParametrosSoapIn">
+    <wsdl:part name="parameters" element="tns:DataSetParametros" />
+  </wsdl:message>
+  <wsdl:message name="DataSetParametrosSoapOut">
+    <wsdl:part name="parameters" element="tns:DataSetParametrosResponse" />
+  </wsdl:message>
+  <wsdl:message name="EntidadInsertUpdateDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:EntidadInsertUpdateDelete" />
+  </wsdl:message>
+  <wsdl:message name="EntidadInsertUpdateDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:EntidadInsertUpdateDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="EntidadGetKeySoapIn">
+    <wsdl:part name="parameters" element="tns:EntidadGetKey" />
+  </wsdl:message>
+  <wsdl:message name="EntidadGetKeySoapOut">
+    <wsdl:part name="parameters" element="tns:EntidadGetKeyResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AccesoDatosSoap">
+    <wsdl:operation name="EntidadGet">
+      <wsdl:input message="tns:EntidadGetSoapIn" />
+      <wsdl:output message="tns:EntidadGetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecProc">
+      <wsdl:input message="tns:ExecProcSoapIn" />
+      <wsdl:output message="tns:ExecProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DataSete">
+      <wsdl:input message="tns:DataSeteSoapIn" />
+      <wsdl:output message="tns:DataSeteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DataSetParametros">
+      <wsdl:input message="tns:DataSetParametrosSoapIn" />
+      <wsdl:output message="tns:DataSetParametrosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EntidadInsertUpdateDelete">
+      <wsdl:input message="tns:EntidadInsertUpdateDeleteSoapIn" />
+      <wsdl:output message="tns:EntidadInsertUpdateDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EntidadGetKey">
+      <wsdl:input message="tns:EntidadGetKeySoapIn" />
+      <wsdl:output message="tns:EntidadGetKeySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AccesoDatosSoap" type="tns:AccesoDatosSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EntidadGet">
+      <soap:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/EntidadGet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecProc">
+      <soap:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/ExecProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataSete">
+      <soap:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/DataSete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataSetParametros">
+      <soap:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/DataSetParametros" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EntidadInsertUpdateDelete">
+      <soap:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/EntidadInsertUpdateDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EntidadGetKey">
+      <soap:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/EntidadGetKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AccesoDatosSoap12" type="tns:AccesoDatosSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EntidadGet">
+      <soap12:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/EntidadGet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecProc">
+      <soap12:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/ExecProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataSete">
+      <soap12:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/DataSete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataSetParametros">
+      <soap12:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/DataSetParametros" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EntidadInsertUpdateDelete">
+      <soap12:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/EntidadInsertUpdateDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EntidadGetKey">
+      <soap12:operation soapAction="http://tempuri.org/AccesoDatosWS/AccesoDatos.asmx/EntidadGetKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AccesoDatos">
+    <wsdl:port name="AccesoDatosSoap" binding="tns:AccesoDatosSoap">
+      <soap:address location="http://192.168.2.11/adInfos/AccesoDatos.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AccesoDatosSoap12" binding="tns:AccesoDatosSoap12">
+      <soap12:address location="http://192.168.2.11/adInfos/AccesoDatos.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

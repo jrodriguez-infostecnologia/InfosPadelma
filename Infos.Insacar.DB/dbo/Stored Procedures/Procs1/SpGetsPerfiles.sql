@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsPerfiles AS select * from sPerfiles GO

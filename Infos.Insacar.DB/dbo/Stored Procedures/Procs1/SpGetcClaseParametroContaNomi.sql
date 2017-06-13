@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetcClaseParametroContaNomi] AS select * from cClaseParametroContaNomi

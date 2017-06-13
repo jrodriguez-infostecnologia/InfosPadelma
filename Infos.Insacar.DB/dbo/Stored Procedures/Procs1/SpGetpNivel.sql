@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetpNivel] AS select * from pNivel GO

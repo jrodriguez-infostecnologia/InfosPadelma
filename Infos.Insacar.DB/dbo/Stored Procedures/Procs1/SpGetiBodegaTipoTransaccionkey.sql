@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiBodegaTipoTransaccionkey @empresa int,@tipo varchar(50),@bodega varchar(5) AS  select * from iBodegaTipoTransaccion where bodega = @bodega and empresa = @empresa and tipo = @tipo

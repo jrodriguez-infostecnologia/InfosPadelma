@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnCuadrillakey] @empresa int,@codigo varchar(50) AS  select * from nCuadrilla where empresa = @empresa and codigo = @codigo

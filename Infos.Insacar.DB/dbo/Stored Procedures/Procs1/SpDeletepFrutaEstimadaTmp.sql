@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletepFrutaEstimadaTmp @fecha date,@empresa int,@Retorno int output  AS begin tran pFrutaEstimadaTmp delete pFrutaEstimadaTmp where empresa = @empresa and fecha = @fecha if (@@error = 0 ) begin set @Retorno = 0 commit tran pFrutaEstimadaTmp end else begin set @Retorno = 1 rollback tran pFrutaEstimadaTmp end

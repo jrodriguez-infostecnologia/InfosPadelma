@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsMenu AS select * from sMenu GO

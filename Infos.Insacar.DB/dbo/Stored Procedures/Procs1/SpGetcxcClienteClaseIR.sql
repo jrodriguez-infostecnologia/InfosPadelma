@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetcxcClienteClaseIR AS select * from cxcClienteClaseIR GO

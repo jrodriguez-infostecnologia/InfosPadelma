@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetlAnalisisTanque AS select * from lAnalisisTanque GO

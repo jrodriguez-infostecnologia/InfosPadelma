@@ -1,0 +1,291 @@
+﻿
+.panel-detalle {
+    padding: 4px;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    margin: 1px;
+}
+
+.panel-primary-detalle {
+    border-color: #428bca;
+}
+.label-titulos {
+    font-weight: bold;
+    text-align:left;
+    width:70px;
+}
+.label-campo {
+    text-align:left;
+}
+
+.panel-primary-detalle > .panel-heading-detalle {
+    color: #fff;
+    background-color: #0C1D87;
+    border-color: #0C1D87;
+}
+
+.panel-heading-detalle {
+    /*padding: 2px 3px;*/
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.panel-body-detalle {
+    border: 1px solid #003399;
+    padding: 3px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-bottom:2px;
+}
+.panel-title-detalle {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.panel-primary {
+    border-color: #428bca;
+}
+
+.panel-primary > .panel-heading {
+    color: #fff;
+    background-color: #0C1D87;
+    border-color: #0C1D87;
+}
+
+.panel-heading {
+    padding: 3px 8px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.panel-body {
+    border: 1px solid #003399;
+    padding: 10px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.form-control {
+    display: block;
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 1.428571429;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    margin-bottom:1px;
+    margin-top:1px;
+}
+
+
+input, button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
+
+button, input, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input:focus, keygen:focus {
+    outline-offset: -2px;
+}
+
+:focus {
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+
+input, keygen, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em 0em 0em 0em;
+    font: 13.3333px Arial;
+}
+
+input, keygen, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb;
+}
+
+
+Pseudo ::before element *, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+Pseudo ::after element *, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.tablaGrilla {
+    margin: 10px 100px 10px 100px;
+    width: 800px;
+    }
+
+.hider {
+    border-color: none;
+    border-style: none;
+    background-color: #FFFFFF;
+}
+
+.botonGV {
+    background-color: #FFFFFF;
+    border: 1px dotted #999999;
+}
+
+
+
+.Items {
+    border: 1px solid #CCCCCC;
+}
+
+.herader {
+    background-repeat: no-repeat;
+    height: 30px;
+    padding-top: 5px;
+    background-color: #000099;
+}
+
+
+
+.Grid {
+    background-color: #fcfcfc;
+    margin: 18px 0 10px 0;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+    font-family: Calibri;
+    color: #474747;
+}
+
+
+.GridDetalle {
+      background-color: #fcfcfc;
+    margin: 1px 0 1px 0;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+    font-family: Calibri;
+    color: #474747;
+}
+
+id td {
+      padding: 2px; 
+      border: solid 1px #c1c1c1;
+     
+}
+
+.Grid th {
+    padding: 4px 2px;
+    color: #FFFFFF;
+    background: no-repeat;
+    border-left: solid 1px #525252;
+    font-size: 12px;
+    border: 1px solid #C1C1C1;
+    background-color: #0C1D87;
+    font-weight: bold;
+}
+.Grid .alt {
+    border-style: solid;
+    border-width: 1px;
+    border-color: silver;
+    background: #fcfcfc url('../Imagen/Fondos/grid-alt.png') repeat-x top;
+    text-align: left;
+}
+.Grid .pgr {
+    background: url('../Imagen/Fondos/barraGrilla.jpg') repeat-x;
+}
+    .Grid .rw {
+    border: 1px solid #C0C0C0;
+    text-align: left;
+}
+.Grid .pgr table { margin: 3px 0; 
+}
+.Grid .pgr td { border-width: 0; padding: 0 6px; border-left: solid 1px #666; font-weight: bold; color: #fff; line-height: 12px; 
+               
+}   
+.Grid .pgr a { color: Gray; text-decoration: none; }
+.Grid .pgr a:hover { color: #000; text-decoration: none; }
+
+.GridDetalle th {
+    padding: 1px 1px;
+    color: #FFFFFF;
+    background: no-repeat;
+    border-left: solid 1px #525252;
+    font-size: 12px;
+    border: 1px solid #C1C1C1;
+    background-color: #0C1D87;
+    font-weight: bold;
+}
+.GridDetalle .alt {
+    border-style: solid;
+    border-width: 1px;
+    border-color: silver;
+    text-align: left;
+}
+.GridDetalle .pgr {
+    background-color: #F0F0F0;
+}
+
+
+    .GridDetalle .rw {
+    border: 1px solid #C0C0C0;
+    text-align: left;
+}
+
+.GridDetalle .pgr table { margin: 3px 0; 
+                       
+}
+.GridDetalle .pgr td { border-width: 0; padding: 0 6px; border-left: solid 1px #666; font-weight: bold; color: #fff; line-height: 12px; 
+               
+}   
+.GridDetalle .pgr a { color: Gray; text-decoration: none; }
+.GridDetalle .pgr a:hover { color: #000; text-decoration: none; }

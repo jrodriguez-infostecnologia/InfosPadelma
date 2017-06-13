@@ -1,0 +1,2 @@
+﻿
+create PROCEDURE [dbo].[SpInsertagTipoLiquidacion] @codigo int,@empresa int,@descripcion varchar(200),@Retorno int output  AS begin tran gTipoLiquidacion insert gTipoLiquidacion( codigo,empresa,descripcion ) select @codigo,@empresa,@descripcion if (@@error = 0 ) begin set @Retorno = 0 commit tran gTipoLiquidacion end else begin set @Retorno = 1 rollback tran gTipoLiquidacion end

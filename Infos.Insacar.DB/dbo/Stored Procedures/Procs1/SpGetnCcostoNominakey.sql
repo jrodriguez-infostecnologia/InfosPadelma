@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnCcostoNominakey] @empresa int,@codigo varchar(50) AS  select * from nCcostoNomina where empresa = @empresa and codigo = @codigo

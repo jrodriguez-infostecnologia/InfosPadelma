@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnNovedadesDetalle] AS select * from nNovedadesDetalle GO

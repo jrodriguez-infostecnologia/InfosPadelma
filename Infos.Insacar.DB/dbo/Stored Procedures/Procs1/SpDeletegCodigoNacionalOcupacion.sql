@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletegCodigoNacionalOcupacion @empresa int,@codigo varchar(50),@Retorno int output  AS begin tran gCodigoNacionalOcupacion delete gCodigoNacionalOcupacion where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran gCodigoNacionalOcupacion end else begin set @Retorno = 1 rollback tran gCodigoNacionalOcupacion end

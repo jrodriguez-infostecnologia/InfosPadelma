@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletebVehiculo @empresa int,@codigo varchar(50),@tipo nchar,@Retorno int output  AS begin tran bVehiculo delete bVehiculo where codigo = @codigo and empresa = @empresa and tipo = @tipo if (@@error = 0 ) begin set @Retorno = 0 commit tran bVehiculo end else begin set @Retorno = 1 rollback tran bVehiculo end

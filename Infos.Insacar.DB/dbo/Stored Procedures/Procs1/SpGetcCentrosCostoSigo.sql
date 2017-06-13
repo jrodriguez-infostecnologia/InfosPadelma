@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetcCentrosCostoSigo] AS select * from cCentrosCostoSigo

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletecxpProveedorBanco @empresa int,@proveedor int,@banco varchar(10),@Retorno int output  AS begin tran cxpProveedorBanco delete cxpProveedorBanco where banco = @banco and empresa = @empresa and proveedor = @proveedor if (@@error = 0 ) begin set @Retorno = 0 commit tran cxpProveedorBanco end else begin set @Retorno = 1 rollback tran cxpProveedorBanco end

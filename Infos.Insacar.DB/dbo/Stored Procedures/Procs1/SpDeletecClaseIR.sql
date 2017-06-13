@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletecClaseIR @empresa int,@codigo int,@Retorno int output  AS begin tran cClaseIR delete cClaseIR where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran cClaseIR end else begin set @Retorno = 1 rollback tran cClaseIR end

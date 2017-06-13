@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetbRemision AS select * from bRemision GO

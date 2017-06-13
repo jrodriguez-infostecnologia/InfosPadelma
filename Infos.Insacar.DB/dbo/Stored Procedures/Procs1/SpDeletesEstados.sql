@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletesEstados @estado char(10),@Retorno int output  AS begin tran sEstados delete sEstados where estado = @estado if (@@error = 0 ) begin set @Retorno = 0 commit tran sEstados end else begin set @Retorno = 1 rollback tran sEstados end

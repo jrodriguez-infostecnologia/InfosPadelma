@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetgCiudad] AS select distinct * from gCiudad GO

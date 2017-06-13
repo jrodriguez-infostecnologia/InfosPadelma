@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeleteaTransaccion @empresa int,@tipo varchar(50),@numero varchar(50),@Retorno int output  AS begin tran aTransaccion delete aTransaccion where empresa = @empresa and numero = @numero and tipo = @tipo if (@@error = 0 ) begin set @Retorno = 0 commit tran aTransaccion end else begin set @Retorno = 1 rollback tran aTransaccion end

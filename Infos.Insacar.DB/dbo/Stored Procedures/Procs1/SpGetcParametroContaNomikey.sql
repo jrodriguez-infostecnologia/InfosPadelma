@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetcParametroContaNomikey] @empresa int,@id int AS  select * from cParametroContaNomi where empresa = @empresa and id = @id
