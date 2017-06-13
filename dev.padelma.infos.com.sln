@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "http://dev.padelma.infos.com", "http://dev.padelma.infos.com", "{D5C72178-067E-4E81-893A-0E13442FC42B}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -45,7 +45,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "NominaInfos", "http://dev.p
 		SlnRelativePath = "InfosPadelma\NominaInfos\"
 	EndProjectSection
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "InfosPadelmaDB", "InfosPadelmaBD\InfosPadelmaDB.sqlproj", "{7916B609-F260-4232-92D7-6374C8C41897}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "InfosPadelmaDB", "Infos.Padelma.BD\InfosPadelmaDB.sqlproj", "{7916B609-F260-4232-92D7-6374C8C41897}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
