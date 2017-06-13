@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsPerfilPermisoskey @perfil varchar(50),@sitio varchar(150),@menu varchar(150),@operacion varchar(50) AS  select * from sPerfilPermisos where menu = @menu and operacion = @operacion and perfil = @perfil and sitio = @sitio

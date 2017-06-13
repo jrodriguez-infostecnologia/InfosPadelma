@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpInsertagDiagnostico] @empresa int,@codigo varchar(50),@descripcion varchar(550),@Retorno int output  AS begin tran gDiagnostico insert gDiagnostico( empresa,codigo,descripcion ) select @empresa,@codigo,@descripcion if (@@error = 0 ) begin set @Retorno = 0 commit tran gDiagnostico end else begin set @Retorno = 1 rollback tran gDiagnostico end

@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetpJerarquiakey] @codigo int , @empresa int AS  select * from pJerarquia where codigo = @codigo and empresa=@empresa

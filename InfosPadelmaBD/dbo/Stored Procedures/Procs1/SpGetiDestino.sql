@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetiDestino AS select * from iDestino GO

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnParametrosAnokey] @empresa int,@ano int AS  select * from nParametrosAno where empresa = @empresa and ano = @ano

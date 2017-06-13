@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlAnalisisTanquekey @empresa int,@item int,@analisis varchar(10) AS  select * from lAnalisisTanque where empresa = @empresa and item = @item and analisis = @analisis

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsysEntidadCampo AS select * from sysEntidadCampo GO

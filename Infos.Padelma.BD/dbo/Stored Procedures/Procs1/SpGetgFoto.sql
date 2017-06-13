@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgFoto AS select * from gFoto GO

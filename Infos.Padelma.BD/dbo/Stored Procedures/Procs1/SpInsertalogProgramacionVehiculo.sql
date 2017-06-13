@@ -1,0 +1,7 @@
+﻿CREATE PROCEDURE [dbo].[SpInsertalogProgramacionVehiculo] @fecha date,@empresa int,@producto int,@tercero int,@cantidad float,@fechaDespacho datetime,@fechaRegistro datetime,@numero varchar(50),@tipo varchar(50),@vehiculo varchar(50),@despacho varchar(50),@codigoConductor varchar(50),@nombreConductor varchar(250),@programacionCarga varchar(50),@remolque varchar(50),@comercializadora varchar(50),@observacion varchar(250),@planta varchar(50),@estado varchar(2),@cliente varchar(10),@usuario varchar(50),@vehiculoPropio bit,@certificado varchar(50), @Retorno int output  AS begin tran logProgramacionVehiculo 
+
+
+--set @certificado = (select isnull(codigo,'') from iItems where referencia=@certificado and empresa=@empresa )
+
+insert logProgramacionVehiculo( fecha,empresa,producto,tercero,cantidad,fechaDespacho,fechaRegistro,numero,tipo,vehiculo,despacho,codigoConductor,nombreConductor,programacionCarga,remolque,comercializadora,observacion,planta,estado,cliente,usuario, VehiculoPropio, certificado ) 
+select @fecha,@empresa,@producto,@tercero,@cantidad,@fechaDespacho,@fechaRegistro,@numero,@tipo,@vehiculo,@despacho,@codigoConductor,@nombreConductor,@programacionCarga,@remolque,@comercializadora,@observacion,@planta,@estado,@cliente,@usuario,@vehiculoPropio,@certificado if (@@error = 0 ) begin set @Retorno = 0 commit tran logProgramacionVehiculo end else begin set @Retorno = 1 rollback tran logProgramacionVehiculo end

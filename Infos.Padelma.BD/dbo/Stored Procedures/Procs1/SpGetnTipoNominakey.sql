@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnTipoNominakey] @empresa int,@codigo varchar(50) AS  select * from nTipoNomina where empresa = @empresa and codigo = @codigo

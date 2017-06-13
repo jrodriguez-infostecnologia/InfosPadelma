@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetiItemskey @empresa int,@codigo int AS  select * from iItems where codigo = @codigo and empresa = @empresa

@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetnFestivo] AS select empresa, convert(varchar(50), fecha,103)  fechaFiltro, fecha from nFestivo GO

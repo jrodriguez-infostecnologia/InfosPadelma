@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgPais AS select * from gPais GO

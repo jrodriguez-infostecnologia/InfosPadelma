@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgUnidadMedidakey @empresa int,@codigo varchar(50) AS  select * from gUnidadMedida where codigo = @codigo and empresa = @empresa

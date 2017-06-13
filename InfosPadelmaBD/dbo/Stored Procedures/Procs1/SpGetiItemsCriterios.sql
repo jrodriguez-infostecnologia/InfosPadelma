@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetiItemsCriterios AS select * from iItemsCriterios GO

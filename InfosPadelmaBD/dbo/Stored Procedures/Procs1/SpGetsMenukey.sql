@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsMenukey @codigo varchar(150),@modulo varchar(150) AS  select * from sMenu where codigo = @codigo and modulo = @modulo

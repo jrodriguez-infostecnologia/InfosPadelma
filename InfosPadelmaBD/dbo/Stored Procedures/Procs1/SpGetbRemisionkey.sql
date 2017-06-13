@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetbRemisionkey @empresa int,@codigo varchar(50) AS  select * from bRemision where codigo = @codigo and empresa = @empresa

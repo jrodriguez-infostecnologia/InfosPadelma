@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetiTransaccion AS select * from iTransaccion GO

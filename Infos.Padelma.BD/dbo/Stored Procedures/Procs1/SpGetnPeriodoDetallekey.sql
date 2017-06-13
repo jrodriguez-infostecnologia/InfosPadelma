@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnPeriodoDetallekey] @empresa int,@año int,@mes int,@noPeriodo int AS  select * from nPeriodoDetalle where empresa = @empresa and año = @año and mes = @mes and noPeriodo = @noPeriodo

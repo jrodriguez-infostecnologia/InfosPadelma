@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsysEntidadMetodos AS select * from sysEntidadMetodos GO

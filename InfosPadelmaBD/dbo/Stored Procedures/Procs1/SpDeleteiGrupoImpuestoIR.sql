@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeleteiGrupoImpuestoIR @empresa int,@grupo char(5),@Retorno int output  AS begin tran iGrupoImpuestoIR delete iGrupoImpuestoIR where empresa = @empresa and grupo = @grupo if (@@error = 0 ) begin set @Retorno = 0 commit tran iGrupoImpuestoIR end else begin set @Retorno = 1 rollback tran iGrupoImpuestoIR end

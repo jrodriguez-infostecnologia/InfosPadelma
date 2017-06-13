@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnModoCampo] AS select * from nModoCampo GO

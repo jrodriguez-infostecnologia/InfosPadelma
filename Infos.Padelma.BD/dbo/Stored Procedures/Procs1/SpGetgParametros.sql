@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgParametros AS select * from gParametros GO

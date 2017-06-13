@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgParametroskey @empresa int,@codigo varchar(50) AS  select * from gParametros where codigo = @codigo and empresa = @empresa

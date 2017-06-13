@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetgFormaPagokey] @empresa int,@codigo varchar(50) AS  select * from gFormaPago where codigo = @codigo and empresa = @empresa

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcPeriodokey @empresa int,@año int,@mes int AS  select * from cPeriodo where año = @año and empresa = @empresa and mes = @mes

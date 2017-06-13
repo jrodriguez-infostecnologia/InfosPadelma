@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetaTransaccionItem] AS select * from aTransaccionItem GO

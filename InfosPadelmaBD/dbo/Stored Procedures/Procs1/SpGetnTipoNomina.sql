@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnTipoNomina] AS select * from nTipoNomina GO

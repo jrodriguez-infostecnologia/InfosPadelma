@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnEntidadAfc] AS select * from nEntidadAfc GO

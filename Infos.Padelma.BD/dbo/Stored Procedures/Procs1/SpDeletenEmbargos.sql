@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpDeletenEmbargos] @empresa int,@empleado int,@codigo int,@tipo varchar(50),@Retorno int output  AS begin tran nEmbargos delete nEmbargos where empresa = @empresa and empleado = @empleado and codigo = @codigo and tipo = @tipo  if (@@error = 0 ) begin set @Retorno = 0 commit tran nEmbargos end else begin set @Retorno = 1 rollback tran nEmbargos end

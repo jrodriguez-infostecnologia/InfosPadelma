@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnTipoConceptoDetallekey] @empresa int,@tipoConcepto varchar(50),@concepto varchar(50) AS  select * from nTipoConceptoDetalle where concepto = @concepto and empresa = @empresa and tipoConcepto = @tipoConcepto

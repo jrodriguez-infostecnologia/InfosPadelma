@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpDeleteaLoteCcostoSigo] @empresa int,@lote varchar(50),@Retorno int output  AS begin tran aLoteCcostoSigo delete aLoteCcostoSigo where empresa = @empresa and lote = @lote if (@@error = 0 ) begin set @Retorno = 0 commit tran aLoteCcostoSigo end else begin set @Retorno = 1 rollback tran aLoteCcostoSigo end

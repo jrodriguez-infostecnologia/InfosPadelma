@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetiPlanItemkey @empresa int,@codigo varchar(5) AS  select * from iPlanItem where codigo = @codigo and empresa = @empresa

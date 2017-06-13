@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaSecciones AS select * from aSecciones GO

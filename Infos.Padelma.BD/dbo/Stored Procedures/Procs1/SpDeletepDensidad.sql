@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletepDensidad @empresa int,@temperatura int,@item varchar(50),@Retorno int output  AS begin tran pDensidad delete pDensidad where empresa = @empresa and item = @item and temperatura = @temperatura if (@@error = 0 ) begin set @Retorno = 0 commit tran pDensidad end else begin set @Retorno = 1 rollback tran pDensidad end

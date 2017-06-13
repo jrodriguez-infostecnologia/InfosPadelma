@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcContactokey @empresa int,@idtercero int,@codigo char(4) AS  select * from cContacto where empresa = @empresa and idtercero = @idtercero and codigo = @codigo

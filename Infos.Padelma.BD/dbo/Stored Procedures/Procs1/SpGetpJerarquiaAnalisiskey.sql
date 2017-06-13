@@ -1,0 +1,2 @@
+﻿
+CREATE PROCEDURE [dbo].[SpGetpJerarquiaAnalisiskey] @jerarquia int,@empresa bit,@analisis varchar(10) AS  select * from pJerarquiaAnalisis where analisis = @analisis and empresa = @empresa and jerarquia = @jerarquia

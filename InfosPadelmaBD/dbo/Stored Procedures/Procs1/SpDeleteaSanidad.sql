@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpDeleteaSanidad] @empresa int,@tipo varchar(50),@numero varchar(50),@Retorno int output  AS begin tran aSanidad delete aSanidad where empresa = @empresa and numero = @numero and tipo = @tipo if (@@error = 0 ) begin set @Retorno = 0 commit tran aSanidad end else begin set @Retorno = 1 rollback tran aSanidad end

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetcxpProveedorBanco AS select * from cxpProveedorBanco GO

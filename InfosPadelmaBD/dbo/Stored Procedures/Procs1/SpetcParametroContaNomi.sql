@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpetcParametroContaNomi] AS select * from cParametroContaNomi

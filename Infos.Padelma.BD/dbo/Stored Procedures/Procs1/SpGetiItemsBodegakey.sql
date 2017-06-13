@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetiItemsBodegakey] @empresa int,@item varchar(50),@bodega varchar(5) AS  select * from iItemsBodega where bodega = @bodega and empresa = @empresa and item = @item

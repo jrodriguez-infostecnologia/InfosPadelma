@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiMayorItem AS select * from iMayorItem GO

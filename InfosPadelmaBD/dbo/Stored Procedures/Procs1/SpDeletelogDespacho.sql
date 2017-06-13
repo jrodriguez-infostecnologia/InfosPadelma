@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletelogDespacho @empresa int,@tipo varchar(50),@numero varchar(50),@Retorno int output  AS begin tran logDespacho delete logDespacho where empresa = @empresa and numero = @numero and tipo = @tipo if (@@error = 0 ) begin set @Retorno = 0 commit tran logDespacho end else begin set @Retorno = 1 rollback tran logDespacho end

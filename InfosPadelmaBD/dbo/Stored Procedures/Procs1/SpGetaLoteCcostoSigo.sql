@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetaLoteCcostoSigo] AS select * from aLoteCcostoSigo GO

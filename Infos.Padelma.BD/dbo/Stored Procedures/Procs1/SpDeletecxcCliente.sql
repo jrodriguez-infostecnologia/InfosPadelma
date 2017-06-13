@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletecxcCliente @empresa int,@idTercero int,@codigo varchar(10),@Retorno int output  AS begin tran cxcCliente delete cxcCliente where codigo = @codigo and empresa = @empresa and idTercero = @idTercero if (@@error = 0 ) begin set @Retorno = 0 commit tran cxcCliente end else begin set @Retorno = 1 rollback tran cxcCliente end

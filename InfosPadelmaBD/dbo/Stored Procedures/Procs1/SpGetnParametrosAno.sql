@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnParametrosAno] AS select * from nParametrosAno GO

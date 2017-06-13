@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnModoCampokey] @empresa int,@modo varchar(50),@entidad varchar(250),@campo varchar(250) AS  select * from nModoCampo where empresa = @empresa and modo = @modo and entidad = @entidad and campo = @campo

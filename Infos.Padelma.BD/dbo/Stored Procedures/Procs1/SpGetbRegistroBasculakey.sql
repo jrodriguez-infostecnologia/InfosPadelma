@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetbRegistroBasculakey @empresa int,@tipo varchar(50),@numero varchar(50) AS  select * from bRegistroBascula where empresa = @empresa and numero = @numero and tipo = @tipo

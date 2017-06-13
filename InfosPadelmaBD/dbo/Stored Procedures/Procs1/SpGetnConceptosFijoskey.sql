@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnConceptosFijoskey] @empresa int,@año int,@mes int,@noPeriodo int,@centroCosto varchar(50) AS  select * from nConceptosFijos where año = @año and centroCosto = @centroCosto and empresa = @empresa and mes = @mes and noPeriodo = @noPeriodo

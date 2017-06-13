@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsModulos AS select * from sModulos GO

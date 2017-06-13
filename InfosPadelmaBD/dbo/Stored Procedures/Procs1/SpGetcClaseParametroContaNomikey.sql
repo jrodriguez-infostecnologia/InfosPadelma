@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetcClaseParametroContaNomikey] @empresa int,@codigo varchar(50) AS  select * from cClaseParametroContaNomi where codigo = @codigo and empresa = @empresa

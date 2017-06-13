@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnConceptoRangokey] @empresa int,@registro int,@concepto varchar(50) AS  select * from nConceptoRango where empresa = @empresa and concepto = @concepto and registro = @registro

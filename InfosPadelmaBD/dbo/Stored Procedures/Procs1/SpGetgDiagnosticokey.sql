@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetgDiagnosticokey] @empresa int,@codigo varchar(50) AS  select * from gDiagnostico where empresa = @empresa and codigo = @codigo

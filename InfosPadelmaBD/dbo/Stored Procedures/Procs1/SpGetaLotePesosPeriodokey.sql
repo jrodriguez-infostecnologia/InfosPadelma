@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaLotePesosPeriodokey @empresa int,@año int,@mes int,@finca varchar(50),@lote varchar(50) AS  select * from aLotePesosPeriodo where año = @año and empresa = @empresa and finca = @finca and lote = @lote and mes = @mes

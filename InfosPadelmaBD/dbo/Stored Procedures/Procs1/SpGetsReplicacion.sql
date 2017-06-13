@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsReplicacion AS select * from sReplicacion GO

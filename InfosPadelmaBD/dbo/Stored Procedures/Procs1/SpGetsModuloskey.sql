@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsModuloskey @codigo varchar(150) AS  select * from sModulos where codigo = @codigo

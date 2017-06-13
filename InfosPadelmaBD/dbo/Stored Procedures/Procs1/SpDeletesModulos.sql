@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletesModulos @codigo varchar(150),@Retorno int output  AS begin tran sModulos delete sModulos where codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran sModulos end else begin set @Retorno = 1 rollback tran sModulos end

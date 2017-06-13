@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpDeletenParametrosAno] @empresa int,@ano int,@Retorno int output  AS begin tran nParametrosAno delete nParametrosAno where empresa = @empresa and ano = @ano if (@@error = 0 ) begin set @Retorno = 0 commit tran nParametrosAno end else begin set @Retorno = 1 rollback tran nParametrosAno end

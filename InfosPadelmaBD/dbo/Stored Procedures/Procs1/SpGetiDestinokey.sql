@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetiDestinokey @empresa int,@nivel int,@codigo varchar(50) AS  select * from iDestino where codigo = @codigo and empresa = @empresa and nivel = @nivel

@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpGetnParametrosTipoCotizante] AS select * from nParametrosTipoCotizante GO

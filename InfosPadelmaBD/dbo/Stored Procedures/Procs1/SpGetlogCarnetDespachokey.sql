@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlogCarnetDespachokey @empresa int,@codigo varchar(50) AS  select * from logCarnetDespacho where codigo = @codigo and empresa = @empresa

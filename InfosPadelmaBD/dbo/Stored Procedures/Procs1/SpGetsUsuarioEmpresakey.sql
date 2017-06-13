@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsUsuarioEmpresakey @empresa int,@usuario varchar(50) AS  select * from sUsuarioEmpresa where empresa = @empresa and usuario = @usuario

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetaTransaccionLote AS select * from aTransaccionLote GO

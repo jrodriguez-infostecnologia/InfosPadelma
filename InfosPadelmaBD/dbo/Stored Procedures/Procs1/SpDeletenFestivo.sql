@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpDeletenFestivo] @fecha date,@empresa int,@Retorno int output  AS begin tran nFestivo delete nFestivo where empresa = @empresa and fecha = @fecha if (@@error = 0 ) begin set @Retorno = 0 commit tran nFestivo end else begin set @Retorno = 1 rollback tran nFestivo end

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiItems AS select * from iItems GO

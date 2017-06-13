@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletegTipoDocumento @empresa int,@codigo char(2),@Retorno int output  AS begin tran gTipoDocumento delete gTipoDocumento where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran gTipoDocumento end else begin set @Retorno = 1 rollback tran gTipoDocumento end

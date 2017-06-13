@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpInsertaiItemsBodega] @empresa int,@item varchar(50),@bodega varchar(5),@Retorno int output  AS begin tran iItemsBodega insert iItemsBodega( empresa,item,bodega ) select @empresa,@item,@bodega if (@@error = 0 ) begin set @Retorno = 0 commit tran iItemsBodega end else begin set @Retorno = 1 rollback tran iItemsBodega end

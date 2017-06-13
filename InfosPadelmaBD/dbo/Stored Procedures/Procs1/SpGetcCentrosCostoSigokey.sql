@@ -1,2 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetcCentrosCostoSigokey] @empresa int,@codigo varchar(50),@mayor varchar(50) AS  
-select * from cCentrosCostoSigo where codigo = @codigo and empresa = @empresa and mayor=@mayor

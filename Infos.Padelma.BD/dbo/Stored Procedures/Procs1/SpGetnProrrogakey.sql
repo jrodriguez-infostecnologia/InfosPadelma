@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnProrrogakey] @empresa int,@id int,@contrato int,@tipo varchar(1) AS  select * from nProrroga where empresa = @empresa and id = @id and contrato = @contrato and tipo = @tipo

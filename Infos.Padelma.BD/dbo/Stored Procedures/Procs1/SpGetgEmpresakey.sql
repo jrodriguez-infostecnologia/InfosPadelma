@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgEmpresakey @id int AS  select * from gEmpresa where id = @id

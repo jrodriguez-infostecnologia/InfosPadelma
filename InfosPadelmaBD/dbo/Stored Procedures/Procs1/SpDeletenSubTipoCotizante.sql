@@ -1,1 +1,0 @@
-﻿create PROCEDURE [dbo].[SpDeletenSubTipoCotizante] @empresa int,@codigo varchar(50),@Retorno int output  AS begin tran nSubTipoCotizante delete nSubTipoCotizante where empresa = @empresa and codigo = @codigo if (@@error = 0 ) begin set @Retorno = 0 commit tran nSubTipoCotizante end else begin set @Retorno = 1 rollback tran nSubTipoCotizante end

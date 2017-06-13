@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgBanco AS select * from gBanco GO

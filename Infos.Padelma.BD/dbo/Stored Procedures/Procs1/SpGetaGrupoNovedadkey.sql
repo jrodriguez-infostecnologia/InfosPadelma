@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaGrupoNovedadkey @empresa int,@codigo varchar(50) AS  select * from aGrupoNovedad where codigo = @codigo and empresa = @empresa

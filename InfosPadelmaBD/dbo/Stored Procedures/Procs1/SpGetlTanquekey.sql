@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetlTanquekey @empresa int,@codigo char(5) AS  select * from lTanque where codigo = @codigo and empresa = @empresa

@@ -1,0 +1,4 @@
+﻿CREATE PROCEDURE [dbo].[SpActualizacPuc] @empresa int,@nivel int,@clase varchar(50),@tercero bit,@cCosto bit,@base bit,@activo bit,
+@codigo varchar(16),@raiz varchar(16),@nombre varchar(150),@naturaleza char(1),@tipo char(1),@Retorno int output  AS begin tran cPuc 
+update cPuc set nivel = @nivel,clase = @clase,tercero = @tercero,cCosto = @cCosto,base = @base,activo = @activo,raiz = @raiz,nombre = @nombre,naturaleza = @naturaleza,tipo = @tipo
+ where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran cPuc end else begin set @Retorno = 1 rollback tran cPuc end

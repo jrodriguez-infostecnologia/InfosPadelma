@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetcxpClaseProveedorkey @empresa int,@codigo char(4) AS  select * from cxpClaseProveedor where codigo = @codigo and empresa = @empresa

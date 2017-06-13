@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletelAnalisisTanque @empresa int,@item int,@analisis varchar(10),@Retorno int output  AS begin tran lAnalisisTanque delete lAnalisisTanque where empresa = @empresa and item = @item and analisis = @analisis if (@@error = 0 ) begin set @Retorno = 0 commit tran lAnalisisTanque end else begin set @Retorno = 1 rollback tran lAnalisisTanque end

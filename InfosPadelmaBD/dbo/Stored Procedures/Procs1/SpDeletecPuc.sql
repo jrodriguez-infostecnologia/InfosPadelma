@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletecPuc @empresa int,@codigo varchar(16),@Retorno int output  AS begin tran cPuc delete cPuc where codigo = @codigo and empresa = @empresa if (@@error = 0 ) begin set @Retorno = 0 commit tran cPuc end else begin set @Retorno = 1 rollback tran cPuc end

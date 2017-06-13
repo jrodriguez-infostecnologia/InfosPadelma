@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpDeletesysEntidadMetodos @entidad varchar(250),@dBase varchar(250),@Retorno int output  AS begin tran sysEntidadMetodos delete sysEntidadMetodos where dBase = @dBase and entidad = @entidad if (@@error = 0 ) begin set @Retorno = 0 commit tran sysEntidadMetodos end else begin set @Retorno = 1 rollback tran sysEntidadMetodos end

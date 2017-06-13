@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetgNivelEducativo AS select * from gNivelEducativo GO

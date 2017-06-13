@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetnParametrosGeneral] AS select * from nParametrosGeneral GO

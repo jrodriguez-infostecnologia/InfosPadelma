@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetlogDespacho AS select * from logDespacho GO

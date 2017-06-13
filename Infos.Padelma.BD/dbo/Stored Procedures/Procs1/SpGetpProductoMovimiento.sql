@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetpProductoMovimiento AS select * from pProductoMovimiento GO

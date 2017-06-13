@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpInsertasPerfiles @activo bit,@codigo varchar(50),@descripcion varchar(550),@Retorno int output  AS begin tran sPerfiles insert sPerfiles( activo,codigo,descripcion ) select @activo,@codigo,@descripcion if (@@error = 0 ) begin set @Retorno = 0 commit tran sPerfiles end else begin set @Retorno = 1 rollback tran sPerfiles end

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetbRegistroBascula AS select * from bRegistroBascula GO

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpActualizasEstados @descripcion varchar(150),@estado char(10),@Retorno int output  AS begin tran sEstados update sEstados set descripcion = @descripcion where estado = @estado if (@@error = 0 ) begin set @Retorno = 0 commit tran sEstados end else begin set @Retorno = 1 rollback tran sEstados end

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnMotivoRetirokey] @empresa int,@codigo varchar(50) AS  select * from nMotivoRetiro where empresa = @empresa and codigo = @codigo

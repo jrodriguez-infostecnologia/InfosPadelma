@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE [dbo].[SpGetsUsuarioPerfileskey] @empresa int,@usuario varchar(50) AS  select * from sUsuarioPerfiles where empresa = @empresa and usuario = @usuario

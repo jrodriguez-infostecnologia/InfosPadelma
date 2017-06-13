@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgPaiskey @empresa int,@codigo varchar(50) AS  select * from gPais where codigo = @codigo and empresa = @empresa

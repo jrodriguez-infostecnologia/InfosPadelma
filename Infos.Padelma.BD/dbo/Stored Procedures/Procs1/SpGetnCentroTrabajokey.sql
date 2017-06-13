@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnCentroTrabajokey] @empresa int,@codigo varchar(50) AS  select * from nCentroTrabajo where empresa = @empresa and codigo = @codigo

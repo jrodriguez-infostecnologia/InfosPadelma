@@ -1,0 +1,1 @@
+﻿create PROCEDURE [dbo].[SpGetgParametrosGenerales] AS select * from gParametrosGenerales GO

@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetfTipoMercado AS select * from fTipoMercado GO

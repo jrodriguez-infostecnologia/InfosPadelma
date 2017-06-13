@@ -1,1 +1,0 @@
-﻿CREATE PROCEDURE SpGetsPerfilPermisos AS select * from sPerfilPermisos GO

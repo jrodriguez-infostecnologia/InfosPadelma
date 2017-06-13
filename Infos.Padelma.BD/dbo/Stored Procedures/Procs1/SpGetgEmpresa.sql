@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetgEmpresa AS select * from gEmpresa GO
