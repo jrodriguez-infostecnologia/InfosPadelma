@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnLiquidacionNominaDetalle] AS select * from nLiquidacionNominaDetalle GO

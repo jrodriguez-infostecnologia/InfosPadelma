@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnEmbargoskey] @empresa int,@empleado int,@codigo int,@tipo varchar(50) AS  select * from nEmbargos where empresa = @empresa and empleado = @empleado and codigo = @codigo and tipo = @tipo

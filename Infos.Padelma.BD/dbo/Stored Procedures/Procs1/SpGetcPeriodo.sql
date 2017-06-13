@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetcPeriodo AS select * from cPeriodo GO

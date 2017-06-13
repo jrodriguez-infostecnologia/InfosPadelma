@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpInsertagRh @empresa int,@codigo varchar(50),@descripcion varchar(250),@Retorno int output  AS begin tran gRh insert gRh( empresa,codigo,descripcion ) select @empresa,@codigo,@descripcion if (@@error = 0 ) begin set @Retorno = 0 commit tran gRh end else begin set @Retorno = 1 rollback tran gRh end

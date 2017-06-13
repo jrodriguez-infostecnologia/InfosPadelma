@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaFinca AS select * from aFinca GO

@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaVariedadkey @empresa int,@codigo char(5) AS  select * from aVariedad where codigo = @codigo and empresa = @empresa

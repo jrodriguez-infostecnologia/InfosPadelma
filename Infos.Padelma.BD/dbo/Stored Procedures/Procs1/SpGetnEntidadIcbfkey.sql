@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnEntidadIcbfkey] @empresa int,@codigo varchar(50) AS  select * from nEntidadIcbf where empresa = @empresa and codigo = @codigo

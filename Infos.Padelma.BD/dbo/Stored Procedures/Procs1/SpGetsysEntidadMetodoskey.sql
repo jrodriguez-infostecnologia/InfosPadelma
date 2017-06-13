@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetsysEntidadMetodoskey @entidad varchar(250),@dBase varchar(250) AS  select * from sysEntidadMetodos where dBase = @dBase and entidad = @entidad

@@ -1,0 +1,2 @@
+﻿
+CREATE PROCEDURE [dbo].[SpDeletepJerarquiaAnalisis] @jerarquia int,@empresa bit,@analisis varchar(10),@Retorno int output  AS begin tran pJerarquiaAnalisis delete pJerarquiaAnalisis where analisis = @analisis and empresa = @empresa and jerarquia = @jerarquia if (@@error = 0 ) begin set @Retorno = 0 commit tran pJerarquiaAnalisis end else begin set @Retorno = 1 rollback tran pJerarquiaAnalisis end

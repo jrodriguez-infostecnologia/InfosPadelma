@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpDeletenFuncionario] @empresa int,@tercero int,@Retorno int output  AS begin tran nFuncionario delete nFuncionario where empresa = @empresa and tercero = @tercero if (@@error = 0 ) begin set @Retorno = 0 commit tran nFuncionario end else begin set @Retorno = 1 rollback tran nFuncionario end

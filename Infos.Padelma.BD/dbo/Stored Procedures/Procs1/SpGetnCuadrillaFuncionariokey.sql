@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE [dbo].[SpGetnCuadrillaFuncionariokey] @empresa int,@funcionario int,@cuadrilla varchar(50) AS  select * from nCuadrillaFuncionario where empresa = @empresa and cuadrilla = @cuadrilla and funcionario = @funcionario

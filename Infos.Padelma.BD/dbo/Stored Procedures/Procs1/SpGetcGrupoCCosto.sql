@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetcGrupoCCosto AS select * from cGrupoCCosto GO

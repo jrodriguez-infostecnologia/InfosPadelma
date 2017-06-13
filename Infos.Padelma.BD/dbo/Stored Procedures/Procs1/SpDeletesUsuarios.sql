@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeletesUsuarios @usuario varchar(50),@Retorno int output  AS begin tran sUsuarios delete sUsuarios where usuario = @usuario if (@@error = 0 ) begin set @Retorno = 0 commit tran sUsuarios end else begin set @Retorno = 1 rollback tran sUsuarios end

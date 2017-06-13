@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetaTransaccionTercerokey @empresa int,@registro int,@registroNovedad int,@tipo varchar(50),@numero varchar(50),@novedad varchar(50) AS  select * from aTransaccionTercero where empresa = @empresa and novedad = @novedad and numero = @numero and registro = @registro and registroNovedad = @registroNovedad and tipo = @tipo
