@@ -11,7 +11,7 @@
     <script src="../../js/Numero.js" type="text/javascript"></script>
     <link href="../../css/jquery-ui.css" rel="stylesheet" />
     <link type="text/css" href="../../css/ui.multiselect.css" rel="stylesheet" />
-    
+
     <script type="text/javascript" src="../../js/lib/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="../../js/jquery-ui1.8.10.min.js"></script>
     <script type="text/javascript" src="../../js/plugins/localisation/jquery.localisation-min.js"></script>
@@ -70,7 +70,12 @@
         <div class="principal">
             <table cellspacing="0" style="width: 1000px">
                 <tr>
-                    <td>Modificación de liquidación de documentos</td>
+                    <td>Modificación de liquidación de documentos
+                        <div>
+                            <asp:Label ID="successMessage" runat="server" ForeColor="Green" Font-Bold="true"></asp:Label>
+                            <asp:Label ID="failMessage" runat="server" ForeColor="Red" Font-Bold="true"></asp:Label>
+                        </div>
+                    </td>
                 </tr>
             </table>
             <table cellspacing="0" style="width: 100%; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: silver;" id="Table2">
@@ -148,17 +153,15 @@
                     </td>
                     <td style="text-align: center;" colspan="2">
                         <asp:ImageButton ID="btnCargar" runat="server" ImageUrl="~/Imagen/Bonotes/btnCargar.png" onmouseout="this.src='../../Imagen/Bonotes/btnCargar.png'" onmouseover="this.src='../../Imagen/Bonotes/btnCargarN.png'" ToolTip="Preliquidar documento" Style="height: 21px" OnClick="btnCargar_Click" />
-                        <asp:Panel runat="server" ID="hasMadeChangesPanel">
-                            <asp:ImageButton ID="lbCancelar" runat="server" ImageUrl="~/Imagen/Bonotes/btnCancelar.jpg" onmouseout="this.src='../../Imagen/Bonotes/btnCancelar.jpg'" onmouseover="this.src='../../Imagen/Bonotes/btnCancelarNegro.jpg'" ToolTip="Cancela la operación" OnClick="lbCancelar_Click" />
-                            <asp:ImageButton ID="btnGuardar" runat="server" ImageUrl="~/Imagen/Bonotes/btnGuardar.jpg" OnClientClick="if(!confirm('Desea guardar los cambios ?')){return false;};" onmouseout="this.src='../../Imagen/Bonotes/btnGuardar.jpg'" onmouseover="this.src='../../Imagen/Bonotes/btnGuardarN.jpg'" ToolTip="Guardar Cambios" OnClick="btnGuardar_Click" />
-                        </asp:Panel>
+                        <asp:ImageButton ID="lbCancelar" runat="server" ImageUrl="~/Imagen/Bonotes/btnCancelar.jpg" onmouseout="this.src='../../Imagen/Bonotes/btnCancelar.jpg'" onmouseover="this.src='../../Imagen/Bonotes/btnCancelarNegro.jpg'" ToolTip="Cancela la operación" OnClick="lbCancelar_Click" />
+                        <asp:ImageButton ID="btnGuardar" runat="server" ImageUrl="~/Imagen/Bonotes/btnGuardar.jpg" OnClientClick="if(!confirm('Desea guardar los cambios ?')){return false;};" onmouseout="this.src='../../Imagen/Bonotes/btnGuardar.jpg'" onmouseover="this.src='../../Imagen/Bonotes/btnGuardarN.jpg'" ToolTip="Guardar Cambios" OnClick="btnGuardar_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style2"></td>
                     <td colspan="4" style="text-align: center;" class="auto-style3">
                         <div style="text-align: center">
-                            <div style="display: inline-block">
+                            <div style="display: inline-block" id="detalleLiqidacion" runat="server">
                                 <asp:GridView ID="gvDetalleLiquidacion" runat="server" AutoGenerateColumns="False" CssClass="Grid" GridLines="None" RowHeaderColumn="cuenta" OnRowDeleting="gvDetalleLiquidacion_RowDeleting" Width="800px">
                                     <AlternatingRowStyle CssClass="alt" />
                                     <Columns>
@@ -181,35 +184,68 @@
                                             <HeaderStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
                                             <ItemStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
                                         </asp:BoundField>
-                                        <asp:TemplateField HeaderText="Cantidad">
+                                        <asp:TemplateField HeaderText="Cantidad" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txvCantidad" runat="server" CssClass="input txvCantidad" onkeyup="formato_numero(this)" Text='<%#Eval("cantidad") %>' Width="80%">0</asp:TextBox>
+                                                <asp:TextBox ID="txvCantidad" runat="server" ClientIDMode="Static" CssClass="input" onkeyup="formato_numero(this)" Enabled='<%#!(bool)Eval("ValidaPorcentaje")%>' Text='<%#Eval("cantidad") %>' Width="80%">0</asp:TextBox>
+                                                <asp:HiddenField ID="cantidad" runat="server" ClientIDMode="Static" Value='<%#Eval("cantidad")%>' />
                                             </ItemTemplate>
-                                            <ItemStyle CssClass="Items" Width="80px" />
+                                            <ItemStyle CssClass="Items" Width="90px" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="ValorUnitario">
+                                        <asp:TemplateField HeaderText="ValorUnitario" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txvValorUnitario" runat="server" CssClass="input txvValorUnitario" onkeyup="formato_numero(this)" Text='<%#Eval("valorUnitario") %>' Width="80%">0</asp:TextBox>
+                                                <asp:TextBox ID="txvValorUnitario" runat="server" ClientIDMode="Static" CssClass="input" onkeyup="formato_numero(this)" Enabled='<%#!(bool)Eval("ValidaPorcentaje")%>' Text='<%#Eval("valorUnitario") %>' Width="80%">0</asp:TextBox>
+                                                <asp:HiddenField ID="valorUnitario" runat="server" ClientIDMode="Static" Value='<%#Eval("valorUnitario")%>' />
                                             </ItemTemplate>
-                                            <ItemStyle CssClass="Items" Width="80px" />
+                                            <ItemStyle CssClass="Items" Width="90px" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="ValorTotal">
+                                        <asp:TemplateField HeaderText="ValorTotal" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txvValorTotal" runat="server" CssClass="input txvValorTotal" onkeyup="formato_numero(this)" Text='<%#Eval("valorTotal") %>' Enabled="false" Width="80%">0</asp:TextBox>
+                                                <asp:TextBox ID="txvValorTotal" runat="server" ClientIDMode="Static" CssClass="input" onkeyup="formato_numero(this)" Enabled="False" Text='<%#Eval("valorTotal") %>' Width="80%">0</asp:TextBox>
+                                                <asp:HiddenField ID="valorTotal" runat="server" ClientIDMode="Static" Value='<%#Eval("valorTotal")%>' />
                                             </ItemTemplate>
-                                            <ItemStyle CssClass="Items" Width="100px" />
+                                            <ItemStyle CssClass="Items" Width="90px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Base Seg. Soc." ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="chkBaseSeguridadSocial" runat="server" ClientIDMode="Static" Enabled="false" Checked='<%#Eval("BaseSeguridadSocial") %>' />
+                                                <asp:HiddenField ID="BaseSeguridadSocial" runat="server" ClientIDMode="Static" Value='<%#Eval("BaseSeguridadSocial")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle CssClass="Items" Width="70px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Porc." ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="chkValidaPorcentaje" runat="server" ClientIDMode="Static" Enabled="false" Checked='<%#Eval("ValidaPorcentaje") %>' />
+                                                <asp:HiddenField ID="ValidaPorcentaje" runat="server" ClientIDMode="Static" Value='<%#Eval("ValidaPorcentaje")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle CssClass="Items" Width="40px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Porcentaje" ItemStyle-HorizontalAlign="Right">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="txvPorcentaje" runat="server" ClientIDMode="Static" CssClass="input" onkeyup="formato_numero(this)" Enabled="false" Text='<%#((bool)Eval("ValidaPorcentaje"))?Eval("Porcentaje"): ""%>' Width="40px">0</asp:TextBox>%
+                                                <asp:HiddenField ID="Porcentaje" runat="server" ClientIDMode="Static" Value='<%#Eval("Porcentaje")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle CssClass="Items" Width="60px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Deducc." ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="chkDeduccion" runat="server" ClientIDMode="Static" Enabled="false" Checked='<%#Eval("Deduccion") %>' />
+                                                <asp:HiddenField ID="Deduccion" runat="server" ClientIDMode="Static" Value='<%#Eval("Deduccion")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle CssClass="Items" Width="40px" />
                                         </asp:TemplateField>
                                     </Columns>
                                     <PagerStyle CssClass="pgr" />
                                     <RowStyle CssClass="rw" />
                                 </asp:GridView>
+                                <div style="text-align: right;">
+                                    <asp:Label ID="lblTotal" Text="Total Liquidación: " runat="server"></asp:Label><asp:TextBox ID="txtTotal" runat="server" ClientIDMode="Static" CssClass="input" Enabled="false"></asp:TextBox>
+                                </div>
                             </div>
                         </div>
                     </td>
                     <td class="auto-style2"></td>
                 </tr>
                 <tr>
-
                     <td colspan="6" style="text-align: center"></td>
                 </tr>
                 <tr>

@@ -9,7 +9,9 @@ CREATE PROCEDURE spSeleccionaContratoExistenteNominaDetalle
 AS
 BEGIN
 	SELECT DISTINCT vLiq.id codContrato,
-	'No. Contrato ('+ convert(varchar,vLiq.id)+') - Fecha Retiro ' + CONVERT(varchar, vLiq.fechaRetiro,103) descContrato
+	'No. Contrato ('+ convert(varchar,vLiq.id)+') - '+
+	(CASE WHEN ISNULL(ISNULL(vLiq.fechaIngreso, vLiq.fechaInicial),0) <> 0 THEN 'Fecha inicial - '++CONVERT(varchar, ISNULL(vLiq.fechaIngreso, vLiq.fechaInicial),103) ELSE 'Sin fecha inicial' END) + ' - '+
+	(CASE WHEN ISNULL(isnull(vLiq.fechaRetiro,vLiq.fechaContratoHasta),0) <> 0 THEN 'Fecha inicial - '+CONVERT(varchar, isnull(vLiq.fechaRetiro,vLiq.fechaContratoHasta),103) ELSE 'Sin fecha final' END) descContrato
 	FROM
 	vLiquidacionDefinitivaReal vLiq
 	WHERE vLiq.empresa = @Empresa

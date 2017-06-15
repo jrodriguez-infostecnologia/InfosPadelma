@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Linq;
 using System.Net;
 using System.Transactions;
 using System.Web;
@@ -21,19 +22,6 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         set
         {
             ViewState["ListadoDetalleLiquidacion"] = value;
-        }
-    }
-
-    public List<LiquidacionDetalle> ListadoDetalleLiquidacionEliminados
-    {
-        get
-        {
-            object o = ViewState["ListadoDetalleLiquidacionEliminados"];
-            return (o == null) ? null : (List<LiquidacionDetalle>)o;
-        }
-        set
-        {
-            ViewState["ListadoDetalleLiquidacionEliminados"] = value;
         }
     }
 
@@ -85,6 +73,11 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlPeriodo.Items.Insert(0, new ListItem("", ""));
             this.ddlPeriodo.Enabled = true;
             limpiarTipoDeDocumento();
+            if (ddlPeriodo.Items.Count == 2)
+            {
+                ddlPeriodo.SelectedIndex = 1;
+                cargarTipoDeDocumento();
+            }
         }
         catch (Exception ex)
         {
@@ -143,18 +136,25 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             else
             {
                 ListadoDetalleLiquidacion = new List<LiquidacionDetalle>();
-                var i = 1;
                 foreach (GridViewRow dr in gvDetalleLiquidacion.Rows)
                 {
                     var item = new LiquidacionDetalle();
-                    item.RegistroDetalleNomina = (i++).ToString();
                     item.CodConcepto = Server.HtmlDecode(dr.Cells[2].Text.ToString());
                     item.DescripcionConcepto = Server.HtmlDecode(dr.Cells[3].Text.ToString());
-                    item.Cantidad = ((TextBox)dr.FindControl("txvCantidad")).Text.ToString();
-                    item.ValorUnitario = ((TextBox)dr.FindControl("txvValorUnitario")).Text.ToString();
-                    item.ValorTotal = ((TextBox)dr.FindControl("txvValorTotal")).Text.ToString();
+                    item.Cantidad = ((HiddenField)dr.FindControl("cantidad")).Value.ToString();
+                    item.ValorUnitario = ((HiddenField)dr.FindControl("valorUnitario")).Value.ToString();
+                    item.ValorTotal = ((HiddenField)dr.FindControl("valorTotal")).Value.ToString();
+                    item.BaseSeguridadSocial = ((HiddenField)dr.FindControl("BaseSeguridadSocial")).Value.ToString() == true.ToString();
+                    item.ValidaPorcentaje = ((HiddenField)dr.FindControl("ValidaPorcentaje")).Value.ToString() == true.ToString();
+                    item.Deduccion = ((HiddenField)dr.FindControl("Deduccion")).Value.ToString() == true.ToString();
+                    item.Porcentaje = ((HiddenField)dr.FindControl("Porcentaje")).Value.ToString();
+
                     ListadoDetalleLiquidacion.Add(item);
                 }
+                var i = 1;
+                ListadoDetalleLiquidacion = ListadoDetalleLiquidacion.OrderBy(_i => _i.Deduccion ? 1 : 0).ToList();
+                ListadoDetalleLiquidacion.ForEach(_i => _i.RegistroDetalleNomina = (i++).ToString());
+
             }
         }
     }
@@ -170,7 +170,8 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
     private void InitView()
     {
         detailLoadedPanel.Visible = false;
-        hasMadeChangesPanel.Visible = false;
+        detalleLiqidacion.Visible = false;
+        //hasMadeChangesPanel.Visible = true;
         limpiarContrato();
         limpiarDetalle();
         limpiarDocumentos();
@@ -217,6 +218,11 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlTipoDocumento.Items.Insert(0, new ListItem("", ""));
             this.ddlTipoDocumento.Enabled = true;
             limpiarDocumentos();
+            if (ddlTipoDocumento.Items.Count == 2)
+            {
+                ddlTipoDocumento.SelectedIndex = 1;
+                cargarDocumentos();
+            }
         }
         catch (Exception ex)
         {
@@ -285,6 +291,11 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlContratos.Items.Insert(0, new ListItem("", ""));
             ddlContratos.Enabled = true;
             limpiarDetalle();
+            if (ddlContratos.Items.Count == 2)
+            {
+                ddlContratos.SelectedIndex = 1;
+                CargarDetalle();
+            }
         }
         catch (Exception ex)
         {
@@ -326,6 +337,11 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             this.ddlNumeroDocumento.Items.Insert(0, new ListItem("", ""));
             this.ddlNumeroDocumento.Enabled = true;
             limpiarEmpleados();
+            if (ddlNumeroDocumento.Items.Count == 2)
+            {
+                ddlNumeroDocumento.SelectedIndex = 1;
+                cargarEmpleados();
+            }
         }
         catch (Exception ex)
         {
@@ -368,9 +384,15 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 limpiarEmpleados();
                 return;
             }
+
             this.ddlEmpleado.Items.Insert(0, new ListItem("", ""));
             this.ddlEmpleado.Enabled = true;
             limpiarContrato();
+            if (ddlEmpleado.Items.Count == 2)
+            {
+                ddlEmpleado.SelectedIndex = 1;
+                cargarContrato();
+            }
         }
         catch (Exception ex)
         {
@@ -392,7 +414,10 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         gvDetalleLiquidacion.DataBind();
         gvDetalleLiquidacion.Visible = false;
         detailLoadedPanel.Visible = false;
+        detalleLiqidacion.Visible = false;
         ddlConceptoVal.Text = "";
+        successMessage.Text = "";
+        failMessage.Text = "";
     }
 
     private void CargarDetalle()
@@ -416,13 +441,22 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 item.Cantidad = dr["cantidad"].ToString();
                 item.ValorUnitario = dr["valorUnitario"].ToString();
                 item.ValorTotal = dr["valorTotal"].ToString();
+                item.Porcentaje = dr["porcentaje"].ToString();
                 item.RegistroDetalleNomina = dr["registroDetalleNomina"].ToString();
+                item.BaseSeguridadSocial = !(dr["baseSeguridadSocial"] is bool) ? false : (bool)dr["baseSeguridadSocial"];
+                item.ValidaPorcentaje = !(dr["validaPorcentaje"] is bool) ? false : (bool)dr["validaPorcentaje"];
+                item.Deduccion = !(dr["signo"] is int) ? false : ((int)dr["signo"] == 2);
                 ListadoDetalleLiquidacion.Add(item);
             }
+            var i = 1;
+            ListadoDetalleLiquidacion = ListadoDetalleLiquidacion.OrderBy(_i => _i.Deduccion ? 1 : 0).ToList();
+            ListadoDetalleLiquidacion.ForEach(_i => _i.RegistroDetalleNomina = (i++).ToString());
+
             this.gvDetalleLiquidacion.DataSource = ListadoDetalleLiquidacion;
             this.gvDetalleLiquidacion.DataBind();
             gvDetalleLiquidacion.Visible = true;
             detailLoadedPanel.Visible = true;
+            detalleLiqidacion.Visible = true;
         }
         catch (Exception ex)
         {
@@ -432,48 +466,60 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 
     protected void gvDetalleLiquidacion_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        if (ListadoDetalleLiquidacionEliminados == null)
-            ListadoDetalleLiquidacionEliminados = new List<LiquidacionDetalle>();
-
+        failMessage.Text = "";
+        successMessage.Text = "";
+        ddlConceptoVal.Text = "";
         var dr = ListadoDetalleLiquidacion[e.RowIndex];
-        if (!dr.RegistroDetalleNomina.ToString().Equals("0"))
-            ListadoDetalleLiquidacionEliminados.Add(dr);
-
         ListadoDetalleLiquidacion.Remove(dr);
         var i = 1;
-        foreach(var rd in ListadoDetalleLiquidacion) {
-            rd.RegistroDetalleNomina = (i++).ToString();
-        }
-        
+        ListadoDetalleLiquidacion = ListadoDetalleLiquidacion.OrderBy(_i => _i.Deduccion ? 1 : 0).ToList();
+        ListadoDetalleLiquidacion.ForEach(_i => _i.RegistroDetalleNomina = (i++).ToString());
+
         gvDetalleLiquidacion.DataSource = ListadoDetalleLiquidacion;
         gvDetalleLiquidacion.DataBind();
-        hasMadeChangesPanel.Visible = true;
+        //hasMadeChangesPanel.Visible = true;
     }
 
     protected void btnCargar_Click(object sender, ImageClickEventArgs e)
     {
+        successMessage.Text = "";
         ddlConceptoVal.Text = "";
+        failMessage.Text = "";
         if (string.IsNullOrEmpty(ddlConcepto.SelectedValue.Trim()))
         {
             ddlConceptoVal.Text = "Debe seleccionar un concepto";
             return;
         }
+        try
+        {
+            var dr = modificacionNomina.CargarInformacionContepto(Convert.ToInt16(Session["empresa"]), ddlConcepto.SelectedValue.Trim()).Tables[0].Rows[0];
 
-        var dt = ListadoDetalleLiquidacion;
-        var dataRow = new LiquidacionDetalle();
-        dataRow.RegistroDetalleNomina = ListadoDetalleLiquidacion.Count.ToString();
-        dataRow.CodConcepto = ddlConcepto.SelectedValue;
-        dataRow.DescripcionConcepto = ddlConcepto.SelectedItem.Text;
-        dataRow.Cantidad = "0";
-        dataRow.ValorUnitario = "0";
-        dataRow.ValorTotal = "0";
-        dt.Add(dataRow);
+            var dt = ListadoDetalleLiquidacion;
+            var item = new LiquidacionDetalle();
+            item.RegistroDetalleNomina = (ListadoDetalleLiquidacion.Count + 1).ToString();
+            item.CodConcepto = ddlConcepto.SelectedValue;
+            item.DescripcionConcepto = ddlConcepto.SelectedItem.Text;
+            item.Cantidad = "0";
+            item.ValorUnitario = "0";
+            item.ValorTotal = "0";
+            item.BaseSeguridadSocial = !(dr["baseSeguridadSocial"] is bool) ? false : (bool)dr["baseSeguridadSocial"];
+            item.ValidaPorcentaje = !(dr["calculaSobrePorcentaje"] is bool) ? false : (bool)dr["calculaSobrePorcentaje"];
+            item.Deduccion = !(dr["signo"] is int) ? false : ((int)dr["signo"] == 2);
+            item.Porcentaje = dr["porcentaje"].ToString();
+            dt.Add(item);
+            var i = 1;
+            ListadoDetalleLiquidacion = ListadoDetalleLiquidacion.OrderBy(_i => _i.Deduccion ? 1 : 0).ToList();
+            ListadoDetalleLiquidacion.ForEach(_i => _i.RegistroDetalleNomina = (i++).ToString());
+            gvDetalleLiquidacion.DataSource = ListadoDetalleLiquidacion;
+            gvDetalleLiquidacion.DataBind();
 
-        gvDetalleLiquidacion.DataSource = ListadoDetalleLiquidacion;
-        gvDetalleLiquidacion.DataBind();
-
-        ddlConcepto.SelectedValue = "";
-        hasMadeChangesPanel.Visible = true;
+            ddlConcepto.SelectedValue = "";
+            //hasMadeChangesPanel.Visible = true;
+        }
+        catch (Exception ex)
+        {
+            ManejoError("Error al cargar la información de la categoría." + ex.ToString(), "C");
+        }
     }
 
     protected void lbCancelar_Click(object sender, ImageClickEventArgs e)
@@ -481,13 +527,26 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         ddlConceptoVal.Text = "";
         CargarDetalle();
         ddlConcepto.SelectedValue = "";
-        hasMadeChangesPanel.Visible = false;
+        successMessage.Text = "";
+        //hasMadeChangesPanel.Visible = false;
     }
 
     protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
     {
         try
         {
+            failMessage.Text = "";
+            bool valid = true;
+            foreach (var detalle in ListadoDetalleLiquidacion)
+            {
+                valid &= Convert.ToDouble(detalle.ValorTotal) > 0;
+            }
+            if (!valid)
+            {
+                failMessage.Text = "Todos los conceptos deben tener un valor total mayor a 0";
+                return;
+            }
+
             modificacionNomina.ElimnarDetalleLiquidación(
                 Convert.ToInt32(ddlAño.SelectedValue),
                 Convert.ToInt32(ddlPeriodo.SelectedValue),
@@ -504,11 +563,12 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 ddlNumeroDocumento.SelectedValue,
                 Convert.ToInt32(ddlEmpleado.SelectedValue),
                 Convert.ToInt32(ddlContratos.SelectedValue),
-                ListadoDetalleLiquidacion)                                                           ;
+                ListadoDetalleLiquidacion);
+            successMessage.Text = "Cambios realizados exitosamente";
         }
         catch (Exception ex)
         {
-            ManejoError("Error al guardar los datos. Correspondiente a: " + ex.Message, "C");
+            ManejoError("Error al guardar los datos. Correspondiente a: " + ex.ToString(), "C");
         }
     }
 }

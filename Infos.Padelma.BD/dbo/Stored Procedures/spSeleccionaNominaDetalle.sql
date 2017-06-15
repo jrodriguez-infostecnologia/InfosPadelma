@@ -17,7 +17,11 @@ BEGIN
 	vLiq.valorUnitario,
 	vLiq.valorTotal,
 	vLiq.valorTotalR,
-	vLiq.vTotalNR
+	vLiq.vTotalNR,
+	vLiq.porcentaje,
+	vLiq.signo,
+	vLiq.validaPorcentaje,
+	vLiq.baseSeguridadSocial
 	FROM
 	vLiquidacionDefinitivaReal vLiq
 	WHERE vLiq.empresa = @Empresa

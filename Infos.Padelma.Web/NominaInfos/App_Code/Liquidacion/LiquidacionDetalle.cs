@@ -15,6 +15,11 @@ public class LiquidacionDetalle
     public string Cantidad { get; set; }
     public string ValorUnitario { get; set; }
     public string ValorTotal { get; set; }
+    public string Porcentaje { get; set; }
+    public bool ValidaPorcentaje { get; set; }
+    public bool BaseSeguridadSocial { get; set; }
+    public bool Deduccion { get; set; }
+
 
     public LiquidacionDetalle()
     {

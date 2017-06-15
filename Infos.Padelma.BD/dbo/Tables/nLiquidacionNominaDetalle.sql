@@ -35,7 +35,7 @@
     [fecha]                DATE            NULL,
     [tipoConcepto]         VARCHAR (50)    NULL,
     [desTipoConcepto]      VARCHAR (200)   NULL,
-    CONSTRAINT [PK_nLiquidacionNominaDetalle] PRIMARY KEY CLUSTERED ([empresa] ASC, [tipo] ASC, [numero] ASC, [año] ASC, [mes] ASC, [registro] ASC, [contrato] ASC),
+    CONSTRAINT [PK_nLiquidacionNominaDetalle] PRIMARY KEY CLUSTERED ([empresa], [tipo], [numero], [año], [mes], [registro], [tercero], [contrato]),
     CONSTRAINT [FK_nLiquidacionNominaDetalle_cCentrosCosto] FOREIGN KEY ([empresa], [ccosto]) REFERENCES [dbo].[cCentrosCosto] ([empresa], [codigo]),
     CONSTRAINT [FK_nLiquidacionNominaDetalle_cTercero] FOREIGN KEY ([empresa], [tercero]) REFERENCES [dbo].[cTercero] ([empresa], [id]),
     CONSTRAINT [FK_nLiquidacionNominaDetalle_nConcepto] FOREIGN KEY ([empresa], [concepto]) REFERENCES [dbo].[nConcepto] ([empresa], [codigo]),

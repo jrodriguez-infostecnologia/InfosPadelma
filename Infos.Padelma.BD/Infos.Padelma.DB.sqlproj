@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>InfosPadelmaDB</Name>
+    <Name>Infos.Padelma.DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{7916b609-f260-4232-92d7-6374c8c41897}</ProjectGuid>
@@ -1750,7 +1750,7 @@
     <Build Include="Security\UsuariosidSys.sql" />
     <Build Include="Security\SSN_Key_01.sql" />
     <Build Include="dbo\Stored Procedures\spSeleccionaNominaDetalle.sql" />
-    <Build Include="dbo\Stored Procedures\SpEliminaNominaDetallle.sql" />
-    <Build Include="dbo\Stored Procedures\SpInsertaNominaDetallle.sql" />
+    <Build Include="dbo\Stored Procedures\SpEliminaNominaDetalle.sql" />
+    <Build Include="dbo\Stored Procedures\SpInsertaNominaDetalle.sql" />
   </ItemGroup>
 </Project>
