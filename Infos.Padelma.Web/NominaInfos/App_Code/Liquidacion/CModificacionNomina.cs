@@ -70,4 +70,48 @@ public class CModificacionNomina
             objValores,
             "ppa");
     }
+
+    public void ElimnarDetalleLiquidación(int año, int periodo, string tipo, int empresa, string numero, int codigoTercero, int codContrato)
+    {
+        string[] iParametros = new string[] { "@año", "@CodContrato", "@CodTercero", "@empresa", "@numero", "@periodo", "@tipo" };
+        string[] oParametros = new string[] { };
+        object[] objValores = new object[] { año, codContrato, codigoTercero, empresa, numero, periodo, tipo };
+
+        Cacceso.ExecProc(
+            "spEliminaNominaDetalle",
+            iParametros,
+            oParametros,
+            objValores,
+            "ppa");
+    }
+
+    public void GuardarDetalleLiqidación(int año, int periodo, string tipo, int empresa, string numero, int codigoTercero, int codContrato, List<LiquidacionDetalle> listadoDetalleLiquidacion)
+    {
+        foreach (var detalle in listadoDetalleLiquidacion)
+        {
+            string[] iParametros = new string[] { "@Año", "@Cantidad", "@CodContrato", "@CodTercero", "@concepto", "@Empresa", "@Numero", "@Periodo", "@registro", "@Tipo", "@ValorTotal", "@ValorUnitario" };
+            string[] oParametros = new string[] { };
+            object[] objValores = new object[] { año, detalle.Cantidad, codContrato, codigoTercero, detalle.CodConcepto, empresa, numero, periodo, detalle.RegistroDetalleNomina, tipo, detalle.ValorTotal, detalle.ValorUnitario };
+
+            Cacceso.ExecProc(
+                "spInsertaNominaDetalle",
+                iParametros,
+                oParametros,
+                objValores,
+                "ppa");
+        }
+    }
+
+    public DataSet CargarInformacionContepto(int empresa, string codigo)
+    {
+        string[] iParametros = new string[] { "@codigo", "@empresa" };
+        object[] objValores = new object[] { codigo, empresa };
+
+        return Cacceso.DataSetParametros(
+            "SpSeleccionaInformaciónConcepto",
+            iParametros,
+            objValores,
+            "ppa");
+
+    }
 }
