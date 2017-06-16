@@ -1752,5 +1752,6 @@
     <Build Include="dbo\Stored Procedures\spSeleccionaNominaDetalle.sql" />
     <Build Include="dbo\Stored Procedures\SpEliminaNominaDetalle.sql" />
     <Build Include="dbo\Stored Procedures\SpInsertaNominaDetalle.sql" />
+    <Build Include="dbo\Stored Procedures\SpSeleccionaInformaciónConcepto.sql" />
   </ItemGroup>
 </Project>
