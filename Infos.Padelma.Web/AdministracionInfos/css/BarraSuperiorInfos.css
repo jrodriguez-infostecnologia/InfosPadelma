@@ -1,0 +1,61 @@
+﻿
+body {
+      min-width:1024px;
+}
+#Principal {
+    min-width: 1000px;
+    width: 100%;
+    height: 120px;
+    width: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: 110%;
+}
+
+#PrimeraLinea {
+    min-width: 1000px;
+    width: 100%;
+    height: 30px;
+    width: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    background-color: #0D1D88;
+    font-size: 110%;
+    display: inline-block;
+}
+
+
+#Titulo {
+   top: 5px;
+    width: 70%;
+    position: relative;
+    float: left;
+    text-align:center;
+    color:white;
+}
+
+
+
+#LogoInfos {
+     min-width:200px;
+    height: 80px;
+    width: 30%;
+    float: left;
+    text-align: right;
+      left:5px;
+      vertical-align:central;
+      position:relative;
+      top:8px;
+}
+
+
+#InfoUsuario {
+    min-width: 200px;
+    height: 90px;
+    width: 50%;
+    float: left;
+    text-align:right;
+    color: #0D1D88;
+    left: 25px;
+    top: 5px;
+    position: relative;
+}

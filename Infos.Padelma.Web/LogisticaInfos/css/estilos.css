@@ -1,0 +1,241 @@
+﻿* {margin: 0px;
+padding: 0px; outline: 0;
+margin-left:auto;
+margin-right:auto;
+}
+html, body {width: 100%;
+}
+body {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+
+
+} 
+
+input[type="text"]
+{
+   width:200px;
+    
+}
+
+fieldset
+{
+  width:90%;
+  margin-left:auto;
+  margin-right:auto;
+  border-color:inherit;  
+}
+
+#menu {
+font-size:small;
+margin-bottom:20px;
+margin-left:0px;
+margin-right:auto;
+margin-top:0px;
+text-align:center;
+width:820px;
+
+}
+#menu ul {
+list-style-type:none;
+}
+#menu ul li {
+width:162px;
+}
+#menu ul li.nivel1 {
+float:left;
+margin-right:1px;
+z-index:11;
+}
+#menu ul li a {
+    background-color: #006699; /*background-image:url(../Imagenes/fondo_barra_titulo.png);*/
+    background-repeat: repeat-x;
+    border-color: White;
+    border-style: solid;
+    border-width: thin;
+    color: White;
+    display: block;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    position: relative;
+    text-decoration: none;
+}
+#menu ul li a.nivel2, #menu ul li a.nivel2ie {
+color:#000000;
+}
+#menu ul li a.nivel1, #menu ul li a.nivel2 {
+display:block !important;
+position:relative;
+}
+#menu ul li:hover {
+position:relative;
+}
+#menu ul li a:hover, #menu ul li:hover a.nivel1
+{
+	background-color: #1c5e55;
+	color: #FFCC00;
+	position: relative;
+}
+#menu ul li ul {
+display:none;
+}
+#menu ul li:hover ul.nivel2, #menu ul li a:hover ul.nivel2 {
+display:block;
+left:0;
+position:absolute;
+}
+#menu ul li ul li a:hover ul.nivel3, #menu ul li ul li:hover ul.nivel3 {
+display:block;
+left:161px !important;
+position:absolute;
+top:0 !important;
+}
+#menu ul li ul li a {
+border-top-color:transparent;
+padding-bottom:8px;
+padding-left:0;
+padding-right:0;
+padding-top:8px;
+width:160px;
+text-align:left;
+}
+#menu ul li ul li a:hover {
+border-top-color:#000000;
+position:relative;
+}
+#menu ul li ul li ul li a.primera {
+border-top-color:#FFFFFF;
+}
+
+
+/*css de los tabs*/	
+
+ #tabs{
+    margin-left: 4px;
+    padding: 0;
+    background: transparent;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    padding-left: 5px;
+    }
+    
+    #tabs ul{
+        font: bold 11px Arial, Verdana, sans-serif;
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+    
+    #tabs li{
+        display:inline;
+        margin:0 2px 0 0;
+        padding:0;
+        color:Black;
+        text-transform:uppercase;
+    }
+    
+    #tabs a{
+        float:left;
+        background:#1c5e55 url(images/tabs_left.gif) no-repeat left top;
+        color:White;
+        margin:0 2px 0 0;
+        padding:0 0 1px 3px;
+        text-decoration:none;
+    }
+    
+    #tabs a span{
+        float:left;
+        display:block;
+        background: transparent url(images/tabs_right.gif) no-repeat right top;
+        padding:4px 9px 2px 6px;
+    }
+    
+    #tabs a span{float:none;}
+    #tabs a:hover{background-color: #1c5e55;color: white;}
+    #tabs a:hover span{background-color: Green;}
+    #tabHeaderActive span, #tabHeaderActive a { background-color: #b5e346; color:Black;}
+    .tabContent {
+        clear:both;
+        border:2px solid #b5e346;
+        padding-top:2px;
+        background-color:#b5e346;
+        
+    }
+    .trAzul
+    {
+     
+    
+        
+    }
+    
+    .tablaForm
+    {
+     
+     margin-left:0px;
+      border:solid; 
+      border-width:thin;
+        
+    }
+    
+    .tablaForm tr:first-child
+    {
+       background-color:#1c5e55; 
+     color:White;  
+    }
+    
+    .tablaForm tr td
+    {
+        
+     vertical-align:top;   
+    }
+   
+   
+   /*VALIDACION*/
+   
+input.disabled {
+	border: 1px solid #F2F2F2;
+	background-color: #F2F2F2;
+}
+
+
+input.validation-failed, textarea.validation-failed {
+	border: 1px solid #FF3300;
+	color : #FF3300;
+}
+
+
+.validation-advice {
+	margin: 5px 0;
+	padding: 5px;
+	background-color: #FF3300;
+	color : #FFF;
+	font-weight: bold;
+	font-size:xx-small;
+}
+
+.custom-advice {
+	margin: 5px 0;
+	padding: 5px;
+	background-color: #C8AA00;
+	color : #FFF;
+	font-weight: bold;
+}
+
+
+
+
+.form-row {
+	clear: both;
+	padding: 0.5em;
+}
+
+.field-label {
+
+}
+
+.field-widget {
+
+}
+    
+   /*****************/

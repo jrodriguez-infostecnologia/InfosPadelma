@@ -1,0 +1,156 @@
+﻿body {
+}
+
+.mayuscula{  
+      padding: 0px 3px 0px 3px;
+    border-width: 1px;
+    border-color: silver;
+    font-family: 'Trebuchet MS' , 'Lucida Sans Unicode' , 'Lucida Grande' , 'Lucida Sans' , Arial, sans-serif;
+    font-size: 12px;
+    color: #003366;
+    height: 20px;
+    border-style: solid;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.080) inset;
+text-transform: uppercase;  
+} 
+
+.principal {
+    vertical-align: top;
+     width: 1000px; height: 600px;
+      text-align: center; 
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+      font-size: 12px;
+       color: #003366;
+}
+.input {
+    padding: 0px 3px 0px 3px;
+    border-width: 1px;
+    border-color: silver;
+    font-family: 'Trebuchet MS' , 'Lucida Sans Unicode' , 'Lucida Grande' , 'Lucida Sans' , Arial, sans-serif;
+    font-size: 12px;
+    color: #003366;
+    height: 20px;
+    border-style: solid;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.080) inset;
+}
+
+.cuadros {
+    border: 1px solid #999999;
+    border-radius: 4px 4px 4px 4px;
+    padding: 8px 8px 8px 8px;
+    text-align: left;
+}
+
+
+
+.label {
+    font-family: "Trebuchet MS" , "Lucida Sans Unicode" , "Lucida Grande" , "Lucida Sans" , Arial, sans-serif;
+    font-size: 12px;
+    color: #003366;
+}
+
+.bordes {
+    width: 250px;
+    text-align: center;
+}
+
+.bordesPeque {
+    width: 70px;
+}
+
+.nombreCampos {
+    text-align: left;
+    }
+
+.Campos {
+    width: 360px;
+    text-align: left;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.tablaGrilla {
+    margin: 10px 100px 10px 100px;
+    width: 800px;
+    }
+
+.hider {
+    border-color: none;
+    border-style: none;
+    background-color: #FFFFFF;
+     border: 1px solid silver;
+}
+
+.botonGV {
+    background-color: #FFFFFF;
+    border: 1px dotted #999999;
+}
+
+.Items {
+    
+    border: 1px solid #CCCCCC;
+}
+
+.herader {
+    border: 1px solid silver;
+    background-image: url('../Imagen/Fondos/barraGrilla.jpg');
+    background-repeat: repeat-x;
+    background-color: #006699;
+    text-align: center;
+}
+
+
+
+.Grid {
+    margin: 0px;
+    border: 1px solid silver;
+    font-family: Calibri;
+    color: #474747;
+}
+
+id td {
+      padding: 2px; 
+      border: solid 1px #c1c1c1;
+     
+}
+
+.Grid th {
+    padding: 0px;
+    color: #fff;
+    background: url('../Imagen/Fondos/barraGrilla.jpg') repeat-x;
+    border-left: solid 1px #525252;
+    font-size: 0.9em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #C1C1C1;
+    background-color: #006699;
+    text-align: center;
+}
+.Grid .alt {
+    border-style: solid;
+    border-width: 1px;
+    border-color: silver;
+    background: #fcfcfc url('../Imagen/Fondos/grid-alt.png') repeat-x top;
+    text-align: left;
+}
+.Grid .pgr {
+    border: 1px solid silver;
+    background: url('../Imagen/Fondos/barraGrilla.jpg') repeat-x;
+}
+
+
+.Grid .rw {
+    border: 1px solid silver;
+    text-align: left;
+}
+
+.Grid .pgr table { 
+                       
+}
+.Grid .pgr td { border-width: 0; padding: 0 6px; border-left: solid 1px #666; font-weight: bold; color: #fff; line-height: 12px; 
+               
+}   
+.Grid .pgr a { color: Gray; text-decoration: none; }
+.Grid .pgr a:hover { color: #000; text-decoration: none; }

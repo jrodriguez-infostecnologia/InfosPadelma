@@ -1,0 +1,421 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Collections;
+
+
+
+/// <summary>
+/// Summary description for Ticket
+/// </summary>
+public class Ticket
+{
+    ArrayList headerLines = new ArrayList();
+    ArrayList subHeaderLines = new ArrayList();
+    ArrayList items = new ArrayList();
+    ArrayList totales = new ArrayList();
+    ArrayList footerLines = new ArrayList();
+    //private Image headerImage = null;
+
+    int count = 0;
+
+    int maxChar = 90;
+    int maxCharDescription = 90;
+
+    int imageHeight = 1;
+
+    float leftMargin = 3;
+    float topMargin = 3;
+
+    string fontName = "Lucida Console";
+    int fontSize = 11;
+
+    Font printFont = null;
+    SolidBrush myBrush = new SolidBrush(Color.Black);
+
+    Graphics gfx = null;
+
+    string line = null;
+
+    public Ticket()
+    {
+        
+    }
+
+
+    public int MaxChar
+    {
+        get { return maxChar; }
+        set { if (value != maxChar) maxChar = value; }
+    }
+
+    public int MaxCharDescription
+    {
+        get { return maxCharDescription; }
+        set { if (value != maxCharDescription) maxCharDescription = value; }
+    }
+
+    public int FontSize
+    {
+        get { return fontSize; }
+        set { if (value != fontSize) fontSize = value; }
+    }
+
+    public string FontName
+    {
+        get { return fontName; }
+        set { if (value != fontName) fontName = value; }
+    }
+
+    public void AddHeaderLine(string line)
+    {
+        headerLines.Add(line);
+    }
+
+    public void AddSubHeaderLine(string line)
+    {
+        subHeaderLines.Add(line);
+    }
+
+    public void AddItem(string cantidad, string item, string price)
+    {
+        OrderItem newItem = new OrderItem('?');
+        items.Add(newItem.GenerateItem(cantidad, item, price));
+    }
+
+    public void AddTotal(string name, string price)
+    {
+        OrderTotal newTotal = new OrderTotal('?');
+        totales.Add(newTotal.GenerateTotal(name, price));
+    }
+
+    public void AddFooterLine(string line)
+    {
+        footerLines.Add(line);
+    }
+
+    private string AlignRightText(int lenght)
+    {
+        string espacios = "";
+        int spaces = maxChar - lenght;
+        for (int x = 0; x < spaces; x++)
+            espacios += " ";
+        return espacios;
+    }
+
+    private string DottedLine()
+    {
+        string dotted = "";
+        for (int x = 0; x < maxChar; x++)
+            dotted += "=";
+        return dotted;
+    }
+
+    public bool PrinterExists(string impresora)
+    {
+        foreach (String strPrinter in PrinterSettings.InstalledPrinters)
+        {
+            if (impresora == strPrinter)
+                return true;
+        }
+        return false;
+    }
+
+    public void PrintTicket(string impresora)
+    {
+        printFont = new Font(fontName, fontSize, FontStyle.Regular);
+
+        PrinterSettings conf_prn = new PrinterSettings();
+        conf_prn.PrinterName = impresora;
+        PaperSize papel = new System.Drawing.Printing.PaperSize("Custom Paper Size", 820, 580);
+        conf_prn.DefaultPageSettings.PaperSize = papel;
+        //conf_prn.DefaultPageSettings.Landscape = true;
+        conf_prn.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
+        
+        PrintDocument pr = new PrintDocument();   
+        pr.PrinterSettings = conf_prn;
+        pr.PrintPage += new PrintPageEventHandler(pr_PrintPage);
+        pr.Print();
+    }
+
+    private void pr_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+    {
+        e.Graphics.PageUnit = GraphicsUnit.Millimeter;
+        gfx = e.Graphics;
+
+        DrawHeader();
+        DrawSubHeader();
+    }
+
+    private float YPosition()
+    {
+        return topMargin + (count * printFont.GetHeight(gfx) + imageHeight);
+    }
+
+
+
+    private void DrawHeader()
+    {
+        foreach (string header in headerLines)
+        {
+            if (header.Length > maxChar)
+            {
+                int currentChar = 0;
+                int headerLenght = header.Length;
+
+                while (headerLenght > maxChar)
+                {
+                    line = header.Substring(currentChar, maxChar);
+                    gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                    count++;
+                    currentChar += maxChar;
+                    headerLenght -= maxChar;
+                }
+                line = header;
+                gfx.DrawString(line.Substring(currentChar, line.Length - currentChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                count++;
+            }
+            else
+            {
+                line = header;
+                gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                count++;
+            }
+        }
+        DrawEspacio();
+    }
+
+    private void DrawSubHeader()
+    {
+        foreach (string subHeader in subHeaderLines)
+        {
+            if (subHeader.Length > maxChar)
+            {
+                int currentChar = 0;
+                int subHeaderLenght = subHeader.Length;
+
+                while (subHeaderLenght > maxChar)
+                {
+                    line = subHeader;
+                    gfx.DrawString(line.Substring(currentChar, maxChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                    count++;
+                    currentChar += maxChar;
+                    subHeaderLenght -= maxChar;
+                }
+                line = subHeader;
+                gfx.DrawString(line.Substring(currentChar, line.Length - currentChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                count++;
+            }
+            else
+            {
+                line = subHeader;
+
+                gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                count++;
+
+                line = DottedLine();
+
+                gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                count++;
+            }
+        }
+        DrawEspacio();
+    }
+
+    private void DrawItems()
+    {
+        OrderItem ordIt = new OrderItem('?');
+
+        gfx.DrawString("CANT  DESCRIPCION                                                      PESO", printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+        count++;
+        DrawEspacio();
+
+        foreach (string item in items)
+        {
+            line = ordIt.GetItemCantidad(item);
+
+            gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+            line = ordIt.GetItemPrice(item);
+            line = AlignRightText(line.Length) + line;
+
+            gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+            string name = ordIt.GetItemName(item);
+
+            leftMargin = 0;
+            if (name.Length > maxCharDescription)
+            {
+                int currentChar = 0;
+                int itemLenght = name.Length;
+
+                while (itemLenght > maxCharDescription)
+                {
+                    line = ordIt.GetItemName(item);
+                    gfx.DrawString("      " + line.Substring(currentChar, maxCharDescription), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                    count++;
+                    currentChar += maxCharDescription;
+                    itemLenght -= maxCharDescription;
+                }
+
+                line = ordIt.GetItemName(item);
+                gfx.DrawString("      " + line.Substring(currentChar, line.Length - currentChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                count++;
+            }
+            else
+            {
+                gfx.DrawString("      " + ordIt.GetItemName(item), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                count++;
+            }
+        }
+
+        leftMargin = 0;
+        DrawEspacio();
+        line = DottedLine();
+
+        gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+        count++;
+        DrawEspacio();
+    }
+
+    private void DrawTotales()
+    {
+        OrderTotal ordTot = new OrderTotal('?');
+
+        foreach (string total in totales)
+        {
+            line = ordTot.GetTotalCantidad(total);
+            line = AlignRightText(line.Length) + line;
+
+            gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+            leftMargin = 0;
+
+            line = "      " + ordTot.GetTotalName(total);
+            gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+            count++;
+        }
+        leftMargin = 0;
+        DrawEspacio();
+        DrawEspacio();
+    }
+
+    private void DrawFooter()
+    {
+        foreach (string footer in footerLines)
+        {
+            if (footer.Length > maxChar)
+            {
+                int currentChar = 0;
+                int footerLenght = footer.Length;
+
+                while (footerLenght > maxChar)
+                {
+                    line = footer;
+                    gfx.DrawString(line.Substring(currentChar, maxChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                    count++;
+                    currentChar += maxChar;
+                    footerLenght -= maxChar;
+                }
+                line = footer;
+                gfx.DrawString(line.Substring(currentChar, line.Length - currentChar), printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+                count++;
+            }
+            else
+            {
+                line = footer;
+                gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+                count++;
+            }
+        }
+        leftMargin = 0;
+        DrawEspacio();
+    }
+
+    private void DrawEspacio()
+    {
+        line = "";
+
+        gfx.DrawString(line, printFont, myBrush, leftMargin, YPosition(), new StringFormat());
+
+        count++;
+    }
+}
+
+public class OrderItem
+{
+    char[] delimitador = new char[] { '?' };
+
+    public OrderItem(char delimit)
+    {
+        delimitador = new char[] { delimit };
+    }
+
+    public string GetItemCantidad(string orderItem)
+    {
+        string[] delimitado = orderItem.Split(delimitador);
+        return delimitado[0];
+    }
+
+    public string GetItemName(string orderItem)
+    {
+        string[] delimitado = orderItem.Split(delimitador);
+        return delimitado[1];
+    }
+
+    public string GetItemPrice(string orderItem)
+    {
+        string[] delimitado = orderItem.Split(delimitador);
+        return delimitado[2];
+    }
+
+    public string GenerateItem(string cantidad, string itemName, string price)
+    {
+        return cantidad + delimitador[0] + itemName + delimitador[0] + price;
+    }
+}
+
+public class OrderTotal
+{
+    char[] delimitador = new char[] { '?' };
+
+    public OrderTotal(char delimit)
+    {
+        delimitador = new char[] { delimit };
+    }
+
+    public string GetTotalName(string totalItem)
+    {
+        string[] delimitado = totalItem.Split(delimitador);
+        return delimitado[0];
+    }
+
+    public string GetTotalCantidad(string totalItem)
+    {
+        string[] delimitado = totalItem.Split(delimitador);
+        return delimitado[1];
+    }
+
+    public string GenerateTotal(string totalName, string price)
+    {
+        return totalName + delimitador[0] + price;
+    }
+}

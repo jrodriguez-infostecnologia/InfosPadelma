@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/SecurityAceites/SecurityAceites.asmx" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/SecurityAceites/SecurityAceites.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/SecurityAceites/SecurityAceites.asmx">
+      <s:element name="ValidarUsuarioActivo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarUsuarioActivoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidarUsuarioActivoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarUsuarioContrasena">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contrasena" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarUsuarioContrasenaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidarUsuarioContrasenaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NombreUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NombreUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NombreUsuarioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarPermisoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sitio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pagina" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarPermisoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidarPermisoUsuarioResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UltimaFechaIngresoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UltimaFechaIngresoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UltimaFechaIngresoUsuarioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarAccionUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sitio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pagina" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistrarAccionUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RegistrarAccionUsuarioResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidarUsuarioActivoSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioActivo" />
+  </wsdl:message>
+  <wsdl:message name="ValidarUsuarioActivoSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioActivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarUsuarioContrasenaSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioContrasena" />
+  </wsdl:message>
+  <wsdl:message name="ValidarUsuarioContrasenaSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioContrasenaResponse" />
+  </wsdl:message>
+  <wsdl:message name="NombreUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:NombreUsuario" />
+  </wsdl:message>
+  <wsdl:message name="NombreUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:NombreUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarPermisoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarPermisoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ValidarPermisoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarPermisoUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="UltimaFechaIngresoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:UltimaFechaIngresoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="UltimaFechaIngresoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:UltimaFechaIngresoUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarAccionUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistrarAccionUsuario" />
+  </wsdl:message>
+  <wsdl:message name="RegistrarAccionUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistrarAccionUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SecurityAceitesSoap">
+    <wsdl:operation name="ValidarUsuarioActivo">
+      <wsdl:input message="tns:ValidarUsuarioActivoSoapIn" />
+      <wsdl:output message="tns:ValidarUsuarioActivoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuarioContrasena">
+      <wsdl:input message="tns:ValidarUsuarioContrasenaSoapIn" />
+      <wsdl:output message="tns:ValidarUsuarioContrasenaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NombreUsuario">
+      <wsdl:input message="tns:NombreUsuarioSoapIn" />
+      <wsdl:output message="tns:NombreUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPermisoUsuario">
+      <wsdl:input message="tns:ValidarPermisoUsuarioSoapIn" />
+      <wsdl:output message="tns:ValidarPermisoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UltimaFechaIngresoUsuario">
+      <wsdl:input message="tns:UltimaFechaIngresoUsuarioSoapIn" />
+      <wsdl:output message="tns:UltimaFechaIngresoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarAccionUsuario">
+      <wsdl:input message="tns:RegistrarAccionUsuarioSoapIn" />
+      <wsdl:output message="tns:RegistrarAccionUsuarioSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SecurityAceitesSoap" type="tns:SecurityAceitesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidarUsuarioActivo">
+      <soap:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/ValidarUsuarioActivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuarioContrasena">
+      <soap:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/ValidarUsuarioContrasena" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NombreUsuario">
+      <soap:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/NombreUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPermisoUsuario">
+      <soap:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/ValidarPermisoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UltimaFechaIngresoUsuario">
+      <soap:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/UltimaFechaIngresoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarAccionUsuario">
+      <soap:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/RegistrarAccionUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SecurityAceitesSoap12" type="tns:SecurityAceitesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidarUsuarioActivo">
+      <soap12:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/ValidarUsuarioActivo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuarioContrasena">
+      <soap12:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/ValidarUsuarioContrasena" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NombreUsuario">
+      <soap12:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/NombreUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarPermisoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/ValidarPermisoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UltimaFechaIngresoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/UltimaFechaIngresoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarAccionUsuario">
+      <soap12:operation soapAction="http://tempuri.org/SecurityAceites/SecurityAceites.asmx/RegistrarAccionUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SecurityAceites">
+    <wsdl:port name="SecurityAceitesSoap" binding="tns:SecurityAceitesSoap">
+      <soap:address location="http://192.168.3.46:8091/SecurityAceites.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SecurityAceitesSoap12" binding="tns:SecurityAceitesSoap12">
+      <soap12:address location="http://192.168.3.46:8091/SecurityAceites.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

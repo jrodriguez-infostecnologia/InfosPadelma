@@ -1,0 +1,33 @@
+﻿.aux {
+    border-top: 1px solid #0066a6;
+    background: #002640;
+    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#002640));
+    background: -webkit-linear-gradient(top, #3e779d, #002640);
+    background: -moz-linear-gradient(top, #3e779d, #002640);
+    background: -ms-linear-gradient(top, #3e779d, #002640);
+    background: -o-linear-gradient(top, #3e779d, #002640);
+    padding: 5px 10px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    color: white;
+    font-size: 14px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+    .aux:hover {
+        border-top-color: #003b63;
+        background: #003b63;
+        color: #b6b2d6;
+    }
+
+    .aux:active {
+        border-top-color: #4a687d;
+        background: #4a687d;
+    }
