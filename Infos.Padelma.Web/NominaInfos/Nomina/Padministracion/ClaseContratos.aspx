@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ClaseContratos.aspx.cs" Inherits="Nomina_Padministracion_ClaseContractos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Padministracion_ClaseContractos" Codebehind="ClaseContratos.aspx.cs" %>
 
 <!DOCTYPE html>
 

@@ -14,7 +14,7 @@ public partial class Nomina_Paminidtracion_ParametrosAño : System.Web.UI.Page
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     Cperiodos periodos = new Cperiodos();
     CIP ip = new CIP();
 

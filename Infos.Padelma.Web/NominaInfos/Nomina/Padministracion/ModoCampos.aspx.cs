@@ -17,7 +17,7 @@ public partial class Admon_Padministracion_TiposTransaccionCampos : System.Web.U
   //  CtiposTransaccion tipoTransaccion = new CtiposTransaccion();
 //    Centidades entidades = new Centidades();
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     string consulta = "C";
     string insertar = "I";

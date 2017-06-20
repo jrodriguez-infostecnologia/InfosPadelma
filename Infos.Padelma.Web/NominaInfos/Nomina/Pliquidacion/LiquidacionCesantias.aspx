@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LiquidacionCesantias.aspx.cs" Inherits="Agronomico_Padministracion_Liquidacion" %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Agronomico_Padministracion_LiquidacionCesantias" Codebehind="LiquidacionCesantias.aspx.cs" %>
 
 <%@ OutputCache Location="None" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

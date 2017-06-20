@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Programacion.aspx.cs" Inherits="Nomina_Pprogramacion_Programacion" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Pprogramacion_Programacion" Codebehind="Programacion.aspx.cs" %>
 
 <!DOCTYPE html>
 

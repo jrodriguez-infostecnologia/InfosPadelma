@@ -14,7 +14,7 @@ public partial class Nomina_Paminidtracion_TipoNomina : System.Web.UI.Page
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
 
     CtipoNomina tipoNomina = new CtipoNomina();

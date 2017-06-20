@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 public partial class Contabilidad_Padministracion_CentroConto : System.Web.UI.Page
 {
     #region Instancias
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
 
     CcentroCosto centroCosto = new CcentroCosto();
     CIP ip = new CIP();

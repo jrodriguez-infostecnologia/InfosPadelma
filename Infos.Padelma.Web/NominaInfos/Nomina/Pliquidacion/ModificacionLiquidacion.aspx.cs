@@ -4,12 +4,12 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net;
-using System.Transactions;
+
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
+public partial class Agronomico_Pliquidacion_ModificacionLiquidacion : System.Web.UI.Page
 {
 
     public List<LiquidacionDetalle> ListadoDetalleLiquidacion
@@ -28,7 +28,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 
     #region Instancias
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Cperiodos periodo = new Cperiodos();
     CModificacionNomina modificacionNomina = new CModificacionNomina();

@@ -2,18 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Transactions;
+
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Agronomico_Padministracion_Cuadrillas : System.Web.UI.Page
+public partial class Agronomico_Padministracion_ParametroSeguridadSocial : System.Web.UI.Page
 {
 
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     CparametroSeguridadSocial seguridadSocial = new CparametroSeguridadSocial();
     #endregion Instancias
@@ -116,7 +116,7 @@ public partial class Agronomico_Padministracion_Cuadrillas : System.Web.UI.Page
         try
         {
 
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 for (int x = 0; x < this.selConceptos.Items.Count; x++)
                 {

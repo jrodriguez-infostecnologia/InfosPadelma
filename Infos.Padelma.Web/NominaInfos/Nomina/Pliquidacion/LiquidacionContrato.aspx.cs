@@ -7,13 +7,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
+public partial class Agronomico_Padministracion_LiquidacionContrato : System.Web.UI.Page
 {
 
     #region Instancias
 
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Cfuncionarios funcionarios = new Cfuncionarios();
     Coperadores operadores = new Coperadores();
@@ -284,7 +284,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
     {
         this.nilblMensaje.Text = "";
 
-        using (TransactionScope ts = new TransactionScope())
+        using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
         {
             try
             {

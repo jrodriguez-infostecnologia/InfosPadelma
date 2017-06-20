@@ -11,7 +11,7 @@ public partial class Nomina_Padministracion_ClaseContractos : System.Web.UI.Page
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CclaseContratos claseContrato = new CclaseContratos();
     CIP ip = new CIP();
 

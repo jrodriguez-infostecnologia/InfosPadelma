@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ModoCampos.aspx.cs" Inherits="Admon_Padministracion_TiposTransaccionCampos" %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Admon_Padministracion_TiposTransaccionCampos" Codebehind="ModoCampos.aspx.cs" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

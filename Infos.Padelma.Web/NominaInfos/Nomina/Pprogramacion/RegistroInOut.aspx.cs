@@ -7,13 +7,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Nomina_Pprogramacion_EditarProgramacion : System.Web.UI.Page
+public partial class Nomina_Pprogramacion_RegistroInOut : System.Web.UI.Page
 {
 
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Ccuadrillas cuadrillas = new Ccuadrillas();
     Cdepartamentos departamentos = new Cdepartamentos();
@@ -131,7 +131,7 @@ public partial class Nomina_Pprogramacion_EditarProgramacion : System.Web.UI.Pag
         try
         {
 
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 string cuadrilla = null;
                 if (rblTipo.SelectedValue == "C")

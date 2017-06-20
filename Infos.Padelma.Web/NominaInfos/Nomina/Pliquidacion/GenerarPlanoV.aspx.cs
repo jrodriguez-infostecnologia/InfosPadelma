@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Nomina_Pliquidacion_GenerarPlano : System.Web.UI.Page
+public partial class Nomina_Pliquidacion_GenerarPlanoV : System.Web.UI.Page
 {
     CpagosNomina pagosNomina = new CpagosNomina();
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GenerarPlano.aspx.cs" Inherits="Nomina_Pliquidacion_GenerarPlano" %>
+﻿<%@ Page Language="C#" AutoEventWireup="True" Inherits="Nomina_Pliquidacion_GenerarPlanoV" Codebehind="GenerarPlanoV.aspx.cs" %>
 
 <!DOCTYPE html>
 

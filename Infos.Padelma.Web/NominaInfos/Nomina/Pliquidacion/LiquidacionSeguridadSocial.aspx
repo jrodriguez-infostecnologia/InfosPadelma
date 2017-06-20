@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LiquidacionSeguridadSocial.aspx.cs" Inherits="Nomina_Pliquidacion_LiquidacionSeguridadSocial" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Pliquidacion_LiquidacionSeguridadSocial" Codebehind="LiquidacionSeguridadSocial.aspx.cs" %>
 
 <!DOCTYPE html>
 

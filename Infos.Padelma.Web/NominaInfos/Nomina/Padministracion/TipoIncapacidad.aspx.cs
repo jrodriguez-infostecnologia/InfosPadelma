@@ -11,7 +11,7 @@ public partial class Nomina_Padministracion_TipoIncapacidad : System.Web.UI.Page
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CtipoIncapacidad tipoIncapacidad = new CtipoIncapacidad();
     CIP ip = new CIP();
 

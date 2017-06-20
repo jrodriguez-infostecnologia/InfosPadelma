@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GrupoCC.aspx.cs" Inherits="Contabilidad_Padministracion_GrupoCC"  %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Contabilidad_Padministracion_GrupoCC"  Codebehind="GrupoCC.aspx.cs" %>
 <%@ OutputCache Location="None" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

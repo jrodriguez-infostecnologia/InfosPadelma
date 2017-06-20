@@ -5,16 +5,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Transactions;
-using System.Configuration;
 
+using System.Configuration;
+using System.Transactions;
 
 public partial class Nomina_Padministracion_PlanoBancos : System.Web.UI.Page
 {
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CplanoBanco transaccionPlano = new CplanoBanco();
     CIP ip = new CIP();
 
@@ -132,7 +132,7 @@ public partial class Nomina_Padministracion_PlanoBancos : System.Web.UI.Page
 
         try
         {
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 if (Convert.ToBoolean(this.Session["editar"]) == true)
                 {

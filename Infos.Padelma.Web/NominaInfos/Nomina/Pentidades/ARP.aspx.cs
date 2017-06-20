@@ -14,7 +14,7 @@ public partial class Nomina_Paminidtracion_ARP : System.Web.UI.Page
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     cParametrosGenerales parametrosGenerales = new cParametrosGenerales();
     CIP ip = new CIP();
     Carp arp = new Carp();

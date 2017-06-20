@@ -2,18 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Transactions;
+
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
+public partial class Agronomico_Pliquidacion_SeguridadSocial : System.Web.UI.Page
 {
 
     #region Instancias
 
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Coperadores operadores = new Coperadores();
     Cperiodos periodo = new Cperiodos();

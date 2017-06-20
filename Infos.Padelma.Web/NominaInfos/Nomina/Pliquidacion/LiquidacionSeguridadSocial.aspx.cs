@@ -14,7 +14,7 @@ public partial class Nomina_Pliquidacion_LiquidacionSeguridadSocial : System.Web
 
     Ccontratos contratos = new Ccontratos();
     Cfuncionarios funcionarios = new Cfuncionarios();
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Coperadores operadores = new Coperadores();
     Cperiodos periodo = new Cperiodos();

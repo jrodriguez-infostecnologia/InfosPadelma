@@ -1,28 +1,13 @@
 using System;
-using System.Data;
 using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using System.Configuration;
-using System; 
-using System.Collections.Generic; 
-using System.ComponentModel; 
-using System.Data; 
-using System.Drawing;
-using System.Text; 
-using System.Windows.Forms; 
 using System.Net;
 
 public partial class Inicio : System.Web.UI.Page
 {
     #region Entidades
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
 
     #endregion Entidades
 
@@ -139,10 +124,7 @@ public partial class Inicio : System.Web.UI.Page
                 return;
             }
 
-            switch (seguridad.ValidarUsuario(
-                        this.txtUsuario.Text,
-                        this.txtClave.Text,
-                        ConfigurationManager.AppSettings["Modulo"].ToString()))
+            switch (seguridad.ValidarUsuario(this.txtUsuario.Text,this.txtClave.Text,ConfigurationManager.AppSettings["Modulo"].ToString()))
             {
                 case 0:
 

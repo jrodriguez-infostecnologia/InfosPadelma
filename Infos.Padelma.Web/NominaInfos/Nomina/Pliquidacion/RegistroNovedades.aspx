@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="RegistroNovedades.aspx.cs" Inherits="Agronomico_Ptransaccion_RegistroNovedades" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Agronomico_Ptransaccion_RegistroNovedades" Codebehind="RegistroNovedades.aspx.cs" %>
 
 <%@ Register Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>

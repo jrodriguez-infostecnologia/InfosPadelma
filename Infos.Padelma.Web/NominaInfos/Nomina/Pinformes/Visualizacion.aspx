@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Visualizacion.aspx.cs" Inherits="Bascula_Pinformes_Visualizacion"  MaintainScrollPositionOnPostback="true" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Bascula_Pinformes_Visualizacion"  MaintainScrollPositionOnPostback="true" Codebehind="Visualizacion.aspx.cs" %>
 
 <!DOCTYPE html>
 

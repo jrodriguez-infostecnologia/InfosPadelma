@@ -4,19 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Transactions;
+
 using System.Drawing;
 using System.Data;
 using System.Configuration;
-
+using System.Transactions;
 
 public partial class Nomina_Pprogramacion_Programacion : System.Web.UI.Page
 {
     #region Instancias
 
 
-    
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
 
 
@@ -108,7 +108,7 @@ public partial class Nomina_Pprogramacion_Programacion : System.Web.UI.Page
             }
             else
             {
-                using (TransactionScope ts = new TransactionScope())
+                using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
                 {
                     foreach (GridViewRow registro in this.gvExtras.Rows)
                     {
@@ -404,7 +404,7 @@ public partial class Nomina_Pprogramacion_Programacion : System.Web.UI.Page
                 return;
             }
 
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 foreach (GridViewRow registro in this.gvLista.Rows)
                 {
@@ -1031,19 +1031,19 @@ public partial class Nomina_Pprogramacion_Programacion : System.Web.UI.Page
         string funcionario = this.gvLista.Rows[CcontrolesUsuario.IndiceControlGrilla("imbPermisos", ((ImageButton)sender).ClientID)].Cells[0].Text;
         string nombre = this.gvLista.Rows[CcontrolesUsuario.IndiceControlGrilla("imbPermisos", ((ImageButton)sender).ClientID)].Cells[1].Text;
         string script = "<script language='javascript'>" + "AutorizaPermiso('" + funcionario + "','" + nombre + "','" + Convert.ToString(this.niddlTurno.SelectedValue) + "');" + "</script>";
-        Page.RegisterStartupScript("AutorizaPermiso", script);
+        ClientScript.RegisterStartupScript(this.GetType(),"AutorizaPermiso", script);
     }
 
     protected void imbInformeProgramacion_Click(object sender, ImageClickEventArgs e)
     {
         string script = "<script language='javascript'>" + "Visualizacion('FuncionarioProgramado');" + "</script>";
-        Page.RegisterStartupScript("Visualizacion", script);
+        ClientScript.RegisterStartupScript(this.GetType(),"Visualizacion", script);
     }
 
     protected void imbInformeEntradas_Click(object sender, ImageClickEventArgs e)
     {
         string script = "<script language='javascript'>" + "Visualizacion('PersonalEnPlanta');" + "</script>";
-        Page.RegisterStartupScript("Registro", script);
+        ClientScript.RegisterStartupScript(this.GetType(), "Registro", script);
     }
 
     protected void imbCuadrilla0_Click(object sender, ImageClickEventArgs e)

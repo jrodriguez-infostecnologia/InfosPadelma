@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PagosNomina.aspx.cs" Inherits="Nomina_Pliquidacion_PagosNomina" %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Pliquidacion_PagosNomina" Codebehind="PagosNomina.aspx.cs" %>
 
 <%@ OutputCache Location="None" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

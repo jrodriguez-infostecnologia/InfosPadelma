@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Transactions;
+
 
 public partial class Nomina_Padministracion_PeriodoNomina : System.Web.UI.Page
 {
@@ -13,7 +13,7 @@ public partial class Nomina_Padministracion_PeriodoNomina : System.Web.UI.Page
 
     Cperiodos periodos = new Cperiodos();
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     List<CperiodoDetalle> listaPeriodoDetalle = new List<CperiodoDetalle>();
     CperiodoDetalle periodoDetalle = new CperiodoDetalle();
     CIP ip = new CIP();
@@ -173,7 +173,7 @@ public partial class Nomina_Padministracion_PeriodoNomina : System.Web.UI.Page
 
         try
         {
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
 
                 if (Convert.ToBoolean(this.Session["editar"]) == true)

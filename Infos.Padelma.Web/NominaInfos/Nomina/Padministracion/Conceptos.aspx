@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Conceptos.aspx.cs" Inherits="Nomina_Padministracion_Conceptos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Padministracion_Conceptos" Codebehind="Conceptos.aspx.cs" %>
 
 <!DOCTYPE html>
 

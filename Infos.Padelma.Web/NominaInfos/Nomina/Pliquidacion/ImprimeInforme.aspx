@@ -1,6 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ImprimeInforme.aspx.cs" Inherits="Bascula_Pinformes_ImprimeInforme" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Bascula_Pliquidacion_ImprimeInforme" Codebehind="ImprimeInforme.aspx.cs" %>
 
-<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+
 
 <!DOCTYPE html>
 
@@ -34,7 +35,6 @@
                     
                     <rsweb:ReportViewer ID="rvImprimir" runat="server" Width="100%" Height="100%" ProcessingMode="Remote">
                     </rsweb:ReportViewer>
-                    
                 </td>
             </tr>
         </table>

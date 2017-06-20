@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Funcionarios.aspx.cs" Inherits="Facturacion_Padministracion_Clientes1" %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Facturacion_Padministracion_Funcionarios" Codebehind="Funcionarios.aspx.cs" %>
 <%@ Register Assembly="obout_Calendar2_Net" Namespace="OboutInc.Calendar2" TagPrefix="obout" %>
 <%@ Register Src="../Control/Calendario.ascx" TagName="Calendario" TagPrefix="uc1" %>
 

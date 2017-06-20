@@ -12,7 +12,7 @@ public partial class Nomina_Pliquidacion_GenerarPlano : System.Web.UI.Page
 {
     CpagosNomina pagosNomina = new CpagosNomina();
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
 
     private void ManejoError(string error, string operacion)

@@ -9,12 +9,12 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class Nomina_Paminidtracion_SubTipoCotizante : System.Web.UI.Page
+public partial class Nomina_Paminidtracion_ParametroTipoCotizante : System.Web.UI.Page
 {
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
 
     CparametroTipoCotizante parametro = new CparametroTipoCotizante();

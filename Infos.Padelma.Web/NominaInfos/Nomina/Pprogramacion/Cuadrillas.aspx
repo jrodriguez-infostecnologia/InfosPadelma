@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Cuadrillas.aspx.cs" Inherits="Agronomico_Padministracion_Cuadrillas" %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Agronomico_Pprogramacion_Cuadrillas" Codebehind="Cuadrillas.aspx.cs" %>
 
 <%@ OutputCache Location="None" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

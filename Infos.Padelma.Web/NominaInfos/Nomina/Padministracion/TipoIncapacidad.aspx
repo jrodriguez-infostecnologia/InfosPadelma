@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TipoIncapacidad.aspx.cs" Inherits="Nomina_Padministracion_TipoIncapacidad" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Padministracion_TipoIncapacidad" Codebehind="TipoIncapacidad.aspx.cs" %>
 
 <!DOCTYPE html>
 

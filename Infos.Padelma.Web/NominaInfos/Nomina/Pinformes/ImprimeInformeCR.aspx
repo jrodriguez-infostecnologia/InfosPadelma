@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ImprimeInformeCR.aspx.cs" Inherits="Bascula_Pinformes_ImprimeInforme" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Bascula_Pinformes_ImprimeInformeCR" Codebehind="ImprimeInformeCR.aspx.cs" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 

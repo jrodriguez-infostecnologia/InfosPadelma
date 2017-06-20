@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AFC.aspx.cs" Inherits="Nomina_Paminidtracion_AFC" %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Paminidtracion_AFC" Codebehind="AFC.aspx.cs" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

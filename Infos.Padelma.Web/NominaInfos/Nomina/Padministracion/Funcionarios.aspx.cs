@@ -8,14 +8,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using System.Transactions;
 
-public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
+
+public partial class Facturacion_Padministracion_Funcionarios : System.Web.UI.Page
 {
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     Cterceros terceros = new Cterceros();
     CIP ip = new CIP();
     string consulta = "C";
@@ -213,7 +213,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         string operacionTer = "inserta";
         try
         {
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 if (pnTercero.Visible == true)
                 {

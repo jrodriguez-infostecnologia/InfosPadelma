@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Vacaciones.aspx.cs" Inherits="Facturacion_Padministracion_Embargos" MaintainScrollPositionOnPostback="true" %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Facturacion_Pliquidacion_Vacaciones" MaintainScrollPositionOnPostback="true" Codebehind="Vacaciones.aspx.cs" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

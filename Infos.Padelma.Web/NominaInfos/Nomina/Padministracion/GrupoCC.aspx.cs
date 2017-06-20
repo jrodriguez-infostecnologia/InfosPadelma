@@ -15,7 +15,7 @@ public partial class Contabilidad_Padministracion_GrupoCC : System.Web.UI.Page
 
     CgrupoCC grupo = new CgrupoCC();
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     string consulta="C";
     string insertar = "I";

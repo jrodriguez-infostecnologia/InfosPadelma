@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MenuInfos.aspx.cs" Inherits="Infos_MenuInfos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Infos_MenuInfos" Codebehind="MenuInfos.aspx.cs" %>
 
 <!DOCTYPE html>
 

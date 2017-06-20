@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 public partial class Contabilidad_Padministracion_EstructuraCCosto : System.Web.UI.Page
 {
     #region Instancias
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     
     CestruturaCC estructura = new CestruturaCC();
     CIP ip = new CIP();

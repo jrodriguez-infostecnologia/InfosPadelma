@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Transactions;
+
 using System.Configuration;
 using System.Net;
 using System.Drawing;
+using System.Transactions;
 
 public partial class Agronomico_Ptransaccion_RegistroNovedades : System.Web.UI.Page
 {
@@ -16,7 +17,7 @@ public partial class Agronomico_Ptransaccion_RegistroNovedades : System.Web.UI.P
     #region Instancias
 
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Coperadores operadores = new Coperadores();
     CtipoTransaccion tipoTransaccion = new CtipoTransaccion();
@@ -427,7 +428,7 @@ public partial class Agronomico_Ptransaccion_RegistroNovedades : System.Web.UI.P
 
         try
         {
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
 
                 DateTime fecha = Convert.ToDateTime(txtFecha.Text);
@@ -530,7 +531,7 @@ public partial class Agronomico_Ptransaccion_RegistroNovedades : System.Web.UI.P
         try
         {
 
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 DateTime fecha = Convert.ToDateTime(txtFecha.Text);
 
@@ -1367,7 +1368,7 @@ public partial class Agronomico_Ptransaccion_RegistroNovedades : System.Web.UI.P
     {
         this.nilblMensajeEdicion.Text = "";
 
-        using (TransactionScope ts = new TransactionScope())
+        using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
         {
             try
             {

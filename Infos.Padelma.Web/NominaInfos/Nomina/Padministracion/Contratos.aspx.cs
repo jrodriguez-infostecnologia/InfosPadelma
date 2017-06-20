@@ -8,15 +8,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using System.Transactions;
+
 using System.Globalization;
+using System.Transactions;
 
 public partial class Facturacion_Padministracion_Contratos : System.Web.UI.Page
 {
     #region Instancias
 
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     Ccontratos contratos = new Ccontratos();
     CIP ip = new CIP();
     Cfuncionarios funcionarios = new Cfuncionarios();
@@ -636,7 +637,7 @@ public partial class Facturacion_Padministracion_Contratos : System.Web.UI.Page
                                             0//@valorSaludObligatoria	money
             };
 
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 switch (CentidadMetodos.EntidadInsertUpdateDelete("nContratos", operacion, "ppa", objValores))
                 {

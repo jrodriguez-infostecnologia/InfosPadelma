@@ -13,7 +13,7 @@ using System.Web.UI.WebControls;
 public partial class Nomina_Pliquidacion_PagosNomina : System.Web.UI.Page
 {
     #region Instancias
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     
     Ctransacciones transacciones = new Ctransacciones();

@@ -11,12 +11,12 @@ using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
 using System.Transactions;
 
-public partial class Facturacion_Padministracion_Embargos : System.Web.UI.Page
+public partial class Facturacion_Pliquidacion_Vacaciones : System.Web.UI.Page
 {
     #region Instancias
     CtipoTransaccion tipoTransaccion = new CtipoTransaccion();
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     Cfuncionarios funcionarios = new Cfuncionarios();
     CtransaccionVacaciones travaca;
     CIP ip = new CIP();
@@ -146,7 +146,7 @@ public partial class Facturacion_Padministracion_Embargos : System.Web.UI.Page
 
         try
         {
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 if (Convert.ToBoolean(this.Session["editar"]) == true)
                 {

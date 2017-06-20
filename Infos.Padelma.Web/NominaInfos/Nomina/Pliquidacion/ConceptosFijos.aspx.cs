@@ -13,7 +13,7 @@ public partial class Agronomico_Padministracion_ConceptosFijos : System.Web.UI.P
     #region Instancias
 
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
 
 
@@ -173,7 +173,7 @@ public partial class Agronomico_Padministracion_ConceptosFijos : System.Web.UI.P
         try
         {
 
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 for (int x = 0; x < this.selConceptos.Items.Count; x++)
                 {

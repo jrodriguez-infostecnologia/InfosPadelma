@@ -13,7 +13,7 @@ public partial class Nomina_Pprogramacion_EditarProgramacion : System.Web.UI.Pag
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Ccuadrillas cuadrillas = new Ccuadrillas();
     Cdepartamentos departamentos = new Cdepartamentos();
@@ -160,7 +160,7 @@ public partial class Nomina_Pprogramacion_EditarProgramacion : System.Web.UI.Pag
         try
         {
 
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 for (int x = 0; x < this.selFuncionarios.Items.Count; x++)
                 {

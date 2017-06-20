@@ -14,7 +14,7 @@ public partial class Nomina_Paminidtracion_ICBF : System.Web.UI.Page
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Cicbf icbf = new Cicbf();
     cParametrosGenerales parametrosGenerales = new cParametrosGenerales();

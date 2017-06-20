@@ -13,7 +13,7 @@ public partial class Agronomico_Padministracion_Cuadrillas : System.Web.UI.Page
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
 
 
@@ -183,7 +183,7 @@ public partial class Agronomico_Padministracion_Cuadrillas : System.Web.UI.Page
         try
         {
 
-            using (TransactionScope ts = new TransactionScope())
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
                 for (int x = 0; x < this.selFuncionarios.Items.Count; x++)
                 {

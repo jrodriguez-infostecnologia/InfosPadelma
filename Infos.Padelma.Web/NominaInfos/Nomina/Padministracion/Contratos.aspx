@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Contratos.aspx.cs" Inherits="Facturacion_Padministracion_Contratos" EnableEventValidation="false" MaintainScrollPositionOnPostback="true" %>
+<%@ Page Language="C#" AutoEventWireup="true" Inherits="Facturacion_Padministracion_Contratos" EnableEventValidation="false" MaintainScrollPositionOnPostback="true" Codebehind="Contratos.aspx.cs" %>
 
 
 

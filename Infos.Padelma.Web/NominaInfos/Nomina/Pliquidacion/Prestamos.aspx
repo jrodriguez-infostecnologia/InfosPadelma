@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Prestamos.aspx.cs" Inherits="Nomina_PLiquidacion_Prestamo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_PLiquidacion_Prestamo" Codebehind="Prestamos.aspx.cs" %>
 
 <!DOCTYPE html>
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EstructuraCCosto.aspx.cs" Inherits="Contabilidad_Padministracion_EstructuraCCosto" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Contabilidad_Padministracion_EstructuraCCosto" Codebehind="EstructuraCCosto.aspx.cs" %>
 
 <!DOCTYPE html>
 

@@ -14,7 +14,7 @@ using System.Security.Principal;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Data.SqlClient;
 
-public partial class Bascula_Pinformes_ImprimeInforme : System.Web.UI.Page
+public partial class Bascula_Pinformes_ImprimeInformeCR : System.Web.UI.Page
 {
     #region Atributos
 
@@ -22,7 +22,7 @@ public partial class Bascula_Pinformes_ImprimeInforme : System.Web.UI.Page
     cInformesCrystal ic = new cInformesCrystal();
     ReportDocument crystalReport;
     Cperiodos periodo = new Cperiodos();
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Ctransacciones transacciones = new Ctransacciones();
 

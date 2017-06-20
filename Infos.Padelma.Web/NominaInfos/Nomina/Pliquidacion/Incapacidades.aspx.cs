@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Transactions;
+
 using System.Data;
 
 public partial class Nomina_PLiquidacion_Incapacidades : System.Web.UI.Page
@@ -13,7 +13,7 @@ public partial class Nomina_PLiquidacion_Incapacidades : System.Web.UI.Page
     #region Instancias
 
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Cincapacidades incapacidad = new Cincapacidades();
     Cperiodos periodo = new Cperiodos();

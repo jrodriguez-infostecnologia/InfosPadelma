@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CentroTrabajos.aspx.cs" Inherits="Nomina_Padministracion_CentroTrabajos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Padministracion_CentroTrabajos" Codebehind="CentroTrabajos.aspx.cs" %>
 
 <!DOCTYPE html>
 

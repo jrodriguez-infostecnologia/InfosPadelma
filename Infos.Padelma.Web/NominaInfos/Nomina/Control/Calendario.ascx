@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Calendario.ascx.cs" Inherits="Nomina_Control_Calendario"   %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" Inherits="Nomina_Control_Calendario"   Codebehind="Calendario.ascx.cs" %>
 
 <style type="text/css">
         BODY {

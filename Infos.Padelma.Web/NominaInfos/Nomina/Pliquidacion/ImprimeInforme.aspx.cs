@@ -12,7 +12,7 @@ using Microsoft.Reporting.WebForms;
 using System.Net;
 using System.Security.Principal;
 
-public partial class Bascula_Pinformes_ImprimeInforme : System.Web.UI.Page
+public partial class Bascula_Pliquidacion_ImprimeInforme : System.Web.UI.Page
 {
     #region Atributos
 

@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 using System.IO;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.Transactions;
+
 using System.Data;
 using System.Net;
 public partial class Infos_MenuInfos : System.Web.UI.Page
@@ -13,7 +13,7 @@ public partial class Infos_MenuInfos : System.Web.UI.Page
     #region Instancias
 
     cMenu menu = new cMenu();
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     #endregion Instancias
     #region Metodos
     private string ObtenerIP()

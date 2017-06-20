@@ -11,7 +11,7 @@ public partial class Nomina_Padministracion_CentroTrabajos : System.Web.UI.Page
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CcentroTrabajo centroTrabajo = new CcentroTrabajo();
     CIP ip = new CIP();
 

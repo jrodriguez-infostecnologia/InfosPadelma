@@ -10,12 +10,12 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Drawing;
 
-public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
+public partial class Facturacion_Padministracion_Log : System.Web.UI.Page
 {
     #region Instancias
 
     
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
 
     Clog log = new Clog();

@@ -9,12 +9,12 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-public partial class Facturacion_Padministracion_Embargos : System.Web.UI.Page
+public partial class Facturacion_Pliquidacion_Embargos : System.Web.UI.Page
 {
     #region Instancias
 
 
-    SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
+    NominaInfos.SeguridadInfos.SecuritySoapClient seguridad = new NominaInfos.SeguridadInfos.SecuritySoapClient();
     CIP ip = new CIP();
     Ccontratos contratos = new Ccontratos();
     cProrroga prorroga = new cProrroga();

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PeriodoNomina.aspx.cs" Inherits="Nomina_Padministracion_PeriodoNomina" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="Nomina_Padministracion_PeriodoNomina" Codebehind="PeriodoNomina.aspx.cs" %>
 
 <!DOCTYPE html>
 
