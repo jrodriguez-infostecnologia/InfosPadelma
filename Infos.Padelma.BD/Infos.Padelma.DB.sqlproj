@@ -1844,5 +1844,6 @@
     <Build Include="dbo\Stored Procedures\SpActualizaaLaborLotePrecio.sql" />
     <Build Include="dbo\Stored Procedures\SpActualizaaLabor.sql" />
     <Build Include="dbo\Stored Procedures\SpActualizaaGrupoLabor.sql" />
+    <Build Include="dbo\Stored Procedures\spLiquidacionNominaPeriodo.sql" />
   </ItemGroup>
 </Project>
