@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetiGrupoImpuestoIR AS select * from iGrupoImpuestoIR GO

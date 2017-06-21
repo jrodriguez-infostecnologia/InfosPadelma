@@ -1,4 +1,4 @@
-﻿CREATE proc spSeleccionaLaboresFertilizacionInforme
+﻿CREATE proc [dbo].[spSeleccionaLaboresFertilizacionInforme]
 @empresa int,
 @fechaInicial date,
 @fechaFinal date

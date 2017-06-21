@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpDeleteaLotePrecio @empresa int,@labor varchar(50),@finca varchar(50),@lote varchar(50),@Retorno int output  AS begin tran aLotePrecio delete aLotePrecio where empresa = @empresa and labor = @labor and finca = @finca and lote = @lote if (@@error = 0 ) begin set @Retorno = 0 commit tran aLotePrecio end else begin set @Retorno = 1 rollback tran aLotePrecio end

@@ -154,6 +154,9 @@ end
 	--(select  rtrim(ltrim(nit)) from gEmpresa where id=2)
 
 	--select * from #causacionContableFinalPR
+	--where Identificacion='1007350155'
+
+	--select * from 
 
 	select isnull(convert(char(1),ltrim(rtrim(tipo))),'')+
 	isnull(convert(char(3),comprobante),'')+
@@ -172,7 +175,8 @@ end
 	+replicate('0',13)
 	+replicate('0',171)
  from #causacionContableFinalPR
- --where #causacionContableFinalPR
+--where Identificacion='1007350155'
+
 
 
 --  go

@@ -2,3 +2,4 @@
 *.jfm
 bin
 *.sqlproj.user
+/packages

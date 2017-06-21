@@ -2,9 +2,14 @@
 @empresa int
 as
 select DISTINCT CONVERT(varchar(50), a.fecha,112) +'-' + convert(varchar(50), a.fechaFinal,112) periodo ,a.fecha fechaI, a.fechaFinal fechaF , a.finca , e.descripcion desfinca, b.lote, 
-b.item, d.descripcion desitem, b.uMedida, b.noPalmas, b.dosis,b.cantidad, a.tipo, a.numero, b.saldo , b.registro,  añoSiembra,
-year(getdate()) - añoSiembra edad, f.hNetas, g.descripcion variedad,
-isnull((select sum(isnull(resta,0) - isnull(suma,0) ) from atransaccionItemSaldo w where w.referencia = a.numero and w.empresa=a.empresa and b.lote=w.lote),0) ejecutado
+b.item, d.descripcion desitem, b.uMedida, b.noPalmas, b.dosis,b.cantidad,
+isnull((select sum(zz.cantidad) from aTransaccion z join  aTransaccionItem zz on z.tipo=zz.tipo
+and z.numero=zz.numero and z.empresa=zz.empresa where    zz.tipo='RLF'  and z.anulado=0
+and zz.item=b.item and b.lote=zz.lote and z.referencia=a.numero ),0) ejecutado, a.tipo, a.numero, b.cantidad -isnull((select sum(zz.cantidad) from aTransaccion z join  aTransaccionItem zz on z.tipo=zz.tipo
+and z.numero=zz.numero and z.empresa=zz.empresa where    zz.tipo='RLF' and z.anulado=0
+and zz.item=b.item and b.lote=zz.lote and z.referencia=a.numero ),0) saldo , b.registro,  añoSiembra,
+year(getdate()) - añoSiembra edad, f.hNetas, g.descripcion variedad
+
 from aTransaccion a  
 join aTransaccionItem  b 
 on a.tipo=b.tipo and a.numero=b.numero and a.empresa=b.empresa

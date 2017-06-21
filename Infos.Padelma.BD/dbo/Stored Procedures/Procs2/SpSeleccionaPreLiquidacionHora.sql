@@ -241,13 +241,13 @@ as
 	deallocate curMov
 
 
-   select a.*, DATENAME(weekday,fechaP) diaSemana , c.descripcion  descripcion, 
-    f.descripcion nombreCuadrilla,e.descripcion DesTurno,
-    e.horaInicio horaInicio,'PROGRAMACIÓN' Tipo,0 tipoP,a.hTurno+a.nExtra THP, (a.hTurno+a.nExtra)-a.HTL as DIF   from tmpLiquidacionHoras  a
-   join nFuncionario c on a.funcionario=c.tercero and a.empresa=c.empresa
-   join nTurno e on a.CodTurno=e.codigo and e.empresa=a.empresa
-   LEFT join nCuadrilla f on f.codigo=a.cuadrilla and f.empresa=a.empresa
-   where a.empresa=@empresa
+   --select a.*, DATENAME(weekday,fechaP) diaSemana , c.descripcion  descripcion, 
+   -- f.descripcion nombreCuadrilla,e.descripcion DesTurno,
+   -- e.horaInicio horaInicio,'PROGRAMACIÓN' Tipo,0 tipoP,a.hTurno+a.nExtra THP, (a.hTurno+a.nExtra)-a.HTL as DIF   from tmpLiquidacionHoras  a
+   --join nFuncionario c on a.funcionario=c.tercero and a.empresa=c.empresa
+   --join nTurno e on a.CodTurno=e.codigo and e.empresa=a.empresa
+   --LEFT join nCuadrilla f on f.codigo=a.cuadrilla and f.empresa=a.empresa
+   --where a.empresa=@empresa
    
        
    --drop table #liquidacion

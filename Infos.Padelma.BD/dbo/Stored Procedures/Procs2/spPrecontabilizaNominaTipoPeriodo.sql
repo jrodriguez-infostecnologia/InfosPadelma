@@ -209,7 +209,7 @@ begin
  --nomina
 insert #tmpNomina
 select a.empresa, a.año, a.mes, @periodoContable,
-a.codtercero , a.codiTercero, a.tipo, a.numero, a.contrato,
+a.codtercero , a.codigo, a.tipo, a.numero, a.contrato,
 a.noPeriodo, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
 a.coddepto,
 @tipoNovedadNomina,
@@ -217,8 +217,8 @@ a.codConcepto,
 null novedadAgronimica,
 a.signo,
 a.valorTotal,
-a.entidadEps,
-a.entidadPension,
+a.entidadSaludN,
+a.entidadPensionN,
 a.entidadArp,
 a.entidadCaja,
 a.entidadSena,
@@ -256,7 +256,7 @@ and a.codCCosto=zz.cCosto and a.departamento=zz.departamento and zz.concepto=a.c
 		end
 			 from cParametroContaNomi zz where zz.empresa=@empresa and zz.clase=@clase 
 and a.codCCosto=zz.cCosto and a.departamento=zz.departamento and zz.concepto=a.codConcepto ) aacosto
-from vSeleccionaLiquidacionDefinitiva a join
+from vLiquidacionDefinitivaReal a join
 nConcepto b on a.codConcepto=b.codigo and a.empresa=b.empresa
 join cTercero c on c.id = a.codTercero and c.empresa = b.empresa
 join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
@@ -351,10 +351,10 @@ and e.codCCosto=zz.cCosto and e.departamento=zz.departamento) aacosto
  join aTransaccionNovedad b on a.numero=b.numero and a.tipo=b.tipo and a.empresa=b.empresa 
  join aTransaccionTercero c on b.numero=c.numero and b.tipo=c.tipo and b.registro=c.registroNovedad and b.empresa=c.empresa 
  join aNovedad f on f.codigo=c.novedad and f.empresa=c.empresa 
- join (select distinct w.tipoConcepto, w.codDepto , w.numero, w.departamento, w.empresa,	w.identificacion, w.codCCosto,	w.codTercero,	w.nombreTercero,	w.codConcepto,	w.tipo,	w.año,	w.mes,	w.anulado,	w.noPeriodo,	w.signo,	w.entidad,	w.basePrimas,	
+ join (select distinct w.tipoConcepto, w.codDepto , w.numero, w.departamento, w.empresa,	w.identificacion, w.codCCosto,		w.descripcion,	w.codConcepto,	w.tipo,	w.año,	w.mes,	w.anulado,	w.noPeriodo,	w.signo,	w.entidad,	w.basePrimas,	
  w.baseCajaCompensacion,	w.baseCesantias,	w.baseVacaciones,	w.baseIntereses,	w.baseSeguridadSocial,	w.manejaRango,	w.baseEmbargo,	w.claseContrato,	w.entidadPension,	w.entidadEps,	w.entidadCesantias,	
- w.entidadCaja,	w.entidadArp,	w.entidadSena,	w.entidadIcbf,	w.codiTercero--, w.noContrato
- from vSeleccionaLiquidacionDefinitiva w where w.noPeriodo=@periodo and w.empresa=@empresa and w.año=@año and w.anulado=0  and w.tipo=@tipoTransaccion )  e on
+ w.entidadCaja,	w.entidadArp,	w.entidadSena,	w.entidadIcbf,	w.codTercero--, w.noContrato
+ from vLiquidacionDefinitivaReal w where w.noPeriodo=@periodo and w.empresa=@empresa and w.año=@año and w.anulado=0  and w.tipo=@tipoTransaccion )  e on
   c.tercero=e.codtercero and  f.concepto = e.codconcepto and e.empresa=a.empresa --and e.noContrato=c.contrato
  and e.numero like '%'+isnull(@numeroTransaccion,'')+'%'
 left join cCentrosCosto j on j.codigo=e.codccosto and j.empresa=a.empresa
@@ -612,6 +612,7 @@ on a.codtercero = aa.tercero and a.empresa=aa.empresa and a.noPeriodo=aa.noPerio
   left join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa --and g.activo=1
 where aa.año=@año  and aa.empresa=@empresa  
 and aa.noPeriodo=@periodo and aa.anulado=0 
+
 if @tipo='CC'
 begin
 	delete #tmpNomina
@@ -711,281 +712,8 @@ end
 else
 begin
 
-if not exists(select * from nSeguridadSocialPila where año=@año and mes=@mes and empresa=@empresa)
-begin
--- SALUD
-insert #tmpNomina
-select a.empresa, a.año, a.mes, d.periodo,
-a.codtercero , a.codigo, null, null, a.contrato,
-null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, e.ccosto cccostoNomina,
-e.departamento,
-@tipoNovedadNomina,@conceptoSalud conceptoSalud,
-null novedadAgronimica, b.signo,
-convert(int, round((case when f.electivaProduccion=0 then  aa.IBCsalud * h.pEmpleador/100
-else aa.IBCsalud*f.porcentajeSS/100 end ),0)) ValorSalud,
-a.entidadEps entidadEPS,null,null,null,null,null,null,
-null entidadFondoS,
-null entidadAdicional,null,null,0,null,--baseCesantias bit,
-null,--basePrimas bit ,
-null,--baseIntereses bit,
-null,--baseVacaciones bit,
-null,--baseEmbargos bit,
-null,--baseCajaCompensacion bit,
-null,--baseSeguridadSocial bit
-null,null,
-null,null,null
-from nSeguridadSocial aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
-z.mes,
-z.entidadEps,
-null entidadPension,
-null entidadArp,
-null entidadCaja,
-null entidadSena,
-null entidadCesantias, z.empresa
-from vLiquidacionDefinitivaReal z ) a 
-on aa.idTercero=a.codtercero and aa.empresa=a.empresa
-and a.año=aa.año and aa.mes=a.mes
- join nConcepto b on @conceptoSalud=b.codigo and a.empresa=b.empresa
- join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
- join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
- join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
- join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
- join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
- left join vEntidadEps h on h.codigo=e.entidadEps and h.empresa=aa.empresa
- join cTercero i on i.id= aa.terceroSalud and i.empresa=aa.empresa 
-where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorSalud>0
--- PENSION
-insert #tmpNomina
-select a.empresa, a.año, a.mes, d.periodo,
-a.codtercero , a.codigo, null, null, a.contrato,
-null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina,  e.ccosto  cccostoNomina,
-e.departamento,
-@tipoNovedadNomina,@conceptoPension concepto,
-null novedadAgronimica,  b.signo ,
-convert(int,round(aa.IBCpension* isnull( h.pEmpleador,0)/100,0)) valorPension,
-null, a.entidadPension entidadPension,null,null,null,null,null,
-null entidadFondoS,
-null entidadAdicional,null,null,0,null,--baseCesantias bit,
-null,--basePrimas bit ,
-null,--baseIntereses bit,
-null,--baseVacaciones bit,
-null,--baseEmbargos bit,
-null,--baseCajaCompensacion bit,
-null,--baseSeguridadSocial bit
-null,null,
-null,null,null
-from nSeguridadSocial aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=6 and tercero= z.codTercero ) contrato,z.año,
-z.mes mes, 
-null entidadEps,
-z.entidadPension,
-null entidadArp,
-null entidadCaja,
-null entidadSena,
-null entidadCesantias, z.empresa
- from vLiquidacionDefinitivaReal z ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
- and a.año=aa.año and aa.mes=a.mes
- join nConcepto b on @conceptoPension =b.codigo and a.empresa=b.empresa
- join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
- join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
- join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
- join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
- left join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
- left join vEntidadPension h on h.codigo=a.entidadPension and h.empresa=aa.empresa
- left join cTercero i on aa.terceroPension =i.id and aa.empresa=i.empresa
-where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorPension>0 --and aa.idTercero='69'
--- ARP
-insert #tmpNomina
-select a.empresa, a.año, a.mes, d.periodo,
-a.codtercero , a.codigo, null, null, a.contrato,
-null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
-e.departamento,
-@tipoNovedadNomina,@conceptoARP,
-null novedadAgronimica, b.signo,
-aa.valorArp,
-null,null,a.entidadArp entidadArp,null,null,null,null,
-null entidadFondoS,
-null entidadAdicional,null,null,0,null,--baseCesantias bit,
-null,--basePrimas bit ,
-null,--baseIntereses bit,
-null,--baseVacaciones bit,
-null,--baseEmbargos bit,
-null,--baseCajaCompensacion bit,
-null,--baseSeguridadSocial bit
-null,null,
-null,null,null
-from nSeguridadSocial aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
-z.mes,
-null entidadEps,
-null entidadPension,
-z.entidadArp,
-null entidadCaja,
-null entidadSena,
-null entidadCesantias, z.empresa
- from vLiquidacionDefinitivaReal z ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
- and a.año=aa.año and aa.mes=a.mes
- join nConcepto b on @conceptoARP=b.codigo and a.empresa=b.empresa
- join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
- join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
- join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
- join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
- join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
- join cTercero h on h.id=aa.terceroArp and h.empresa=aa.empresa
-where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorArp>0
--- CAJA
-insert #tmpNomina
-select a.empresa, a.año, a.mes, d.periodo,
-a.codtercero , a.codigo, null, null, a.contrato,
-null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
-e.departamento,
-@tipoNovedadNomina,@conceptoCaja,
-null novedadAgronimica, b.signo,
-aa.valorCaja,
-null,null,null,a.entidadCaja caja,null,null,null,
-null entidadFondoS,
-null entidadAdicional,null,null,0,null,--baseCesantias bit,
-null,--basePrimas bit ,
-null,--baseIntereses bit,
-null,--baseVacaciones bit,
-null,--baseEmbargos bit,
-null,--baseCajaCompensacion bit,
-null,--baseSeguridadSocial bit
-null,null,
-null,null,null
-from nSeguridadSocial aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
-z.mes,
-null entidadEps,
-null entidadPension,
-null entidadArp,
-z.entidadCaja,
-null entidadSena,
-null entidadCesantias, z.empresa
- from vLiquidacionDefinitivaReal z  where año=@año and mes=@periodo and z.empresa=@empresa ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
-and a.año=aa.año and aa.mes=a.mes
- join nConcepto b on @conceptoCaja=b.codigo and a.empresa=b.empresa
- join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
- join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
- join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
- join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
- join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
- join cTercero h on h.id=aa.terceroCaja and h.empresa=aa.empresa
-where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorCaja>0
--- SENA
-insert #tmpNomina
-select a.empresa, a.año, a.mes, d.periodo,
-a.codtercero , a.codigo, null, null, a.contrato,
-null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
-e.departamento,
-@tipoNovedadNomina,@conceptoSENA,
-null novedadAgronimica,b.signo,
-aa.valorCaja,
-null,null,null,null,a.entidadSena entsena,null,null,
-null entidadFondoS,
-null entidadAdicional,null,null,0,null,--baseCesantias bit,
-null,--basePrimas bit ,
-null,--baseIntereses bit,
-null,--baseVacaciones bit,
-null,--baseEmbargos bit,
-null,--baseCajaCompensacion bit,
-null,--baseSeguridadSocial bit
-null,null,
-null,null,null
-from nSeguridadSocial aa join  (select distinct z.codtercero codtercero, z.codigo, z.contrato,z.año,
-z.mes,
-z.entidadEps,
-z.entidadPension,
-z.entidadArp,
-z.entidadCaja,
-z.entidadSena,
-z.entidadCesantias, z.empresa
-from vLiquidacionDefinitivaReal z ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
-and a.año=aa.año and aa.mes=a.mes
- join nConcepto b on @conceptoSENA=b.codigo and a.empresa=b.empresa
- join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
- join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
- join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
- join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
- join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
- join cTercero h on aa.terceroSena=h.id and h.empresa=aa.empresa
-where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorSena>0
--- FONDO DE SOLIDARIDAD 
-insert #tmpNomina
-select a.empresa, a.año, a.mes, d.periodo,
-a.codtercero , a.codigo, null, null, a.contrato,
-null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
-e.departamento,
-@tipoNovedadNomina,@conceptoFondoSolidaridad,
-null novedadAgronimica, b.signo,
-isnull( aa.valorFondo,0) + isnull(aa.valorFondoSub,0),
-null,a.entidadPension,null,null,null,null, null,
-null entidadFondoS,
-null entidadAdicional,null,null,0,null,--baseCesantias bit,
-null,--basePrimas bit ,
-null,--baseIntereses bit,
-null,--baseVacaciones bit,
-null,--baseEmbargos bit,
-null,--baseCajaCompensacion bit,
-null,--baseSeguridadSocial bit
-null,null,
-null,null,null
-from nSeguridadSocial aa  join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
-z.mes, null entidadEps,
- z.entidadPension entidadPension,
- null entidadArp,
- null entidadCaja,
- null entidadSena,
- z.entidadPension fondoSolidaridad, z.empresa
- from vLiquidacionDefinitivaReal z  ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
-and a.año=aa.año and aa.mes=a.mes
- join nConcepto b on @conceptoFondoSolidaridad=b.codigo and a.empresa=b.empresa
- join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
- join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
- join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
- join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
- join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
- left join vEntidadPension h on a.entidadPension = h.tercero and aa.empresa=h.empresa
- join cTercero i on aa.terceroPension=i.id and aa.empresa=i.empresa
-where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorFondo>0
--- ICBF 
-insert #tmpNomina
-select a.empresa, a.año, a.mes, d.periodo,
-a.codtercero , a.codigo, null, null, a.contrato,
-null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
-e.departamento,
-@tipoNovedadNomina,@conceptoICBF,
-null novedadAgronimica, b.signo,
-valorIcbf,
-null,null,null,null,null,e.entidadCesantias,
-null entidadFondoS,
-h.nit entidadicbf,
-null entidadAdicional,null,null,0,null,--baseCesantias bit,
-null,--basePrimas bit ,
-null,--baseIntereses bit,
-null,--baseVacaciones bit,
-null,--baseEmbargos bit,
-null,--baseCajaCompensacion bit,
-null,--baseSeguridadSocial bit
-null,null,
-null,null,null
-from nSeguridadSocial aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
-z.mes,
- null entidadEps,null entidadPension,
-null entidadArp,
-null entidadCaja,
-null entidadSena,
-null entidadCesantias, z.empresa,z.entidadIcbf
-from vLiquidacionDefinitivaReal z ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
-and a.año=aa.año and aa.mes=a.mes
- join nConcepto b on @conceptoICBF=b.codigo and a.empresa=b.empresa
- join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
- join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
- join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
- join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
- join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
- join cTercero h on h.id=aa.terceroIcbf and h.empresa=aa.empresa
-where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorIcbf>0
 
-end
-else
+if not exists(select * from nSeguridadSocialPila where año=@año and mes=@mes and empresa=@empresa)
 begin
 
 -- SALUD
@@ -1115,7 +843,283 @@ e.departamento,
 @tipoNovedadNomina,@conceptoCaja,
 null novedadAgronimica, b.signo,
 aa.valorCaja,
-null,null,null,a.entidadCaja caja,null,null,null,
+null,null,null, case when  len(ltrim(rtrim(a.entidadCaja))) = 0 then h.nit else a.entidadCaja end  caja,null,null,null,
+null entidadFondoS,
+null entidadAdicional,null,null,0,null,--baseCesantias bit,
+null,--basePrimas bit ,
+null,--baseIntereses bit,
+null,--baseVacaciones bit,
+null,--baseEmbargos bit,
+null,--baseCajaCompensacion bit,
+null,--baseSeguridadSocial bit
+null,null,
+null,null,null
+from nSeguridadSocialPila aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
+z.mes,
+null entidadEps,
+null entidadPension,
+null entidadArp,
+z.entidadcaja,
+null entidadSena,
+null entidadCesantias, z.empresa
+ from vLiquidacionDefinitivaReal z  where año=@año and mes=@periodo and z.empresa=@empresa ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
+and a.año=aa.año and aa.mes=a.mes
+ join nConcepto b on @conceptoCaja=b.codigo and a.empresa=b.empresa
+ join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
+ join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
+ join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=(select max(id) from ncontratos where empresa=@empresa and tercero= a.codTercero )
+ join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
+ join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
+ join cTercero h on h.id=aa.terceroCaja and h.empresa=aa.empresa
+where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorCaja>0
+-- SENA
+insert #tmpNomina
+select a.empresa, a.año, a.mes, d.periodo,
+a.codtercero , a.codigo, null, null, a.contrato,
+null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
+e.departamento,
+@tipoNovedadNomina,@conceptoSENA,
+null novedadAgronimica,b.signo,
+aa.valorCaja,
+null,null,null,null,a.entidadSena entsena,null,null,
+null entidadFondoS,
+null entidadAdicional,null,null,0,null,--baseCesantias bit,
+null,--basePrimas bit ,
+null,--baseIntereses bit,
+null,--baseVacaciones bit,
+null,--baseEmbargos bit,
+null,--baseCajaCompensacion bit,
+null,--baseSeguridadSocial bit
+null,null,
+null,null,null
+from nSeguridadSocialPila aa join  (select distinct z.codtercero codtercero, z.codigo, z.contrato,z.año,
+z.mes,
+z.entidadEps,
+z.entidadPension,
+z.entidadArp,
+z.entidadCaja,
+z.entidadSena,
+z.entidadCesantias, z.empresa
+from vLiquidacionDefinitivaReal z ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
+and a.año=aa.año and aa.mes=a.mes
+ join nConcepto b on @conceptoSENA=b.codigo and a.empresa=b.empresa
+ join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
+ join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
+ join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
+ join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
+ join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
+ join cTercero h on aa.terceroSena=h.id and h.empresa=aa.empresa
+where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorSena>0
+-- FONDO DE SOLIDARIDAD 
+insert #tmpNomina
+select a.empresa, a.año, a.mes, d.periodo,
+a.codtercero , a.codigo, null, null, a.contrato,
+null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
+e.departamento,
+@tipoNovedadNomina,@conceptoFondoSolidaridad,
+null novedadAgronimica, b.signo,
+isnull( aa.valorFondo,0) + isnull(aa.valorFondoSub,0),
+null,a.entidadPension,null,null,null,null, null,
+null entidadFondoS,
+null entidadAdicional,null,null,0,null,--baseCesantias bit,
+null,--basePrimas bit ,
+null,--baseIntereses bit,
+null,--baseVacaciones bit,
+null,--baseEmbargos bit,
+null,--baseCajaCompensacion bit,
+null,--baseSeguridadSocial bit
+null,null,
+null,null,null
+from nSeguridadSocialPila aa  join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
+z.mes, null entidadEps,
+ z.entidadPension entidadPension,
+ null entidadArp,
+ null entidadCaja,
+ null entidadSena,
+ z.entidadPension fondoSolidaridad, z.empresa
+ from vLiquidacionDefinitivaReal z  ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
+and a.año=aa.año and aa.mes=a.mes
+ join nConcepto b on @conceptoFondoSolidaridad=b.codigo and a.empresa=b.empresa
+ join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
+ join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
+ join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
+ join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
+ join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
+ left join vEntidadPension h on a.entidadPension = h.tercero and aa.empresa=h.empresa
+ join cTercero i on aa.terceroPension=i.id and aa.empresa=i.empresa
+where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorFondo>0
+-- ICBF 
+insert #tmpNomina
+select a.empresa, a.año, a.mes, d.periodo,
+a.codtercero , a.codigo, null, null, a.contrato,
+null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
+e.departamento,
+@tipoNovedadNomina,@conceptoICBF,
+null novedadAgronimica, b.signo,
+valorIcbf,
+null,null,null,null,null,e.entidadCesantias,
+null entidadFondoS,
+h.nit entidadicbf,
+null entidadAdicional,null,null,0,null,--baseCesantias bit,
+null,--basePrimas bit ,
+null,--baseIntereses bit,
+null,--baseVacaciones bit,
+null,--baseEmbargos bit,
+null,--baseCajaCompensacion bit,
+null,--baseSeguridadSocial bit
+null,null,
+null,null,null
+from nSeguridadSocialPila aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
+z.mes,
+ null entidadEps,null entidadPension,
+null entidadArp,
+null entidadCaja,
+null entidadSena,
+null entidadCesantias, z.empresa,z.entidadIcbf
+from vLiquidacionDefinitivaReal z ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
+and a.año=aa.año and aa.mes=a.mes
+ join nConcepto b on @conceptoICBF=b.codigo and a.empresa=b.empresa
+ join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
+ join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
+ join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
+ join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
+ join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
+ join cTercero h on h.id=aa.terceroIcbf and h.empresa=aa.empresa
+where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorIcbf>0
+
+end
+else
+begin
+
+-- SALUD
+insert #tmpNomina
+select a.empresa, a.año, a.mes, d.periodo,
+a.codtercero , a.codigo, null, null, a.contrato,
+null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, e.ccosto cccostoNomina,
+e.departamento,
+@tipoNovedadNomina,@conceptoSalud conceptoSalud,
+null novedadAgronimica, b.signo,
+convert(int, round((case when f.electivaProduccion=0 then  aa.IBCsalud * h.pEmpleador/100
+else aa.IBCsalud*f.porcentajeSS/100 end ),0)) ValorSalud,
+a.entidadEps entidadEPS,null,null,null,null,null,null,
+null entidadFondoS,
+null entidadAdicional,null,null,0,null,--baseCesantias bit,
+null,--basePrimas bit ,
+null,--baseIntereses bit,
+null,--baseVacaciones bit,
+null,--baseEmbargos bit,
+null,--baseCajaCompensacion bit,
+null,--baseSeguridadSocial bit
+null,null,
+null,null,null
+from nSeguridadSocialPila aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
+z.mes,
+z.entidadEps,
+null entidadPension,
+null entidadArp,
+null entidadCaja,
+null entidadSena,
+null entidadCesantias, z.empresa
+from vLiquidacionDefinitivaReal z ) a 
+on aa.idTercero=a.codtercero and aa.empresa=a.empresa
+and a.año=aa.año and aa.mes=a.mes
+ join nConcepto b on @conceptoSalud=b.codigo and a.empresa=b.empresa
+ join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
+ join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
+ join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
+ join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
+ join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
+ left join vEntidadEps h on h.codigo=e.entidadEps and h.empresa=aa.empresa
+ join cTercero i on i.id= aa.terceroSalud and i.empresa=aa.empresa 
+where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorSalud>0
+
+-- PENSION
+insert #tmpNomina
+select a.empresa, a.año, a.mes, d.periodo,
+a.codtercero , a.codigo, null, null, a.contrato,
+null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina,  e.ccosto  cccostoNomina,
+e.departamento,
+@tipoNovedadNomina,@conceptoPension concepto,
+null novedadAgronimica,  b.signo ,
+convert(int,round(aa.IBCpension* isnull( h.pEmpleador,0)/100,0)) valorPension,
+null, case when  len(ltrim(rtrim(isnull(a.entidadPension,'')))) = 0 then i.nit else a.entidadPension end entidadPension,null,null,null,null,null,
+null entidadFondoS,
+null entidadAdicional,null,null,0,null,--baseCesantias bit,
+null,--basePrimas bit ,
+null,--baseIntereses bit,
+null,--baseVacaciones bit,
+null,--baseEmbargos bit,
+null,--baseCajaCompensacion bit,
+null,--baseSeguridadSocial bit
+null,null,
+null,null,null
+from nSeguridadSocialPila aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
+z.mes mes, 
+null entidadEps,
+z.entidadPension,
+null entidadArp,
+null entidadCaja,
+null entidadSena,
+null entidadCesantias, z.empresa
+ from vLiquidacionDefinitivaReal z ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
+ and a.año=aa.año and aa.mes=a.mes
+ join nConcepto b on @conceptoPension =b.codigo and a.empresa=b.empresa
+ join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
+ join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
+ join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
+ join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
+ left join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
+ left join vEntidadPension h on h.codigo=a.entidadPension and h.empresa=aa.empresa
+ left join cTercero i on aa.terceroPension =i.id and aa.empresa=i.empresa
+where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorPension>0 --and aa.idTercero='69'
+-- ARP
+insert #tmpNomina
+select a.empresa, a.año, a.mes, d.periodo,
+a.codtercero , a.codigo, null, null, a.contrato,
+null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
+e.departamento,
+@tipoNovedadNomina,@conceptoARP,
+null novedadAgronimica, b.signo,
+aa.valorArl,
+null,null,a.entidadArp entidadArp,null,null,null,null,
+null entidadFondoS,
+null entidadAdicional,null,null,0,null,--baseCesantias bit,
+null,--basePrimas bit ,
+null,--baseIntereses bit,
+null,--baseVacaciones bit,
+null,--baseEmbargos bit,
+null,--baseCajaCompensacion bit,
+null,--baseSeguridadSocial bit
+null,null,
+null,null,null
+from nSeguridadSocialPila aa join  (select distinct z.codtercero codtercero, z.codigo, (select max(id) from ncontratos where empresa=@empresa and tercero= z.codTercero ) contrato,z.año,
+z.mes,
+null entidadEps,
+null entidadPension,
+z.entidadArp,
+null entidadCaja,
+null entidadSena,
+null entidadCesantias, z.empresa
+ from vLiquidacionDefinitivaReal z ) a on aa.idTercero=a.codtercero and aa.empresa=a.empresa
+ and a.año=aa.año and aa.mes=a.mes
+ join nConcepto b on @conceptoARP=b.codigo and a.empresa=b.empresa
+ join cTercero c on c.id = a.codtercero and c.empresa = b.empresa
+ join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
+ join nContratos e on e.tercero=a.codtercero and a.empresa=e.empresa and a.contrato=e.id
+ join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
+ join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa and g.activo=1
+ join cTercero h on h.id=aa.terceroArl and h.empresa=aa.empresa
+where aa.año=@año and aa.mes=@periodo and aa.empresa=@empresa and aa.valorArl>0
+-- CAJA
+insert #tmpNomina
+select a.empresa, a.año, a.mes, d.periodo,
+a.codtercero , a.codigo, null, null, a.contrato,
+null, f.codigo claseContrato, g.manejaLC, g.manejaHE, g.mayor mccostoNomina, g.codigo cccostoNomina,
+e.departamento,
+@tipoNovedadNomina,@conceptoCaja,
+null novedadAgronimica, b.signo,
+aa.valorCaja,
+null,null,null,case when  len(ltrim(rtrim(isnull(a.entidadCaja,'')))) = 0 then h.nit else a.entidadCaja end  caja,null,null,null,
 null entidadFondoS,
 null entidadAdicional,null,null,0,null,--baseCesantias bit,
 null,--basePrimas bit ,
@@ -2494,8 +2498,10 @@ begin
 	   @usuario
 FROM   #tmpPagoNomina a 
        LEFT JOIN cparametrocontanomi b 
-              ON a.Concepto = b.concepto 
-                 AND a.tiponovedad = 'N' 
+              ON 
+			  --a.Concepto = b.concepto 
+                 --AND 
+				 a.tiponovedad = 'N' 
                  AND a.empresa = b.empresa 
                  AND b.clase = @clase 
                  AND a.mccostoNomina = b.cCostoMayor 
@@ -2574,8 +2580,10 @@ FROM   #tmpPagoNomina a
 	   @usuario
 FROM   #tmpPagoNomina a 
        LEFT JOIN cparametrocontanomi b 
-              ON a.Concepto = b.concepto 
-                 AND a.tiponovedad = 'N' 
+              ON 
+			  --a.Concepto = b.concepto 
+                 --AND
+				  a.tiponovedad = 'N' 
                  AND a.empresa = b.empresa 
                  AND b.clase = @clase 
                  AND a.mccostoNomina = b.cCostoMayor 

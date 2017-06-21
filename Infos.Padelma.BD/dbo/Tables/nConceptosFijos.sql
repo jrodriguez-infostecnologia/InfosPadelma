@@ -25,6 +25,10 @@
     [lDomingoCero]      BIT            NULL,
     [mDomingo]          BIT            NULL,
     [lSindicato]        BIT            NULL,
+    [lDomingoPromedio]  BIT            NULL,
+    [lFestivoPromedio]  BIT            NULL,
     CONSTRAINT [PK_nConceptosFijos] PRIMARY KEY CLUSTERED ([empresa] ASC, [centroCosto] ASC, [año] ASC, [mes] ASC, [noPeriodo] ASC)
 );
+
+
 

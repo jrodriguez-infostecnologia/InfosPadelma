@@ -13,6 +13,6 @@ select a.empresa,a.mayor,c.descripcion nombreMayor, a.codCCosto codigoCentroCost
  from vSeleccionaLiquidacionDefinitiva a
 join cCentrosCosto c on c.codigo=a.mayor and c.empresa=a.empresa
 join nConcepto d on d.codigo=a.codconcepto and d.empresa=a.empresa
-where a.empresa=@empresa and a.mes=@mes and a.año=@año  and a.anulado=0
+where a.empresa=@empresa and a.mes=@mes and a.año=@año  and a.anulado=0 and a.tipo='LQN'
 group by a.empresa,a.mayor,c.descripcion, a.codCCosto,a.nombreCcosto,a.codconcepto,a.mes,
  d.descripcion ,a.signo, a.fecha, a.fechaInicial, a.fechaFinal, a.año, a.mes

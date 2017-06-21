@@ -8,7 +8,7 @@
     [mes]        INT          NOT NULL,
     [fecha]      DATE         NOT NULL,
     [fechaFinal] DATE         NOT NULL,
-    [item]       VARCHAR (50) NOT NULL,
+    [item]       INT          NOT NULL,
     [uMedida]    VARCHAR (50) NOT NULL,
     [novedad]    VARCHAR (50) NULL,
     [cantidad]   FLOAT (53)   NOT NULL,
@@ -18,6 +18,10 @@
     [noPalmas]   FLOAT (53)   NOT NULL,
     [dosis]      FLOAT (53)   NOT NULL,
     [registror]  INT          NOT NULL,
-    CONSTRAINT [PK_aTransaccionItem] PRIMARY KEY CLUSTERED ([tipo] ASC, [numero] ASC, [registro] ASC, [lote] ASC)
+    CONSTRAINT [PK_aTransaccionItem] PRIMARY KEY CLUSTERED ([empresa] ASC, [tipo] ASC, [numero] ASC, [registro] ASC, [lote] ASC),
+    CONSTRAINT [FK_aTransaccionItem_gEmpresa] FOREIGN KEY ([empresa]) REFERENCES [dbo].[gEmpresa] ([id]),
+    CONSTRAINT [FK_aTransaccionItem_iItems] FOREIGN KEY ([empresa], [item]) REFERENCES [dbo].[iItems] ([empresa], [codigo])
 );
+
+
 

@@ -1,6 +1,6 @@
 ﻿CREATE VIEW dbo.vContabilizacion
 AS
-SELECT        a.empresa, a.tipo, a.año, a.mes, a.periodoContable, a.registro, a.codigoEmpleado, a.identificacionEmpleado, b.descripcion AS desEmpleado, a.tipoNomina, a.docNomina, a.contrato AS noContrato, 
+SELECT        a.empresa, aa.tipoLiquidacion, a.año, a.mes, a.periodoContable, a.registro, a.codigoEmpleado, a.identificacionEmpleado, b.descripcion AS desEmpleado, a.tipoNomina, a.docNomina, a.contrato AS noContrato, 
                          a.claseContrato, d.descripcion, d.electivaProduccion AS sena, a.periodoNomina, 'Periodo del: ' + CONVERT(varchar(50), c.fechaInicial, 112) + ' Hasta: ' + CONVERT(varchar(50), c.fechaFinal, 112) AS desPeriodo, 
                          a.manejaLabCam, a.manejaHE, a.mCcostoNomina, e.descripcion AS desmCcostoNomina, a.aCcostoNomina, f.descripcion AS desaCcostoNomina, a.departamento, g.descripcion AS desDepartamento, 
                          a.codigoConcepto, h.descripcion AS desConcepto, a.codigoLabor, i.descripcion AS desLabor, a.cuentaContable, j.nombre AS desCuentaContable, a.mCcostoContable, k.descripcion AS desmCCostoContable, 

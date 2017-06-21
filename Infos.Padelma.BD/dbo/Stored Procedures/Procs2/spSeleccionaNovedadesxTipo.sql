@@ -12,7 +12,9 @@ begin
 		join aTipoNovedad b on b.tipo=a.codigo and a.empresa=b.empresa and a.activo=1
 		join aNovedad c on c.grupo=b.novedad and c.empresa=b.empresa and c.activo=1
 		where a.codigo=@tipo
+		order by c.descripcion
 end
 else
 	select codigo, codigo+ ' - ' +descripcion descripcion, claseLabor, empresa from aNovedad
 	where empresa=@empresa
+	order by descripcion

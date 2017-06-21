@@ -598,7 +598,7 @@ declare cursorTercero insensitive cursor for
 
 			set @IBC = @IBC --+ isnull(@valorVacaciones,0) + isnull(@valorIncapacidad,0)
 			set @diasSLN = @diasSLN +  isnull((select sum(cantidad) from vSeleccionaLiquidacionDefinitiva where empresa=@empresa and año=@año and mes=@mes and codtercero=@tercero and codconcepto=@pierdeDomingo and anulado=0),0)
-			set @diasTotalAusentismo = @diasTotalAusentismo +  isnull((select sum(cantidad) from vSeleccionaLiquidacionDefinitiva where empresa=@empresa and año=@año and mes=@mes and codtercero=@tercero and codconcepto=@pierdeDomingo),0)
+			set @diasTotalAusentismo = @diasTotalAusentismo +  isnull((select sum(cantidad) from vSeleccionaLiquidacionDefinitiva where empresa=@empresa and año=@año and mes=@mes and codtercero=@tercero and codconcepto=@pierdeDomingo and anulado=0),0)
 			
 			if (@diasIncapacidad >30)
 				set @diasIncapacidad=30
@@ -697,6 +697,7 @@ declare cursorTercero insensitive cursor for
 						from vSeleccionaLiquidacionDefinitiva a
 						join cTercero b on b.id=a.codTercero and b.empresa=a.empresa
 						where a.empresa=@empresa and año=@año and mes=@mes and codtercero=@tercero and codconcepto=@pierdeDomingo
+						and a.anulado=0
 						set @fila=@fila+@diasSLN+1
 			end
 		if @diasSalud>0

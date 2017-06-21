@@ -45,7 +45,7 @@ from cPeriodo where año=@año and mes=@mes and empresa=@empresa
 select @conceptoVacaciones=vacaciones,@conceptoIncapacidad= incapacidades from nParametrosGeneral where empresa=@empresa
 
 declare cursorTercero insensitive cursor for	
-		select distinct  isnull(codTercero,a.idtercero), isnull((select max(salario) from nContratos where empresa=@empresa and tercero=  isnull(codTercero,a.idtercero)) , '') , tipoContizante, subTipoCotizante,salud,pension,arp,fondoSolidaridad,caja,sena,icbf,electivaProduccion,porcentajeSS from nSeguridadSocial a left join
+		select distinct  isnull(codTercero,a.idtercero), isnull((select max(salario) from nContratos where empresa=@empresa and tercero=  isnull(codTercero,a.idtercero)) , '') , tipoContizante, a.subTipoCotizante,salud,pension,arp,fondoSolidaridad,caja,sena,icbf,electivaProduccion,porcentajeSS from nSeguridadSocialPila a left join
 		vSeleccionaLiquidacionDefinitiva b on a.idTercero=b.codTercero and a.empresa=b.empresa
 		where a.empresa=@empresa and a.año=@año and a.mes=@mes and anulado=0
 		--and tercero =237
@@ -213,6 +213,9 @@ declare @SlnSalud float
 
 
  -- seguridad social
+ if exists (select * from nSeguridadSocialPila where empresa=@empresa and año=@año and mes=@mes)
+ begin
+
 insert #tmpSeguridadSocialNomina
 select distinct
 a.idTercero ,	   --idTercero varchar(50),
@@ -222,7 +225,7 @@ c.razonSocial,     --nombreTercero varchar(50),
 (select top 1 descripcion from nConcepto z where z.codigo=@conceptoSalud and z.empresa=@empresa),	   --nombreConcepto varchar(250),
 a.IBCsalud IBCsalud ,
 0,				   --valorNominaTrabajador float, 
-a.valorSalud  valorSeguridadSocial,		   --valorSeguridadSocial float,
+Sum(a.valorSalud)  valorSeguridadSocial,		   --valorSeguridadSocial float,
 0,		   --valorSeguridadSocialSena float,
 0 ,  --valorSeguridadSocialxEmpleador float
 0,
@@ -236,16 +239,20 @@ where codigoConcepto=@conceptoSalud and aa.año=@año and aa.mes=@mes  and aa.em
 and e.nit=bb.terceroContable
 )
 -- from
-from nSeguridadSocial a
+from nSeguridadSocialPila a
  join cTercero c on c.id = a.idTercero and c.empresa = a.empresa
  join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
  join cTercero e on a.terceroSalud=e.id and e.empresa=a.empresa
 where a.año=@año and a.mes=@mes  and a.empresa=@empresa and SLN<>'X'and a.valorSalud>0
+group by idTercero, c.codigo, c.razonSocial, a.IBCsalud, e.codigo, e.razonSocial, c.nit, e.nit
+end
 
+ if exists (select * from nSeguridadSocialPila where empresa=@empresa and año=@año and mes=@mes)
+ begin
 
 update #tmpSeguridadSocialNomina
 set sln = a.IBCsalud
-from  #tmpSeguridadSocialNomina aa join   nSeguridadSocial a on a.idTercero = aa.idTercero
+from  #tmpSeguridadSocialNomina aa join   nSeguridadSocialPila a on a.idTercero = aa.idTercero
 and aa.concepto=@conceptoSalud 
 join vEntidadEps b on a.terceroSalud = b.tercero and a.empresa=b.empresa
 join nConcepto c on c.codigo=@conceptoSalud and c.empresa=a.empresa
@@ -253,7 +260,10 @@ join cTercero d on a.idTercero=d.id and a.empresa=d.empresa
 join nContratos g on g.tercero=a.idTercero and g.empresa=c.empresa and g.id= (select max(id) from nContratos zz where g.tercero=zz.tercero and c.empresa=zz.empresa and zz.activo=1)
 join nClaseContrato h on g.claseContrato=h.codigo and g.empresa=h.empresa
 where año=@año and mes=@mes  and a.empresa=@empresa and a.SLN='X'
+end 
 
+ if exists (select * from nSeguridadSocialPila where empresa=@empresa and año=@año and mes=@mes)
+ begin
  -- seguridad social
 insert #tmpSeguridadSocialNomina
 select distinct
@@ -274,19 +284,23 @@ e.razonSocial,
 '',
 (select   sum(credito)  from cContabilizacion aa join cContabilizacionDetalle bb
 on aa.numero=bb.numero and aa.tipo=bb.tipo and aa.empresa=bb.empresa
-where codigoConcepto in(@conceptoPension,@conceptoFondoSolidaridad) and aa.año=@año and aa.mes=@mes  and aa.empresa=@empresa and bb.codigoEmpleado=a.idTercero and aa.anulado=0
+where codigoConcepto in(@conceptoPension,@conceptoFondoSolidaridad)
+ and aa.año=@año and aa.mes=@mes  and aa.empresa=@empresa and bb.codigoEmpleado=a.idTercero and aa.anulado=0
 and bb.terceroContable=e.codigo and bb.empresa=e.empresa)
 -- from
-from nSeguridadSocial a
+from nSeguridadSocialPila a
  join cTercero c on c.id = a.idTercero and c.empresa = a.empresa
  join cperiodo d on d.año=a.año and d.mes=a.mes and d.empresa=a.empresa
  join cTercero e on a.terceroPension=e.id and e.empresa=a.empresa
 where a.año=@año and a.mes=@mes  and a.empresa=@empresa and SLN<>'X'and a.valorPension>0
+end
 
 
+ if exists (select * from nSeguridadSocialPila where empresa=@empresa and año=@año and mes=@mes)
+ begin
 update #tmpSeguridadSocialNomina
 set sln = a.IBCpension
-from  #tmpSeguridadSocialNomina aa join   nSeguridadSocial a on a.idTercero = aa.idTercero
+from  #tmpSeguridadSocialNomina aa join   nSeguridadSocialPila a on a.idTercero = aa.idTercero
 and aa.concepto=@conceptoPension 
 join vEntidadEps b on a.terceroSalud = b.tercero and a.empresa=b.empresa
 join nConcepto c on c.codigo=@conceptoSalud and c.empresa=a.empresa
@@ -294,6 +308,8 @@ join cTercero d on a.idTercero=d.id and a.empresa=d.empresa
 join nContratos g on g.tercero=a.idTercero and g.empresa=c.empresa and g.id= (select max(id) from nContratos zz where g.tercero=zz.tercero and c.empresa=zz.empresa)
 join nClaseContrato h on g.claseContrato=h.codigo and g.empresa=h.empresa
 where año=@año and mes=@mes  and a.empresa=@empresa and a.SLN='X'
+end
+
 
 
 declare @tipoTraNomina varchar(50) = 'LQN'
@@ -319,7 +335,7 @@ identificacion 	,
 nombreTercero	,
 concepto	,
 nombreConcepto	,
-a.ibc ibcSS,
+Sum(a.ibc) ibcSS,
 b.ibc ibc,
 b.vacaciones,
 b.vacacionesComp,
@@ -328,7 +344,7 @@ sum(valorSeguridadSocialNomina) dNomina	,
 sum(valorSeguridadSocial) pSeguridadSocial	,
 empleadoSena	pSena,
 sum(valorSeguridadSocialxEmpleador) pEmpleador,
-sum(a.valorContabilizado) vContabilizado,
+avg(a.valorContabilizado) vContabilizado,
 sln,
 idFondo,
 descripcionFondo,
@@ -341,19 +357,17 @@ identificacion	,
 nombreTercero	,
 concepto	,
 nombreConcepto	,
-a.ibc,
-b.ibc ,
 b.vacaciones,
 b.vacacionesComp,
 b.incapacidad,
-valorSeguridadSocialNomina	,
 a.idTercero,
 sln,
 idFondo,
 descripcionFondo,
 codCentroCosto,
 CentroCosto,
-empleadoSena
+empleadoSena,
+b.ibc
 order by nombreTercero, nombreConcepto
 
 

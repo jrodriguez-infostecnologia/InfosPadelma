@@ -1,0 +1,1 @@
+﻿CREATE PROCEDURE SpGetlogProgramacionVehiculoEstadokey @empresa int,@registro varchar(50) AS  select * from logProgramacionVehiculoEstado where empresa = @empresa and registro = @registro
