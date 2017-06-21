@@ -98,7 +98,7 @@ public partial class Nomina_Paminidtracion_FondoPension : System.Web.UI.Page
         try
         {
             DataView dvterceros = CentidadMetodos.EntidadGet("cTercero", "ppa").Tables[0].DefaultView;
-            dvterceros.RowFilter = "empresa = " + Convert.ToInt32(this.Session["empresa"]).ToString() + " and activo=1 and proveedor=1";
+            dvterceros.RowFilter = "empresa = " + Convert.ToInt32(this.Session["empresa"]).ToString() +"and proveedor = 1 and  activo=1";
             dvterceros.Sort = "descripcion";
             this.ddlTercero.DataSource = dvterceros;
             this.ddlTercero.DataValueField = "id";

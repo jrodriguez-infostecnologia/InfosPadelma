@@ -61,15 +61,15 @@ public partial class Bascula_Pinformes_Visualizacion : System.Web.UI.Page
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
             case "liqui02":
-               script = "<script language='javascript'> Visualizacion('RegistroNovedades');</script>";
+                script = "<script language='javascript'> Visualizacion('RegistroNovedades');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
             case "liqui45":
-               script = "<script language='javascript'> Visualizacion('NovedadDetalle');</script>";
+                script = "<script language='javascript'> Visualizacion('NovedadDetalle');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
-	   case "liqui46":
-               script = "<script language='javascript'> Visualizacion('FormatoIR');</script>";
+            case "liqui46":
+                script = "<script language='javascript'> Visualizacion('FormatoIR');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
             case "liqui03":
@@ -179,8 +179,18 @@ public partial class Bascula_Pinformes_Visualizacion : System.Web.UI.Page
                 script = "<script language='javascript'> Visualizacion('InformeSeguridadSocialNomina');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
-	  case "liqui450":
+            case "liqui450":
                 script = "<script language='javascript'> Visualizacion('PreLiquidacionPrimasConcepto');</script>";
+                Page.RegisterStartupScript("Visualizacion", script);
+                break;
+
+            case "liqui47":
+                script = "<script language='javascript'> Visualizacion('ResumenPagos');</script>";
+                Page.RegisterStartupScript("Visualizacion", script);
+                break;
+
+            case "liqui48":
+                script = "<script language='javascript'> Visualizacion('DescuentoEntidadSS');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
 
@@ -213,7 +223,7 @@ public partial class Bascula_Pinformes_Visualizacion : System.Web.UI.Page
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
             case "pag01":
-                script = "<script language='javascript'> Visualizacion('Chequebancolombia');</script>";
+                script = "<script language='javascript'> Visualizacion2('Chequebancolombia');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
         }

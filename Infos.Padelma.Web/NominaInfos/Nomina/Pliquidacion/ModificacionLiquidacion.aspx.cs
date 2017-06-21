@@ -148,7 +148,9 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                     item.ValidaPorcentaje = ((HiddenField)dr.FindControl("ValidaPorcentaje")).Value.ToString() == true.ToString();
                     item.Deduccion = ((HiddenField)dr.FindControl("Deduccion")).Value.ToString() == true.ToString();
                     item.Porcentaje = ((HiddenField)dr.FindControl("Porcentaje")).Value.ToString();
-
+					item.ValorUnitario = Math.Round(Convert.ToDouble(item.ValorUnitario)).ToString();
+					item.ValorTotal = Math.Round(Convert.ToDouble(item.ValorTotal)).ToString();
+					item.Cantidad = Math.Round(Convert.ToDouble(item.Cantidad)).ToString();
                     ListadoDetalleLiquidacion.Add(item);
                 }
                 var i = 1;
@@ -446,6 +448,9 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 item.BaseSeguridadSocial = !(dr["baseSeguridadSocial"] is bool) ? false : (bool)dr["baseSeguridadSocial"];
                 item.ValidaPorcentaje = !(dr["validaPorcentaje"] is bool) ? false : (bool)dr["validaPorcentaje"];
                 item.Deduccion = !(dr["signo"] is int) ? false : ((int)dr["signo"] == 2);
+				item.ValorUnitario = Math.Round(Convert.ToDouble(item.ValorUnitario)).ToString();
+				item.ValorTotal = Math.Round(Convert.ToDouble(item.ValorTotal)).ToString();
+				item.Cantidad = Math.Round(Convert.ToDouble(item.Cantidad)).ToString();
                 ListadoDetalleLiquidacion.Add(item);
             }
             var i = 1;
