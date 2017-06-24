@@ -1,5 +1,8 @@
+packages
+*.suo
 *.dbmdl
 *.jfm
-bin
-*.sqlproj.user
-/packages
+obj
+.vs
+*.user
+/Infos.Aceites.DB/bin

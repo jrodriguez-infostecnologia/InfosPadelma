@@ -1,8 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ImprimeTrans.aspx.cs" Inherits="Bascula_Pinformes_ImprimeTrans" %>
 
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
-
-    <%@ Register assembly="printButtonDLL" namespace="printButtonDLL" tagprefix="cc1" %>
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
      
 <!DOCTYPE html>
 

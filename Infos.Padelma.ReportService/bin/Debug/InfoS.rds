@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="InfoS">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Database=GrupoDavila;Server=127.0.0.1,1444;Integrated Security=FALSE</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>ae98ef11-18e9-4411-937d-927149bbd1c0</DataSourceID>
+</RptDataSource>

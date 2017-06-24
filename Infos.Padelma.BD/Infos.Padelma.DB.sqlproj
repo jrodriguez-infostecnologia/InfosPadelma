@@ -1845,5 +1845,9 @@
     <Build Include="dbo\Stored Procedures\SpActualizaaLabor.sql" />
     <Build Include="dbo\Stored Procedures\SpActualizaaGrupoLabor.sql" />
     <Build Include="dbo\Stored Procedures\spLiquidacionNominaPeriodo.sql" />
+    <Build Include="dbo\Stored Procedures\SpSeleccionapTransaccionDetalle.sql" />
+    <Build Include="dbo\Stored Procedures\spSeleccionaInformeTiquetesAgronomico.sql" />
+    <Build Include="dbo\Stored Procedures\spLiquidaConceptosBasicosVacaciones.sql" />
+    <Build Include="dbo\Stored Procedures\SpGetgTipoTransaccionProducto.sql" />
   </ItemGroup>
 </Project>
