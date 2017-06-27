@@ -374,6 +374,25 @@ public partial class Bascula_Pinformes_ImprimeInforme : System.Web.UI.Page
                         this.rvImprimir.ServerReport.SetParameters(new ReportParameter[] { rpEmpresa });
                         break;
 
+                    case "ResumenPagos":
+                        this.rvImprimir.ServerReport.ReportPath = ConfigurationManager.AppSettings["UrlInformes"].ToString() + this.Request.QueryString["informe"].ToString();
+                        this.rvImprimir.ServerReport.Refresh();
+                        this.rvImprimir.ServerReport.ReportServerUrl = url;
+                        SetParametrosReportes();
+                        this.rvImprimir.ServerReport.SetParameters(new ReportParameter[] { rpEmpresa });
+                        break;
+
+
+                    case "DescuentoEntidadSS":
+
+                        this.rvImprimir.ServerReport.ReportPath = ConfigurationManager.AppSettings["UrlInformes"].ToString() + this.Request.QueryString["informe"].ToString();
+                        this.rvImprimir.ServerReport.Refresh();
+                        this.rvImprimir.ServerReport.ReportServerUrl = url;
+                        SetParametrosReportes();
+                        this.rvImprimir.ServerReport.SetParameters(new ReportParameter[] { rpEmpresa });
+                        break;
+         
+
                         
 
                 }

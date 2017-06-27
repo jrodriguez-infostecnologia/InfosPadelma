@@ -146,6 +146,8 @@
                         <asp:CheckBox ID="chkLDomingoCero" runat="server" Text="Liquida Domingos y Festivos en Cero(0)" Visible="False" />
                         <br />
                         <asp:CheckBox ID="chkMuestraDomingo" runat="server" Text="Muestra Domingo" Visible="False" />
+                        <asp:CheckBox ID="chkDomingoPromedio" runat="server" Text="Promedia Domingo" Visible="False" />
+                        <asp:CheckBox ID="chkFestivoPromedio" runat="server" Text="Promedia Festivo" Visible="False" />
                     </td>
                     <td class="bordes"></td>
                 </tr>
@@ -274,6 +276,12 @@
                             <ItemStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
                             </asp:CheckBoxField>
                             <asp:CheckBoxField DataField="lSindicato" HeaderText="lSin">
+                            <ItemStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                            </asp:CheckBoxField>
+                            <asp:CheckBoxField DataField="lDomingoPromedio" HeaderText="LDP">
+                            <ItemStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                            </asp:CheckBoxField>
+                            <asp:CheckBoxField DataField="lFestivoPromedio" HeaderText="LFP">
                             <ItemStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
                             </asp:CheckBoxField>
                         </Columns>
