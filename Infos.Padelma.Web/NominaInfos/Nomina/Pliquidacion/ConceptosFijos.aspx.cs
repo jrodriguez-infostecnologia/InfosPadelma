@@ -200,8 +200,10 @@ public partial class Agronomico_Padministracion_ConceptosFijos : System.Web.UI.P
                 chkLausentismo.Checked,
                 chkLDomingos.Checked,
                 chkLDomingoCero.Checked,
+                chkDomingoPromedio.Checked,
                 chkLembargos.Checked,
                 chkLFestivos.Checked,
+                chkFestivoPromedio.Checked,
                 chkLFondavi.Checked,
                 chkLhoras.Checked,
                 false,
@@ -651,6 +653,21 @@ public partial class Agronomico_Padministracion_ConceptosFijos : System.Web.UI.P
                     this.chkLiquidaSindicato.Checked = ((CheckBox)objControl).Checked;
             }
 
+            foreach (Control objControl in this.gvLista.SelectedRow.Cells[25].Controls)
+            {
+                if (objControl is CheckBox)
+                    this.chkLiquidaSindicato.Checked = ((CheckBox)objControl).Checked;
+            }
+            foreach (Control objControl in this.gvLista.SelectedRow.Cells[26].Controls)
+            {
+                if (objControl is CheckBox)
+                    this.chkDomingoPromedio.Checked = ((CheckBox)objControl).Checked;
+            }
+            foreach (Control objControl in this.gvLista.SelectedRow.Cells[27].Controls)
+            {
+                if (objControl is CheckBox)
+                    this.chkFestivoPromedio.Checked = ((CheckBox)objControl).Checked;
+            }
         }
         catch (Exception ex)
         {

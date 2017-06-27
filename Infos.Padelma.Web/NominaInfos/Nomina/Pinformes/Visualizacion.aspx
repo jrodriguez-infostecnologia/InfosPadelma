@@ -20,6 +20,12 @@
             x.focus();
         }
 
+        function Visualizacion2(informe) {
+            var opciones = "toolbar = no, location = no, directories = no, status = no, menubar = no, scrollbars = yes, resizable = yes, width =" + screen.availWidth + ", height =" + screen.availHeight + ", top = 0, left = 5";
+            sTransaccion = "ImprimeInformeCR.aspx";
+            x = window.open(sTransaccion, "", opciones);
+            x.focus();
+        }
     </script>
 
 </head>
@@ -85,6 +91,8 @@
                                     <asp:TreeNode Text="Formato Ingreso y Retenciones - Formato 2276" Value="liqui46"></asp:TreeNode>
                                    <asp:TreeNode Text="Detalle Novedades" Value="liqui45"></asp:TreeNode>
                                    <asp:TreeNode Text="Conceptos Acumulado Primas" Value="liqui450"></asp:TreeNode>
+                                    <asp:TreeNode Text="Resumen de pagos" Value="liqui47"></asp:TreeNode>
+                                    <asp:TreeNode Text="Descuentos por entidad SS" Value="liqui48"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="Seguridad Social" Value="Seguridad Social">
                                     <asp:TreeNode Text="Relación Devengado Trabajador" Value="liqui18"></asp:TreeNode>

@@ -22,7 +22,7 @@
                         total -= parseFloat(val);
                 }
             });
-            $("#txtTotal").val(total);
+            $("#txtTotal").val(total.toFixed(0));
         }
         function recalcularPorcentajes() {
             $("#gvDetalleLiquidacion tr input[type=checkbox]#chkValidaPorcentaje:checked").each(function () {
@@ -41,7 +41,7 @@
                 if (!isNaN(porcentaje) && !isNaN(totalBaseSeguridadSocial)) {
                     result = totalBaseSeguridadSocial * porcentaje / 100;
                 }
-                $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal").val(totalBaseSeguridadSocial * porcentaje / 100);
+                $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal").val(result.toFixed(0));
                 $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal, input[type=text]#txvCantidad").trigger('updateValues');
 
             });
@@ -91,7 +91,7 @@
                 return;
             }
             var total = $cantidad * $valor_unitario;
-            $total.val(total.toFixed(2));
+            $total.val(total.toFixed(0));
             recalcularPorcentajes();
             recalcularTotal();
             $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal, input[type=text]#txvCantidad").trigger('updateValues');
