@@ -63,6 +63,7 @@
 @noSMLVSenaICBF int,
 @promedioFestivo bit,
 @paga31 bit,@LQN varchar(50),@LQC varchar(50),@ACU varchar(50),
+@aporteParafiscalesING bit,
 @Retorno int output  
 AS begin tran nParametrosGeneral 
 update nParametrosGeneral 
@@ -132,7 +133,8 @@ promedioFestivo=@promedioFestivo,
 paga31=@paga31,
 LQN=@LQN,
 LQC=@LQC,
-ACU=@ACU
+ACU=@ACU,
+aporteParafiscalesING=@aporteParafiscalesING
 where empresa = @empresa
 if (@@error = 0 ) begin set @Retorno = 0 commit tran nParametrosGeneral end
  else begin set @Retorno = 1 rollback tran nParametrosGeneral end

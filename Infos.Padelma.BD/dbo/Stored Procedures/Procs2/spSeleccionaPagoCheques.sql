@@ -16,4 +16,4 @@ convert(varchar(50), tercero) tercero  from [dbo].[vSeleccionaPagosNomina]
 where empresa=@empresa and noPeriodo=@periodo and numero=@numero
 and noCheque<>'' and noCheque>0
 and año=@año and anulado=0
-order by  [vSeleccionaPagosNomina].tercero
+order by  [vSeleccionaPagosNomina].tercero --desc

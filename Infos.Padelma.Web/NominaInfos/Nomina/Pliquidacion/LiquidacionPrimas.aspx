@@ -225,12 +225,19 @@
             </table>
             <div>
                 <div style="display: inline-block">
-                    <asp:GridView ID="gvLista" runat="server" Width="900px" GridLines="None" CssClass="Grid" OnRowDeleting="gvLista_RowDeleting" AutoGenerateColumns="False" AllowPaging="True" PageSize="20" OnPageIndexChanging="gvLista_PageIndexChanging">
+                    <asp:GridView ID="gvLista" runat="server" Width="900px" GridLines="None" CssClass="Grid" OnRowDeleting="gvLista_RowDeleting" AutoGenerateColumns="False" AllowPaging="True" PageSize="20" OnPageIndexChanging="gvLista_PageIndexChanging" OnRowEditing="gvLista_RowEditing">
                         <AlternatingRowStyle CssClass="alt" />
                         <Columns>
                             <asp:TemplateField HeaderText="Anul">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="imElimina" runat="server" CommandName="Delete" ImageUrl="~/Imagen/TabsIcon/cancel.png" OnClientClick="if(!confirm('Desea eliminar el registro ?')){return false;};" ToolTip="Elimina el registro seleccionado" />
+                                </ItemTemplate>
+                                <HeaderStyle BackColor="White" />
+                                <ItemStyle Width="20px" CssClass="Items" HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Edit">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="imElimina" runat="server" CommandName="Edit" ImageUrl="~/Imagen/TabsIcon/pencil.png" ToolTip="Edita el registro seleccionado" />
                                 </ItemTemplate>
                                 <HeaderStyle BackColor="White" />
                                 <ItemStyle Width="20px" CssClass="Items" HorizontalAlign="Center" />

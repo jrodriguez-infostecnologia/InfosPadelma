@@ -21,11 +21,14 @@
     [contrato]        INT             NULL,
     [periodo]         INT             NULL,
     [contratista]     BIT             NULL,
+    [proveedor]       VARCHAR (50)    NULL,
     CONSTRAINT [PK_aTransaccionTercero_1] PRIMARY KEY CLUSTERED ([empresa] ASC, [tipo] ASC, [numero] ASC, [novedad] ASC, [registro] ASC, [registroNovedad] ASC),
     CONSTRAINT [FK_aTransaccionTercero_aLotes] FOREIGN KEY ([empresa], [lote]) REFERENCES [dbo].[aLotes] ([empresa], [codigo]),
     CONSTRAINT [FK_aTransaccionTercero_aTransaccion] FOREIGN KEY ([empresa], [tipo], [numero]) REFERENCES [dbo].[aTransaccion] ([empresa], [tipo], [numero]),
     CONSTRAINT [FK_aTransaccionTercero_gEmpresa] FOREIGN KEY ([empresa]) REFERENCES [dbo].[gEmpresa] ([id])
 );
+
+
 
 
 GO

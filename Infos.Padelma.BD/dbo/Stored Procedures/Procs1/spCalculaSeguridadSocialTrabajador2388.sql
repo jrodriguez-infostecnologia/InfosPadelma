@@ -23,13 +23,13 @@ declare @tercero int,@salario int, @SMLV int,@SMLVD int,
 @pierdeDomingo varchar(50), @valorVacacionesCompensada float=0,@contrato int,
 @fechaIngreso date,@fechaRetiro date,@fiSLN date,@ffSLN date,@fiVAC date,@ffVAC date,@fiIGE date,@ffIGE date,@fechaVSP date,@fiLMA date,@ffLMA date,
 @fiVCT date,@ffVCT date,@fiIRL date,@ffIRL date,@salarioIntegral bit,@diasVAC int =0, @IBCvacaciones int,@diasTotalAusentismo int =0,
-@jonadaLaboral int,@sumaPrestacionSocial bit,@conceptoPermiso varchar(50)
+@jonadaLaboral int,@sumaPrestacionSocial bit,@conceptoPermiso varchar(50),@aporteParafiscalesING bit,@IBCcajaVacaciones int=0,@lqc varchar(50),@tipoTran varchar(50)
 
 delete  from nSeguridadSocialPila
 where empresa=@empresa and año=@año and mes=@mes
 
 select @SMLV=vSalarioMinimo from nParametrosAno where empresa=@empresa and ano=@año
-select @noSPF=noSMLVSenaICBF,@jonadaLaboral= jornadaDiaria from nParametrosGeneral where empresa=@empresa
+select @noSPF=noSMLVSenaICBF,@jonadaLaboral= jornadaDiaria, @aporteParafiscalesING=aporteParafiscalesING,@lqc =LQC from nParametrosGeneral where empresa=@empresa
 set @SMLVD=round(@SMLV/30,0)
 
 select @FIPN =fechaInicial, @FFPN= fechaFinal 
@@ -82,20 +82,26 @@ declare cursorTercero insensitive cursor for
     		--Recorre total de ibc pagados
 			
 			declare cursorCaonceptos insensitive cursor for	
-			select codConcepto, cantidad,valorTotal,baseSeguridadSocial,sumaPrestacionSocial from vSeleccionaLiquidacionDefinitiva
+			select codConcepto, cantidad,valorTotal,baseSeguridadSocial,sumaPrestacionSocial,tipo from vSeleccionaLiquidacionDefinitiva
 			where empresa=@empresa and año=@año and mes=@mes and codTercero=@tercero and anulado=0
 			order by codTercero
 			open cursorCaonceptos			
-			fetch cursorCaonceptos into @concepto,@cantidad,@valorTotal,@baseSeguridadSocial,@sumaPrestacionSocial
+			fetch cursorCaonceptos into @concepto,@cantidad,@valorTotal,@baseSeguridadSocial,@sumaPrestacionSocial,@tipoTran
 			while( @@fetch_status = 0 )
 			begin	
 				if  @baseSeguridadSocial=1 and @concepto not in ( @conceptoIncapacidad,@conceptoPermiso,@conceptoVacaciones)
+				begin
 					set @IBC = @IBC + @valorTotal
+					--select @valorTotal, @concepto
+				end
+
+				if  @baseSeguridadSocial=1 and @concepto  in ( @conceptoVacaciones) and @tipoTran=@lqc
+					set @IBCcajaVacaciones = @IBCcajaVacaciones + @valorTotal
 
 				if @sumaPrestacionSocial = 1 and @concepto not in ( @conceptoIncapacidad,@conceptoPermiso,@conceptoVacaciones)
 					set @diasIBC = @diasIBC + @cantidad
 
-			fetch cursorCaonceptos into @concepto,@cantidad,@valorTotal,@baseSeguridadSocial,@sumaPrestacionSocial
+			fetch cursorCaonceptos into @concepto,@cantidad,@valorTotal,@baseSeguridadSocial,@sumaPrestacionSocial,@tipoTran
 			end
 			close cursorCaonceptos
 			deallocate cursorCaonceptos
@@ -125,7 +131,7 @@ declare cursorTercero insensitive cursor for
 				if @IBC < @SMLV*@noSPF
 				select @tarifaSena=0,@tarifaICBF=0
 			 --Recorre Vacaciones del tercero
-		   set @valorVacacionesCompensada = isnull((select sum(valorTotal) from vSeleccionaLiquidacionDefinitiva
+			set @valorVacacionesCompensada = isnull((select sum(valorTotal) from vSeleccionaLiquidacionDefinitiva
 			where empresa=@empresa and año=@año and mes=@mes  and codconcepto=@conceptoVacaciones
 			and codtercero=@tercero and anulado=0 and tipoConcepto=2),0)
 
@@ -193,7 +199,7 @@ declare cursorTercero insensitive cursor for
 						select @IBCcaja=ibc, @valorCaja=CCF from nTablaSmlvRedondeo where año=@año and dia=@diasVAC
 					else
 					begin
-						set @IBCcaja=ROUND(@IBCcaja + @valorVacacionesCompensada,-3)
+						set @IBCcaja=ROUND(@IBCcaja + @valorVacacionesCompensada + @IBCcajaVacaciones,-3)
 						set @valorCaja= CEILING((@IBCcaja*(@tarifaCaja/100))/100.0) * 100
 					end
 					if @basico >= (@SMLV*4)
@@ -356,7 +362,7 @@ declare cursorTercero insensitive cursor for
 						select @IBCcaja=ibc, @valorCaja=CCF from nTablaSmlvRedondeo where año=@año and dia=@diasVAC
 					else
 					begin
-						set @IBCcaja=ROUND(@IBCcaja + @valorVacacionesCompensada,-3)
+						set @IBCcaja=ROUND(@IBCcaja + @valorVacacionesCompensada + @IBCcajaVacaciones,-3)
 						set @valorCaja= CEILING((@IBCcaja*(@tarifaCaja/100))/100.0) * 100
 					end
 					if @basico >= (@SMLV*4)
@@ -391,6 +397,11 @@ declare cursorTercero insensitive cursor for
 					
 					set @diasTotalAusentismo = @diasTotalAusentismo + @diasIncapacidad
 					
+					if @aporteParafiscalesING=0 
+					begin
+						set @valorCaja=0
+						set @tarifaCaja=0
+					end
 					if @afectaTipoNovedad ='IGE'
 					begin
 						set @IGE='X'
@@ -643,7 +654,7 @@ declare cursorTercero insensitive cursor for
 				select @IBCcaja=ibc, @valorCaja=CCF from nTablaSmlvRedondeo where año=@año and dia=@diasCaja
 			else
 			begin
-				set @IBCcaja=ROUND(@IBCcaja + @valorVacacionesCompensada,-3)
+				set @IBCcaja=ROUND(@IBCcaja + @valorVacacionesCompensada + @IBCcajaVacaciones,-3)
 				set @valorCaja= CEILING((@IBCcaja*(@tarifaCaja/100))/100.0) * 100
 			end
 			if @basico >= (@SMLV*4)
@@ -702,6 +713,9 @@ declare cursorTercero insensitive cursor for
 			end
 		if @diasSalud>0
 		begin
+
+	
+
 			insert nSeguridadSocialPila
 			select a.empresa ,@año ,@mes ,@fila registro,a.tercero ,b.codigo ,UPPER(b.apellido1) ,UPPER(b.apellido2),UPPER(b.nombre1),UPPER(b.nombre2),b.departamento,b.ciudad,a.tipoContizante,a.subTipoCotizante,
 			@diasSalud * @jonadaLaboral horasLaboradas,'' extranjero,'' RecidenteExterior,NULL fechaRadExterior, @ING,@fechaIngreso,@RET,@fechaRetiro,'' TDE,'' TAE,''TDP,''TAP,''VSP,NULL fechaVSP,'X' VST,'' SLN,null fiSLN ,null ffSLN,

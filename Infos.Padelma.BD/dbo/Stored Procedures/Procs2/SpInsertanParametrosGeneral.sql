@@ -6,14 +6,17 @@ CREATE PROCEDURE [dbo].[SpInsertanParametrosGeneral] @embargos varchar(50), @fec
 @IVM varchar(50),@subsidioTransporte varchar(50),@retroactivo varchar(50),@retencion varchar(50),@suspenciones varchar(50),@incapacidades varchar(50),@cajaCompensacion varchar(50),@noSMLVSenaICBF int,
 @cesantias varchar(50),@intereses varchar(50),@vacaciones varchar(50),@primas varchar(50),@salarioIntegral varchar(50),@permisos varchar(50),@HF varchar(50),@HRF varchar(50),@ganaDomingo varchar(50),@paga31 bit,
 @pagoFestivo varchar(50),@aprendizSena varchar(50),@pGanaDomingo bit, @HENF varchar(50),@HEDF varchar(50),@sueldo varchar(50),@jornales varchar(50),@salud varchar(50), @pension varchar(50),@diasVacaciones int,
-@LQN varchar(50),@LQC varchar(50),@ACU varchar(50),
+
+@LQN varchar(50),@LQC varchar(50),@ACU varchar(50),@aporteParafiscalesING bit,
 @HRD varchar(50),@HEDD varchar(50),@HEND varchar(50),@fondoEmpleado varchar(50),@sindicato varchar(50), @Retorno int output  AS begin tran nParametrosGeneral 
 insert nParametrosGeneral( fechaUlrimaCesantias,empresa,noSalarioIntegral,jornadaDiaria,horaInicioDiurna,horaInicioNocturna,fechaRegistro,fechaEdicion,tipoJornadaDiaria,HO,HRN,HEN,HED,
 HD,usuarioRegistro,usuarioEdicion,ATEP,fondoSolidaridad,licRemunerado,licNoRemunerado,PrimasExtralegales,anticipoCesantias,sena,ICBF,ARP,indemnizacion,EM,IVM,subsidioTransporte,retroactivo,
 retencion,suspenciones,incapacidades,cajaCompensacion,cesantias,intereses,vacaciones,primas,salarioIntegral,permisos,HF,HRF,HENF,HEDF,sueldo,jornales, salud, pension,embargos, 
-ganaDomingo, pGanaDomingo,HRD,HEDD,HEND,fondoEmpleado,sindicato , diasVacaciones, pagoFestivo,aprendizSena, horaFinalDiurna, horaFinalNocturna,noSMLVSenaICBF,promedioFestivo,paga31,LQN ,LQC ,ACU )
+ganaDomingo, pGanaDomingo,HRD,HEDD,HEND,fondoEmpleado,sindicato , diasVacaciones, pagoFestivo,aprendizSena, horaFinalDiurna, horaFinalNocturna,noSMLVSenaICBF,promedioFestivo,paga31,LQN ,LQC ,ACU,
+aporteParafiscalesING )
  select @fechaUlrimaCesantias,@empresa,@noSalarioIntegral,@jornadaDiaria,@horaInicioDiurna,@horaInicioNocturna,@fechaRegistro,@fechaEdicion,@tipoJornadaDiaria,@HO,@HRN,@HEN,@HED,@HD,@usuarioRegistro,
  @usuarioEdicion,@ATEP,@fondoSolidaridad,@licRemunerado,@licNoRemunerado,@PrimasExtralegales,@anticipoCesantias,@sena,@ICBF,@ARP,@indemnizacion,@EM,@IVM,@subsidioTransporte,@retroactivo,@retencion,
  @suspenciones,@incapacidades,@cajaCompensacion,@cesantias,@intereses,@vacaciones,@primas,@salarioIntegral,@permisos,@HF,@HRF,@HENF,@HEDF,@sueldo,@jornales, @salud, @pension,@embargos, 
- @ganaDomingo,@pGanaDomingo,@HRD,@HEDD,@HEND,@fondoEmpleado,@sindicato,@diasVacaciones,@pagoFestivo,@aprendizSena,@horaFinalDiurna,@horaFinalNocturna,@noSMLVSenaICBF,@promedioFestivo,@paga31,@LQN,@LQC ,@ACU
+ @ganaDomingo,@pGanaDomingo,@HRD,@HEDD,@HEND,@fondoEmpleado,@sindicato,@diasVacaciones,@pagoFestivo,@aprendizSena,@horaFinalDiurna,@horaFinalNocturna,@noSMLVSenaICBF,@promedioFestivo,@paga31,@LQN,@LQC ,@ACU,
+ @aporteParafiscalesING
  if (@@error = 0 ) begin set @Retorno = 0 commit tran nParametrosGeneral end else begin set @Retorno = 1 rollback tran nParametrosGeneral end

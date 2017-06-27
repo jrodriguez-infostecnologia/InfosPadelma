@@ -1849,5 +1849,6 @@
     <Build Include="dbo\Stored Procedures\spSeleccionaInformeTiquetesAgronomico.sql" />
     <Build Include="dbo\Stored Procedures\spLiquidaConceptosBasicosVacaciones.sql" />
     <Build Include="dbo\Stored Procedures\SpGetgTipoTransaccionProducto.sql" />
+    <Build Include="dbo\Stored Procedures\SpSeleccionaDetalleLiquidacionPrima.sql" />
   </ItemGroup>
 </Project>

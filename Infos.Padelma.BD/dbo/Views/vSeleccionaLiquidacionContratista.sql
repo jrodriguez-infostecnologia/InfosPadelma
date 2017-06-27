@@ -13,7 +13,7 @@ FROM            dbo.aTransaccion INNER JOIN
                          dbo.nFuncionario ON dbo.aTransaccion.empresa = dbo.nFuncionario.empresa AND dbo.aTransaccionTercero.tercero = dbo.nFuncionario.tercero INNER JOIN
                          dbo.cTercero ON dbo.aTransaccion.empresa = dbo.cTercero.empresa AND dbo.nFuncionario.proveedor = dbo.cTercero.id LEFT OUTER JOIN
                          dbo.aLotes ON dbo.aTransaccionTercero.empresa = dbo.aLotes.empresa AND dbo.aTransaccionTercero.lote = dbo.aLotes.codigo
-WHERE        (dbo.aTransaccion.anulado = 0) AND (dbo.nFuncionario.contratista = 1)
+WHERE        (dbo.aTransaccion.anulado = 0) AND (dbo.aTransaccionTercero.contratista = 1)
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vSeleccionaLiquidacionContratista';
 
