@@ -237,7 +237,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Edit">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="imElimina" runat="server" CommandName="Edit" ImageUrl="~/Imagen/TabsIcon/pencil.png" ToolTip="Edita el registro seleccionado" />
+                                    <asp:ImageButton ID="imEdit" runat="server" CommandName="Edit" ImageUrl="~/Imagen/TabsIcon/pencil.png" ToolTip="Edita el registro seleccionado" />
                                 </ItemTemplate>
                                 <HeaderStyle BackColor="White" />
                                 <ItemStyle Width="20px" CssClass="Items" HorizontalAlign="Center" />

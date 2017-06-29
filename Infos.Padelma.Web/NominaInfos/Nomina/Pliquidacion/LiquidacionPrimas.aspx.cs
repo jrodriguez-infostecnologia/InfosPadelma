@@ -917,11 +917,11 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 ManejoError("Usuario no autorizado para ejecutar esta operación", "A");
                 return;
             }
+
             var row = gvLista.Rows[e.NewEditIndex];
             string tipo = row.Cells[2].Text;
             string numero = row.Cells[3].Text;
-            Response.Redirect("ModificacionPrimas.aspx?tipo=" + tipo + "&numero=" + numero);
-
+            Response.Redirect("ModificacionPrimas.aspx?tipo=" + tipo + "&numero=" + numero, false);
         }
         catch (Exception ex)
         {
