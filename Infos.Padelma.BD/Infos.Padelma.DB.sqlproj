@@ -65,6 +65,7 @@
     <Folder Include="dbo\Stored Procedures\Procs1\" />
     <Folder Include="dbo\Stored Procedures\Procs2\" />
     <Folder Include="Security\" />
+    <Folder Include="dbo\Types" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\tmpLiquidacionPrimaConcepto.sql" />
@@ -1850,5 +1851,8 @@
     <Build Include="dbo\Stored Procedures\spLiquidaConceptosBasicosVacaciones.sql" />
     <Build Include="dbo\Stored Procedures\SpGetgTipoTransaccionProducto.sql" />
     <Build Include="dbo\Stored Procedures\SpSeleccionaDetalleLiquidacionPrima.sql" />
+    <Build Include="dbo\Stored Procedures\SpActualizaDetalleLiquidacionPrima.sql" />
+    <Build Include="dbo\Types\ActualizaDetalleLiquidacionPrimaType.sql" />
+    <Build Include="dbo\Stored Procedures\SpSeleccionaCabeceraLiquidacionPrima.sql" />
   </ItemGroup>
 </Project>

@@ -22,9 +22,9 @@ AS
 	ON 
 	ter.id = prima_detalle.tercero AND
 	ter.empresa = prima_detalle.empresa
-	INNER JOIN nContratos contratos
-	ON
-	contratos.id = prima_detalle.contrato AND
-	contratos.empresa = prima_detalle.empresa;
+	WHERE 
+	prima_detalle.empresa = @empresa AND
+	prima_detalle.tipo = @tipo AND
+	prima_detalle.numero = @numero;
 		
 RETURN 0

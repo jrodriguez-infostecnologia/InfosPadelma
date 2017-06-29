@@ -16,5 +16,6 @@ AS
 	INNER JOIN @DataTable _source
 	ON _source.empresa = liqPrima.empresa
 	AND _source.tipo = liqPrima.tipo
-	AND _source.numero = liqPrima.numero;
+	AND _source.numero = liqPrima.numero
+	AND _source.tercero = liqPrima.tercero;
 RETURN 0
