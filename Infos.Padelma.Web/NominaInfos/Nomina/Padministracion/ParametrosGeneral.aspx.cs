@@ -104,6 +104,7 @@ public partial class Nomina_Paminidtracion_ParametrosGeneral : System.Web.UI.Pag
                     ddlLiquidacionNomina.SelectedValue = r.Row.ItemArray.GetValue(64).ToString();
                     ddlLiquidacionContrato.SelectedValue = r.Row.ItemArray.GetValue(65).ToString();
                     ddlAcumulado.SelectedValue = r.Row.ItemArray.GetValue(66).ToString();
+                    chkAportesParafiscalesING.Checked = Convert.ToBoolean(r.Row.ItemArray.GetValue(67));
                 }
             }
             else
@@ -1106,6 +1107,7 @@ public partial class Nomina_Paminidtracion_ParametrosGeneral : System.Web.UI.Pag
                 object[] objValoresActualiza = new object[]{
                     ddlAcumulado.SelectedValue,//ACU
                    AnticipoCesantias,      //@anticipoCesantias
+                   chkAportesParafiscalesING.Checked,
                    aprendizSena,
                                 ARP,    //@ARP
                                 ATEP,    //@ATEP

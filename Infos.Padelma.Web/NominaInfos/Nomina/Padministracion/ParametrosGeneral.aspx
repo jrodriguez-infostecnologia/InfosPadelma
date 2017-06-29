@@ -136,6 +136,17 @@
                                                 </td>
                                                 <td style="width: 10px">&nbsp;</td>
                                             </tr>
+                                            <tr>
+                                                <td style="width: 10px">&nbsp;</td>
+                                                <td style="text-align: left" colspan="2">
+                                                    <asp:CheckBox ID="chkAportesParafiscalesING" runat="server" Text="Realiza aportes parafiscales en días de incapacidad" />
+                                                </td>
+                                                <td colspan="2" style="text-align: left">
+                                                    &nbsp;</td>
+                                                <td style="text-align: left;" colspan="2">
+                                                    &nbsp;</td>
+                                                <td style="width: 10px">&nbsp;</td>
+                                            </tr>
                                         </table>
                                     </fieldset>
                                 </div>

@@ -385,9 +385,9 @@ public partial class Seguridad_Pcontrol_Permisos : System.Web.UI.Page
             }
 
             switch (perfiles.EliminaPermisosPerfilSitioMenu(
-                this.gvLista.Rows[e.RowIndex].Cells[2].Text,
-                this.gvLista.Rows[e.RowIndex].Cells[3].Text,
-                this.gvLista.Rows[e.RowIndex].Cells[4].Text))
+               Server.HtmlDecode( this.gvLista.Rows[e.RowIndex].Cells[2].Text),
+                Server.HtmlDecode(this.gvLista.Rows[e.RowIndex].Cells[3].Text),
+                Server.HtmlDecode(this.gvLista.Rows[e.RowIndex].Cells[4].Text)))
             {
                 case 0:
 
