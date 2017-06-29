@@ -10,7 +10,7 @@ using System.Configuration;
 public class Cacceso
 {
     private static string GetCadenaConexion(string Conexion)
-    {         
+    {
         string CadenaConexion = "";
 
         switch (Conexion)
@@ -19,7 +19,7 @@ public class Cacceso
 
                 CadenaConexion = ConfigurationManager.AppSettings["CadenaConexion"];
                 break;
-      
+
         }
 
         return CadenaConexion;
@@ -29,7 +29,7 @@ public class Cacceso
     {
         SqlDatabase BdSql = new SqlDatabase(GetCadenaConexion(Conexion));
         DbCommand comando;
-        
+
         comando = BdSql.GetStoredProcCommand(SpNombre);
         comando.CommandTimeout = 60;
 
@@ -39,7 +39,7 @@ public class Cacceso
     public static DataSet DataSetParametros(string SpNombre, string[] IParametros, object[] ObjValores, string Conexion)
     {
         SqlDatabase BdSql = new SqlDatabase(GetCadenaConexion(Conexion));
-        DbCommand comando;            
+        DbCommand comando;
         int i;
 
         comando = BdSql.GetStoredProcCommand(SpNombre);
@@ -53,38 +53,30 @@ public class Cacceso
                 BdSql.AddInParameter(comando, ParIn, DbType.Boolean, null);
             }
             else
-            {
                 if (ObjValores.GetValue(i).GetType() == typeof(string))
-                {
-                    BdSql.AddInParameter(comando, ParIn, DbType.String, ObjValores.GetValue(i));
-                }
-                else
-                {
-                    if (ObjValores.GetValue(i).GetType() == typeof(DateTime))
-                    {
-                        BdSql.AddInParameter(comando, ParIn, DbType.Date, ObjValores.GetValue(i));
-                    }
-                    else
-                    {
-                        if (ObjValores.GetValue(i).GetType() == typeof(int))
-                        {
-                            BdSql.AddInParameter(comando, ParIn, DbType.Int32, ObjValores.GetValue(i));
-                        }
-                        else
-                            if (ObjValores.GetValue(i).GetType() == typeof(bool))
-                            {
-                                BdSql.AddInParameter(comando, ParIn, DbType.Boolean, ObjValores.GetValue(i));
-                            }
-                            else
-                            {
-                                {
-                                    BdSql.AddInParameter(comando, ParIn, DbType.Decimal, ObjValores.GetValue(i));
-                                }
-                            }
-                    }
-                }
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.String, ObjValores.GetValue(i));
             }
-
+            else if (ObjValores.GetValue(i).GetType() == typeof(DateTime))
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.Date, ObjValores.GetValue(i));
+            }
+            else if (ObjValores.GetValue(i).GetType() == typeof(int))
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.Int32, ObjValores.GetValue(i));
+            }
+            else if (ObjValores.GetValue(i).GetType() == typeof(bool))
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.Boolean, ObjValores.GetValue(i));
+            }
+            else if (ObjValores.GetValue(i).GetType() == typeof(DataTable))
+            {
+                BdSql.AddInParameter(comando, ParIn, SqlDbType.Structured, ObjValores.GetValue(i));
+            }
+            else
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.Decimal, ObjValores.GetValue(i));
+            }
             i++;
         }
 
@@ -97,7 +89,7 @@ public class Cacceso
     public static object[] ExecProc(string SpNombre, string[] IParametros, string[] OParametros, object[] ObjValores, string Conexion)
     {
         SqlDatabase BdSql = new SqlDatabase(GetCadenaConexion(Conexion));
-        DbCommand comando;            
+        DbCommand comando;
         Object[] ObjRetorno = new object[OParametros.GetLength(0)];
         int i;
 
@@ -113,38 +105,30 @@ public class Cacceso
                 BdSql.AddInParameter(comando, ParIn, DbType.Boolean, null);
             }
             else
-            {
                 if (ObjValores.GetValue(i).GetType() == typeof(string))
-                {
-                    BdSql.AddInParameter(comando, ParIn, DbType.String, ObjValores.GetValue(i));
-                }
-                else
-                {
-                    if (ObjValores.GetValue(i).GetType() == typeof(DateTime))
-                    {
-                        BdSql.AddInParameter(comando, ParIn, DbType.Date, ObjValores.GetValue(i));
-                    }
-                    else
-                    {
-                        if (ObjValores.GetValue(i).GetType() == typeof(int))
-                        {
-                            BdSql.AddInParameter(comando, ParIn, DbType.Int32, ObjValores.GetValue(i));
-                        }
-                        else
-                            if (ObjValores.GetValue(i).GetType() == typeof(bool))
-                            {
-                                BdSql.AddInParameter(comando, ParIn, DbType.Boolean, ObjValores.GetValue(i));
-                            }
-                            else
-                            {
-                                {
-                                    BdSql.AddInParameter(comando, ParIn, DbType.Decimal, ObjValores.GetValue(i));
-                                }
-                            }
-                    }
-                }
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.String, ObjValores.GetValue(i));
             }
-
+            else if (ObjValores.GetValue(i).GetType() == typeof(DateTime))
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.Date, ObjValores.GetValue(i));
+            }
+            else if (ObjValores.GetValue(i).GetType() == typeof(int))
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.Int32, ObjValores.GetValue(i));
+            }
+            else if (ObjValores.GetValue(i).GetType() == typeof(bool))
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.Boolean, ObjValores.GetValue(i));
+            }
+            else if (ObjValores.GetValue(i).GetType() == typeof(DataTable))
+            {
+                BdSql.AddInParameter(comando, ParIn, SqlDbType.Structured, ObjValores.GetValue(i));
+            }
+            else
+            {
+                BdSql.AddInParameter(comando, ParIn, DbType.Decimal, ObjValores.GetValue(i));
+            }
             i++;
         }
 
@@ -160,7 +144,6 @@ public class Cacceso
         foreach (string Opar in OParametros)
         {
             ObjRetorno.SetValue(BdSql.GetParameterValue(comando, Opar), i);
-
             i++;
         }
 
