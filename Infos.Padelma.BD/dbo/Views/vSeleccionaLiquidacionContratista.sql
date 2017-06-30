@@ -11,7 +11,8 @@ FROM            dbo.aTransaccion INNER JOIN
                          dbo.aTransaccion.numero = dbo.aTransaccionTercero.numero AND dbo.aTransaccionNovedad.registro = dbo.aTransaccionTercero.registroNovedad INNER JOIN
                          dbo.aNovedad ON dbo.aTransaccion.empresa = dbo.aNovedad.empresa AND dbo.aTransaccionTercero.novedad = dbo.aNovedad.codigo INNER JOIN
                          dbo.nFuncionario ON dbo.aTransaccion.empresa = dbo.nFuncionario.empresa AND dbo.aTransaccionTercero.tercero = dbo.nFuncionario.tercero INNER JOIN
-                         dbo.cTercero ON dbo.aTransaccion.empresa = dbo.cTercero.empresa AND dbo.nFuncionario.proveedor = dbo.cTercero.id LEFT OUTER JOIN
+                         dbo.cTercero ON dbo.aTransaccion.empresa = dbo.cTercero.empresa AND CASE WHEN len(dbo.nFuncionario.proveedor) > 0 THEN (dbo.nFuncionario.proveedor) 
+                         ELSE aTransaccionTercero.proveedor END = dbo.cTercero.id LEFT OUTER JOIN
                          dbo.aLotes ON dbo.aTransaccionTercero.empresa = dbo.aLotes.empresa AND dbo.aTransaccionTercero.lote = dbo.aLotes.codigo
 WHERE        (dbo.aTransaccion.anulado = 0) AND (dbo.aTransaccionTercero.contratista = 1)
 GO

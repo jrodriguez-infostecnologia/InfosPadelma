@@ -611,7 +611,7 @@ on a.codtercero = aa.tercero and a.empresa=aa.empresa and a.noPeriodo=aa.noPerio
   left  join nClaseContrato f on e.claseContrato=f.codigo and e.empresa=f.empresa
   left join cCentrosCosto g on g.codigo=e.ccosto and g.empresa=a.empresa --and g.activo=1
 where aa.año=@año  and aa.empresa=@empresa  
-and aa.noPeriodo=@periodo and aa.anulado=0 
+and aa.noPeriodo=@periodo and aa.anulado=0  AND valorPago>0
 
 if @tipo='CC'
 begin

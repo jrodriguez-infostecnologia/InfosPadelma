@@ -12,7 +12,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 
     #region Instancias
 
-    
+
     SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
     CIP ip = new CIP();
     Coperadores operadores = new Coperadores();
@@ -23,7 +23,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
     Ctransacciones transacciones = new Ctransacciones();
     CliquidacionNomina liquidacion = new CliquidacionNomina();
     Cgeneral general = new Cgeneral();
-	Cfuncionarios funcionario = new Cfuncionarios();
+    Cfuncionarios funcionario = new Cfuncionarios();
 
     #endregion Instancias
 
@@ -124,7 +124,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
     {
         string script = "", nombreTercero = "", numeroTransaccion = "";
         int retorno = 0;
-        liquidacion.LiquidacionPrimasDefinitiva(Convert.ToInt32(ddlAñoPago.SelectedValue.Trim()),Convert.ToInt32(ddlPeriodoPago.SelectedValue.Trim()),Convert.ToInt32(ddlAñoDesde.SelectedValue.Trim()), Convert.ToInt32(ddlAñoHasta.SelectedValue.Trim()), Convert.ToInt32(ddlPeriodoDesde.SelectedValue.Trim()), Convert.ToInt32(ddlPeriodoHasta.SelectedValue.Trim()), Convert.ToInt16(Session["empresa"]),
+        liquidacion.LiquidacionPrimasDefinitiva(Convert.ToInt32(ddlAñoPago.SelectedValue.Trim()), Convert.ToInt32(ddlPeriodoPago.SelectedValue.Trim()), Convert.ToInt32(ddlAñoDesde.SelectedValue.Trim()), Convert.ToInt32(ddlAñoHasta.SelectedValue.Trim()), Convert.ToInt32(ddlPeriodoDesde.SelectedValue.Trim()), Convert.ToInt32(ddlPeriodoHasta.SelectedValue.Trim()), Convert.ToInt16(Session["empresa"]),
             ddlccosto.SelectedValue.Trim(), ddlEmpleado.SelectedValue.Trim(), Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(ddlOpcionLiquidacion.SelectedValue),
             ConfigurationManager.AppSettings["TipoTransaccionPrima"].ToString(), Session["usuario"].ToString(), txtObservacion.Text, out retorno, out numeroTransaccion);
         switch (retorno)
@@ -203,7 +203,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
     {
         try
         {
-		DataView dvTerceroCCosto = funcionario.RetornaFuncionarioCcosto(ddlccosto.SelectedValue, Convert.ToInt16(Session["empresa"]));
+            DataView dvTerceroCCosto = funcionario.RetornaFuncionarioCcosto(ddlccosto.SelectedValue, Convert.ToInt16(Session["empresa"]));
             // DataView dvTerceroCCosto = CcontrolesUsuario.OrdenarEntidadyActivos(CentidadMetodos.EntidadGet("nFuncionario", "ppa"), "descripcion", Convert.ToInt16(Session["empresa"]));
             // dvTerceroCCosto.RowFilter = "ccosto = '" + ddlccosto.SelectedValue.ToString() + "'";
             this.ddlEmpleado.DataSource = dvTerceroCCosto;
@@ -231,11 +231,11 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 
     protected void cargarPeriodos()
     {
-       
 
-       
+
+
     }
-  
+
     protected string nombrePaginaActual()
     {
         string[] arrResult = HttpContext.Current.Request.RawUrl.Split('/');
@@ -378,7 +378,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
 
 
 
-                object[] objValo = new object[]{   
+                object[] objValo = new object[]{
                                         false,    //@anulado	bit
                                        Convert.ToInt32(ddlAñoDesde.SelectedValue),     //@año	int
                                         false,    //@cerrado	bit
@@ -603,7 +603,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             {
                 ManejoError("Error al cargar periodo inicial. Correspondiente a: " + ex.Message, "C");
             }
-           
+
         }
     }
 
@@ -640,7 +640,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 ddlccosto.SelectedValue = "";
                 break;
             case 3:
-                  cargarCentroCosto(true);
+                cargarCentroCosto(true);
                 lblCcosto.Text = "Centro costo";
                 ddlccosto.Visible = true;
                 ddlEmpleado.Visible = true;
@@ -768,13 +768,13 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 return;
             }
 
-            if (chkPagaNomina.Checked==false)
+            if (chkPagaNomina.Checked == false)
             {
                 nilblInformacion.Text = "Debe chequear un periodo de pago";
                 return;
             }
 
-            if (ddlAñoPago.SelectedValue.Trim().Length == 0 )
+            if (ddlAñoPago.SelectedValue.Trim().Length == 0)
             {
                 nilblInformacion.Text = "Debe seleccionar un año y periodo de pago";
                 return;
@@ -818,7 +818,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 ManejoError("Error al cargar año de pago. Correspondiente a: " + ex.Message, "C");
             }
 
-            
+
         }
         else
         {
@@ -835,14 +835,23 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         {
             try
             {
-                if (transacciones.VerificaEdicionBorrado(this.gvLista.Rows[e.RowIndex].Cells[1].Text, this.gvLista.Rows[e.RowIndex].Cells[2].Text, Convert.ToInt16(Session["empresa"])) != 0)
+                if (transacciones.VerificaEdicionBorrado(
+                    this.gvLista.Rows[e.RowIndex].Cells[2].Text,
+                    this.gvLista.Rows[e.RowIndex].Cells[3].Text,
+                    Convert.ToInt16(Session["empresa"])) != 0)
                 {
                     this.nilblMensaje.Text = "Transacción ejecutada / anulada no es posible su edición";
                     return;
                 }
 
-                switch (transacciones.AnulaLiquidacionPrima(this.gvLista.Rows[e.RowIndex].Cells[1].Text, this.gvLista.Rows[e.RowIndex].Cells[2].Text, this.Session["usuario"].ToString().Trim(), Convert.ToInt16(Session["empresa"]),
-                    Convert.ToInt16(gvLista.Rows[e.RowIndex].Cells[4].Text), Convert.ToInt16(gvLista.Rows[e.RowIndex].Cells[5].Text), Convert.ToInt16(gvLista.Rows[e.RowIndex].Cells[6].Text)))
+                switch (transacciones.AnulaLiquidacionPrima(
+                    this.gvLista.Rows[e.RowIndex].Cells[2].Text,
+                    this.gvLista.Rows[e.RowIndex].Cells[3].Text,
+                    this.Session["usuario"].ToString().Trim(),
+                    Convert.ToInt16(Session["empresa"]),
+                    Convert.ToInt16(gvLista.Rows[e.RowIndex].Cells[5].Text),
+                    Convert.ToInt16(gvLista.Rows[e.RowIndex].Cells[6].Text),
+                    Convert.ToInt16(gvLista.Rows[e.RowIndex].Cells[7].Text)))
                 {
                     case 0:
                         nilblMensaje.Text = "Registro Anulado satisfactoriamente";
@@ -896,6 +905,27 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             {
                 ManejoError("Error al cargar periodo hasta. Correspondiente a: " + ex.Message, "C");
             }
+        }
+    }
+
+    protected void gvLista_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        try
+        {
+            if (seguridad.VerificaAccesoOperacion(this.Session["usuario"].ToString(), ConfigurationManager.AppSettings["Modulo"].ToString(), nombrePaginaActual(), "A", Convert.ToInt16(Session["empresa"])) == 0)
+            {
+                ManejoError("Usuario no autorizado para ejecutar esta operación", "A");
+                return;
+            }
+
+            var row = gvLista.Rows[e.NewEditIndex];
+            string tipo = row.Cells[2].Text;
+            string numero = row.Cells[3].Text;
+            Response.Redirect("ModificacionPrimas.aspx?tipo=" + tipo + "&numero=" + numero, false);
+        }
+        catch (Exception ex)
+        {
+            ManejoError("Error al ir a editar el registro. Correspondiente a: " + ex.ToString(), "A");
         }
     }
 }
