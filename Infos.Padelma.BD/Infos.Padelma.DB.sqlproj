@@ -66,6 +66,7 @@
     <Folder Include="dbo\Stored Procedures\Procs2\" />
     <Folder Include="Security\" />
     <Folder Include="dbo\Types" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\tmpLiquidacionPrimaConcepto.sql" />
@@ -1854,5 +1855,6 @@
     <Build Include="dbo\Stored Procedures\SpActualizaDetalleLiquidacionPrima.sql" />
     <Build Include="dbo\Types\ActualizaDetalleLiquidacionPrimaType.sql" />
     <Build Include="dbo\Stored Procedures\SpSeleccionaCabeceraLiquidacionPrima.sql" />
+    <None Include="Scripts\CREATE_PAGE_ModificacionLiquidacion.sql" />
   </ItemGroup>
 </Project>
