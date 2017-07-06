@@ -54,7 +54,8 @@ declare cursorTercero insensitive cursor for
 		begin	
 			SELECT  @IBC=0,@diasIBC=0,@diasIncapacidad=0,@valorIncapacidad=0,@IGE=' ',@SLN=' ',@IRP=0,@LMA=' ',@diasSLN=0,@valorSLN=0,
 			@diasVacaiones=0,@valorVacaciones=0,@VAC=' ',@ING='',@RET=' ',@TDE='',@TAE='',@TDP='', @exoneraSalud='S', @TAP='',@VSP='',@VTE='',@AVP='',@VST='X',
-			@valorARP=0,@valorCaja=0,@valorFondoSolidaridad=0,@valorICBF=0,@valorPension=0,@valorSalud=0,@valorSLN=0,@valorSena=0,@valorFondoSub=0,@IBCsln=0,@diasTotalAusentismo=0
+			@valorARP=0,@valorCaja=0,@valorFondoSolidaridad=0,@valorICBF=0,@valorPension=0,@valorSalud=0,@valorSLN=0,@valorSena=0,
+			@valorFondoSub=0,@IBCsln=0,@diasTotalAusentismo=0,@IBCcajaVacaciones=0
 			-- Verifica si el trabajador tiene ingreso
 			if exists(select * from nContratos where tercero=@tercero and fechaIngreso between @FIPN and @FFPN and empresa=@empresa)
 			begin

@@ -1,11 +1,11 @@
 ﻿
-CREATE PROCEDURE spSeleccionaNominaDetalle
-	@Año int = 2016, 
-	@Periodo int = 13, 
-	@Empresa int = 1,
-	@Tipo varchar(50) = 'LQC',
-	@Numero varchar(50) = 'LQC00000000000000000018',
-	@CodTercero int = 319,
+CREATE PROCEDURE [dbo].[spSeleccionaNominaDetalle]
+	@Año int = 2017, 
+	@Periodo int = 17, 
+	@Empresa int = 3,
+	@Tipo varchar(50) = 'LQN',
+	@Numero varchar(50) = 'LQN00000000000000000080',
+	@CodTercero int = 280,
 	@CodContrato int = 1
 AS
 BEGIN
@@ -14,6 +14,8 @@ BEGIN
 	vLiq.codConcepto,
 	vLiq.Expr1 descripcionConcepto,
 	vLiq.cantidad,
+	--case when valorUnitario=0 then convert(int,(valorTotal/cantidad))
+	 --else  vLiq.valorUnitario end 
 	vLiq.valorUnitario,
 	vLiq.valorTotal,
 	vLiq.valorTotalR,
