@@ -2,10 +2,9 @@
     $(document).ready(function () {
         $(".numeric-field").on('keyup', function () {
             var n = parseInt($(this).val().replace(/\D/g, ''), 10);
-            $(this).val(n.toLocaleString());
+            $(this).val(n.toLocaleString("EN"));
 
         });
-        $(".numeric-field").keyup();
         $("table tr #txvValorPromedio,table tr #txvDiasPromedio").keyup(function () {
             var parent = $(this).closest("tr");
             var valorPromedio = parent.find("#txvValorPromedio");
@@ -15,7 +14,7 @@
                 return;
             }
             var diasPromedioVal = diasPromedio.val().replace(/\D/g, '');
-            if (isNaN(diasPromedioVal)) {
+            if (isNaN(diasPromedioVal) && parseFloat(diasPromedioVal) <=0) {
                 return;
             }
             var baseVal = parseFloat(valorPromedioVal) / parseFloat(diasPromedioVal) * 30;
@@ -38,5 +37,7 @@
             parent.find("#txvValorPrima").val(valorPrimaVal.toFixed(0));
             parent.find("#txvValorPrima").keyup();
         });
+		
+        $(".numeric-field").keyup();
     });
 })(jQuery);

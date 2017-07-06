@@ -17,7 +17,7 @@
     <script type="text/javascript" src="../../js/plugins/scrollTo/jquery.scrollTo-min.js"></script>
     <script type="text/javascript" src="../../js/ui.multiselect.js"></script>
     <script type="text/javascript" src="../../js/lib/cleave.js/dist/cleave.min.js"></script>
-    <script type="text/javascript" src="../../js/Liquidación/ModificacionPrima.js"></script>
+    <script type="text/javascript" src="../../js/Liquidación/ModificacionPrima.js?v=20170704"></script>
 
 
     <link href="../../css/chosen.css" rel="stylesheet" />
