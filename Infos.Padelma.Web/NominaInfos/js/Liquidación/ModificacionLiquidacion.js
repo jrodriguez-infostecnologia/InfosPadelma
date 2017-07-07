@@ -1,7 +1,15 @@
 ﻿(function ($) {
     function init() {
+        $(".numeric-field").on('keyup', function () {
+            var n = parseInt($(this).val().replace(/\D/g, ''), 10);
+            $(this).val(n.toLocaleString("EN"));
+        });
+        $(".numeric-field").on('formatNumeric', function () {
+            var n = parseInt($(this).val().replace(/\D/g, ''), 10);
+            $(this).val(n.toLocaleString("EN"));
+        });
         function copyNumericValue(source, target) {
-            var val = source.val().replace(/,/g, "");
+            var val = source.val().replace(/\D/g, "");
             if (!isNaN(val))
                 target.val(val);
         }
@@ -11,7 +19,7 @@
         }
         function recalcularTotal() {
             var total = 0;
-            var $total = $("#gvDetalleLiquidacion tr input[type=text]#txvValorTotal").each(function () {
+            var $total = $("#gvDetalleLiquidacion tr input[type=hidden]#valorTotal").each(function () {
                 var val = $(this).val();
                 var $row = $(this).closest("tr");
                 var deduccion = $row.find("#chkDeduccion").is(':checked');
@@ -23,6 +31,7 @@
                 }
             });
             $("#txtTotal").val(total.toFixed(0));
+            $(".numeric-field").trigger('formatNumeric');
         }
         function recalcularPorcentajes() {
             $("#gvDetalleLiquidacion tr input[type=checkbox]#chkValidaPorcentaje:checked").each(function () {
@@ -61,26 +70,6 @@
             var $target = $parent.find("input[type=hidden]#valorTotal");
             copyNumericValue($(this), $target);
         }).change();
-        /*$("td input[type=text]#txvPorcentaje").keyup(function () {
-            var $parent = $(this).closest("tr");
-            var $target = $parent.find("input[type=hidden]#Porcentaje");
-            copyNumericValue($(this), $target);
-        }).keyup();
-        $("td input[type=text]#chkDeduccion").change(function () {
-            var $parent = $(this).closest("tr");
-            var $target = $parent.find("input[type=hidden]#Deduccion");
-            copyBooleanValue($(this), $target);
-        }).change();
-        $("td input[type=text]#chkValidaPorcentaje").change(function () {
-            var $parent = $(this).closest("tr");
-            var $target = $parent.find("input[type=hidden]#ValidaPorcentaje");
-            copyBooleanValue($(this), $target);
-        }).change();
-        $("td input[type=text]#chkBaseSeguridadSocial").change(function () {
-            var $parent = $(this).closest("tr");
-            var $target = $parent.find("input[type=hidden]#BaseSeguridadSocial");
-            copyBooleanValue($(this), $target);
-        }).change();*/
 
         $("td input[type=text]#txvCantidad, td input[type=text]#txvValorUnitario").keyup(function () {
             var $parent = $(this).closest("tr");
@@ -90,11 +79,13 @@
             if (isNaN($cantidad) || isNaN($valor_unitario)) {
                 return;
             }
-            var total = $cantidad * $valor_unitario;
+
+            var total = ($cantidad != 0 ? $cantidad : 1) * $valor_unitario;
             $total.val(total.toFixed(0));
+            $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal, input[type=text]#txvCantidad").trigger('updateValues');
             recalcularPorcentajes();
             recalcularTotal();
-            $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal, input[type=text]#txvCantidad").trigger('updateValues');
+            
         }).keyup();
 
     }

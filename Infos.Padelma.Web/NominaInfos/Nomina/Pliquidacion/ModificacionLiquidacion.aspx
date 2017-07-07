@@ -186,21 +186,21 @@
                                         </asp:BoundField>
                                         <asp:TemplateField HeaderText="Cantidad" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txvCantidad" runat="server" ClientIDMode="Static" CssClass="input" onkeyup="formato_numero(this)" Enabled='<%#!(bool)Eval("ValidaPorcentaje")%>' Text='<%#Eval("cantidad") %>' Width="80%">0</asp:TextBox>
+                                                <asp:TextBox ID="txvCantidad" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Enabled='<%#!(bool)Eval("ValidaPorcentaje")%>' Text='<%#Eval("cantidad") %>' Width="80%">0</asp:TextBox>
                                                 <asp:HiddenField ID="cantidad" runat="server" ClientIDMode="Static" Value='<%#Eval("cantidad")%>' />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="Items" Width="90px" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="ValorUnitario" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txvValorUnitario" runat="server" ClientIDMode="Static" CssClass="input" onkeyup="formato_numero(this)" Enabled='<%#!(bool)Eval("ValidaPorcentaje")%>' Text='<%#Eval("valorUnitario") %>' Width="80%">0</asp:TextBox>
+                                                <asp:TextBox ID="txvValorUnitario" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Enabled='<%#!(bool)Eval("ValidaPorcentaje")%>' Text='<%#Eval("valorUnitario") %>' Width="80%">0</asp:TextBox>
                                                 <asp:HiddenField ID="valorUnitario" runat="server" ClientIDMode="Static" Value='<%#Eval("valorUnitario")%>' />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="Items" Width="90px" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="ValorTotal" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txvValorTotal" runat="server" ClientIDMode="Static" CssClass="input" onkeyup="formato_numero(this)" Enabled="False" Text='<%#Eval("valorTotal") %>' Width="80%">0</asp:TextBox>
+                                                <asp:TextBox ID="txvValorTotal" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Enabled="False" Text='<%#Eval("valorTotal") %>' Width="80%">0</asp:TextBox>
                                                 <asp:HiddenField ID="valorTotal" runat="server" ClientIDMode="Static" Value='<%#Eval("valorTotal")%>' />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="Items" Width="90px" />
@@ -238,7 +238,7 @@
                                     <RowStyle CssClass="rw" />
                                 </asp:GridView>
                                 <div style="text-align: right;">
-                                    <asp:Label ID="lblTotal" Text="Total Liquidación: " runat="server"></asp:Label><asp:TextBox ID="txtTotal" runat="server" ClientIDMode="Static" CssClass="input" Enabled="false"></asp:TextBox>
+                                    <asp:Label ID="lblTotal" Text="Total Liquidación: " runat="server"></asp:Label><asp:TextBox ID="txtTotal" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Enabled="false"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
