@@ -1,25 +1,28 @@
 #tab {
     text-align:center;
+    z-index:999999999;
 
 }
 #tt {
     width:1024px;
     display:inline-block;
+   
 }
 .panel {
-
-  overflow: hidden;
-  text-align: left;
-  margin: 0;
-  border: 0;
-  -moz-border-radius: 0 0 0 0;
-  -webkit-border-radius: 0 0 0 0;
-  border-radius: 0 0 0 0;
+    overflow: hidden;
+    text-align: left;
+    margin: 0;
+    border: 0;
+    -moz-border-radius: 0 0 0 0;
+    -webkit-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+    border: 1px solid #808080;
 }
 .panel-header,
 .panel-body {
   border-width: 1px;
   border-style: solid;
+  border-color:#808080;
 }
 .panel-header {
   padding: 5px;
@@ -805,8 +808,8 @@
   font-size: 1px;
   display: none;
   cursor: pointer;
-  /*border-width: 1px;
-  border-style: solid;*/
+  border-width: 1px;
+  border-style: solid;
 }
 .tabs-scroller-left {
   left: 0;
@@ -835,8 +838,8 @@
   min-width:1024px;
 }
 .tabs-scrolling {
-  margin-left: 18px;
-  margin-right: 18px;
+  margin-left: 0px;
+  margin-right: 0px;;
 }
 .tabs-disabled {
   opacity: 0.3;
