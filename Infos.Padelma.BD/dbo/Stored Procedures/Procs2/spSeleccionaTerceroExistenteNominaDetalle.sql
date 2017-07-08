@@ -7,7 +7,7 @@ CREATE PROCEDURE spSeleccionaTerceroExistenteNominaDetalle
 	@Numero varchar(50) = 'LQC00000000000000000018'
 AS
 BEGIN
-	SELECT DISTINCT vLiq.codTercero, vLiq.descripcion 
+	SELECT DISTINCT vLiq.codTercero, CONCAT(vLiq.codTercero,' - ', vLiq.descripcion) descripcion 
 	FROM
 	vLiquidacionDefinitivaReal vLiq
 	WHERE vLiq.empresa = @Empresa

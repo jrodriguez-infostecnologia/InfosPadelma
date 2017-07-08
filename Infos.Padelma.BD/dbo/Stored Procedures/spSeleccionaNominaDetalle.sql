@@ -14,8 +14,6 @@ BEGIN
 	vLiq.codConcepto,
 	vLiq.Expr1 descripcionConcepto,
 	vLiq.cantidad,
-	--case when valorUnitario=0 then convert(int,(valorTotal/cantidad))
-	 --else  vLiq.valorUnitario end 
 	vLiq.valorUnitario,
 	vLiq.valorTotal,
 	vLiq.valorTotalR,
@@ -23,14 +21,32 @@ BEGIN
 	vLiq.porcentaje,
 	vLiq.signo,
 	vLiq.validaPorcentaje,
-	vLiq.baseSeguridadSocial
+	vLiq.baseSeguridadSocial,
+	CAST(CASE WHEN COUNT(nov.codigo)>0 THEN 1  ELSE 0 END AS BIT) agrupaLaboresAgronomico
 	FROM
 	vLiquidacionDefinitivaReal vLiq
+	LEFT JOIN aNovedad nov
+	ON nov.empresa = vLiq.empresa
+	AND nov.concepto = vLiq.codConcepto
 	WHERE vLiq.empresa = @Empresa
 	AND vLiq.año = @Año
 	AND vLiq.noPeriodo = @Periodo
 	AND vLiq.tipo = @Tipo
 	AND vLiq.numero = @Numero
 	AND vLiq.codTercero = @CodTercero
-	AND vLiq.id = @CodContrato;
+	AND vLiq.id = @CodContrato
+	GROUP BY 
+	vLiq.registroDetalleNomina,
+	vLiq.empresa,
+	vLiq.codConcepto,
+	vLiq.Expr1,
+	vLiq.cantidad,
+	vLiq.valorUnitario,
+	vLiq.valorTotal,
+	vLiq.valorTotalR,
+	vLiq.vTotalNR,
+	vLiq.porcentaje,
+	vLiq.signo,
+	vLiq.validaPorcentaje,
+	vLiq.baseSeguridadSocial;
 END

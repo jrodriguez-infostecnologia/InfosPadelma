@@ -147,6 +147,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                     item.BaseSeguridadSocial = ((HiddenField)dr.FindControl("BaseSeguridadSocial")).Value.ToString() == true.ToString();
                     item.ValidaPorcentaje = ((HiddenField)dr.FindControl("ValidaPorcentaje")).Value.ToString() == true.ToString();
                     item.Deduccion = ((HiddenField)dr.FindControl("Deduccion")).Value.ToString() == true.ToString();
+                    item.AgrupaLaboresAgronomico = ((HiddenField)dr.FindControl("AgrupaLaboresAgronomico")).Value.ToString() == true.ToString();
                     item.Porcentaje = ((HiddenField)dr.FindControl("Porcentaje")).Value.ToString();
 					item.ValorUnitario = Math.Round(Convert.ToDouble(item.ValorUnitario)).ToString();
 					item.ValorTotal = Math.Round(Convert.ToDouble(item.ValorTotal)).ToString();
@@ -448,7 +449,8 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                 item.BaseSeguridadSocial = !(dr["baseSeguridadSocial"] is bool) ? false : (bool)dr["baseSeguridadSocial"];
                 item.ValidaPorcentaje = !(dr["validaPorcentaje"] is bool) ? false : (bool)dr["validaPorcentaje"];
                 item.Deduccion = !(dr["signo"] is int) ? false : ((int)dr["signo"] == 2);
-				item.ValorUnitario = Math.Round(Convert.ToDouble(item.ValorUnitario)).ToString();
+                item.AgrupaLaboresAgronomico = !(dr["agrupaLaboresAgronomico"] is bool) ? false : (bool)dr["agrupaLaboresAgronomico"];
+                item.ValorUnitario = Math.Round(Convert.ToDouble(item.ValorUnitario)).ToString();
 				item.ValorTotal = Math.Round(Convert.ToDouble(item.ValorTotal)).ToString();
 				item.Cantidad = Math.Round(Convert.ToDouble(item.Cantidad)).ToString();
                 ListadoDetalleLiquidacion.Add(item);
@@ -510,6 +512,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
             item.BaseSeguridadSocial = !(dr["baseSeguridadSocial"] is bool) ? false : (bool)dr["baseSeguridadSocial"];
             item.ValidaPorcentaje = !(dr["calculaSobrePorcentaje"] is bool) ? false : (bool)dr["calculaSobrePorcentaje"];
             item.Deduccion = !(dr["signo"] is int) ? false : ((int)dr["signo"] == 2);
+            item.AgrupaLaboresAgronomico = !(dr["agrupaLaboresAgronomico"] is bool) ? false : (bool)dr["agrupaLaboresAgronomico"];
             item.Porcentaje = dr["porcentaje"].ToString();
             dt.Add(item);
             var i = 1;

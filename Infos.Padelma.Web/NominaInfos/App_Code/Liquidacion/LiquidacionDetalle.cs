@@ -19,6 +19,7 @@ public class LiquidacionDetalle
     public bool ValidaPorcentaje { get; set; }
     public bool BaseSeguridadSocial { get; set; }
     public bool Deduccion { get; set; }
+    public bool AgrupaLaboresAgronomico { get; set; }
 
 
     public LiquidacionDetalle()

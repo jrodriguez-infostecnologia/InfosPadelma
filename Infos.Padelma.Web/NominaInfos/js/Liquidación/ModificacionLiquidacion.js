@@ -2,10 +2,14 @@
     function init() {
         $(".numeric-field").on('keyup', function () {
             var n = parseInt($(this).val().replace(/\D/g, ''), 10);
+            if (isNaN(n))
+                return;
             $(this).val(n.toLocaleString("EN"));
         });
         $(".numeric-field").on('formatNumeric', function () {
             var n = parseInt($(this).val().replace(/\D/g, ''), 10);
+            if (isNaN(n))
+                return;
             $(this).val(n.toLocaleString("EN"));
         });
         function copyNumericValue(source, target) {
@@ -30,8 +34,9 @@
                         total -= parseFloat(val);
                 }
             });
+            if (isNaN(total))
+                total = 0;
             $("#txtTotal").val(total.toFixed(0));
-            $(".numeric-field").trigger('formatNumeric');
         }
         function recalcularPorcentajes() {
             $("#gvDetalleLiquidacion tr input[type=checkbox]#chkValidaPorcentaje:checked").each(function () {
@@ -52,42 +57,45 @@
                 }
                 $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal").val(result.toFixed(0));
                 $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal, input[type=text]#txvCantidad").trigger('updateValues');
-
             });
         }
         $("td input[type=text]#txvCantidad").bind('updateValues', function () {
             var $parent = $(this).closest("tr");
             var $target = $parent.find("input[type=hidden]#cantidad");
             copyNumericValue($(this), $target);
-        }).keyup();
+        }).trigger('updateValues')
         $("td input[type=text]#txvValorUnitario").bind('updateValues', function () {
             var $parent = $(this).closest("tr");
             var $target = $parent.find("input[type=hidden]#valorUnitario");
             copyNumericValue($(this), $target);
-        }).keyup();
+        }).trigger('updateValues')
         $("td input[type=text]#txvValorTotal").bind('updateValues', function () {
             var $parent = $(this).closest("tr");
             var $target = $parent.find("input[type=hidden]#valorTotal");
             copyNumericValue($(this), $target);
-        }).change();
+        }).trigger('updateValues')
 
         $("td input[type=text]#txvCantidad, td input[type=text]#txvValorUnitario").keyup(function () {
             var $parent = $(this).closest("tr");
             var $total = $parent.find("td input[type=text]#txvValorTotal");
+            var $AgrupaLaboresAgronomico = $parent.find("td input[type=checkbox]#chkAgrupaLaboresAgronomico")[0].checked;
             var $cantidad = $parent.find("td input[type=text]#txvCantidad").val().replace(/,/g, "");
             var $valor_unitario = $parent.find("td input[type=text]#txvValorUnitario").val().replace(/,/g, "");
-            if (isNaN($cantidad) || isNaN($valor_unitario)) {
+            if (isNaN($cantidad) || isNaN($valor_unitario) || $AgrupaLaboresAgronomico) {
                 return;
             }
-
-            var total = ($cantidad != 0 ? $cantidad : 1) * $valor_unitario;
+            var total = ($cantidad != 0 ? $cantidad : 1) * ($valor_unitario != 0 ? $valor_unitario : 1);
             $total.val(total.toFixed(0));
+            $parent.find("td input[type=text]#txvValorTotal").keyup();
+        }).keyup();
+
+        $("td input[type=text]#txvValorTotal").keyup(function () {
+            var $parent = $(this).closest("tr");
             $parent.find("input[type=text]#txvValorUnitario, input[type=text]#txvValorTotal, input[type=text]#txvCantidad").trigger('updateValues');
             recalcularPorcentajes();
             recalcularTotal();
-            
+            $(".numeric-field").trigger('formatNumeric');
         }).keyup();
-
     }
     $(document).ready(function () {
         init();
