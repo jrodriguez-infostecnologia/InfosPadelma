@@ -467,7 +467,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ManejoError("Error al cargar año. Correspondiente a: " + ex.Message, "C");
+            ManejoError("Error al cargar año. Correspondiente a: " + ex.ToString(), "C");
         }
     }
 

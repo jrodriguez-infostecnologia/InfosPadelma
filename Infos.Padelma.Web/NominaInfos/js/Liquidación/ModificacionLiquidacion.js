@@ -81,7 +81,7 @@
             var $AgrupaLaboresAgronomico = $parent.find("td input[type=checkbox]#chkAgrupaLaboresAgronomico")[0].checked;
             var $cantidad = $parent.find("td input[type=text]#txvCantidad").val().replace(/,/g, "");
             var $valor_unitario = $parent.find("td input[type=text]#txvValorUnitario").val().replace(/,/g, "");
-            if (isNaN($cantidad) || isNaN($valor_unitario) || $AgrupaLaboresAgronomico) {
+            if (isNaN($cantidad) || isNaN($valor_unitario) || $AgrupaLaboresAgronomico || !$parent.find("td input[type=text]#txvValorTotal").attr('disabled')) {
                 return;
             }
             var total = ($cantidad != 0 ? $cantidad : 1) * ($valor_unitario != 0 ? $valor_unitario : 1);
