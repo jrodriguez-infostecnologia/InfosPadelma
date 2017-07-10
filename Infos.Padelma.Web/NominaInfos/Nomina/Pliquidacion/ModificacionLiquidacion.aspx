@@ -193,14 +193,14 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="ValorUnitario" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txvValorUnitario" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Enabled='<%#!(bool)Eval("ValidaPorcentaje") && !(bool)Eval("AgrupaLaboresAgronomico") && !((string)Eval("valorUnitario")=="0" && Convert.ToInt32((string)Eval("cantidad"))>0)%>' Text='<%#Eval("valorUnitario") %>' Width="80%">0</asp:TextBox>
+                                                <asp:TextBox ID="txvValorUnitario" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Enabled='<%#!(bool)Eval("ValidaPorcentaje") && !(bool)Eval("HabilitaValorTotal")%>' Text='<%#Eval("valorUnitario") %>' Width="80%">0</asp:TextBox>
                                                 <asp:HiddenField ID="valorUnitario" runat="server" ClientIDMode="Static" Value='<%#Eval("valorUnitario")%>' />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="Items" Width="90px" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="ValorTotal" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txvValorTotal" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Enabled='<%#!(bool)Eval("ValidaPorcentaje") && ((bool)Eval("AgrupaLaboresAgronomico") ||((string)Eval("valorUnitario")=="0" && Convert.ToInt32((string)Eval("cantidad"))>0))%>' Text='<%#Eval("valorTotal") %>' Width="80%">0</asp:TextBox>
+                                                <asp:TextBox ID="txvValorTotal" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Enabled='<%#!(bool)Eval("ValidaPorcentaje") && (bool)Eval("HabilitaValorTotal")%>' Text='<%#Eval("valorTotal") %>' Width="80%">0</asp:TextBox>
                                                 <asp:HiddenField ID="valorTotal" runat="server" ClientIDMode="Static" Value='<%#Eval("valorTotal")%>' />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="Items" Width="90px" />
@@ -233,10 +233,10 @@
                                             </ItemTemplate>
                                             <ItemStyle CssClass="Items" Width="40px" />
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Agro." ItemStyle-HorizontalAlign="Center">
+                                        <asp:TemplateField HeaderText="Hab. Tot" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
-                                                <asp:CheckBox ID="chkAgrupaLaboresAgronomico" runat="server" ClientIDMode="Static" Enabled="false" Checked='<%#Eval("AgrupaLaboresAgronomico") %>' />
-                                                <asp:HiddenField ID="AgrupaLaboresAgronomico" runat="server" ClientIDMode="Static" Value='<%#Eval("AgrupaLaboresAgronomico")%>' />
+                                                <asp:CheckBox ID="chkHabilitaValorTotal" runat="server" ClientIDMode="Static" Enabled="false" Checked='<%#Eval("HabilitaValorTotal") %>' />
+                                                <asp:HiddenField ID="HabilitaValorTotal" runat="server" ClientIDMode="Static" Value='<%#Eval("HabilitaValorTotal")%>' />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="Items" Width="40px" />
                                         </asp:TemplateField>

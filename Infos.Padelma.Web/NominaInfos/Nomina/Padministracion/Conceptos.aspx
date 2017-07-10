@@ -58,7 +58,7 @@
             <asp:UpdatePanel ID="upCabeza" runat="server" UpdateMode="Conditional" Visible="False">
                 <ContentTemplate>
                     <div style="padding: 5px 15px 5px 15px">
-                        <div style="border: 1px solid silver; display: inline-block; ">
+                        <div style="border: 1px solid silver; display: inline-block;">
                             <div style="padding: 2px 5px 2px 5px">
                                 <table cellspacing="0" style="width: 940px;" id="TABLE1">
                                     <tr>
@@ -174,15 +174,14 @@
                                             <asp:CheckBox ID="chkLiquiddacionNomina" runat="server" Text="No liquida con nomina" Visible="False" />
                                             <asp:CheckBox ID="chkPrestacionSocial" runat="server" Text="Concepto prestaciones social" Visible="False" />
                                             <asp:CheckBox ID="chkSumaPrestacionSocial" runat="server" Text="Suma día prestaciones sociales" Visible="False" />
+                                            <br />
+                                            <asp:CheckBox ID="chkHabilitaValorTotalEnModificaLiquidacion" runat="server" Text="Maneja valor total sin base" Visible="False" />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 130px; text-align: left">
-                                            &nbsp;</td>
-                                        <td class="Campos">
-                                            &nbsp;</td>
-                                        <td colspan="2" style="text-align: left">
-                                            &nbsp;</td>
+                                        <td style="width: 130px; text-align: left">&nbsp;</td>
+                                        <td class="Campos">&nbsp;</td>
+                                        <td colspan="2" style="text-align: left">&nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: left" colspan="4">
@@ -316,143 +315,148 @@
             </div>
             <div>
                 <div style="margin: 5px; padding: 10px; overflow-x: scroll; width: 900px;">
-                <div style="display: inline-block">
-                    <asp:GridView ID="gvLista" runat="server" Width="1200px" GridLines="None" OnSelectedIndexChanged="gvLista_SelectedIndexChanged" CssClass="Grid" OnRowDeleting="gvLista_RowDeleting" AutoGenerateColumns="False" AllowPaging="True" PageSize="20" OnPageIndexChanging="gvLista_PageIndexChanging1">
-                        <AlternatingRowStyle CssClass="alt" />
-                        <Columns>
-                            <asp:ButtonField ButtonType="Image" HeaderText="Edit" ImageUrl="~/Imagen/TabsIcon/pencil.png" Text="Botón" CommandName="Select">
-                                <ItemStyle Width="20px" CssClass="Items" />
-                            </asp:ButtonField>
-                            <asp:TemplateField HeaderText="Elim">
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="imElimina" runat="server" CommandName="Delete" ImageUrl="~/Imagen/TabsIcon/cancel.png" OnClientClick="if(!confirm('Desea eliminar el registro ?')){return false;};" ToolTip="Elimina el registro seleccionado" />
-                                </ItemTemplate>
-                                <HeaderStyle BackColor="White" />
-                                <ItemStyle Width="20px" CssClass="Items" HorizontalAlign="Center" />
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="codigo" HeaderText="C&#243;digo" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="30px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="descripcion" HeaderText="Descripci&#243;n" ReadOnly="True"
-                                SortExpression="descripcion">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="abreviatura" HeaderText="Abreviatura" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="100px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="signo" HeaderText="Signo" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="tipoLiquidacion" HeaderText="tipoLiqui" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="20px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="base" HeaderText="Base" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="valor" HeaderText="Valor" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="20px" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="valorMinimo" HeaderText="VlrMinimo" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="20px" />
-                            </asp:BoundField>
-                            <asp:CheckBoxField DataField="basePrimas" HeaderText="BP">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="baseCajaCompensacion" HeaderText="BCC">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="baseCesantias" HeaderText="BC">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="baseVacaciones" HeaderText="BV">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="baseIntereses" HeaderText="BI">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="baseSeguridadSocial" HeaderText="BS">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="controlaSaldo" HeaderText="CS">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="manejaRango" HeaderText="MR">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="ingresoGravado" HeaderText="IG">
-                                <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:BoundField DataField="controlConcepto" HeaderText="CC" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
-                            </asp:BoundField>
-                            <asp:CheckBoxField DataField="activo" HeaderText="Act">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                               <asp:BoundField DataField="porcentaje" HeaderText="%" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
-                            </asp:BoundField>
-                               <asp:CheckBoxField DataField="validaPorcentaje" HeaderText="v%">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                             <asp:CheckBoxField DataField="fijo" HeaderText="fijo">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="baseEmbargo" HeaderText="BE">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                               <asp:BoundField DataField="prioridad" HeaderText="Prio" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="5px" />
-                            </asp:BoundField>
-                            <asp:CheckBoxField DataField="descuentaDomingo" HeaderText="DD">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="descuentaTransporte" HeaderText="DT">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="mostrarFecha" HeaderText="MF">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="noMostrar" HeaderText="NM">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="mostrarDetalle" HeaderText="MD">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="ausentismo" HeaderText="AUS">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="prestacionSocial" HeaderText="PS">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="sumaPrestacionSocial" HeaderText="SDPS">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:CheckBoxField DataField="mostrarCantidad" HeaderText="MCan">
-                                <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
-                            </asp:CheckBoxField>
-                            <asp:BoundField DataField="noMes" HeaderText="NM" ReadOnly="True">
-                                <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
-                                <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
-                            </asp:BoundField>
-
-                        </Columns>
-                        <PagerStyle CssClass="pgr" />
-                        <RowStyle CssClass="rw" />
-                    </asp:GridView>
+                    <div style="display: inline-block">
+                        <asp:GridView ID="gvLista" runat="server" Width="1200px" GridLines="None" OnSelectedIndexChanged="gvLista_SelectedIndexChanged" CssClass="Grid" OnRowDeleting="gvLista_RowDeleting" AutoGenerateColumns="False" AllowPaging="True" PageSize="20" OnPageIndexChanging="gvLista_PageIndexChanging1">
+                            <AlternatingRowStyle CssClass="alt" />
+                            <Columns>
+                                <asp:ButtonField ButtonType="Image" HeaderText="Edit" ImageUrl="~/Imagen/TabsIcon/pencil.png" Text="Botón" CommandName="Select">
+                                    <ItemStyle Width="20px" CssClass="Items" />
+                                </asp:ButtonField>
+                                <asp:TemplateField HeaderText="Elim">
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="imElimina" runat="server" CommandName="Delete" ImageUrl="~/Imagen/TabsIcon/cancel.png" OnClientClick="if(!confirm('Desea eliminar el registro ?')){return false;};" ToolTip="Elimina el registro seleccionado" />
+                                    </ItemTemplate>
+                                    <HeaderStyle BackColor="White" />
+                                    <ItemStyle Width="20px" CssClass="Items" HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="codigo" HeaderText="C&#243;digo" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="30px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="descripcion" HeaderText="Descripci&#243;n" ReadOnly="True"
+                                    SortExpression="descripcion">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="abreviatura" HeaderText="Abreviatura" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="100px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="signo" HeaderText="Signo" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="tipoLiquidacion" HeaderText="tipoLiqui" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="20px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="base" HeaderText="Base" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="valor" HeaderText="Valor" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="20px" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="valorMinimo" HeaderText="VlrMinimo" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="20px" />
+                                </asp:BoundField>
+                                <asp:CheckBoxField DataField="basePrimas" HeaderText="BP">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="baseCajaCompensacion" HeaderText="BCC">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="baseCesantias" HeaderText="BC">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="baseVacaciones" HeaderText="BV">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="baseIntereses" HeaderText="BI">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="baseSeguridadSocial" HeaderText="BS">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="controlaSaldo" HeaderText="CS">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="manejaRango" HeaderText="MR">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="ingresoGravado" HeaderText="IG">
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:BoundField DataField="controlConcepto" HeaderText="CC" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
+                                </asp:BoundField>
+                                <asp:CheckBoxField DataField="activo" HeaderText="Act">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:BoundField DataField="porcentaje" HeaderText="%" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
+                                </asp:BoundField>
+                                <asp:CheckBoxField DataField="validaPorcentaje" HeaderText="v%">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="fijo" HeaderText="fijo">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="baseEmbargo" HeaderText="BE">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:BoundField DataField="prioridad" HeaderText="Prio" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="5px" />
+                                </asp:BoundField>
+                                <asp:CheckBoxField DataField="descuentaDomingo" HeaderText="DD">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="descuentaTransporte" HeaderText="DT">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="mostrarFecha" HeaderText="MF">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="noMostrar" HeaderText="NM">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="mostrarDetalle" HeaderText="MD">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="ausentismo" HeaderText="AUS">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="prestacionSocial" HeaderText="PS">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="sumaPrestacionSocial" HeaderText="SDPS">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:CheckBoxField DataField="mostrarCantidad" HeaderText="MCan">
+                                    <ItemStyle HorizontalAlign="Center" Width="10px" CssClass="Items" />
+                                </asp:CheckBoxField>
+                                <asp:BoundField DataField="noMes" HeaderText="NM" ReadOnly="True">
+                                    <HeaderStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
+                                    <ItemStyle HorizontalAlign="Left" BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
+                                </asp:BoundField>
+                                <asp:TemplateField HeaderText="Hab.">
+                                    <ItemTemplate>
+                                        <asp:CheckBox ID="chkHabilitaValorTotalEnModificaLiquidacion" runat="server" Checked='<%# Eval("habilitaValorTotal") %>' Enabled="False" />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="20px" />
+                                </asp:TemplateField>
+                            </Columns>
+                            <PagerStyle CssClass="pgr" />
+                            <RowStyle CssClass="rw" />
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
-</div>
         </div>
         <script src="../../js/jquery.min.js" type="text/javascript"></script>
         <script src="../../js/chosen.jquery.js" type="text/javascript"></script>

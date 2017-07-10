@@ -78,13 +78,13 @@
         $("td input[type=text]#txvCantidad, td input[type=text]#txvValorUnitario").keyup(function () {
             var $parent = $(this).closest("tr");
             var $total = $parent.find("td input[type=text]#txvValorTotal");
-            var $AgrupaLaboresAgronomico = $parent.find("td input[type=checkbox]#chkAgrupaLaboresAgronomico")[0].checked;
+            var $HabilitaValorTotal = $parent.find("td input[type=checkbox]#chkHabilitaValorTotal")[0].checked;
             var $cantidad = $parent.find("td input[type=text]#txvCantidad").val().replace(/,/g, "");
             var $valor_unitario = $parent.find("td input[type=text]#txvValorUnitario").val().replace(/,/g, "");
-            if (isNaN($cantidad) || isNaN($valor_unitario) || $AgrupaLaboresAgronomico || !$parent.find("td input[type=text]#txvValorTotal").attr('disabled')) {
+            if (isNaN($cantidad) || isNaN($valor_unitario) || $HabilitaValorTotal) {
                 return;
             }
-            var total = ($cantidad != 0 ? $cantidad : 1) * ($valor_unitario != 0 ? $valor_unitario : 1);
+            var total = ($cantidad != 0 ? $cantidad : 1) * $valor_unitario;
             $total.val(total.toFixed(0));
             $parent.find("td input[type=text]#txvValorTotal").keyup();
         }).keyup();

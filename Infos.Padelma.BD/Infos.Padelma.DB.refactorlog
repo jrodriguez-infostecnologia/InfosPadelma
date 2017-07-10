@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="7d4e3c52-4c58-4d97-9277-530015bb4926" ChangeDateTime="07/10/2017 13:35:12">
+    <Property Name="ElementName" Value="[dbo].[nConcepto].[mostrarCantidad]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[nConcepto]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="habilitarValorTotal" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="df9f0856-7c0f-4f6d-b144-2ebd04f74ce9" ChangeDateTime="07/10/2017 14:17:31">
+    <Property Name="ElementName" Value="[dbo].[nConcepto].[habilitarValorTotal]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[nConcepto]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="calculadoSinBaseValorUnitario" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f02a1034-0473-4afd-9399-c4189130f312" ChangeDateTime="07/10/2017 14:17:45">
+    <Property Name="ElementName" Value="[dbo].[nConcepto].[calculadoSinBaseValorUnitario]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[nConcepto]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="habilitaValorTotal" />
+  </Operation>
+</Operations>

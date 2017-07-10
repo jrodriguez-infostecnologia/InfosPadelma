@@ -22,31 +22,14 @@ BEGIN
 	vLiq.signo,
 	vLiq.validaPorcentaje,
 	vLiq.baseSeguridadSocial,
-	CAST(CASE WHEN COUNT(nov.codigo)>0 THEN 1  ELSE 0 END AS BIT) agrupaLaboresAgronomico
+	vLiq.habilitaValorTotal
 	FROM
 	vLiquidacionDefinitivaReal vLiq
-	LEFT JOIN aNovedad nov
-	ON nov.empresa = vLiq.empresa
-	AND nov.concepto = vLiq.codConcepto
 	WHERE vLiq.empresa = @Empresa
 	AND vLiq.año = @Año
 	AND vLiq.noPeriodo = @Periodo
 	AND vLiq.tipo = @Tipo
 	AND vLiq.numero = @Numero
 	AND vLiq.codTercero = @CodTercero
-	AND vLiq.id = @CodContrato
-	GROUP BY 
-	vLiq.registroDetalleNomina,
-	vLiq.empresa,
-	vLiq.codConcepto,
-	vLiq.Expr1,
-	vLiq.cantidad,
-	vLiq.valorUnitario,
-	vLiq.valorTotal,
-	vLiq.valorTotalR,
-	vLiq.vTotalNR,
-	vLiq.porcentaje,
-	vLiq.signo,
-	vLiq.validaPorcentaje,
-	vLiq.baseSeguridadSocial;
+	AND vLiq.id = @CodContrato;
 END

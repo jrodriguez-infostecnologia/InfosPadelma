@@ -178,6 +178,7 @@ public partial class Nomina_Padministracion_Conceptos : System.Web.UI.Page
                     Convert.ToInt16(Session["empresa"]),
                     DateTime.Now,
                     chkConceptoFijo.Checked,
+                    chkHabilitaValorTotalEnModificaLiquidacion.Checked,
                     chkIngresoGravado.Checked,
                     chkManejaRango.Checked,
                     chkMostrarCantidad.Checked,
@@ -311,6 +312,16 @@ public partial class Nomina_Padministracion_Conceptos : System.Web.UI.Page
 
     }
 
+    private void ManejaBase()
+    {
+        if (chkManejaBase.Checked)
+            ddlConceptoBase.Enabled = true;
+        else
+        {
+            ddlConceptoBase.SelectedValue = "";
+            ddlConceptoBase.Enabled = false;
+        }
+    }
 
     #endregion Metodos
 
@@ -663,6 +674,12 @@ public partial class Nomina_Padministracion_Conceptos : System.Web.UI.Page
             else
                 this.txvNoMes.Text = "0";
 
+            foreach (Control objControl in this.gvLista.SelectedRow.Cells[36].Controls)
+            {
+                if (objControl is CheckBox)
+                    this.chkHabilitaValorTotalEnModificaLiquidacion.Checked = ((CheckBox)objControl).Checked;
+            }
+
             ValidaProcentaje();
             manejaRangos();
             cargarRangos();
@@ -861,23 +878,12 @@ public partial class Nomina_Padministracion_Conceptos : System.Web.UI.Page
         }
     }
 
-    #endregion Eventos
-
     protected void chkManejaBase_CheckedChanged(object sender, EventArgs e)
     {
         ManejaBase();
     }
 
-    private void ManejaBase()
-    {
-        if (chkManejaBase.Checked)
-            ddlConceptoBase.Enabled = true;
-        else
-        {
-            ddlConceptoBase.SelectedValue = "";
-            ddlConceptoBase.Enabled = false;
-        }
-    }
+    #endregion Eventos
 
 
 }

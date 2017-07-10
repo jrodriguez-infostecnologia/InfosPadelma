@@ -1857,4 +1857,10 @@
     <Build Include="dbo\Stored Procedures\SpSeleccionaCabeceraLiquidacionPrima.sql" />
     <None Include="Scripts\CREATE_PAGE_ModificacionLiquidacion.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Infos.Padelma.DB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\UPDATE_NCONCEPTO.sql" />
+  </ItemGroup>
 </Project>

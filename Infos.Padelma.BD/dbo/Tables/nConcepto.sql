@@ -36,6 +36,7 @@
     [sumaPrestacionSocial] BIT             NULL,
     [mostrarCantidad]      BIT             NULL,
     [noMes]                INT             NULL,
+    [habilitaValorTotal]  BIT				NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_nConcepto] PRIMARY KEY CLUSTERED ([empresa] ASC, [codigo] ASC)
 );
 
