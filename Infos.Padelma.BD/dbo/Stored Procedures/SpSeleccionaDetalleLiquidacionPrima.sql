@@ -16,7 +16,8 @@ AS
 	prima_detalle.base,
 	prima_detalle.diasPromedio,
 	prima_detalle.diasPrimas,
-	prima_detalle.valorPrima
+	prima_detalle.valorPrima,
+	prima_detalle.contrato
 	FROM nLiquidacionPrimaDetalle prima_detalle
 	INNER JOIN cTercero ter
 	ON 

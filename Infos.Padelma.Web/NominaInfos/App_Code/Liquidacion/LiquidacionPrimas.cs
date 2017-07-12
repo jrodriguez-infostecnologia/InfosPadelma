@@ -22,7 +22,7 @@ public class LiquidacionPrimas
     public string DiasPromedio { get; set; }
     public string DiasPrimas { get; set; }
     public string ValorPrima { get; set; }
-
+    public int Contrato { get; set; }
 
     public LiquidacionPrimas()
     {

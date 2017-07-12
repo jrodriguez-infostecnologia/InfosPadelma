@@ -2,15 +2,19 @@
     function init() {
         $(".numeric-field").on('keyup', function () {
             var n = parseInt($(this).val().replace(/\D/g, ''), 10);
-            if (isNaN(n))
-                return;
-            $(this).val(n.toLocaleString("EN"));
+            if (isNaN(n)) {
+                $(this).val($(this).val().replace(/\D/g, ''));
+            } else {
+                $(this).val(n.toLocaleString("EN"));
+            }
         });
         $(".numeric-field").on('formatNumeric', function () {
             var n = parseInt($(this).val().replace(/\D/g, ''), 10);
-            if (isNaN(n))
-                return;
-            $(this).val(n.toLocaleString("EN"));
+            if (isNaN(n)) {
+                $(this).val($(this).val().replace(/\D/g, ''));
+            } else {
+                $(this).val(n.toLocaleString("EN"));
+            }
         });
         function copyNumericValue(source, target) {
             var val = source.val().replace(/\D/g, "");

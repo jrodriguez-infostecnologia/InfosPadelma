@@ -10,3 +10,7 @@ C:\proyects\InfosPadelma\Infos.Padelma.BD\obj\Debug\InfosPadelmaDB.dll
 C:\proyects\InfosPadelma\Infos.Padelma.BD\obj\Debug\InfosPadelmaDB.pdb
 C:\proyects\InfosPadelma\Infos.Padelma.BD\bin\Debug\InfosPadelmaDB.dll
 C:\proyects\InfosPadelma\Infos.Padelma.BD\bin\Debug\InfosPadelmaDB.pdb
+C:\proyects\InfosPadelma\Infos.Padelma.BD\obj\Debug\Model.xml
+C:\proyects\InfosPadelma\Infos.Padelma.BD\obj\Debug\refactor.xml
+C:\proyects\InfosPadelma\Infos.Padelma.BD\obj\Debug\postdeploy.sql
+C:\proyects\InfosPadelma\Infos.Padelma.BD\obj\Debug\predeploy.sql

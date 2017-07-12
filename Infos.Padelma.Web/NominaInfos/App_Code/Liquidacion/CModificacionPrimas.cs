@@ -36,10 +36,23 @@ public class CModificacionPrimas
         return ds.Tables[0].Rows.Count > 0 ? ds.Tables[0].Rows[0] : null;
     }
 
+    public DataSet CargarTerceros(string empresa)
+    {
+        string[] iParametros = new string[] { "@empresa" };
+        object[] objValores = new object[] { empresa };
+
+        var ds = Cacceso.DataSetParametros(
+            "SpSeleccionaTercerosModificacionPrima",
+            iParametros,
+            objValores,
+            "ppa");
+        return ds;
+    }
+
     public void GuardarCambios(DataTable table)
     {
         string[] iParametros = new string[] { "@DataTable" };
-        string[] oParametros = new string[] {  };
+        string[] oParametros = new string[] { };
         object[] objValores = new object[] { table };
 
         var ds = Cacceso.ExecProc(
@@ -48,5 +61,18 @@ public class CModificacionPrimas
             oParametros,
             objValores,
             "ppa");
+    }
+
+    public DataRow CargarInformacionTercero(string empresa, string tercero)
+    {
+        string[] iParametros = new string[] { "@empresa", "@tercero" };
+        object[] objValores = new object[] { empresa, tercero };
+
+        var ds = Cacceso.DataSetParametros(
+            "SpGetDetalleTerceroActualizacionLiquidacion",
+            iParametros,
+            objValores,
+            "ppa");
+        return ds.Tables[0].Rows.Count > 0 ? ds.Tables[0].Rows[0] : null;
     }
 }

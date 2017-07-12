@@ -123,14 +123,100 @@
                     </td>
                     <td style="width: 80px"></td>
                 </tr>
+            </table>
+            <hr />
+            <span>Registrar tercero</span>
+            <hr />
+            <table style="width: 100%;">
                 <tr>
-                    <td style="width: 80px"></td>
-                    <td colspan="4" style="text-align: center;">
+                    <td style="width: 20px"></td>
+                    <td style="width: 100px; text-align: left;">
+                        <asp:Label ID="lblTercero" runat="server" Text="Tercero"></asp:Label>
+                    </td>
+                    <td style="width: 350px; text-align: left;">
+                        <asp:DropDownList ID="ddlTercero" runat="server" CssClass="chzn-select" data-placeholder="Seleccione una opción..." Width="100%"></asp:DropDownList>
+                        <asp:Label ID="ddlTerceroVal" runat="server" ForeColor="Red" Style="display:block"></asp:Label>
+                    </td>
+                    <td style="width: 120px; text-align: left;">
+                        <asp:LinkButton ID="lblFechaIngreso" runat="server" OnClick="lblFechaIngreso_Click" Style="color: #003366">Fecha Ingreso</asp:LinkButton>
+                    </td>
+                    <td class="Campos">
+                        <asp:Calendar ID="niCalendarFechaIngreso" runat="server" BackColor="White" BorderColor="#999999"
+                            CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
+                            ForeColor="Black" Height="180px" OnSelectionChanged="CalendarFechaIngreso_SelectionChanged" Width="150px" Visible="false">
+                            <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                            <SelectorStyle BackColor="#CCCCCC" />
+                            <WeekendDayStyle BackColor="FloralWhite" />
+                            <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                            <OtherMonthDayStyle ForeColor="Gray" />
+                            <NextPrevStyle VerticalAlign="Bottom" />
+                            <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                            <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                        </asp:Calendar>
+                        <asp:TextBox ID="txtFechaIngreso" runat="server" Font-Bold="True" ForeColor="Gray"
+                            CssClass="input" AutoPostBack="True" OnTextChanged="txtFechaIngreso_TextChanged"></asp:TextBox>
+                        <asp:Label ID="txtFechaIngresoVal" runat="server" ForeColor="Red" Style="display:block"></asp:Label>
+                    </td>
+                    <td style="width: 20px"></td>
+                </tr>
+                <tr>
+                    <td style="width: 20px"></td>
+                    <td style="width: 120px; text-align: left;">
+                        <asp:LinkButton ID="lblFechaInicio" runat="server" OnClick="lblFechaInicio_Click"
+                            Style="color: #003366">Fecha Inicio</asp:LinkButton>
+                    </td>
+                    <td class="Campos">
+                        <asp:Calendar ID="CalendarFechaInicio" runat="server" BackColor="White" BorderColor="#999999"
+                            CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
+                            ForeColor="Black" Height="180px" OnSelectionChanged="CalendarFechaInicio_SelectionChanged" Width="150px" Visible="false">
+                            <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                            <SelectorStyle BackColor="#CCCCCC" />
+                            <WeekendDayStyle BackColor="FloralWhite" />
+                            <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                            <OtherMonthDayStyle ForeColor="Gray" />
+                            <NextPrevStyle VerticalAlign="Bottom" />
+                            <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                            <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                        </asp:Calendar>
+                        <asp:TextBox ID="txtFechaInicio" runat="server" Font-Bold="True" ForeColor="Gray"
+                            CssClass="input" AutoPostBack="True" OnTextChanged="txtFechaInicio_TextChanged"></asp:TextBox>
+                        <asp:Label ID="txtFechaInicioVal" runat="server" ForeColor="Red" Style="display:block"></asp:Label>
+                    </td>
+                    <td style="width: 120px; text-align: left;">
+                        <asp:LinkButton ID="lblFechaFin" runat="server" OnClick="lblFechaFin_Click"
+                            Style="color: #003366">Fecha Fin</asp:LinkButton>
+                    </td>
+                    <td class="Campos">
+                        <asp:Calendar ID="CalendarFechaFin" runat="server" BackColor="White" BorderColor="#999999"
+                            CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt"
+                            ForeColor="Black" Height="180px" OnSelectionChanged="CalendarFechaFin_SelectionChanged" Width="150px" Visible="false">
+                            <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                            <SelectorStyle BackColor="#CCCCCC" />
+                            <WeekendDayStyle BackColor="FloralWhite" />
+                            <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                            <OtherMonthDayStyle ForeColor="Gray" />
+                            <NextPrevStyle VerticalAlign="Bottom" />
+                            <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                            <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                        </asp:Calendar>
+                        <asp:TextBox ID="txtFechaFin" runat="server" Font-Bold="True" ForeColor="Gray"
+                            CssClass="input" AutoPostBack="True" OnTextChanged="txtFechaFin_TextChanged"></asp:TextBox>
+                        <asp:Label ID="txtFechaFinVal" runat="server" ForeColor="Red" Style="display:block"></asp:Label>
+                    </td>
+                    <td style="width: 20px"></td>
+                </tr>
+                <tr>
+                    <td style="width: 20px"></td>
+                    <td style="text-align: center;" colspan="4">
+                        <asp:ImageButton ID="btnCargar" runat="server" ImageUrl="~/Imagen/Bonotes/btnCargar.png" onmouseout="this.src='../../Imagen/Bonotes/btnCargar.png'" onmouseover="this.src='../../Imagen/Bonotes/btnCargarN.png'" ToolTip="Cargar nuevo tercero" Style="height: 21px" OnClick="btnCargar_Click" />
                         <asp:ImageButton ID="btnGuardar" runat="server" ImageUrl="~/Imagen/Bonotes/btnGuardar.jpg" OnClientClick="if(!confirm('Desea guardar los cambios ?')){return false;};" onmouseout="this.src='../../Imagen/Bonotes/btnGuardar.jpg'" onmouseover="this.src='../../Imagen/Bonotes/btnGuardarN.jpg'" ToolTip="Guardar Cambios" OnClick="btnGuardar_Click" />
                         <asp:ImageButton ID="lbCancelar" runat="server" ImageUrl="~/Imagen/Bonotes/btnCancelar.jpg" onmouseout="this.src='../../Imagen/Bonotes/btnCancelar.jpg'" onmouseover="this.src='../../Imagen/Bonotes/btnCancelarNegro.jpg'" ToolTip="Cancela la operación" OnClick="lbCancelar_Click" />
                     </td>
                     <td style="width: 80px"></td>
                 </tr>
+            </table>
+            <hr />
+            <table style="width: 100%;">
                 <tr>
                     <td colspan="6" style="text-align: center;" class="auto-style3">
                         <div>
@@ -139,9 +225,16 @@
                         </div>
                         <div style="text-align: center">
                             <div style="display: inline-block" id="detalleLiqidacion" runat="server">
-                                <asp:GridView ID="gvDetalleLiquidacion" runat="server" AutoGenerateColumns="False" CssClass="Grid" GridLines="None" RowHeaderColumn="cuenta" Width="100%">
+                                <asp:GridView ID="gvDetalleLiquidacion" runat="server" AutoGenerateColumns="False" CssClass="Grid" GridLines="None" RowHeaderColumn="cuenta" Width="100%" OnRowDeleting="gvDetalleLiquidacion_RowDeleting">
                                     <AlternatingRowStyle CssClass="alt" />
                                     <Columns>
+                                        <asp:TemplateField HeaderText="Anul">
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="imElimina" runat="server" CommandName="Delete" ImageUrl="~/Imagen/TabsIcon/cancel.png" OnClientClick="if(!confirm('Desea eliminar el registro ?')){return false;};" ToolTip="Elimina el registro seleccionado" />
+                                            </ItemTemplate>
+                                            <HeaderStyle BackColor="White" />
+                                            <ItemStyle Width="20px" CssClass="Items" HorizontalAlign="Center" />
+                                        </asp:TemplateField>
                                         <asp:BoundField DataField="CodigoTercero" HeaderText="Cod.">
                                             <HeaderStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" />
                                             <ItemStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" Width="10px" />
@@ -182,7 +275,7 @@
                                             <ItemTemplate>
                                                 <asp:TextBox ID="txvValorPromedio" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Text='<%#Eval("ValorPromedio") %>' Width="80%">0</asp:TextBox>
                                             </ItemTemplate>
-                                            <ItemStyle CssClass="Items" Width="80px" />
+                                            <ItemStyle CssClass="Items" Width="90px" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Dias Promedio" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
@@ -194,7 +287,7 @@
                                             <ItemTemplate>
                                                 <asp:TextBox ID="txvBase" runat="server" ClientIDMode="Static" CssClass="input numeric-field" Text='<%#Eval("Base") %>' Enabled="false" Width="80%">0</asp:TextBox>
                                             </ItemTemplate>
-                                            <ItemStyle CssClass="Items"  Width="90px" />
+                                            <ItemStyle CssClass="Items" Width="90px" />
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Dias Prima" ItemStyle-HorizontalAlign="Right">
                                             <ItemTemplate>
