@@ -18,7 +18,9 @@
     [declarante]        BIT           CONSTRAINT [DF_nFuncionario_declarante] DEFAULT ((0)) NOT NULL,
     [contratista]       BIT           NULL,
     [otros]             BIT           NULL,
+    [foto] INT NULL, 
     CONSTRAINT [PK_nFuncionario] PRIMARY KEY CLUSTERED ([empresa] ASC, [tercero] ASC),
-    CONSTRAINT [FK_nFuncionario_gEmpresa] FOREIGN KEY ([empresa]) REFERENCES [dbo].[gEmpresa] ([id])
+    CONSTRAINT [FK_nFuncionario_gEmpresa] FOREIGN KEY ([empresa]) REFERENCES [dbo].[gEmpresa] ([id]), 
+    CONSTRAINT [FK_nFuncionario_gFoto] FOREIGN KEY ([foto]) REFERENCES [gFoto]([id])
 );
 

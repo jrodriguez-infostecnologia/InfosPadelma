@@ -21,4 +21,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="habilitaValorTotal" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="45408c2c-144b-4004-911f-d1f6f836d7dc" ChangeDateTime="07/13/2017 16:22:16">
+    <Property Name="ElementName" Value="[dbo].[FK_nFuncionario_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[nFuncionario]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_nFuncionario_gFoto]" />
+  </Operation>
 </Operations>

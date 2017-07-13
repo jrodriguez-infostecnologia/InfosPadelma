@@ -4,5 +4,12 @@
 as
 
 
-select * from cTercero
-where id=@tercero and empresa=@empresa
+select 
+b.*,
+a.*,
+c.foto fotoBinaria 
+from 
+cTercero b
+INNER JOIN nFuncionario a on a.tercero = b.id and a.empresa = b.empresa
+LEFT JOIN gFoto c on c.id=a.foto
+where b.id=@tercero and b.empresa=@empresa

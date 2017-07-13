@@ -37,6 +37,16 @@ public partial class Facturacion_Padministracion_Contratos : System.Web.UI.Page
             {
                 txtDescripcion.Text = drv.Row.ItemArray.GetValue(12).ToString().Trim();
                 txtIdentificacion.Text = drv.Row.ItemArray.GetValue(5).ToString().Trim();
+                txtIdentificacion.Text = drv.Row.ItemArray.GetValue(5).ToString().Trim();
+
+                var Foto = (drv.Row["fotoBinaria"] is byte[]) ? (byte[])drv.Row["fotoBinaria"] : null;
+                this.imbFuncionario.ImageUrl = "";
+                string urlFoto = string.Empty;
+                if (Foto != null)
+                {
+                    urlFoto = "data:image/png;base64," + Convert.ToBase64String(Foto, Base64FormattingOptions.None);
+                    this.imbFuncionario.ImageUrl = urlFoto;
+                }
             }
             txtCodigoTercero.Text = ddlTercero.SelectedValue.ToString();
             txtNroContrato.Text = contratos.Consecutivo(Convert.ToInt32(Session["empresa"]), txtIdentificacion.Text.Trim());
@@ -130,9 +140,8 @@ public partial class Facturacion_Padministracion_Contratos : System.Web.UI.Page
             this.pnContratos.Controls);
 
         this.nilbNuevo.Visible = true;
-        //this.fuFoto.Visible = false;
-        //this.imbFuncionario.Visible = false;
-        //txtFechaNacimiento.Visible = false;
+        this.imbFuncionario.ImageUrl = "";
+        this.imbFuncionario.Visible = false;
         pnContratos.Visible = false;
 
 
@@ -736,6 +745,7 @@ public partial class Facturacion_Padministracion_Contratos : System.Web.UI.Page
         this.nilbNuevo.Visible = true;
         this.nilblInformacion.Text = "";
         //this.fuFoto.Visible = false;
+        this.imbFuncionario.ImageUrl = "";
         this.imbFuncionario.Visible = false;
 
     }
@@ -747,6 +757,7 @@ public partial class Facturacion_Padministracion_Contratos : System.Web.UI.Page
         pnContratos.Visible = false;
         this.nilbNuevo.Visible = true;
         this.imbFuncionario.Visible = false;
+        this.imbFuncionario.ImageUrl = "";
         GetEntidad();
     }
 
@@ -953,6 +964,8 @@ public partial class Facturacion_Padministracion_Contratos : System.Web.UI.Page
             DataView dvContrato = contratos.RetornaDatosContrato(Convert.ToInt32(Session["empresa"]), tercero, contrato);
             txtDescripcion.Text = HttpUtility.HtmlDecode(this.gvLista.SelectedRow.Cells[4].Text.Trim());
             txtCodigoTercero.Text = this.gvLista.SelectedRow.Cells[3].Text.Trim();
+
+
 
             foreach (DataRowView registro in dvContrato)
             {
@@ -1198,6 +1211,15 @@ public partial class Facturacion_Padministracion_Contratos : System.Web.UI.Page
                     txvValorContrato.Text = registro.Row.ItemArray.GetValue(76).ToString();
                 else
                     txvValorContrato.Text = "0";
+                
+                var Foto = (registro.Row["fotoBinaria"] is byte[]) ? (byte[])registro.Row["fotoBinaria"] : null;
+                this.imbFuncionario.ImageUrl = "";
+                string urlFoto = string.Empty;
+                if (Foto != null)
+                {
+                    urlFoto = "data:image/png;base64," + Convert.ToBase64String(Foto, Base64FormattingOptions.None);
+                    this.imbFuncionario.ImageUrl = urlFoto;
+                }
             }
 
             manejoEdicion(false);

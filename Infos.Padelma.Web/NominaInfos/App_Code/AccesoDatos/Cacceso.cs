@@ -73,6 +73,10 @@ public class Cacceso
             {
                 BdSql.AddInParameter(comando, ParIn, SqlDbType.Structured, ObjValores.GetValue(i));
             }
+            else if (ObjValores.GetValue(i).GetType() == typeof(byte[]))
+            {
+                BdSql.AddInParameter(comando, ParIn, SqlDbType.Image, ObjValores.GetValue(i));
+            }
             else
             {
                 BdSql.AddInParameter(comando, ParIn, DbType.Decimal, ObjValores.GetValue(i));
@@ -124,6 +128,10 @@ public class Cacceso
             else if (ObjValores.GetValue(i).GetType() == typeof(DataTable))
             {
                 BdSql.AddInParameter(comando, ParIn, SqlDbType.Structured, ObjValores.GetValue(i));
+            }
+            else if (ObjValores.GetValue(i).GetType() == typeof(byte[]))
+            {
+                BdSql.AddInParameter(comando, ParIn, SqlDbType.Image, ObjValores.GetValue(i));
             }
             else
             {

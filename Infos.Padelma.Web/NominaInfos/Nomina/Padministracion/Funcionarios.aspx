@@ -1,4 +1,5 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeFile="Funcionarios.aspx.cs" Inherits="Facturacion_Padministracion_Clientes1" %>
+
 <%@ Register Assembly="obout_Calendar2_Net" Namespace="OboutInc.Calendar2" TagPrefix="obout" %>
 <%@ Register Src="../Control/Calendario.ascx" TagName="Calendario" TagPrefix="uc1" %>
 
@@ -100,102 +101,103 @@
                                     <asp:Panel ID="pnTercero" runat="server" Visible="False">
                                         <fieldset>
                                             <legend>Información del tercero</legend>
-                                            <div style="padding:5px">
-                                            <table  style="width: 700px" width="100%">
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="Label23" runat="server" Text="Código"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:TextBox ID="txtCodigo" runat="server" AutoPostBack="True" CssClass="input" OnTextChanged="txtCodigo_TextChanged" onkeyup="formato_numero(this)" TabIndex="1" Width="150px"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="Label5" runat="server" Text="Tipo Identificación"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:DropDownList ID="ddlTipoID" runat="server" CssClass="chzn-select" data-placeholder="Seleccione una opción..." Height="20px" TabIndex="2" Width="300px" Enabled="False">
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="Label4" runat="server" Text="Nro. Identificacion"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos" valign="middle">
-                                                        <asp:TextBox ID="txtDocumento" runat="server" CssClass="input" TabIndex="3" Width="200px"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="lblPrimerApellido" runat="server" Text="Primer Apellido"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:TextBox ID="txtApellido1" runat="server" CssClass="input" TabIndex="5" Width="220px"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="lblSegundoApellido" runat="server" Text="Segundo Apellido"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:TextBox ID="txtApellido2" runat="server" CssClass="input" TabIndex="6" Width="220px"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="lblPrimerNombre" runat="server" Text="Primer Nombre"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:TextBox ID="txtNombre1" runat="server" CssClass="input" TabIndex="7" Width="220px"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="lblSegundoNombre" runat="server" Text="Segundo Nombre"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:TextBox ID="txtNombre2" runat="server" CssClass="input" TabIndex="7" Width="220px"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="lblSegundoNombre0" runat="server" Text="Teléfono"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:TextBox ID="txtTelefono" runat="server" CssClass="input" TabIndex="7" Width="180px" MaxLength="15"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="lblDireccion" runat="server" Text="Dirección"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:TextBox ID="txtDireccion" runat="server" CssClass="input" TabIndex="7" Width="400px"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="Label24" runat="server" Text="Departamento" Visible="False"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:DropDownList ID="ddlDepartamento" runat="server" AutoPostBack="True" CssClass="chzn-select" data-placeholder="Seleccione una opción..." Height="20px" OnSelectedIndexChanged="ddlDepartamento_SelectedIndexChanged" TabIndex="14" Visible="False" Width="300px">
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 120px; text-align: left;">
-                                                        <asp:Label ID="Label22" runat="server" Text="Ciudad" Visible="False"></asp:Label>
-                                                    </td>
-                                                    <td class="Campos">
-                                                        <asp:DropDownList ID="ddlCiudad" runat="server" CssClass="chzn-select" data-placeholder="Seleccione una opción..." Height="20px" TabIndex="14" Visible="False" Width="300px">
-                                                        </asp:DropDownList>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                                </div>
-                                        </fieldset></asp:Panel>
+                                            <div style="padding: 5px">
+                                                <table style="width: 700px" width="100%">
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="Label23" runat="server" Text="Código"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:TextBox ID="txtCodigo" runat="server" AutoPostBack="True" CssClass="input" OnTextChanged="txtCodigo_TextChanged" onkeyup="formato_numero(this)" TabIndex="1" Width="150px"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="Label5" runat="server" Text="Tipo Identificación"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:DropDownList ID="ddlTipoID" runat="server" CssClass="chzn-select" data-placeholder="Seleccione una opción..." Height="20px" TabIndex="2" Width="300px" Enabled="False">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="Label4" runat="server" Text="Nro. Identificacion"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos" valign="middle">
+                                                            <asp:TextBox ID="txtDocumento" runat="server" CssClass="input" TabIndex="3" Width="200px"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="lblPrimerApellido" runat="server" Text="Primer Apellido"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:TextBox ID="txtApellido1" runat="server" CssClass="input" TabIndex="5" Width="220px"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="lblSegundoApellido" runat="server" Text="Segundo Apellido"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:TextBox ID="txtApellido2" runat="server" CssClass="input" TabIndex="6" Width="220px"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="lblPrimerNombre" runat="server" Text="Primer Nombre"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:TextBox ID="txtNombre1" runat="server" CssClass="input" TabIndex="7" Width="220px"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="lblSegundoNombre" runat="server" Text="Segundo Nombre"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:TextBox ID="txtNombre2" runat="server" CssClass="input" TabIndex="7" Width="220px"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="lblSegundoNombre0" runat="server" Text="Teléfono"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:TextBox ID="txtTelefono" runat="server" CssClass="input" TabIndex="7" Width="180px" MaxLength="15"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="lblDireccion" runat="server" Text="Dirección"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:TextBox ID="txtDireccion" runat="server" CssClass="input" TabIndex="7" Width="400px"></asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="Label24" runat="server" Text="Departamento" Visible="False"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:DropDownList ID="ddlDepartamento" runat="server" AutoPostBack="True" CssClass="chzn-select" data-placeholder="Seleccione una opción..." Height="20px" OnSelectedIndexChanged="ddlDepartamento_SelectedIndexChanged" TabIndex="14" Visible="False" Width="300px">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 120px; text-align: left;">
+                                                            <asp:Label ID="Label22" runat="server" Text="Ciudad" Visible="False"></asp:Label>
+                                                        </td>
+                                                        <td class="Campos">
+                                                            <asp:DropDownList ID="ddlCiudad" runat="server" CssClass="chzn-select" data-placeholder="Seleccione una opción..." Height="20px" TabIndex="14" Visible="False" Width="300px">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </fieldset>
+                                    </asp:Panel>
                                 </td>
                                 <td></td>
                             </tr>
@@ -315,7 +317,9 @@
                                 </td>
                                 <td class="Campos">
                                     <asp:FileUpload ID="fuFoto" runat="server" ToolTip="Haga clic para cargar la foto del funcionario seleccionado"
-                                        Visible="False" Width="360px" /></td>
+                                        Visible="False" Width="360px" onchange="hiddenCommand.click();" />
+                                    <asp:Button ID="hiddenCommand" runat="server" ClientIDMode="Static" OnClick="hiddenCommand_Click" Style="display: none;" />
+                                </td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -425,6 +429,10 @@
                                 <ItemStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" HorizontalAlign="Center" Width="40px" />
                             </asp:CheckBoxField>
                             <asp:CheckBoxField DataField="otros" HeaderText="Otros" />
+                            <asp:BoundField DataField="foto" HeaderText="Foto">
+                                <HeaderStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" HorizontalAlign="Center" />
+                                <ItemStyle BorderColor="Silver" BorderStyle="Solid" BorderWidth="1px" HorizontalAlign="Center" Width="40px" />
+                            </asp:BoundField>
                         </Columns>
                         <PagerStyle CssClass="pgr" />
                         <RowStyle CssClass="rw" />

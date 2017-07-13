@@ -15,11 +15,11 @@ public class Cterceros
 {
 
     public Cterceros()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
     public DataView RetornaDatosTercero(string tercero, int empresa)
     {
@@ -39,14 +39,24 @@ public class Cterceros
             "cTercero",
             "ppa").Tables[0].DefaultView;
 
-        dvEntidad.RowFilter = "empresa="+empresa+" and (codigo like '%" + texto + "%' or descripcion like '%" + texto + "%')";
+        dvEntidad.RowFilter = "empresa=" + empresa + " and (codigo like '%" + texto + "%' or descripcion like '%" + texto + "%')";
         dvEntidad.Sort = "descripcion";
 
         return dvEntidad;
     }
 
+    public DataRow BuscarFoto(int foto)
+    {
+        object[] objKey = new object[] { foto };
+        DataView dvEntidad = CentidadMetodos.EntidadGetKey(
+            "gFoto",
+            "ppa", objKey).Tables[0].DefaultView;
+
+        return dvEntidad.Table.Rows.Count > 0 ? dvEntidad.Table.Rows[0] : null;
+    }
+
     public int VerificaTercero(string tercero, out string nombre)
-    {        
+    {
         object[] objKey = new object[] { tercero };
 
         DataView dvTerceros = CentidadMetodos.EntidadGetKey(
@@ -69,9 +79,9 @@ public class Cterceros
     public int RetornaConsecutivoIdtercero(int empresa)
     {
 
-        string[] iParametros = new string[] { "@empresa"};
+        string[] iParametros = new string[] { "@empresa" };
         string[] oParametros = new string[] { "@retorno" };
-        object[] objValores = new object[] { empresa};
+        object[] objValores = new object[] { empresa };
 
         object[] resultado = Cacceso.ExecProc(
             "spRetornaConsecutivoIdTercero",
@@ -88,9 +98,9 @@ public class Cterceros
     public int RetornaCodigoTercero(string codigo, int empresa)
     {
 
-        string[] iParametros = new string[] { "@codigo","@empresa" };
+        string[] iParametros = new string[] { "@codigo", "@empresa" };
         string[] oParametros = new string[] { "@retorno" };
-        object[] objValores = new object[] { codigo,empresa};
+        object[] objValores = new object[] { codigo, empresa };
 
         object[] resultado = Cacceso.ExecProc(
             "spRetornaCodigoTercero",

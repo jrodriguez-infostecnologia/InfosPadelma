@@ -9,12 +9,13 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Transactions;
+using System.IO;
 
 public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
 {
     #region Instancias
 
-    
+
     SeguridadInfos.Security seguridad = new SeguridadInfos.Security();
     Cterceros terceros = new Cterceros();
     CIP ip = new CIP();
@@ -26,6 +27,12 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
     string editar = "A";
 
     Cfuncionarios funcionarios = new Cfuncionarios();
+
+    private byte[] Foto
+    {
+        get { object o = Session["Foto"]; return (o == null) ? null : (byte[])o; }
+        set { Session["Foto"] = value; }
+    }
 
     #endregion Instancias
 
@@ -95,6 +102,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         CcontrolesUsuario.LimpiarControles(this.pnTercero.Controls);
         this.nilbNuevo.Visible = true;
         this.fuFoto.Visible = false;
+        imbFuncionario.ImageUrl = "";
         this.imbFuncionario.Visible = false;
         txtFechaNacimiento.Visible = false;
         this.pnTercero.Visible = false;
@@ -215,24 +223,22 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         {
             using (TransactionScope ts = new TransactionScope())
             {
+              
+                if (Foto == null)
+                {
+                    if (operacion == "inserta" && chkValidaFoto.Checked == true)
+                    {
+                        CcontrolesUsuario.MensajeError("Debe seleccionar la foto del funcionario", nilblInformacion);
+                        return;
+                    }
+                }
                 if (pnTercero.Visible == true)
                 {
                     int id = 0;
-                    object nit = null, dv = null, foto = null, contacto = null, telefono = null, direccion = null, barrio = null;
+                    object nit = null, dv = null, contacto = null, telefono = null, direccion = null, barrio = null;
                     object fax = null, email = null, razonSocial = null, descripcion = null, identificacion = null;
 
-                    if (this.fuFoto.HasFile)
-                    {
-                        //    this.fuFoto.SaveAs(Convert.ToString(ConfigurationManager.AppSettings["urlFoto"]) + Convert.ToString(txtIdentificacion.Text).Trim() + ".png");
-                    }
-                    else
-                    {
-                        if (operacion == "inserta" && chkValidaFoto.Checked == true)
-                        {
-                            CcontrolesUsuario.MensajeError("Debe seleccionar la foto del funcionario", nilblInformacion);
-                            return;
-                        }
-                    }
+
                     if (Convert.ToBoolean(this.Session["editar"]) == true)
                     {
                         operacionTer = "actualiza";
@@ -258,7 +264,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
                         return;
                     }
 
-                    if (txtDocumento.Text.Trim().Length == 0 || txtApellido1.Text.Trim().Length == 0 || txtNombre1.Text.Trim().Length == 0 || txtDireccion.Text.Trim().Length == 0 || ddlCiudad.SelectedValue.Length==0)
+                    if (txtDocumento.Text.Trim().Length == 0 || txtApellido1.Text.Trim().Length == 0 || txtNombre1.Text.Trim().Length == 0 || txtDireccion.Text.Trim().Length == 0 || ddlCiudad.SelectedValue.Length == 0)
                     {
                         CcontrolesUsuario.MensajeError("Campos vacios por favor corrija", nilblInformacion);
                         return;
@@ -286,7 +292,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
                                         false,   //extractora
                                         null,//@fax
                                         DateTime.Now,//@fechaRegistro
-                                        foto,//@foto
+                                        null,//@foto
                                         id,//@id
                                         txtDocumento.Text,//@nit
                                         txtNombre1.Text,//@nombre1
@@ -323,7 +329,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
                             else
                                 identificacion = txtIdentificacion.Text.Trim();
 
-                            object[] objValores1 = new object[]{                
+                            object[] objValores1 = new object[]{
                                 this.chkActivo.Checked,
                                 ddlCiudadNacimineto.SelectedValue,
                                 cliente,
@@ -335,6 +341,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
                                 Convert.ToInt32(Session["empresa"]),
                                 chkExtranjero.Checked,
                                 Convert.ToDateTime(txtFechaNacimiento.Text),
+                                Foto,
                                 nivelEducativo,
                                 chkOperador.Checked,
                                 chkOtros.Checked,
@@ -379,7 +386,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
                     else
                         nivelEducativo = ddlNivelEducativo.SelectedValue;
 
-                    object[] objValores = new object[]{                
+                    object[] objValores = new object[]{
                             this.chkActivo.Checked,
                             ddlCiudadNacimineto.SelectedValue,
                             cliente,
@@ -391,6 +398,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
                             Convert.ToInt32(Session["empresa"]),
                             chkExtranjero.Checked,
                             Convert.ToDateTime( txtFechaNacimiento.Text),
+                            Foto,
                             nivelEducativo,
                             chkOperador.Checked,
                             chkOtros.Checked,
@@ -469,7 +477,9 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         this.txtDescripcion.Enabled = false;
         this.txtIdentificacion.Enabled = false;
         this.fuFoto.Visible = true;
+        imbFuncionario.ImageUrl = "";
         chkValidaFoto.Checked = true;
+        Foto = null;
         chkManejaTercero.Text = "Crea tercero";
     }
 
@@ -486,6 +496,8 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         this.nilbNuevo.Visible = true;
         this.nilblInformacion.Text = "";
         this.fuFoto.Visible = false;
+        imbFuncionario.ImageUrl = "";
+        Foto = null;
         this.imbFuncionario.Visible = false;
         chkManejaTercero.Text = "Crea tercero";
     }
@@ -496,6 +508,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         this.nilbNuevo.Visible = true;
         this.imbFuncionario.Visible = false;
         this.fuFoto.Visible = false;
+        Foto = null;
         txtFechaNacimiento.Visible = false;
         GetEntidad();
     }
@@ -541,6 +554,9 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         this.txtIdentificacion.Enabled = false;
         this.fuFoto.Visible = true;
         this.ddlTercero.Enabled = false;
+        Foto = null;
+        imbFuncionario.ImageUrl = "";
+
         try
         {
             CargarCombos();
@@ -551,6 +567,8 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
                 this.Session["id"] = dvTercero.Table.Rows[0].ItemArray.GetValue(1).ToString();
             else
                 this.Session["id"] = null;
+
+
 
             if (dvTercero.Table.Rows.Count > 0)
             {
@@ -678,6 +696,14 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
                     if (objControl is CheckBox)
                         this.chkOtros.Checked = ((CheckBox)objControl).Checked;
                 }
+
+                if (!string.IsNullOrWhiteSpace(Server.HtmlDecode(gvLista.SelectedRow.Cells[20].Text)))
+                {
+                    var idFoto = Convert.ToInt32(Server.HtmlDecode(gvLista.SelectedRow.Cells[20].Text));
+
+                    var result = terceros.BuscarFoto(idFoto);
+                    Foto = (result["foto"] is byte[]) ? (byte[])result["foto"] : null;
+                }
             }
 
         }
@@ -689,8 +715,12 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         try
         {
             this.imbFuncionario.Visible = true;
-            string urlFoto = ConfigurationManager.AppSettings["RutaFoto"] + Convert.ToString(txtIdentificacion.Text) + ".png";
-            this.imbFuncionario.ImageUrl = urlFoto;
+            string urlFoto = string.Empty;
+            if (Foto != null)
+            {
+                urlFoto = "data:image/png;base64," + Convert.ToBase64String(Foto, Base64FormattingOptions.None);
+                this.imbFuncionario.ImageUrl = urlFoto;
+            }
         }
         catch (Exception ex)
         {
@@ -851,7 +881,7 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
         }
     }
 
-   
+
 
 
     protected void chkValidaFoto_CheckedChanged(object sender, EventArgs e)
@@ -911,5 +941,27 @@ public partial class Facturacion_Padministracion_Clientes1 : System.Web.UI.Page
     protected void chkContratista_CheckedChanged(object sender, EventArgs e)
     {
         cargarComboxDetalle();
+    }
+
+    protected void hiddenCommand_Click(object sender, EventArgs e)
+    {
+        if (this.fuFoto.HasFile)
+        {
+            Stream fs = fuFoto.PostedFile.InputStream;
+            BinaryReader br = new BinaryReader(fs);
+            Foto = br.ReadBytes((int)fs.Length);
+        }
+        else
+        {
+            CcontrolesUsuario.MensajeError("Debe seleccionar la foto del funcionario", nilblInformacion);
+            return;
+        }
+        this.imbFuncionario.Visible = true;
+        string urlFoto = string.Empty;
+        if (Foto != null)
+        {
+            urlFoto = "data:image/png;base64," + Convert.ToBase64String(Foto, Base64FormattingOptions.None);
+            this.imbFuncionario.ImageUrl = urlFoto;
+        }
     }
 }
