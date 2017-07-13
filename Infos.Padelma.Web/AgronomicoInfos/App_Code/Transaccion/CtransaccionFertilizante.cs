@@ -7,6 +7,8 @@ using System.Web;
 /// <summary>
 /// Descripción breve de CtransaccionFertilizante
 /// </summary>
+/// 
+[Serializable]
 public class CtransaccionFertilizante
 {
     public CtransaccionFertilizante()

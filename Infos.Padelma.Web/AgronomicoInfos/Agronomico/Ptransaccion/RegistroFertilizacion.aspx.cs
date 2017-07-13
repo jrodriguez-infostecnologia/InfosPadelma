@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Transactions;
 using System.Web;
@@ -13,7 +14,11 @@ using System.Web.UI.WebControls;
 
 public class Csubtotal
 {
-    public string novedades { get; set; } public string nombreNovedades { get; set; } public decimal subCantidad { get; set; } public decimal subRacimo { get; set; } public decimal subJornal { get; set; }
+    public string novedades { get; set; }
+    public string nombreNovedades { get; set; }
+    public decimal subCantidad { get; set; }
+    public decimal subRacimo { get; set; }
+    public decimal subJornal { get; set; }
     public Csubtotal() { }
     public Csubtotal(string novedades, string nombreNovedades, decimal subCantidad, decimal subRacimo, decimal subJornal) { this.novedades = novedades; this.nombreNovedades = nombreNovedades; this.subCantidad = subCantidad; this.subRacimo = subRacimo; this.subJornal = subJornal; }
 }
@@ -52,7 +57,6 @@ public class CsubtotalItems
     }
 }
 
-
 public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
 {
 
@@ -64,7 +68,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
     Ccuadrillas cuadrillas = new Ccuadrillas();
     Ctercero terceros;
     CtransaccionFertilizante novedadTransaccion = new CtransaccionFertilizante();
-    List<CtransaccionFertilizante> listaNovedadesTransaccion = new List<CtransaccionFertilizante>();
     Cseccion seccion = new Cseccion();
     CIP ip = new CIP();
     Ctransacciones transacciones = new Ctransacciones();
@@ -83,7 +86,24 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
     List<CtransaccionFertilizante> listaTransaccionFertilizante = new List<CtransaccionFertilizante>();
     CtransaccionFertilizante trafer = new CtransaccionFertilizante();
     Clotes lot = null;
-    List<Clotes> listaLotes = null;
+    private List<Clotes> listaLotes
+    {
+        get { object o = ViewState["listaLotes"]; return (o == null) ? null : (List<Clotes>)o; }
+        set { ViewState["listaLotes"] = value; }
+    }
+
+    private List<CtransaccionFertilizante> listaTransaccion
+    {
+        get { object o = Session["listaTransaccion"]; return (o == null) ? null : (List<CtransaccionFertilizante>)o; }
+        set { Session["listaTransaccion"] = value; }
+    }
+
+    private List<CtransaccionFertilizante> listaNovedadesTransaccion
+    {
+        get { object o = Session["listaNovedadesTransaccion"]; return (o == null) ? null : (List<CtransaccionFertilizante>)o; }
+        set { Session["listaNovedadesTransaccion"] = value; }
+    }
+
 
     #endregion Instancias
 
@@ -286,6 +306,9 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                 {
                     ((GridView)d.FindControl("gvLotes")).DataSource = nt.Terceros;
                     ((GridView)d.FindControl("gvLotes")).DataBind();
+
+                    ((GridView)d.FindControl("gvItems")).DataSource = nt.ListaItems;
+                    ((GridView)d.FindControl("gvItems")).DataBind();
                 }
             }
         }
@@ -334,36 +357,23 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                            noPalma,
                            registroI, registriR);
 
-                    List<CtransaccionFertilizante> listaTransaccion = null;
-
-                    if (this.Session["transaccion"] == null)
+                    if (listaTransaccion == null)
                     {
                         listaTransaccion = new List<CtransaccionFertilizante>();
-                        listaTransaccion.Add(trafer);
                     }
-                    else
-                    {
-                        listaTransaccion = (List<CtransaccionFertilizante>)Session["transaccion"];
-                        listaTransaccion.Add(trafer);
-                    }
-                  
-                    List<CtransaccionFertilizante> listaTransaccionGV = null;
-                    listaTransaccionGV = new List<CtransaccionFertilizante>();
+                    listaTransaccion.Add(trafer);
 
-                    for (int z = 0; z < listaTransaccion.Count; z++)
-                    {
-                        if (listaTransaccion[z].RegistroR == registriR)
-                        {
-
-                            listaTransaccionGV.Add(listaTransaccion[z]);
-
-                        }
-                    }
+                    List<CtransaccionFertilizante> listaTransaccionGV = listaTransaccion.Where(i => i.RegistroR == registriR).ToList();
 
                     ((GridView)dli.FindControl("gvItems")).DataSource = listaTransaccionGV;
                     ((GridView)dli.FindControl("gvItems")).DataBind();
 
-                    this.Session["transaccion"] = listaTransaccion;
+                    var _nt = listaNT.FirstOrDefault(nt => ((Label)d.FindControl("lblNovedad")).Text.Trim() == nt.Codnovedad.ToString() & ((Label)d.FindControl("lblSeccion")).Text.Trim() == nt.Codseccion.ToString() & ((Label)d.FindControl("lblLote")).Text.Trim() == nt.Codlote.ToString() & ((Label)d.FindControl("lblRegistro")).Text.Trim() == nt.Registro.ToString());
+                    if (_nt != null)
+                    {
+                        _nt.ListaItems = listaTransaccionGV;
+                    }
+
                 }
             }
             /////////////////////
@@ -391,7 +401,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                 {
                     List<CtransaccionFertilizante> listaTransaccion = null;
 
-                    if (this.Session["transaccion"] == null)
+                    if (listaLotes == null)
                     {
                         listaTransaccion = new List<CtransaccionFertilizante>();
                         trafer = new CtransaccionFertilizante(iditem, item, umedida,
@@ -404,8 +414,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                     }
                     else
                     {
-                        listaLotes = (List<Clotes>)Session["transaccion"];
-
                         bool validar = false;
 
                         for (x = 0; x < listaLotes.Count; x++)
@@ -429,14 +437,11 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                         dosis, nbulto, pbulto, noPalma, registroI, 0);
                             listaTransaccion.Add(trafer);
                             lot = new Clotes(loted, listaTransaccion);
-                            listaLotes = new List<Clotes>();
-                            listaLotes = (List<Clotes>)this.Session["transaccion"];
                             listaLotes.Add(lot);
                         }
 
                     }
 
-                    this.Session["transaccion"] = listaLotes;
                     this.dlLotes.DataSource = listaLotes;
                     this.dlLotes.DataBind();
 
@@ -459,9 +464,9 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
 
 
         if (listaNT.Count > 0)
-            this.Session["novedadLoteSesion"] = listaNT;
+            this.listaNovedadesTransaccion = listaNT;
         else
-            this.Session["novedadLoteSesion"] = null;
+            this.listaNovedadesTransaccion = null;
 
     }
 
@@ -536,7 +541,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                         if (txtRemision.Enabled == true)
                             remision = txtRemision.Text;
 
-                        object[] objValoDeleteNovedad = new object[]{     
+                        object[] objValoDeleteNovedad = new object[]{
                                  Convert.ToInt16(this.Session["empresa"]) ,  //@empresa	int
                                 numerotransaccion,    //@numero	varchar
                                 ddlTipoDocumento.SelectedValue,  //@tipo	varchar
@@ -548,7 +553,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                                 break;
                         }
 
-                        object[] objValoDeleteTerceroItems = new object[]{     
+                        object[] objValoDeleteTerceroItems = new object[]{
                                  Convert.ToInt16(this.Session["empresa"]) ,  //@empresa	int
                                 numerotransaccion,    //@numero	varchar
                                 ddlTipoDocumento.SelectedValue,  //@tipo	varchar
@@ -560,7 +565,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                                 break;
                         }
 
-                        object[] objValoDeleteTerceroNovedad = new object[]{     
+                        object[] objValoDeleteTerceroNovedad = new object[]{
                                  Convert.ToInt16(this.Session["empresa"]) ,  //@empresa	int
                                 numerotransaccion,    //@numero	varchar
                                 ddlTipoDocumento.SelectedValue,  //@tipo	varchar
@@ -572,7 +577,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                                 break;
                         }
 
-                        object[] objValo = new object[]{     
+                        object[] objValo = new object[]{
                                                        false, // @anulado	bit
                                                       Convert.ToUInt32(fecha.Year), //@año	int
                                                      0,  //@cantidad	int
@@ -811,8 +816,8 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
 
                         if (verificaEncabezado == false & verificaDetalle == false & verificaBascula == false)
                         {
-                        //    transacciones.ActualizaConsecutivo(ddlTipoDocumento.Text, Convert.ToInt16(this.Session["empresa"]));
-                        //    ts.Complete();
+                            //    transacciones.ActualizaConsecutivo(ddlTipoDocumento.Text, Convert.ToInt16(this.Session["empresa"]));
+                            //    ts.Complete();
                             ManejoExito("Datos Actualizados satisfactoriamente", "I");
                         }
                     }
@@ -836,7 +841,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                     numerotransaccion = transacciones.RetornaNumeroTransaccion(ddlTipoDocumento.SelectedValue, Convert.ToInt16(this.Session["empresa"]));
                     this.Session["numerotransaccion"] = numerotransaccion;
 
-                    object[] objValo = new object[]{     
+                    object[] objValo = new object[]{
                                                        false, // @anulado	bit
                                                       Convert.ToUInt32(fecha.Year), //@año	int
                                                      0,  //@cantidad	int
@@ -975,7 +980,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                                        0,  //@saldo	float
                                        ddlTipoDocumento.SelectedValue.Trim(),     //@tipo	varchar
                                        gvr.Cells[3].Text.Trim()     //@uMedida	varchar
-                             };
+                                    };
                                     switch (CentidadMetodos.EntidadInsertUpdateDelete("aTransaccionItem", operacion, "ppa", objValoresItem))
                                     {
                                         case 1:
@@ -1235,8 +1240,9 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         }
 
 
-        if (this.Session["novedadLoteSesion"] == null)//cuando la lista de novedades es nula
+        if (listaNovedadesTransaccion == null)//cuando la lista de novedades es nula
         {
+            listaNovedadesTransaccion = new List<CtransaccionFertilizante>();
             for (int x = 0; x < selTerceroCosecha.Items.Count; x++)
             {
                 if (selTerceroCosecha.Items[x].Selected)
@@ -1248,13 +1254,12 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             }
             novedadTransaccion = new CtransaccionFertilizante(novedad, nombreNovedad, ddlLote.SelectedValue.Trim(), ddlLote.SelectedItem.Text, ddlSeccion.SelectedValue.Trim(), ddlSeccion.SelectedItem.Text,
                 0, cantidad, listaTerceros, dlDetalle.Items.Count, uMedidad, pesoRacimo, txtFechaD.Text, Convert.ToDecimal(txvJornalesD.Text), precioLabor, null);
-            listaNovedadesTransaccion.Add(novedadTransaccion);
-            this.Session["novedadLoteSesion"] = listaNovedadesTransaccion;
+            listaNovedadesTransaccion
+                .Add(novedadTransaccion);
         }
         // cuando la lista de novedades  NO es nula
         else
         {
-            listaNovedadesTransaccion = (List<CtransaccionFertilizante>)this.Session["novedadLoteSesion"]; // cargo todas las novedades 
             listaTerceros = new List<Ctercero>();
             for (int x = 0; x < selTerceroCosecha.Items.Count; x++)
             {
@@ -1269,7 +1274,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             novedadTransaccion = new CtransaccionFertilizante(novedad, nombreNovedad, ddlLote.SelectedValue.Trim(), ddlLote.SelectedItem.Text, ddlSeccion.SelectedValue.Trim(), ddlSeccion.SelectedItem.Text,
                 0, cantidad, listaTerceros, dlDetalle.Items.Count, uMedidad, pesoRacimo, txtFechaD.Text, Convert.ToDecimal(txvJornalesD.Text), precioLabor, null);
             listaNovedadesTransaccion.Add(novedadTransaccion);
-            this.Session["novedadLoteSesion"] = listaNovedadesTransaccion;
             posicionNovedad++;
         }
 
@@ -1285,6 +1289,9 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                 {
                     ((GridView)d.FindControl("gvLotes")).DataSource = nt.Terceros;
                     ((GridView)d.FindControl("gvLotes")).DataBind();
+
+                    ((GridView)d.FindControl("gvItems")).DataSource = nt.ListaItems;
+                    ((GridView)d.FindControl("gvItems")).DataBind();
                 }
             }
         }
@@ -1435,6 +1442,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
 
         this.Response.Redirect("~/Agronomico/Error.aspx", false);
     }
+
     private void ManejoExito(string mensaje, string operacion)
     {
         this.nilblInformacion.Text = mensaje;
@@ -1452,7 +1460,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         ddlTipoDocumento.Visible = false;
         lblNumero.Visible = false;
         txtNumero.Visible = false;
-        selTerceroCosecha.Visible = false;
         this.nilbNuevo.Visible = true;
         this.nilblInformacion.ForeColor = Color.Green;
         gvSubTotales.DataSource = null;
@@ -1495,9 +1502,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
     }
     private void actualizarDatos()
     {
-
-        listaNovedadesTransaccion = (List<CtransaccionFertilizante>)this.Session["novedadLoteSesion"];
-
 
         foreach (DataListItem dli in dlDetalle.Items)
         {
@@ -1570,7 +1574,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         this.txtNumero.Text = "";
         this.ddlTipoDocumento.Focus();
         this.lbRegistrar.Visible = true;
-        this.Session["transaccion"] = null;
+        listaTransaccion = null;
 
     }
     private void InHabilitaEncabezado()
@@ -1657,7 +1661,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         Csubtotal subT;
         bool validarN = false;
         int pn = 0, noTerceros = 0;
-        listaNovedadesTransaccion = (List<CtransaccionFertilizante>)this.Session["novedadLoteSesion"];
         int contarN = 0;
 
         foreach (DataListItem dl in dlDetalle.Items)
@@ -1766,7 +1769,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
     }
     private void CalcularSubtotal()
     {
-        listaNovedadesTransaccion = (List<CtransaccionFertilizante>)this.Session["novedadLoteSesion"];
         gvSubTotales.DataSource = null;
         gvSubTotales.DataBind();
         subtotal = new List<Csubtotal>();
@@ -1972,7 +1974,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         {
             // variables de sesion
             this.Session["editar"] = false;
-            this.Session["novedadLoteSesion"] = null;
+            listaNovedadesTransaccion = null;
             this.Session["numerotransaccion"] = null;
             this.Session["subtotal"] = null;
             this.Session["numerotransaccion"] = null;
@@ -1999,9 +2001,9 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             upEncabezado.Visible = true;
             upDetalle.Visible = true;
             niimbImprimir.Visible = false;
-            selTerceroCosecha.Visible = false;
             ComportamientoTransaccion();
             this.hdTransaccionConfig.Value = CcontrolesUsuarios.TipoTransaccionConfig(this.ddlTipoDocumento.SelectedValue, Convert.ToInt16(Session["empresa"]));
+            selTerceroCosecha.Visible = false;
             string[] split = hdTransaccionConfig.Value.Split('*');
             selTerceroCosecha.Visible = Convert.ToBoolean(split[27]);
             referencia();
@@ -2009,7 +2011,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ManejoError("Error al cargar tipo de transacción debido a: " + ex.Message,"C");
+            ManejoError("Error al cargar tipo de transacción debido a: " + ex.Message, "C");
         }
 
     }
@@ -2047,7 +2049,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         }
         //CcontrolesUsuario.HabilitarControles(upEncabezado.Controls);
         this.Session["editar"] = false;
-        this.Session["novedadLoteSesion"] = null;
+        listaNovedadesTransaccion = null;
         this.Session["numerotransaccion"] = null;
         ManejoEncabezado();
         CargarTipoTransaccion();
@@ -2081,7 +2083,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         CcontrolesUsuario.LimpiarControles(this.upDetalle.Controls);
         CcontrolesUsuario.InhabilitarControles(this.upDetalle.Controls);
         niimbImprimir.Visible = false;
-        this.Session["transaccion"] = null;
+        listaTransaccion = null;
         this.dlDetalle.DataSource = null;
         this.dlDetalle.DataBind();
         Session["lote"] = null;
@@ -2103,8 +2105,8 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         dlLotes.DataBind();
         selTerceroCosecha.Visible = false;
         this.Session["editar"] = null;
-        this.Session["transaccion"] = null;
-        this.Session["novedadLoteSesion"] = null;
+        listaTransaccion = null;
+        listaNovedadesTransaccion = null;
 
         if (imbConsulta.Enabled == false)
         {
@@ -2241,9 +2243,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             lbFecha.Enabled = true;
             ConfiguracionNovedad(ddlNovedad.SelectedValue.ToString().Trim());
             LiquidaTransaccioin(0, 0);
-            List<CtransaccionFertilizante> listaTransaccion = null;
             List<CtransaccionFertilizante> listaTransaccionGV = null;
-            listaTransaccion = (List<CtransaccionFertilizante>)Session["transaccion"];
 
             foreach (DataListItem dli in dlDetalle.Items)
             {
@@ -2357,11 +2357,8 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                     txvPesoBulto.Text = "0";
                 }
 
-                List<CtransaccionFertilizante> listaTransaccion = null;
 
-
-
-                if (this.Session["transaccion"] == null)
+                if (listaTransaccion == null)
                 {
                     listaTransaccion = new List<CtransaccionFertilizante>();
                     trafer = new CtransaccionFertilizante(ddlItem.SelectedValue.Trim(), ddlItem.SelectedItem.Text.Trim(), ddlumedidaItem.SelectedValue.Trim(),
@@ -2374,8 +2371,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                 }
                 else
                 {
-                    listaLotes = (List<Clotes>)Session["transaccion"];
-
                     bool validar = false;
 
                     for (int x = 0; x < listaLotes.Count; x++)
@@ -2399,14 +2394,11 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                         Convert.ToDecimal(txvCantidadD.Text), Convert.ToDecimal(txvNoBultos.Text), Convert.ToDecimal(txvPesoBulto.Text), Convert.ToInt32(txvNoPalma.Text), listaTransaccion.Count + 1, 0);
                         listaTransaccion.Add(trafer);
                         lot = new Clotes(ddlLote.SelectedValue.Trim(), listaTransaccion);
-                        listaLotes = new List<Clotes>();
-                        listaLotes = (List<Clotes>)this.Session["transaccion"];
                         listaLotes.Add(lot);
                     }
 
                 }
 
-                this.Session["transaccion"] = listaLotes;
                 this.dlLotes.DataSource = listaLotes;
                 this.dlLotes.DataBind();
 
@@ -2605,7 +2597,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         string seccion = ((Label)dlDetalle.Items[e.Item.ItemIndex].FindControl("lblSeccion")).Text.Trim();
         string lote = ((Label)dlDetalle.Items[e.Item.ItemIndex].FindControl("lblLote")).Text.Trim();
         int registro = Convert.ToInt16(((Label)dlDetalle.Items[e.Item.ItemIndex].FindControl("lblRegistro")).Text.Trim());
-        listaNovedadesTransaccion = (List<CtransaccionFertilizante>)this.Session["novedadLoteSesion"]; // cargo todas las novedades 
 
         foreach (CtransaccionFertilizante nt in listaNovedadesTransaccion)
         {
@@ -2637,10 +2628,12 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                 {
                     ((GridView)d.FindControl("gvLotes")).DataSource = nt.Terceros;
                     ((GridView)d.FindControl("gvLotes")).DataBind();
+
+                    ((GridView)d.FindControl("gvItems")).DataSource = nt.ListaItems;
+                    ((GridView)d.FindControl("gvItems")).DataBind();
                 }
             }
         }
-        this.Session["novedadLoteSesion"] = listaNovedadesTransaccion;
         LiquidaTransaccioin(0, 0);
     }
 
@@ -2752,7 +2745,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         lblNumero.Visible = false;
         lbCancelar.Visible = false;
         lbRegistrar.Visible = false;
-        this.Session["transaccion"] = null;
+        listaTransaccion = null;
         this.gvSubTotales.DataSource = null;
         this.gvSubTotales.DataBind();
         this.lbRegistrar.Enabled = true;
@@ -2823,7 +2816,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             this.nilblMensajeEdicion.Text = "";
             this.nilblInformacion.Text = "";
             this.Session["editar"] = true;
-            this.Session["transaccion"] = null;
+            listaTransaccion = null;
             txtNumero.Enabled = false;
             ddlTipoDocumento.Enabled = false;
             lbRegistrar.Visible = false;
@@ -2835,6 +2828,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             txtFecha.Text = fecha.ToString();
             txtNumero.Text = this.gvTransaccion.Rows[e.RowIndex].Cells[3].Text;
             txtObservacion.Enabled = true;
+            referencia();
             cargarEncabezado();
             cargarDetalle();
             CalcularSubtotal();
@@ -2845,6 +2839,10 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             imbLiquidar.Visible = true;
             CcontrolesUsuario.InhabilitarUsoControles(upEncabezado.Controls);
             txtObservacion.Enabled = true;
+            this.hdTransaccionConfig.Value = CcontrolesUsuarios.TipoTransaccionConfig(this.ddlTipoDocumento.SelectedValue, Convert.ToInt16(Session["empresa"]));
+            selTerceroCosecha.Visible = false;
+            string[] split = hdTransaccionConfig.Value.Split('*');
+            selTerceroCosecha.Visible = Convert.ToBoolean(split[27]);
 
         }
         catch (Exception ex)
@@ -2905,8 +2903,8 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         CcontrolesUsuario.LimpiarControles(upConsulta.Controls);
         gvTransaccion.DataSource = null;
         gvTransaccion.DataBind();
-        this.Session["novedadLoteSesion"] = null;
-        this.Session["transaccion"] = null;
+        listaNovedadesTransaccion = null;
+        listaTransaccion = null;
         this.gvTransaccion.DataSource = null;
         this.gvTransaccion.DataBind();
         this.imbConsulta.BorderStyle = BorderStyle.None;
@@ -3062,7 +3060,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             {
                 int indexDL = e.Item.ItemIndex;
                 DataListItem dli = dlDetalle.Items[e.Item.ItemIndex];
-                listaNovedadesTransaccion = (List<CtransaccionFertilizante>)this.Session["novedadLoteSesion"];
                 GridView gvTerceros = (GridView)dli.FindControl("gvLotes");
                 int registro = Convert.ToInt16(((Label)dli.FindControl("lblRegistro")).Text);
                 List<Ctercero> tercerosNovedad = listaNovedadesTransaccion[registro].Terceros;
@@ -3100,17 +3097,18 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                         {
                             ((GridView)d.FindControl("gvLotes")).DataSource = nt.Terceros;
                             ((GridView)d.FindControl("gvLotes")).DataBind();
+
+                            ((GridView)d.FindControl("gvItems")).DataSource = nt.ListaItems;
+                            ((GridView)d.FindControl("gvItems")).DataBind();
                         }
                     }
                 }
-                this.Session["novedadLoteSesion"] = listaNovedadesTransaccion;
                 LiquidaTransaccioin(0, 0);
             }
 
             if (e.CommandName == "Update")
             {
                 DataListItem dli = dlDetalle.Items[e.Item.ItemIndex];
-                listaNovedadesTransaccion = (List<CtransaccionFertilizante>)this.Session["novedadLoteSesion"];
 
                 GridView gvTerceros = (GridView)dli.FindControl("gvLotes");
                 int registro = Convert.ToInt16(((Label)dli.FindControl("lblRegistro")).Text);
@@ -3137,10 +3135,12 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                         {
                             ((GridView)d.FindControl("gvLotes")).DataSource = nt.Terceros;
                             ((GridView)d.FindControl("gvLotes")).DataBind();
+
+                            ((GridView)d.FindControl("gvItems")).DataSource = nt.ListaItems;
+                            ((GridView)d.FindControl("gvItems")).DataBind();
                         }
                     }
                 }
-                this.Session["novedadLoteSesion"] = listaNovedadesTransaccion;
                 LiquidaTransaccioin(0, 0);
             }
             if (e.CommandName == "AddItem")
@@ -3154,7 +3154,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                     return;
                 }
 
-                
+
 
                 foreach (GridViewRow gvr in ((GridView)dli.FindControl("gvItems")).Rows)
                 {
@@ -3201,35 +3201,18 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                         ((GridView)dli.FindControl("gvItems")).Rows.Count + 1,
                         registroR);
 
-                    List<CtransaccionFertilizante> listaTransaccion = null;
 
-                    if (this.Session["transaccion"] == null)
+                    if (listaTransaccion == null)
                     {
                         listaTransaccion = new List<CtransaccionFertilizante>();
-                        listaTransaccion.Add(trafer);
                     }
-                    else
-                    {
-                        listaTransaccion = (List<CtransaccionFertilizante>)Session["transaccion"];
-                        listaTransaccion.Add(trafer);
-                    }
-                    List<CtransaccionFertilizante> listaTransaccionGV = null;
-                    listaTransaccionGV = new List<CtransaccionFertilizante>();
-
-                    for (int x = 0; x < listaTransaccion.Count; x++)
-                    {
-                        if (listaTransaccion[x].RegistroR == registroR)
-                        {
-
-                            listaTransaccionGV.Add(listaTransaccion[x]);
-
-                        }
-                    }
+                    listaTransaccion.Add(trafer);
+                    List<CtransaccionFertilizante> listaTransaccionGV = listaTransaccion.Where(i => i.RegistroR == registroR).ToList();
 
                     ((GridView)dli.FindControl("gvItems")).DataSource = listaTransaccionGV;
                     ((GridView)dli.FindControl("gvItems")).DataBind();
 
-                    this.Session["transaccion"] = listaTransaccion;
+                    listaNovedadesTransaccion[registroR].ListaItems = listaTransaccionGV;
 
                 }
                 else
@@ -3245,9 +3228,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             {
                 DataListItem dli = dlDetalle.Items[e.Item.ItemIndex];
                 GridView gvItemsDl = (GridView)dli.FindControl("gvItems");
-                List<CtransaccionFertilizante> listaTransaccion = null;
                 int registroR = Convert.ToInt32(((Label)dli.FindControl("lblRegistro")).Text);
-                listaTransaccion = (List<CtransaccionFertilizante>)Session["transaccion"];
                 foreach (GridViewRow gvc in gvItemsDl.Rows)
                 {
                     CheckBox chkSeleccion = (CheckBox)gvc.FindControl("chkSeleccion");
@@ -3262,29 +3243,19 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
                         }
                     }
                 }
-                List<CtransaccionFertilizante> listaTransaccionGV = null;
-                listaTransaccionGV = new List<CtransaccionFertilizante>();
+                List<CtransaccionFertilizante> listaTransaccionGV = listaTransaccion.Where(i => i.RegistroR == registroR).ToList();
 
-                for (int x = 0; x < listaTransaccion.Count; x++)
-                {
-                    if (listaTransaccion[x].RegistroR == registroR)
-                    {
-
-                        listaTransaccionGV.Add(listaTransaccion[x]);
-
-                    }
-                }
                 ((GridView)dli.FindControl("gvItems")).DataSource = listaTransaccionGV;
                 ((GridView)dli.FindControl("gvItems")).DataBind();
 
-                this.Session["transaccion"] = listaTransaccion;
+                listaNovedadesTransaccion[registroR].ListaItems = listaTransaccionGV;
             }
 
             subtotalitems();
         }
         catch (Exception ex)
         {
-            ManejoError("Error al cargar items debido a:    " + ex.Message, "C");
+            ManejoError("Error al cargar items debido a:    " + ex.ToString(), "C");
         }
     }
 
@@ -3622,8 +3593,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
 
             DataListItem dlitem = (DataListItem)((GridView)(sender)).Parent;
 
-            listaLotes = new List<Clotes>();
-            listaLotes = (List<Clotes>)Session["transaccion"];
             listaTransaccionFertilizante = new List<CtransaccionFertilizante>();
 
 
@@ -3660,7 +3629,6 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
             }
 
 
-            this.Session["transaccion"] = listaLotes;
             dlLotes.DataSource = listaLotes;
             dlLotes.DataBind();
 

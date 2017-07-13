@@ -124,5 +124,6 @@ and a.tipo='LQN'
 
 select * from #temporal
 where mDomingo=0
+order by identificacion, codConcepto
 
 drop table #temporal

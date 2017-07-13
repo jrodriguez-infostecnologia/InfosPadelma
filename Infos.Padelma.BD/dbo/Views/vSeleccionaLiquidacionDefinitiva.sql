@@ -11,9 +11,10 @@ SELECT        a.empresa, SUBSTRING(CONVERT(varchar, CONVERT(money, RTRIM(tt.codi
                          cc.tipoContizante, cc.tipoNomina, cc.salarioAnterior, cc.auxilioTransporte, cc.id AS noContrato, s.prestacionSocial, s.mostrarCantidad, d.codigo AS codCCosto, d.descripcion AS nombreCcosto, 
                          g.descripcion AS nombreDepartamento, g.codigo AS codDepto, ISNULL(h.razonSocial, '') AS nombreEPS, ISNULL(i.razonSocial, '') AS nombrePension, CASE WHEN b.concepto IN (nn.ganaDomingo, 
                          nn.pagoFestivo, nn.PrimasExtralegales) AND n.mDomingo = 1 THEN 1 ELSE 0 END AS mDomingo, p.fechaInicial AS fip, p.fechaFinal AS ffp, d.mayor, CONVERT(varchar(4), a.año) 
-                         + RTRIM(RIGHT('00' + RTRIM(a.mes), 2)) AS periodoUnido, DATENAME(MONTH, a.fecha) AS nombreMes, s.sumaPrestacionSocial, cl.electivaProduccion, cc.subTipoCotizante, cl.porcentajeSS, s.tipoLiquidacion, 
-                         dbo.nParametrosTipoCotizante.salud, dbo.nParametrosTipoCotizante.pension, dbo.nParametrosTipoCotizante.fondoSolidaridad, dbo.nParametrosTipoCotizante.arp, dbo.nParametrosTipoCotizante.caja, 
-                         dbo.nParametrosTipoCotizante.sena, dbo.nParametrosTipoCotizante.icbf, dbo.nCentroTrabajo.codigo AS centroTrabajo, s.descripcion, h.id AS terceroSalud, i.id AS terceroPension, b.valorTotal AS valorNP
+                         + RTRIM(RIGHT('00' + RTRIM(a.mes), 2)) AS periodoUnido, dbo.fRetornaNombreMes(p.mes) AS nombreMes, s.sumaPrestacionSocial, cl.electivaProduccion, cc.subTipoCotizante, cl.porcentajeSS, 
+                         s.tipoLiquidacion, dbo.nParametrosTipoCotizante.salud, dbo.nParametrosTipoCotizante.pension, dbo.nParametrosTipoCotizante.fondoSolidaridad, dbo.nParametrosTipoCotizante.arp, 
+                         dbo.nParametrosTipoCotizante.caja, dbo.nParametrosTipoCotizante.sena, dbo.nParametrosTipoCotizante.icbf, dbo.nCentroTrabajo.codigo AS centroTrabajo, s.descripcion, h.id AS terceroSalud, 
+                         i.id AS terceroPension, b.valorTotal AS valorNP
 FROM            dbo.nLiquidacionNomina AS a INNER JOIN
                          dbo.nLiquidacionNominaDetalle AS b ON b.numero = a.numero AND b.tipo = a.tipo AND b.empresa = a.empresa INNER JOIN
                          dbo.cTercero AS tt ON a.empresa = tt.empresa AND tt.id = b.tercero INNER JOIN
@@ -260,7 +261,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[52] 4[18] 2[15] 3) )"
+         Configuration = "(H (1[28] 4[29] 2[29] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -396,4 +397,6 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
      ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vSeleccionaLiquidacionDefinitiva';
+
+
 

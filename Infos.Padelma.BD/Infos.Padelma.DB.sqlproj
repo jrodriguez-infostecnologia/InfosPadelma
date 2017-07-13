@@ -1858,6 +1858,7 @@
     <None Include="Scripts\CREATE_PAGE_ModificacionLiquidacion.sql" />
     <Build Include="dbo\Stored Procedures\SpSeleccionaTercerosModificacionPrima.sql" />
     <Build Include="dbo\Stored Procedures\SpGetDetalleTerceroActualizacionLiquidacion.sql" />
+    <Build Include="dbo\Stored Procedures\spInformeGeneralDestajo.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Infos.Padelma.DB.refactorlog" />

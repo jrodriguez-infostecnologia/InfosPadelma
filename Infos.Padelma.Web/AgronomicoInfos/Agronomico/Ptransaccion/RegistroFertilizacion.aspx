@@ -29,13 +29,13 @@
     <script type="text/javascript">
 
         function MantenSesion() {
-            var CONTROLADOR = "refresh_session.ashx";
-            var head = document.getElementsByTagName('head').item(0);
-            script = document.createElement('script');
-            script.src = CONTROLADOR;
-            script.setAttribute('type', 'text/javascript');
-            script.defer = true;
-            head.appendChild(script);
+            //var CONTROLADOR = "refresh_session.ashx";
+            //var head = document.getElementsByTagName('head').item(0);
+            //script = document.createElement('script');
+            //script.src = CONTROLADOR;
+            //script.setAttribute('type', 'text/javascript');
+            //script.defer = true;
+            //head.appendChild(script);
         }
 
         function igualarRacimos() {

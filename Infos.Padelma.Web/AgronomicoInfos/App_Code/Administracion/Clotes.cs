@@ -7,6 +7,7 @@ using System.Web;
 /// <summary>
 /// Descripción breve de CLotes
 /// </summary>
+[Serializable]
 public class Clotes
 {
 	 private string lote;

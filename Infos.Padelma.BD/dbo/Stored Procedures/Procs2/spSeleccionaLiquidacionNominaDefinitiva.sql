@@ -88,7 +88,6 @@ where  a.empresa=@empresa
 and a.codConcepto not in (select isnull(concepto,'') from aNovedad z where z.empresa=@empresa )
 and   a.noPeriodo=@periodo and a.año=@año and a.anulado=0 and a.numero like '%'+ @numero+ '%'
 
-
 insert @temporal
 select   a.identificacion, a.codTercero, a.nombreTercero, a.codCCosto, a.nombreCcosto, a.sueldo, a.nombreCargo, a.codConcepto,
  a.nombreConcepto, case when mostrarCantidad=1 then NULL else  a.cantidad end cantidad,a.valorTotal valorConcepto, 
@@ -113,3 +112,4 @@ and convert(date,b.fecha) between @fechaInicial and @fechaFinal and a.numero lik
 
 select * from @temporal
 where mDomingo=0
+order by identificacion, codConcepto
