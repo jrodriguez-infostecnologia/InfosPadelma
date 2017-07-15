@@ -835,13 +835,20 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
         {
             try
             {
-                if (transacciones.VerificaEdicionBorrado(
+                switch (transacciones.VerificaEdicionBorrado(
                     this.gvLista.Rows[e.RowIndex].Cells[2].Text,
                     this.gvLista.Rows[e.RowIndex].Cells[3].Text,
-                    Convert.ToInt16(Session["empresa"])) != 0)
+                    Convert.ToInt16(Session["empresa"])))
                 {
-                    this.nilblMensaje.Text = "Transacción ejecutada / anulada no es posible su edición";
-                    return;
+                    case 1:
+                        this.nilblMensaje.Text = "Transacción ejecutada / anulada no es posible su edición";
+                        return;
+                    case 2:
+                        this.nilblMensaje.Text = "El periodo de la prima está cerrado, no se puede anular";
+                        return;
+                    default:
+                        break;
+
                 }
 
                 switch (transacciones.AnulaLiquidacionPrima(

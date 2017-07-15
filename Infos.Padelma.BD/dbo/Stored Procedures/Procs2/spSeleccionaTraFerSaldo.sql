@@ -4,7 +4,7 @@ as
 
 select  distinct
 a.numero, 
-'FER : ' + CONVERT(varchar(50), a.fecha) + ' hasta: ' + CONVERT(varchar(50), a.fechaFinal) +' - ' + a.observacion
+ a.numero + ' - FER : ' + CONVERT(varchar(50), a.fecha) + ' hasta: ' + CONVERT(varchar(50), a.fechaFinal) +' - ' + a.observacion
 as cadena 
 from aTransaccion a 
 join aTransaccionItem b on 
