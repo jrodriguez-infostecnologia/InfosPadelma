@@ -141,6 +141,10 @@ public partial class Bascula_Pinformes_Visualizacion : System.Web.UI.Page
                 script = "<script language='javascript'>" + "Visualizacion('LaboresFertilizacionDetalle');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
+            case "fer04":
+                script = "<script language='javascript'>" + "Visualizacion('PlanFertilizacionSaldoTransaccion');</script>";
+                Page.RegisterStartupScript("Visualizacion", script);
+                break;
 
         }
     }

@@ -260,7 +260,7 @@ public class CtransaccionFertilizante
         object[] objValores = new object[] { item, empresa };
 
         return Convert.ToString(Cacceso.ExecProc(
-            "spRetornaUmedidaCatalogo",
+            "spRetornaUmedidaCatalogoConsumo",
             iParametros,
             oParametros,
             objValores,
@@ -332,6 +332,20 @@ public class CtransaccionFertilizante
 
         return Convert.ToInt32(Cacceso.ExecProc(
             "spActualizaSaldoItemTransaccion",
+            iParametros,
+            oParametros,
+            objValores,
+            "ppa").GetValue(0));
+    }
+
+    public int verificaUmedidaBulto( string umedida, int empresa)
+    {
+        string[] iParametros = new string[] { "@umedida", "@empresa" };
+        string[] oParametros = new string[] { "@retorno" };
+        object[] objValores = new object[] { umedida,  empresa };
+
+        return Convert.ToInt32(Cacceso.ExecProc(
+            "SpVerificaUmedidaBulto",
             iParametros,
             oParametros,
             objValores,

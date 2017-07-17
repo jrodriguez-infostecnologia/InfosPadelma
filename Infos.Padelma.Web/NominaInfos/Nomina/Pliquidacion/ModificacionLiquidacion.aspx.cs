@@ -574,7 +574,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
                     Convert.ToInt32(ddlEmpleado.SelectedValue),
                     Convert.ToInt32(ddlContratos.SelectedValue),
                     ListadoDetalleLiquidacion);
-                ts.Complete();
+				ts.Complete();
             }
             successMessage.Text = "Cambios realizados exitosamente";
         }

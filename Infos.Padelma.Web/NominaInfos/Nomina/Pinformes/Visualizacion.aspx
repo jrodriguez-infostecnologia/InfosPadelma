@@ -74,7 +74,7 @@
                                 <asp:TreeNode Text="Liquidación Nomina" Value="Liquidación Nomina">
 
                                     <asp:TreeNode Text="Preliquidación" Value="liqui01"></asp:TreeNode>
-                                    <asp:TreeNode Text="Resumen Preliquidación" Value="liqui05"></asp:TreeNode>
+									<asp:TreeNode Text="Resumen Preliquidación" Value="liqui05"></asp:TreeNode>
                                     <asp:TreeNode Text="Liquidación Definitiva Periodo" Value="liqui06"></asp:TreeNode>
                                     <asp:TreeNode Text="Liquidación por Trabajador" Value="liqui20"></asp:TreeNode>
                                     <asp:TreeNode Text="Resumen Liquidación por Periodo" Value="liqui07"></asp:TreeNode>
@@ -108,6 +108,8 @@
                                     <asp:TreeNode Text="Acumulados Prestaciones" Value="presta01"></asp:TreeNode>
                                     <asp:TreeNode Text="Pre-liquidación Primas semestrales" Value="presta02"></asp:TreeNode>
                                     <asp:TreeNode Text="Liquidación de Contrato - Tercero" Value="presta05"></asp:TreeNode>
+									<asp:TreeNode Text="Liquidacion Primas Definitiva" Value="presta06"></asp:TreeNode>
+                                    
                                 </asp:TreeNode>
 
                                 <asp:TreeNode Text="Pagos" Value="Pagos">

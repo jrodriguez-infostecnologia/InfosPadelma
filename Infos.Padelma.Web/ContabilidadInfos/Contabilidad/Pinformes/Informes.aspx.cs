@@ -97,6 +97,10 @@ public partial class Bascula_Pinformes_Visualizacion : System.Web.UI.Page
                 script = "<script language='javascript'>Visualizacion('ResumenGrupoConceptoxAño');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
+            case "Resu03":
+                script = "<script language='javascript'>Visualizacion('InformeGeneralDestajo');</script>";
+                Page.RegisterStartupScript("Visualizacion", script);
+                break;
             case "des01":
                 script = "<script language='javascript'>Visualizacion('DescuentosLiquidacionNomina');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);

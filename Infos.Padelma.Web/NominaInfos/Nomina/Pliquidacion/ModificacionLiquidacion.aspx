@@ -7,7 +7,7 @@
 <head runat="server">
     <title>Seguridad</title>
     <link rel="stylesheet" href="../../css/common.css" type="text/css" />
-    <link href="../../css/Formularios.css" rel="stylesheet" />
+    <link href="../../css/Formularios.css?v=2332" rel="stylesheet" />
     <script src="../../js/Numero.js" type="text/javascript"></script>
     <link href="../../css/jquery-ui.css" rel="stylesheet" />
     <link type="text/css" href="../../css/ui.multiselect.css" rel="stylesheet" />
@@ -17,7 +17,7 @@
     <script type="text/javascript" src="../../js/plugins/localisation/jquery.localisation-min.js"></script>
     <script type="text/javascript" src="../../js/plugins/scrollTo/jquery.scrollTo-min.js"></script>
     <script type="text/javascript" src="../../js/ui.multiselect.js"></script>
-    <script type="text/javascript" src="../../js/Liquidación/ModificacionLiquidacion.js"></script>
+    <script type="text/javascript" src="../../js/Liquidación/ModificacionLiquidacion.js?v=20170710"></script>
     <script type="text/javascript">
         $(function () {
             $.localise('ui-multiselect', { language: 'es', path: '../../js/locale/' });
