@@ -79,6 +79,7 @@
                                     <asp:TreeNode Text="Plan de fertilización con saldos" Value="fer01"></asp:TreeNode>
                                     <asp:TreeNode Text="Labores fecha lote" Value="fer02"></asp:TreeNode>
                                     <asp:TreeNode Text="Labores fertilización detalle" Value="fer03"></asp:TreeNode>
+                                    <asp:TreeNode Text="Plan de fertilización con saldos por transacción" Value="fer04"></asp:TreeNode>
                                 </asp:TreeNode>
                             </Nodes>
                             <NodeStyle Font-Names="Tahoma" Font-Size="8pt" ForeColor="Black" HorizontalPadding="5px"

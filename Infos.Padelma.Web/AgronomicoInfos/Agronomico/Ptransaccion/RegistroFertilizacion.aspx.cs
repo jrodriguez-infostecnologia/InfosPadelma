@@ -3398,7 +3398,7 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
         try
         {
             umedidaItem();
-            ddlumedidaItem.Enabled = false;
+            //ddlumedidaItem.Enabled = false;
             txvPesoBulto.Text = "50";
         }
         catch (Exception ex)
@@ -3671,6 +3671,11 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
     }
     protected void ddlumedidaItem_SelectedIndexChanged1(object sender, EventArgs e)
     {
+        manejoumedida(sender);
+    }
+
+    private void manejoumedida(object sender)
+    {
         DataListItem item = (DataListItem)((DropDownList)sender).Parent;
 
         if (trafer.verificaUmedidaFertilizacion(((DropDownList)sender).SelectedValue.Trim(), Convert.ToInt16(this.Session["empresa"])) == 1)
@@ -3708,11 +3713,49 @@ public partial class Agronomico_Ptransaccion_Transacciones : System.Web.UI.Page
     {
         DataListItem item = (DataListItem)((DropDownList)sender).Parent;
         string umedida = trafer.retornaUmedidaCatalogo(((DropDownList)sender).SelectedValue.Trim(), Convert.ToInt32(this.Session["empresa"]));
-        if (umedida.Length > 0)
+
+        if (trafer.verificaUmedidaBulto(((Label)item.FindControl("lblUmedida")).Text, Convert.ToInt16(this.Session["empresa"])) == 1)
         {
-            ((DropDownList)item.FindControl("ddlUmedidaItem")).SelectedValue = umedida.Trim();
+            ((DropDownList)item.FindControl("ddlUmedidaItem")).SelectedValue = ((Label)item.FindControl("lblUmedida")).Text;
             ((DropDownList)item.FindControl("ddlUmedidaItem")).Enabled = false;
+            ((Label)item.FindControl("lblNoBultos")).Visible = true;
+            ((Label)item.FindControl("lblPesoKgBulto")).Visible = true;
+            ((TextBox)item.FindControl("txtPesoBulto")).Visible = true;
+            ((TextBox)item.FindControl("txtNoBultos")).Visible = true;
+            ((TextBox)item.FindControl("txtNoBultos")).Enabled = true;
+            ((TextBox)item.FindControl("txtNoBultos")).ReadOnly = true;
+            ((TextBox)item.FindControl("txtPesoBulto")).Visible = true;
+            ((TextBox)item.FindControl("txtPesoBulto")).Enabled = true;
+            ((TextBox)item.FindControl("txtPesoBulto")).ReadOnly = true;
+            ((TextBox)item.FindControl("txtPesoBulto")).Text = "50";
+            ((TextBox)item.FindControl("txtNoBultos")).Text = "0";
+            ((TextBox)item.FindControl("txvCantidadD")).Enabled = false;
         }
+
+        else
+        {
+            if (umedida.Length > 0)
+            {
+                ((DropDownList)item.FindControl("ddlUmedidaItem")).SelectedValue = umedida.Trim();
+                ((DropDownList)item.FindControl("ddlUmedidaItem")).Enabled = false;
+                ((Label)item.FindControl("lblNoBultos")).Visible = false;
+                ((Label)item.FindControl("lblPesoKgBulto")).Visible = false;
+                ((TextBox)item.FindControl("txtPesoBulto")).Visible = false;
+                ((TextBox)item.FindControl("txtNoBultos")).Visible = false;
+                ((TextBox)item.FindControl("txtNoBultos")).Enabled = false;
+                ((TextBox)item.FindControl("txtNoBultos")).ReadOnly = false;
+                ((TextBox)item.FindControl("txtPesoBulto")).Visible = false;
+                ((TextBox)item.FindControl("txtPesoBulto")).Enabled = false;
+                ((TextBox)item.FindControl("txtPesoBulto")).ReadOnly = false;
+                ((TextBox)item.FindControl("txtPesoBulto")).Text = "0";
+                ((TextBox)item.FindControl("txtNoBultos")).Text = "0";
+                ((TextBox)item.FindControl("txvCantidadD")).Enabled = true;
+            }
+        }
+
+
+
+
     }
     protected void txvCantidadD_TextChanged(object sender, EventArgs e)
     {

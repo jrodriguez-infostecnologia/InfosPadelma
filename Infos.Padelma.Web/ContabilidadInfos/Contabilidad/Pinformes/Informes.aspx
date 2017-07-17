@@ -54,6 +54,7 @@
                                     <asp:TreeNode Text="Resumen contratistas por periodo" Value="tran11"></asp:TreeNode>
                                     <asp:TreeNode Text="Resumen de labores por año (fecha labor)" Value="Resu01"></asp:TreeNode>
                                     <asp:TreeNode Text="Resumen de labores por año (fecha tra.)" Value="Resu02"></asp:TreeNode>
+                                    <asp:TreeNode Text="Resumen general destajo" Value="Resu03"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="Informes de Nómina" Value="Liquidación Nomina">
                                     <asp:TreeNode Text="Resumen Liquidación Definitiva" Value="liqui07"></asp:TreeNode>

@@ -7,7 +7,7 @@
 <head runat="server">
     <title>Seguridad</title>
     <link rel="stylesheet" href="../../css/common.css" type="text/css" />
-    <link href="../../css/Formularios.css" rel="stylesheet" />
+    <link href="../../css/Formularios.css?v=20170712" rel="stylesheet" />
     <link href="../../css/jquery-ui.css" rel="stylesheet" />
     <link type="text/css" href="../../css/ui.multiselect.css" rel="stylesheet" />
 
@@ -17,7 +17,7 @@
     <script type="text/javascript" src="../../js/plugins/scrollTo/jquery.scrollTo-min.js"></script>
     <script type="text/javascript" src="../../js/ui.multiselect.js"></script>
     <script type="text/javascript" src="../../js/lib/cleave.js/dist/cleave.min.js"></script>
-    <script type="text/javascript" src="../../js/Liquidación/ModificacionPrima.js?v=20170704"></script>
+    <script type="text/javascript" src="../../js/Liquidación/ModificacionPrima.js?v=20170712"></script>
 
 
     <link href="../../css/chosen.css" rel="stylesheet" />

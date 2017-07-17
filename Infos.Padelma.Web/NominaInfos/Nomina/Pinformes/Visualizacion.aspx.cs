@@ -60,6 +60,12 @@ public partial class Bascula_Pinformes_Visualizacion : System.Web.UI.Page
                     "</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
                 break;
+			case "presta06":
+                script = "<script language='javascript'>" +
+                    "Visualizacion('InformeLiquidacionPrimas');" +
+                    "</script>";
+                Page.RegisterStartupScript("Visualizacion", script);
+                break;
             case "liqui02":
                 script = "<script language='javascript'> Visualizacion('RegistroNovedades');</script>";
                 Page.RegisterStartupScript("Visualizacion", script);
