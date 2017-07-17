@@ -4,17 +4,17 @@ AS
 
 DECLARE @empresa int, @tipo varchar(50), @numero varchar(50);
 
-SELECT DISTINCT 
+SELECT DISTINCT TOP 1
 @empresa=empresa, 
 @tipo=tipo, 
 @numero=numero
 FROM @DataTable;
 
-DELETE nLiquidacionNominaDetalle 
+DELETE nLiquidacionPrimaDetalle 
 WHERE
 @empresa = empresa
-AND @empresa = tipo
-AND @empresa = numero;
+AND @tipo = tipo
+AND @numero = numero;
 
 INSERT nLiquidacionPrimaDetalle (empresa,tipo,numero,tercero,añoInicial,añoFinal,periodoInicial,periodoFinal,fechaInicial,fechaFinal,fechaIngreso,basico,valorTransporte,valorPromedio,base,diasPromedio,diasPrimas,contrato) 
 SELECT _source.empresa,_source.tipo,_source.numero,_source.tercero,_source.añoInicial,_source.añoFinal,_source.periodoInicial,_source.periodoFinal,_source.fechaInicial,_source.fechaFinal,_source.fechaIngreso,_source.basico,_source.valorTransporte,_source.valorPromedio,_source.base,_source.diasPromedio,_source.diasPrimas,_source.contrato FROM @DataTable _source;
