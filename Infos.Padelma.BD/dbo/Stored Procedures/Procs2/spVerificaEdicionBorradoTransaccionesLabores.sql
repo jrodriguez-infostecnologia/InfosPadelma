@@ -33,5 +33,19 @@ Desarrollado: INFOS TECNOLOGIA S.A.S
 		begin
 			set @retorno = 1
 		end
+		else
+		begin
+			if( exists ( select *
+					 from nLiquidacionPrima pri
+					 INNER JOIN nPeriodoDetalle npe
+					 ON pri.empresa = npe.empresa
+					 ANd pri.periodo = npe.noPeriodo
+					 where
+					 tipo = @tipo and
+					 numero = @numero and
+					 pri.empresa =@empresa and
+					 npe.cerrado <> 0 ) )
+			set @retorno = 2
+		end
 		
 	end
