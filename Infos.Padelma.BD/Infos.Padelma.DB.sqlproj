@@ -1859,6 +1859,7 @@
     <Build Include="dbo\Stored Procedures\SpSeleccionaTercerosModificacionPrima.sql" />
     <Build Include="dbo\Stored Procedures\SpGetDetalleTerceroActualizacionLiquidacion.sql" />
     <Build Include="dbo\Stored Procedures\spInformeGeneralDestajo.sql" />
+    <Build Include="dbo\Stored Procedures\spSeleccionaLiquidacionPrimas.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Infos.Padelma.DB.refactorlog" />
