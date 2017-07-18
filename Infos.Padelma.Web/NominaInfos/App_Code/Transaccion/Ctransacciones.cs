@@ -259,11 +259,11 @@ public class Ctransacciones
         return Convert.ToInt16(Cacceso.ExecProc("spAnulaLiquidacionDefinitiva", iParametros, oParametros, objValores, "ppa").GetValue(0));
     }
 
-    public int AnulaLiquidacionPrima(string tipo, string numero, string usuario, int empresa, int año, int mes, int periodo)
+    public int AnulaLiquidacionPrima(string tipo, string numero, string usuario, int empresa, int año, int periodo)
     {
-        string[] iParametros = new string[] { "@tipo", "@numero", "@usuario", "@empresa", "@año", "@mes", "@periodo" };
+        string[] iParametros = new string[] { "@tipo", "@numero", "@usuario", "@empresa", "@año", "@periodo" };
         string[] oParametros = new string[] { "@retorno" };
-        object[] objValores = new object[] { tipo, numero, usuario, empresa, año, mes, periodo };
+        object[] objValores = new object[] { tipo, numero, usuario, empresa, año, periodo };
         return Convert.ToInt16(Cacceso.ExecProc("spAnulaLiquidacionPrima", iParametros, oParametros, objValores, "ppa").GetValue(0));
     }
 
