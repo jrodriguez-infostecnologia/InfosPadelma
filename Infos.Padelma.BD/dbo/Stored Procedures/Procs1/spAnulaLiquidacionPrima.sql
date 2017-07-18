@@ -4,7 +4,6 @@
 	@usuario	varchar(50),
 	@periodo	int,
 	@año		int,
-	@mes		int,
 	@empresa	int,
 	@retorno	int output
 AS

@@ -116,7 +116,7 @@ public partial class Agronomico_Padministracion_Liquidacion : System.Web.UI.Page
     {
         try
         {
-            this.ddlPeriodo.DataSource = periodo.PeriodosCeradoNominaAño(Convert.ToInt32(ddlAño.SelectedValue.Trim()), Convert.ToInt16(Session["empresa"]), ddlTipo.SelectedValue.Trim()).Tables[0].DefaultView;
+            this.ddlPeriodo.DataSource = periodo.PeriodosCeradoNominaAño(Convert.ToInt32(ddlAño.SelectedValue.Trim()), Convert.ToInt16(Session["empresa"]), ddlTipo.SelectedValue.Trim()).Table.DefaultView;
             this.ddlPeriodo.DataValueField = "noPeriodo";
             this.ddlPeriodo.DataTextField = "descripcion";
             this.ddlPeriodo.DataBind();

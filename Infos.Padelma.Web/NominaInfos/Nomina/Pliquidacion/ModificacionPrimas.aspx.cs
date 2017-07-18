@@ -322,7 +322,7 @@ public partial class Nomina_Pliquidacion_ModificacionPrimas : System.Web.UI.Page
             }
 
             // Base calculado ValorPromedio*DiasPrimedio*30
-            item.Base = (Convert.ToInt32(item.DiasPromedio) != 0 ? Convert.ToInt32(item.ValorPromedio) / Convert.ToInt32(item.DiasPromedio) * 30 : 0).ToString();
+            item.Base = Math.Round(Convert.ToDouble(item.DiasPromedio) != 0 ? Convert.ToDouble(item.ValorPromedio) / Convert.ToDouble(item.DiasPromedio) * 30 : 0,0).ToString();
 
             var txvDiasPrima = (TextBox)dr.FindControl("txvDiasPrima");
             value = txvDiasPrima.Text.Replace(",", "");
@@ -342,7 +342,7 @@ public partial class Nomina_Pliquidacion_ModificacionPrimas : System.Web.UI.Page
             }
 
             // Calculado Base * DiasPrima / 360 
-            item.ValorPrima = Math.Round(Convert.ToDouble(item.Base) * Convert.ToDouble(item.DiasPrimas) / 360).ToString();
+            item.ValorPrima = Math.Round(Convert.ToDouble(item.Base) * Convert.ToDouble(item.DiasPrimas) / 360,0).ToString();
         }
 
         if (!valid)

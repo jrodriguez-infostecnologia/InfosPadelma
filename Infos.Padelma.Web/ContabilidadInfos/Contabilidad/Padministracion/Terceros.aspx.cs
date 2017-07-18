@@ -205,7 +205,7 @@ public partial class Facturacion_Padministracion_Terceros : System.Web.UI.Page
 
             object nit = null;
             object dv = null;
-            object ciudad = null, departamento=null;
+            object ciudad = null, departamento = null;
             object foto = null;
             object contacto = null;
             object telefono = null;
@@ -566,104 +566,106 @@ public partial class Facturacion_Padministracion_Terceros : System.Web.UI.Page
                 txtDv.Text = Server.HtmlDecode(this.gvLista.SelectedRow.Cells[7].Text);
             else
                 txtDv.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(7) != null)
-                txtRazonSocial.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(7).ToString();
-            else
-                txtRazonSocial.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(8) != null)
-                txtApellido1.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(8).ToString();
-            else
-                txtApellido1.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(9) != null)
-                txtApellido2.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(9).ToString();
-            else
-                txtApellido2.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(10) != null)
-                txtNombre1.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(10).ToString();
-            else
-                txtNombre1.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(11) != null)
-                txtNombre2.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(11).ToString();
-            else
-                txtNombre2.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(12) != null)
+            if (dvTercero.Table.Rows.Count > 0)
             {
-                if (dvTercero.Table.Rows[0].ItemArray.GetValue(12).ToString().Trim().Length > 0)
-                    txtDescripcion.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(12).ToString();
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(7) != null)
+                    txtRazonSocial.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(7).ToString();
+                else
+                    txtRazonSocial.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(8) != null)
+                    txtApellido1.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(8).ToString();
+                else
+                    txtApellido1.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(9) != null)
+                    txtApellido2.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(9).ToString();
+                else
+                    txtApellido2.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(10) != null)
+                    txtNombre1.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(10).ToString();
+                else
+                    txtNombre1.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(11) != null)
+                    txtNombre2.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(11).ToString();
+                else
+                    txtNombre2.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(12) != null)
+                {
+                    if (dvTercero.Table.Rows[0].ItemArray.GetValue(12).ToString().Trim().Length > 0)
+                        txtDescripcion.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(12).ToString();
+                    else
+                        txtDescripcion.Text = "";
+                }
                 else
                     txtDescripcion.Text = "";
+
+                chkActivo.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(13));
+
+
+
+                chkCliente.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(15));
+                chkProveedor.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(16));
+                chkEmpleado.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(17));
+                chkAccionista.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(18));
+                chkContratista.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(19));
+                chkExtractora.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(20));
+                chkComercializadora.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(29));
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(22) != null)
+                    txtContacto.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(22).ToString();
+                else
+                    txtContacto.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(24) != null)
+                    txtTelefono.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(24).ToString();
+                else
+                    txtTelefono.Text = "";
+
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(25) != null)
+                    txtDireccion.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(25).ToString();
+                else
+                    txtDireccion.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(26) != null)
+                    txtBarrio.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(26).ToString();
+                else
+                    txtBarrio.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(27) != null)
+                    txtFax.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(27).ToString();
+                else
+                    txtFax.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(28) != null)
+                    txtEmail.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(28).ToString();
+                else
+                    txtEmail.Text = "";
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(1) != null)
+                    this.Session["id"] = dvTercero.Table.Rows[0].ItemArray.GetValue(1).ToString();
+
+                else
+                    this.Session["id"] = null;
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(30) != null)
+                {
+                    ddlDepartamento.SelectedValue = dvTercero.Table.Rows[0].ItemArray.GetValue(30).ToString();
+                    cargarCiudad(ddlDepartamento.SelectedValue);
+                }
+
+                if (dvTercero.Table.Rows[0].ItemArray.GetValue(14) != null)
+                {
+                    if (dvTercero.Table.Rows[0].ItemArray.GetValue(14).ToString().Trim().Length > 0)
+                        ddlCiudad.SelectedValue = dvTercero.Table.Rows[0].ItemArray.GetValue(14).ToString();
+                }
+                else
+                    ddlCiudad.SelectedValue = "";
             }
-            else
-                txtDescripcion.Text = "";
-
-            chkActivo.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(13));
-
-       
-
-            chkCliente.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(15));
-            chkProveedor.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(16));
-            chkEmpleado.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(17));
-            chkAccionista.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(18));
-            chkContratista.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(19));
-            chkExtractora.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(20));
-            chkComercializadora.Checked = Convert.ToBoolean(dvTercero.Table.Rows[0].ItemArray.GetValue(29));
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(22) != null)
-                txtContacto.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(22).ToString();
-            else
-                txtContacto.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(24) != null)
-                txtTelefono.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(24).ToString();
-            else
-                txtTelefono.Text = "";
-
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(25) != null)
-                txtDireccion.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(25).ToString();
-            else
-                txtDireccion.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(26) != null)
-                txtBarrio.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(26).ToString();
-            else
-                txtBarrio.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(27) != null)
-                txtFax.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(27).ToString();
-            else
-                txtFax.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(28) != null)
-                txtEmail.Text = dvTercero.Table.Rows[0].ItemArray.GetValue(28).ToString();
-            else
-                txtEmail.Text = "";
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(1) != null)
-                this.Session["id"] = dvTercero.Table.Rows[0].ItemArray.GetValue(1).ToString();
-
-            else
-                this.Session["id"] = null;
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(30) != null)
-            {
-                ddlDepartamento.SelectedValue = dvTercero.Table.Rows[0].ItemArray.GetValue(30).ToString();
-                cargarCiudad(ddlDepartamento.SelectedValue);
-            }
-
-            if (dvTercero.Table.Rows[0].ItemArray.GetValue(14) != null)
-            {
-                if (dvTercero.Table.Rows[0].ItemArray.GetValue(14).ToString().Trim().Length > 0)
-                    ddlCiudad.SelectedValue = dvTercero.Table.Rows[0].ItemArray.GetValue(14).ToString();
-            }
-            else
-                ddlCiudad.SelectedValue = "";
 
             switch (rbTipoPersona.SelectedValue.ToString())
             {

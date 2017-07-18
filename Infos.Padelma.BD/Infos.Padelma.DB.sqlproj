@@ -1860,6 +1860,8 @@
     <Build Include="dbo\Stored Procedures\SpGetDetalleTerceroActualizacionLiquidacion.sql" />
     <Build Include="dbo\Stored Procedures\spInformeGeneralDestajo.sql" />
     <Build Include="dbo\Stored Procedures\spSeleccionaLiquidacionPrimas.sql" />
+    <Build Include="dbo\Stored Procedures\SpVerificaUmedidaBulto.sql" />
+    <Build Include="dbo\Stored Procedures\spRetornaUmedidaCatalogoConsumo.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Infos.Padelma.DB.refactorlog" />
